@@ -53,6 +53,6 @@ function postmail($to,$subject = "",$body = "")
 }
     $message = "Welcome to our website!\r\rYou, or someone using your email address, has completed registration at test.chile.com. You can complete registration by clicking the following link:\rhttp://test.chile.com/verify.php?$activationKey\r\rIf this is an error, ignore this email and you will be removed from our mailing list.\r\rRegards,\ test.chile.com";
 
-    postmail($email','感谢注册',$message);
+    postmail($email,'感谢注册',$message);
 
 ?>
