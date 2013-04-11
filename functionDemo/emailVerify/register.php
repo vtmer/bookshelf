@@ -1,4 +1,3 @@
-
 <?php
 require('config.php');
 require('class.phpmailer.php');
@@ -29,10 +28,10 @@ function postmail($to,$subject = "",$body = "")
                                            // 2 = messages only
     $mail->SMTPAuth   = true;                  // 启用 SMTP 验证功能
     $mail->SMTPSecure = "ssl";                 // 安全协议
-    $mail->Host       = "smtp.qq.com";      // SMTP 服务器
+    $mail->Host       = "smtp.example.com";      // SMTP 服务器
     $mail->Port       = 465;                   // SMTP服务器的端口号
-    $mail->Username   = "296276305";  // SMTP服务器用户名
-    $mail->Password   = "zzl082513";            // SMTP服务器密码
+    $mail->Username   = "";  // SMTP服务器用户名
+    $mail->Password   = "";            // SMTP服务器密码
    // $mail->SetFrom('发件人地址，如admin#jiucool.com #换成@', '发件人名称');
     //$mail->AddReplyTo("邮件回复地址,如admin#jiucool.com #换成@","邮件回复人的名称");
     $mail->SetFrom('296276305@qq.com','chile');
@@ -54,6 +53,6 @@ function postmail($to,$subject = "",$body = "")
 }
     $message = "Welcome to our website!\r\rYou, or someone using your email address, has completed registration at test.chile.com. You can complete registration by clicking the following link:\rhttp://test.chile.com/verify.php?$activationKey\r\rIf this is an error, ignore this email and you will be removed from our mailing list.\r\rRegards,\ test.chile.com";
 
-    postmail('296276305@qq.com','感谢注册',$message);
+    postmail($email','感谢注册',$message);
 
 ?>
