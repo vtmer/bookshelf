@@ -12,7 +12,8 @@ $sql="INSERT INTO users (username, password, email, activationkey, status) VALUE
 @mysql_query($sql) or die("Can't insert into users!");
 ##Send activation Email
 
-function postmail($to,$subject = "",$body = ""){
+function postmail($to,$subject = "",$body = "")
+{
     //$to 表示收件人地址 $subject 表示邮件标题 $body表示邮件正文
     //error_reporting(E_ALL);
     error_reporting(E_STRICT);
@@ -30,11 +31,11 @@ function postmail($to,$subject = "",$body = ""){
     $mail->SMTPSecure = "ssl";                 // 安全协议
     $mail->Host       = "smtp.qq.com";      // SMTP 服务器
     $mail->Port       = 465;                   // SMTP服务器的端口号
-    $mail->Username   = "";  // SMTP服务器用户名
-    $mail->Password   = "";            // SMTP服务器密码
+    $mail->Username   = "296276305";  // SMTP服务器用户名
+    $mail->Password   = "zzl082513";            // SMTP服务器密码
    // $mail->SetFrom('发件人地址，如admin#jiucool.com #换成@', '发件人名称');
     //$mail->AddReplyTo("邮件回复地址,如admin#jiucool.com #换成@","邮件回复人的名称");
-    $mail->SetFrom('','');
+    $mail->SetFrom('296276305@qq.com','chile');
     $mail->Subject    = $subject;
     $mail->AltBody    = "To view the message, please use an HTML compatible email viewer! "; // optional, comment out and test
     $mail->MsgHTML($body);
@@ -42,14 +43,17 @@ function postmail($to,$subject = "",$body = ""){
     $mail->AddAddress($address);
     //$mail->AddAttachment("images/phpmailer.gif");      // attachment 
     //$mail->AddAttachment("images/phpmailer_mini.gif"); // attachment
-    if(!$mail->Send()) {
+    if(!$mail->Send()) 
+    {
         echo "Mailer Error: " . $mail->ErrorInfo;
-    } else {
+    } 
+    else 
+    {
         echo "Message has sent!";
-        }
     }
+}
     $message = "Welcome to our website!\r\rYou, or someone using your email address, has completed registration at test.chile.com. You can complete registration by clicking the following link:\rhttp://test.chile.com/verify.php?$activationKey\r\rIf this is an error, ignore this email and you will be removed from our mailing list.\r\rRegards,\ test.chile.com";
 
-    postmail($email,'感谢注册',$message);
+    postmail('296276305@qq.com','感谢注册',$message);
 
 ?>
