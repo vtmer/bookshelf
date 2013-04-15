@@ -1,0 +1,53 @@
+/*css document*/
+body { background:#cfcaa5 url('../img/bg.jpg') repeat-x;}
+div#home_page {  margin:50px auto 30px; width:400px; height:125px; background:url('../img/default.png') no-repeat;}
+div#home_page a { float:left; width:400px; height:125px;}
+
+
+div.main {...........}
+div.main { width:807px; margin:auto; }
+div.main h3 { height:39px; margin-bottom:20px; background:url('../img/h_bg.png') no-repeat; font:14px "微软雅黑",Arial, Helvetica, sans-serif; line-height:33px; text-indent:1em; color:#ffffff;}
+
+.first_step {...........}
+div.first_step { margin:0 10px;}
+div.first_step ul {overflow:hidden; margin:0 10px;}
+div.first_step ul li { float:left; width:148px; margin-bottom:50px;}
+span.college { float:left; width:95px; height:105px; margin:0 26px 10px; background:url('../img/college_logo.png') no-repeat; cursor:pointer;}
+div.first_step ul li p { clear:both; font:14px "微软雅黑",Arial, Helvetica, sans-serif; font-weight:bold; text-align:center; color:#42362d;}
+span.logo_01 { background-position:0px 0px;}
+span.logo_02 { background-position:-99px 0px;}
+span.logo_03 { background-position:-197px 0px;}
+span.logo_04 { background-position:-296px 0px;}
+span.logo_05 { background-position:-396px 0px;}
+span.logo_06 { background-position:0px -119px;}
+span.logo_07 { background-position:-100px -119px;}
+span.logo_08 { background-position:-200px -119px;}
+span.logo_09 { background-position:-300px -119px;}
+span.logo_10 { background-position:-400px -119px;}
+
+div.selected_logo { position:relative; width:148px; margin:auto;}
+div.selected_logo span { margin-bottom:0px;}
+/*第二，三部中间显示的logo和内容*/
+
+
+span.step_back { position:absolute; top:180px; left:-110px; width:59px; height:58px; background:url("../img/step_back.png") no-repeat; cursor:pointer;}
+.second_step {...........}
+div.second_step { clear:both; position:relative; margin:0 10px 65px;}
+div.second_step ul { z-index:10; width:700px; height:180px; margin:70px auto; padding:10px; background:#eeece1; border-bottom:solid 0px rgba(0,0,0,.3); box-shadow:0px 10px 10px -5px rgba(0,0,0,0.6),0px 2px 2px 2px rgba(255,255,255,.6) inset,0px -4px 5px 0px rgba(0,0,0,.2) inset,0px -2px 3px 0px rgba(0,0,0,.8) inset; border-radius:8px;}
+div.second_step ul li { float:left; height:40px; margin-right:20px; padding:0 10px; font:14px 宋体,Arial, Helvetica, sans-serif; line-height:40px; cursor:pointer;}
+div.second_step ul li:hover { background:#f4c676; border-radius:5px;}
+div.second_step .bottom_shadow { position:absolute; bottom:-25px; z-index:-1; width:718px; height:48px; margin-left:-9px;  background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, from(rgba(0,0,0,.15)), to(rgba(0,0,0,0)));}
+
+.third_step {..........}
+div.third_step { clear:both; position:relative; margin:0 10px 65px;}
+div.third_step ul { z-index:10; width:400px; height:160px; margin:70px auto; padding:10px; background:#eeece1; border-bottom:solid 0px rgba(0,0,0,.3); box-shadow:0px 10px 10px -5px rgba(0,0,0,0.6),0px 2px 2px 2px rgba(255,255,255,.6) inset,0px -4px 5px 0px rgba(0,0,0,.2) inset,0px -2px 3px 0px rgba(0,0,0,.8) inset; border-radius:8px;}
+div.third_step ul li { float:left; height:40px; margin-right:20px; padding:0 10px; font:14px 宋体,Arial, Helvetica, sans-serif; line-height:40px; cursor:pointer;}
+div.third_step ul li:hover { background:#f4c676; border-radius:5px;}
+div.third_step .bottom_shadow { position:absolute; bottom:-25px; z-index:-1; width:418px; height:48px; margin-left:-9px;  background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, from(rgba(0,0,0,.15)), to(rgba(0,0,0,0)));}
+
+div.shelf_bg { clear:both; width:100%; height:65px;background:url('../img/shelf.png') no-repeat;}
+div.shelf_bg span { float:right; width:90px; height:69px; margin:-4px 50px 0 0; background:url('../img/sign_in.png') no-repeat;}
+form input { clear:both; background:transparent; border:none; font:14px "微软雅黑",Arial, Helvetica, sans-serif; font-weight:bold; text-align:center; color:#42362d;}
+form a#submit { display:none; position:absolute; bottom:-145px; right:-230px; z-index:1000; height:30px; background:#c6c4b6; padding:0 17px; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center; cursor:pointer;}
+form a#submit:hover { background:#e8a126; color:#fff;}
+div.second_step ,div.selected_logo,div.third_step { display:none;}

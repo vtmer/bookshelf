@@ -1,0 +1,6 @@
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, cite, code, del, dfn, img, ins, kbd, q, samp, strike, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td{font-size:100% ; margin:0; padding:0; outline:0 none ; border:0 none;}
+body,input,select,button,img { font-size:12px; text-align: left; margin:0; padding:0;}
+table{border-collapse:collapse;}
+ul,li{ list-style: none;}
+a { text-decoration:none; }
+a,a:hover,a:visited { color:#000;}
