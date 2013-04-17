@@ -34,7 +34,7 @@
 		<a href="#"><input type="submit" value="" /></a>
 	</div>
 	<div class="mid_content">
-		<div class="content_box">
+		<div class="content_box">	
 			<div class="box_demo search_results">
 				<h3>搜索结果：</h3>
 				<table>
@@ -61,7 +61,7 @@
 						{
 							echo 
 							"<tr>
-							<td><a href='book_info.html'>".$value['name']."</a></td>
+							<td><a href='./book_info/".$value['id']."'>".$value['name']."</a></td>
 							<td>".$value['course_name']."</td>
 							<td>".$value['author']."</td>
 							<td>".$value['course_category']."</td>

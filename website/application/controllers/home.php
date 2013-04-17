@@ -27,12 +27,6 @@ class Home extends CI_Controller
 		//var_dump($data['system_match']);
 		$this->load->view('home',$data);
 	}
-	public function search()
-	{
-		
-
-
-	}
 }
 
 

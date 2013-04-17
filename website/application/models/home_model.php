@@ -5,7 +5,6 @@ class Home_Model extends CI_Model
   	{
     	$this->load->database();
   	}
-
   	public function get_book_need($major,$grade)
   	{
 
@@ -13,6 +12,14 @@ class Home_Model extends CI_Model
 		$query = $this->db->query($sql,array($major,$grade));
 		return $query->result_array();  		
   	}
+/**
+ * 系统匹配书源人
+ *
+ * @todo   get系统匹配书源人
+ * @access public
+ * @param  $match
+ * @return array
+ */
   	public function get_system_match(array $match)
   	{
   		$book = array();
@@ -48,8 +55,6 @@ class Home_Model extends CI_Model
 	  				$user[$row['id']]['number'] = $j;
 	  				$j++;	
 	  			}
-
-
 	  		}
 	  			
 		}
