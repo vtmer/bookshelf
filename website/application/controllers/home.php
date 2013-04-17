@@ -8,6 +8,8 @@ class Home extends CI_Controller
 	}
 	public function index()
 	{
+		$this->load->helper('form');
+		$this->load->library('form_validation');
 		$data['book_need'] = $this->home_model->get_book_need('网络工程','2011');
 		$match=array();
 		$i=0;
@@ -24,6 +26,12 @@ class Home extends CI_Controller
 		$data['system_match'] = $this->home_model->get_system_match($match);
 		//var_dump($data['system_match']);
 		$this->load->view('home',$data);
+	}
+	public function search()
+	{
+		
+
+
 	}
 }
 

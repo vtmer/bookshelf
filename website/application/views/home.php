@@ -28,15 +28,18 @@
 	<a href="./home" title="前往首页"></a>
 </div>
 <div class="main">
+	<?php echo form_open('search');?>
 	<div class="search_bar">
-		<input type="text" value="请输入要查找的书目" />
-		<a href="search.html"></a>
+		<input type="text" name="keywords" value="请输入要查找的书目" />
+		<a href="#"><input type="submit" value="" /></a>
+
 	</div>
+	</form>
 	<div class="mid_content">
 		<div class="content_box">
 			<div class="box_demo needed_book">
 				<h3>您本学期需要的教材有：</h3>
-				<p>数字媒体技术专业10级 [<a href="index.html" alt="修改">修改</a>]</p>
+				<p>数字媒体技术专业10级 [<a href="./index" alt="修改">修改</a>]</p>
 				<table>
 					<tbody>
 						<tr>
