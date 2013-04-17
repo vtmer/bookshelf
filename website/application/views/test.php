@@ -1,16 +1,15 @@
-<?php foreach ($book_need as  $value)
+<?php 
+var_dump($system_match);
+foreach ($system_match['user'] as  $value)
 	{   
-		
-			# code...
-		
-		var_dump($value);
-		echo 
-		"<tr><td>" . $value['name'] . "</td>".
-		"<td>" . $value['course_name'] . "</td>".
-		"<td>" . $value['author'] ."</td>".
-		"<td>" . $value['course_category']. "</td>".
-		"<td>" . $value['publish'] . "</td>".
-		"<td>" . $value['version'] . "</td></tr>";	
-		
+		//var_dump($value);
+			echo $value['id'].'---';
+			echo $value['truename'].'---';
+			echo $value['dormitory'].'---';
+	
+		foreach ($system_match['book'] as $key ) {
+			if($value['id']==$key['from_id']	)
+			echo $key['name'].'|||';
+		}
 	}
 	?>

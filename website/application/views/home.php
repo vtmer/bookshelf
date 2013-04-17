@@ -25,7 +25,7 @@
 	</div>
 </div>
 <div class="home_page">
-	<a href="home.html" title="前往首页"></a>
+	<a href="./home" title="前往首页"></a>
 </div>
 <div class="main">
 	<div class="search_bar">
@@ -51,12 +51,12 @@
 						<?php foreach ($book_need as $row)
 						{   
 							echo
-							"<tr><td>" . $row['name'] . "</td>".
+							"<tr><td><a href='./book_info/".$row['id']."'>" . $row['name'] . "</a></td>".
 							"<td>" . $row['course_name'] . "</td>".
 							"<td>" . $row['author'] ."</td>".
 							"<td>" . $row['course_category']. "</td>".
 							"<td>" . $row['publish'] . "</td>".
-							"<td>" . $row['version'] . "</td></tr>";				
+							"<td>" . $row['version'] . "</td></tr>";			
 						}
 						?>
 						
@@ -115,6 +115,42 @@
 						<th>所在生活区</th>
 						<th>拥有你需要的教材数</th>
 					</tr>
+					<?php 
+					foreach ($system_match['user'] as $user) 
+						{
+							echo 
+							"<tr>
+							<td><a href='book_owner.html/".$user['id']."'/>".$user['truename'].'</a></td>
+							<td>'.$user['dormitory'].'</td>
+							<td>'.
+								'<div class="book_list">
+									<h6>书目</h6>';						
+					?>
+									<ul>
+									<?php
+									foreach ($system_match['book'] as $book) 
+									{
+										if($user['id']==$book['from_id'])
+										{
+											echo "<li>".$book['name']."</li>";
+										}
+									}	
+									?>
+									<!--
+										<li>线性代数</li>
+										<li>高等代数</li>
+										<li>大学英语</li>
+										<li></li>
+										<li></li>
+									-->
+									</ul>
+									<span>全选</span>
+									<a href="check_step.html" class="order"></a>
+								</div>
+							</td>
+						</tr>
+					<?php }?>
+					<!--
 					<tr>
 						<td><a href="book_owner.html">甄大钊</a></td>
 						<td>东</td>
@@ -204,7 +240,7 @@
 								<a href="check_step.html" class="order"></a>
 							</div>
 						</td>
-					</tr>
+					</tr>-->
 					</tbody>
 				</table>
 				<ul class="pages">
