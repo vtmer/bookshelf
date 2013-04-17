@@ -23,7 +23,7 @@ class Home extends CI_Controller
 		}
 		$data['system_match'] = $this->home_model->get_system_match($match);
 		//var_dump($data['system_match']);
-		//$this->load->view('home',$data);
+		$this->load->view('home',$data);
 	}
 }
 

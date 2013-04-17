@@ -20,9 +20,10 @@ class Home_Model extends CI_Model
   		$i = 0;
   		$sql = "SELECT `from_id`,`ISBN`,`name` FROM `circulating_book` WHERE book_status=1";
   		$query = $this->db->query($sql);
+  		$result = $query->result_array();
   		foreach ($match as $value) 
   		{  			
-	  		foreach ($query->result_array() as $row) 
+	  		foreach ($result as $row) 
 	  		{
 	  			if($value['ISBN']==$row['ISBN']&&$value['name']==$row['name'])
 	  			{
@@ -34,19 +35,25 @@ class Home_Model extends CI_Model
 		}
 		$sql2 = "SELECT `id`,`truename`,`dormitory` FROM `user`"; 
 		$query2 = $this->db->query($sql2);
-		$j = 0;
-		foreach ($book as $value) 
-  		{  			
-	  		foreach ($query2->result_array() as $row) 
+		$result = $query2->result_array();
+		$j = 1;	
+		foreach ($result as $row) 
+  		{  		
+  			$j = 1;	
+	  		foreach ($book as $value)
 	  		{
 	  			if($value['from_id']==$row['id'])
 	  			{
 	  				$user[$row['id']] = $row;
-	  				$user[$row['id']]['number']+=1;
+	  				$user[$row['id']]['number'] = $j;
+	  				$j++;	
 	  			}
-	  		}			
+
+
+	  		}
+	  			
 		}
-		var_dump($user);
+		//var_dump($user);
 		return array('user'=>$user,'book'=>$book);
   	}
 }

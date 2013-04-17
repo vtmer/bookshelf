@@ -122,7 +122,7 @@
 							"<tr>
 							<td><a href='book_owner.html/".$user['id']."'/>".$user['truename'].'</a></td>
 							<td>'.$user['dormitory'].'</td>
-							<td>'.
+							<td>'.$user['number'].
 								'<div class="book_list">
 									<h6>书目</h6>';						
 					?>
