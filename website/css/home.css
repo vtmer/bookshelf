@@ -1,0 +1,71 @@
+/*css document*/
+div.main {..........}
+div.main { overflow:hidden; width:960px; margin:auto;}
+div.search_bar { width:482px; height:94px; margin:auto; background:url('../img/search.jpg') no-repeat;}
+div.search_bar input { width:392px; height:27px; margin:23px 0 0 14px; background:none; border:none;}
+div.search_bar a { float:right; width:50px; height:50px; margin:11px 11px 0 0 ;}
+
+
+div.mid_content { width:100%; padding-top:88px; background:url('../img/shelf.png') 77px 0 no-repeat; }
+div.content_box { margin-bottom:90px;}
+
+div.mid_content div.box_demo h3 { float:left; width:200px; height:42px; margin:20px 0 10px -2px; background:url('../img/h3_bg.png') 0px 0px no-repeat; font:14px 微软雅黑; line-height:38px; color:#fff; text-indent:1em;}
+
+div.needed_book {.........}
+div.needed_book p { clear:both; margin-bottom:20px; text-indent:2em; font-size:14px; color:#565656;}
+div.needed_book p a { color:#565656;}
+div.needed_book p a:hover { color:#000;}
+div.needed_book table { margin-bottom:30px;}
+div.needed_book table th:nth-child(1),
+div.needed_book table td:nth-child(1){ width:120px; text-align:center;}
+div.needed_book table th:nth-child(2),
+div.needed_book table td:nth-child(2){ width:135px; text-align:center;}
+div.needed_book table th:nth-child(3),
+div.needed_book table td:nth-child(3){ width:80px; text-align:center;}
+div.needed_book table th:nth-child(4),
+div.needed_book table td:nth-child(4){ width:140px; text-align:center;}
+div.needed_book table th:nth-child(5),
+div.needed_book table td:nth-child(5){ width:120px; text-align:center;}
+div.needed_book table th:nth-child(6),
+div.needed_book table td:nth-child(6){ width:65px; text-align:center;}
+
+/*定义表格各列的宽度*/
+
+
+div.mid_content div.match_book table { position:relative; margin:none; margin-left:15px;}
+div.mid_content div.match_book h3 { margin-bottom:20px; background-position:0 -44px;}
+div.match_book table th:nth-child(1),
+div.match_book table td:nth-child(1){ width:120px; text-align:center;}
+div.match_book table th:nth-child(2),
+div.match_book table td:nth-child(2){ width:115px; text-align:center;}
+div.match_book table th:nth-child(3),
+div.match_book table td:nth-child(3){ width:160px; text-align:center;}
+/*定义表格各列的宽度*/
+div.match_book table td.hover_td { background:#dedcd0 url('../img/hover_td.png') 140px 0 no-repeat;}
+div.match_book table div.book_list { display:none; position:absolute; z-index:1000; right:-301px; top:-2px; height:223px; width:306px; background:url('../img/hover_table.png') no-repeat; color:#fff;}
+div.match_book table td.hover_td div.book_list { display:block;}
+div.match_book table div.book_list h6 { text-align:center; line-height:32px;}
+div.match_book table div.book_list ul { padding:0 4px;} 
+div.match_book table div.book_list ul li { height:30px; text-align:left; text-indent:50px;}
+div.match_book table div.book_list span { position:absolute; bottom:10px; left:26px; text-decoration:underline; cursor:pointer;}
+div.match_book table div.book_list a { position:absolute; botton:11px; right:40px; height:26px; width:74px; }
+
+
+
+
+div.match_book ul.pages { clear:both; float:right; margin:45px 40px 20px;}
+div.match_book ul.pages li{ float:left; margin:0 3px;}
+div.match_book ul.pages li a { float:left; background:url('../img/pages.png') no-repeat;}
+div.match_book ul.pages li.prev a{ width:38px; height:38px;  background-position:0px 0px;} 
+div.match_book ul.pages li.prev a:hover { background-position:0px -40px;}
+div.match_book ul.pages li.next a{ width:38px; height:38px;  background-position:-45px 0px;}
+div.match_book ul.pages li.next a:hover {  background-position:-45px -40px;}
+div.match_book ul.pages li.page a{ margin-top:10px; width:15px; height:15px; background-position:-92px -12px;} 
+div.match_book ul.pages li.page a:hover,div.match_book ul.pages li.on_select a { background-position:-93px -34px;}
+
+
+div.footer {.........}
+div.footer {float:left; width:100%; height:222px; margin-top:300px; background:url('../img/bottom_bg.jpg') repeat-x;}
+div.footer div.safa {width:760px; height:344px; margin:-278px auto 80px; background:url('../img/safa.png') no-repeat;}
+div.footer ul { float:right; margin-top:20px; margin-right:20px; font-size:14px; color:#fff;}
+div.footer ul li { text-align:right; line-height:24px;}
