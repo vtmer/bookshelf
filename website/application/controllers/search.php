@@ -24,7 +24,7 @@ class Search extends CI_Controller
 		}
 		else
 		{
-			header("location:base_url('index.php/home')");
+			redirect('home');
 		}	
 	}
 		

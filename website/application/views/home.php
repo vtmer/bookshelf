@@ -1,9 +1,9 @@
 
 <div class="main">
-		<?php echo form_open('search');?>	
-		<div class="search_bar">
-		<input type="text" name="keywords" value="请输入要查找的书目" />
-		<a href="#"><input type='submit' value='' /></a>
+	<form action="<?php echo site_url('search'); ?>" method="POST"> 
+	<div class="search_bar">
+	<input type="text" name="keywords" value="请输入要查找的书目" />
+	<a href="#"><input type='submit' value='' /></a>
 	</div>
 	</form>
 	<div class="mid_content">
@@ -25,7 +25,7 @@
 						<?php foreach ($book_need as $row)
 						{   
 							echo
-							"<tr><td><a href='./home/book_info/".$row['id']."'>" . $row['name'] . "</a></td>".
+							"<tr><td><a href='".site_url('home/book_info')."/".$row['id']."'>" . $row['name'] . "</a></td>".
 							"<td>" . $row['course_name'] . "</td>".
 							"<td>" . $row['author'] ."</td>".
 							"<td>" . $row['course_category']. "</td>".
@@ -94,7 +94,7 @@
 						{
 							echo 
 							"<tr>
-							<td><a href='./home/book_owner/".$user['id']."'/>".$user['truename'].'</a></td>
+							<td><a href='".site_url('home/book_owner')."/".$user['id']."'/>".$user['truename'].'</a></td>
 							<td>'.$user['dormitory'].'</td>
 							<td>'.$user['number'].
 								'<div class="book_list">

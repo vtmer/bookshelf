@@ -55,10 +55,22 @@ class Home_Model extends CI_Model
 	  				$user[$row['id']]['number'] = $j;
 	  				$j++;	
 	  			}
-	  		}
-	  			
+	  		}	  			
 		}
 		//var_dump($match);
 		return array('user'=>$user,'book'=>$book);
+  	}
+
+  	public function get_userinfo($book_id)
+  	{
+  		$sql="SELECT `id`,`truename`,`faculty`,`major`,`grade`,`dormitory` FROM `user` WHERE `id`=?";
+  		$query=$this->db->query($sql,array($book_id));
+  		return $query->result_array();
+  	}
+  	public function get_userbook($user_id)
+  	{
+  		$sql="SELECT * FROM `circulating_book`,`allbook` WHERE `circulating_book`.`from_id`=? AND `allbook`.`ISBN`=`circulating_book`.`ISBN`";
+  		$query=$this->db->query($sql,array($user_id,$user_id));
+  		return $query->result_array();
   	}
 }

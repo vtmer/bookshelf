@@ -34,27 +34,43 @@ class Home extends CI_Controller
 		$this->load->view('home',$data);
 		$this->parser->parse('template/footer',$footer);
 	}
-	public function book_info($id)
+	public function book_info($book_id)
 	{
 		$header = array('title'=>'书籍信息','css_file'=>'book_info.css');
 		$footer = array('js_file'=>'book_info.js');
 
 		$this->load->model('search_model');
-		$data['book_info'] = $this->search_model->get_book_by_id($id);
+
+		$data['book_info'] = $this->search_model->get_book_by_id($book_id);
+		if(!$data['book_info']) 
+		{
+			show_404();
+			exit();
+		}
 		$data['user'] = $this->home_model->get_system_match(array(array('ISBN'=>$data['book_info'][0]->ISBN,
-																'name'=>$data['book_info'][0]->name,'id'=>$id)));
+																'name'=>$data['book_info'][0]->name,'id'=>$book_id)));
 		//var_dump($data['user']);
 		$this->parser->parse('template/header',$header);
 		$this->load->view('book_info',$data);
 		$this->parser->parse('template/footer',$footer);
 	}
-	public function book_owner($id)
+	public function book_owner($user_id)
 	{
 		$header = array('title'=>'书籍拥有者','css_file'=>'book_owner.css');
 		$footer = array('js_file'=>'book_owner.js');
 
+		$data['user']=$this->home_model->get_userinfo($user_id);
 
-
+		if (!$data['user']) 
+		{
+			show_404();
+			exit();
+		}
+		$data['books']=$this->home_model->get_userbook($user_id);
+		var_dump($data);
+		$this->parser->parse('template/header',$header);
+		$this->load->view('book_owner',$data);
+		$this->parser->parse('template/footer',$footer);
 	}
 }
 

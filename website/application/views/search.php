@@ -1,6 +1,6 @@
 
 <div class="main">
-	<?php echo form_open('search');?>
+	<form action="<?php echo site_url('search'); ?>" method="POST">
 	<div class="search_bar">
 		<input type="text" name="keywords" value="请输入要查找的书目" />
 		<a href="#"><input type='submit' value='' /></a>
@@ -34,7 +34,7 @@
 						{
 							echo 
 							"<tr>
-							<td><a href='./book_info/".$value['id']."'>".$value['name']."</a></td>
+							<td><a href='".site_url('home/book_info')."/".$value['id']."'>".$value['name']."</a></td>
 							<td>".$value['course_name']."</td>
 							<td>".$value['author']."</td>
 							<td>".$value['course_category']."</td>
