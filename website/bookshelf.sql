@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.10.1
+-- version 3.4.11.1deb1
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 04 月 16 日 10:39
--- 服务器版本: 5.5.20
--- PHP 版本: 5.3.10
+-- 生成日期: 2013 年 04 月 18 日 22:28
+-- 服务器版本: 5.5.29
+-- PHP 版本: 5.4.6-1ubuntu1.2
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `allbook` (
   PRIMARY KEY (`id`),
   KEY `ISBN` (`ISBN`,`name`),
   KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -52,8 +52,8 @@ CREATE TABLE IF NOT EXISTS `allbook` (
 
 CREATE TABLE IF NOT EXISTS `circulating_book` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `from_id` int(11) unsigned NOT NULL COMMENT '第一书源人',
-  `to_id` int(11) unsigned DEFAULT NULL COMMENT '第二书源人',
+  `from_user_id` int(11) unsigned NOT NULL COMMENT '第一书源人',
+  `to_user_id` int(11) unsigned DEFAULT NULL COMMENT '第二书源人',
   `ISBN` varchar(30) DEFAULT NULL,
   `name` varchar(30) DEFAULT NULL,
   `circulate_number` int(11) NOT NULL DEFAULT '0' COMMENT '流通次数',
@@ -62,8 +62,6 @@ CREATE TABLE IF NOT EXISTS `circulating_book` (
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '书本添加时间',
   `change_time` datetime DEFAULT NULL COMMENT '书源人改变时间',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `from_id` (`from_id`),
-  UNIQUE KEY `to_id` (`to_id`),
   KEY `ISBN` (`ISBN`),
   KEY `name` (`name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
@@ -96,6 +94,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(20) NOT NULL,
   `password` varchar(16) NOT NULL,
   `truename` char(20) NOT NULL,
+  `student_id` int(12) NOT NULL COMMENT '学号',
   `campus` varchar(50) NOT NULL DEFAULT '大学城',
   `faculty` varchar(40) NOT NULL COMMENT '学院',
   `major` varchar(80) NOT NULL COMMENT '专业',
@@ -109,20 +108,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `activationkey` (`activationkey`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
---
--- 限制导出的表
---
-
---
--- 限制表 `circulating_book`
---
-ALTER TABLE `circulating_book`
-  ADD CONSTRAINT `circulating_book_ibfk_1` FOREIGN KEY (`from_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `circulating_book_ibfk_2` FOREIGN KEY (`to_id`) REFERENCES `user` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
-  ADD CONSTRAINT `circulating_book_ibfk_3` FOREIGN KEY (`ISBN`) REFERENCES `allbook` (`ISBN`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `circulating_book_ibfk_4` FOREIGN KEY (`name`) REFERENCES `allbook` (`name`) ON UPDATE CASCADE;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

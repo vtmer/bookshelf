@@ -14,6 +14,7 @@ class Login extends CI_Controller
         }
     }
     
+	//登陆验证
     public function check()
     {           
         $this->load->library('form_validation');
@@ -32,7 +33,7 @@ class Login extends CI_Controller
 			{
                 $email = $this->input->post('email');
                 $uid = $this->user_model->get_id($email);
-                
+                /*储存用户信息至session*/
                 $data = array(
                     'email' => $email,
                     'uid' => $uid,
@@ -54,7 +55,8 @@ class Login extends CI_Controller
     {
         $this->load->view('login', array('error' => TRUE));
     }
-    
+
+	//退出登陆
     public function logout()
     {
 		if (!$this->is_logged_in()) 
@@ -68,7 +70,8 @@ class Login extends CI_Controller
             $this->load->view('login');
         }
     }
-    
+	
+	//判断登陆状态
     private function is_logged_in()
     {
         return $this->session->userdata('is_logged_in');
