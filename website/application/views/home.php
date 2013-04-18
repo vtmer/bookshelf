@@ -1,37 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>工大书架</title>
-<link href="../resources/css/reset.css" type="text/css" rel="stylesheet" />
-<link href="../resources/css/header.css" type="text/css" rel="stylesheet" />
-<link href="../resources/css/home.css" type="text/css" rel="stylesheet" />
-<script language="javascript" src="../resources/js/jquery-1.7.2.js">
-</script>
-</head>
-<body>
-<div id="float_head">
-	<div class="header">
-		<a href="http://www.gdutonline.com" id="gdutonline"></a>
-		<span class="score">积分：0</span>
-		<a href="message.html" id="message">收到短信息<span>(0)</span></a>
-		<div class="user_info">
-			<span class="user_name">董晓丁</span>
-			<a href="personal_info.html">个人设置</a>
-			<a href="bookshelf.html">我的书架</a>
-			<a href="#">退出</a>
-		</div>
-		<a href="add_book.html" id="add_book">捐书</a>
-	</div>
-</div>
-<div class="home_page">
-	<a href="./home" title="前往首页"></a>
-</div>
+
 <div class="main">
-	<?php echo form_open('search');?>
-	<div class="search_bar">
+		<?php echo form_open('search');?>	
+		<div class="search_bar">
 		<input type="text" name="keywords" value="请输入要查找的书目" />
-		<a href="<?php echo base_url();?>index.php/search"></a>
+		<a href="#"><input type='submit' value='' /></a>
 	</div>
 	</form>
 	<div class="mid_content">
@@ -53,7 +25,7 @@
 						<?php foreach ($book_need as $row)
 						{   
 							echo
-							"<tr><td><a href='./book_info/".$row['id']."'>" . $row['name'] . "</a></td>".
+							"<tr><td><a href='./home/book_info/".$row['id']."'>" . $row['name'] . "</a></td>".
 							"<td>" . $row['course_name'] . "</td>".
 							"<td>" . $row['author'] ."</td>".
 							"<td>" . $row['course_category']. "</td>".
@@ -122,7 +94,7 @@
 						{
 							echo 
 							"<tr>
-							<td><a href='book_owner.html/".$user['id']."'/>".$user['truename'].'</a></td>
+							<td><a href='./home/book_owner/".$user['id']."'/>".$user['truename'].'</a></td>
 							<td>'.$user['dormitory'].'</td>
 							<td>'.$user['number'].
 								'<div class="book_list">
@@ -258,22 +230,3 @@
 		</div><!-- end of content_box 包裹整块质感效果的div -->
 	</div>
 </div><!--end of main-->
-<div class="footer">
-	<div class="safa"></div>
-	<ul>
-		<li>Copyright @ 2012 Product Of vtmer 维生数工作室</li>
-		<li>联系我们 关于我们 后台管理 @工大书架</li>
-	</ul>
-</div>
-</body>
-<script>
-	$(".main .search_bar input").bind("click",function(){if(this.value=="请输入要查找的书目")this.value=""}).bind("blur",function(){if(!this.value)this.value="请输入要查找的书目"});
-	$(".main .match_book table tr:eq(1)").children(2).addClass("hover_td");
-	$(".main .match_book table tr").children(2).bind("mouseover",function(){
-		$(this).addClass("hover_td");
-	});
-	$(".main .match_book table tr").children(2).bind("mouseout",function(){
-		$(this).removeClass("hover_td");
-	});
-</script>
-</html>
