@@ -40,7 +40,7 @@ class Home_Model extends CI_Model
 	  			}
 	  		}  		
 		}
-		$sql2 = "SELECT `id`,`truename`,`dormitory` FROM `user`"; 
+		$sql2 = "SELECT `id`,`truename`,`dormitory`,`major` FROM `user`"; 
 		$query2 = $this->db->query($sql2);
 		$result = $query2->result_array();
 		$j = 1;	
@@ -58,7 +58,7 @@ class Home_Model extends CI_Model
 	  		}
 	  			
 		}
-		//var_dump($user);
+		//var_dump($match);
 		return array('user'=>$user,'book'=>$book);
   	}
 }

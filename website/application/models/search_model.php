@@ -19,6 +19,7 @@ class Search_Model extends CI_Model
   	}
   	public function get_book_by_keywords($keywords)
   	{
+      $keywords=mysql_real_escape_string($keywords);
   		$sql = "SELECT * FROM `allbook` WHERE `name` LIKE ('%$keywords%')";
   		$query=$this->db->query($sql);
   		$result=$query->result_array();

@@ -25,7 +25,7 @@
 						<?php foreach ($book_need as $row)
 						{   
 							echo
-							"<tr><td><a href='./book_info/".$row['id']."'>" . $row['name'] . "</a></td>".
+							"<tr><td><a href='./home/book_info/".$row['id']."'>" . $row['name'] . "</a></td>".
 							"<td>" . $row['course_name'] . "</td>".
 							"<td>" . $row['author'] ."</td>".
 							"<td>" . $row['course_category']. "</td>".
@@ -94,7 +94,7 @@
 						{
 							echo 
 							"<tr>
-							<td><a href='book_owner.html/".$user['id']."'/>".$user['truename'].'</a></td>
+							<td><a href='./home/book_owner/".$user['id']."'/>".$user['truename'].'</a></td>
 							<td>'.$user['dormitory'].'</td>
 							<td>'.$user['number'].
 								'<div class="book_list">
