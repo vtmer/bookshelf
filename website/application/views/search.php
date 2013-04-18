@@ -31,8 +31,9 @@
 	<?php echo form_open('search');?>
 	<div class="search_bar">
 		<input type="text" name="keywords" value="请输入要查找的书目" />
-		<a href="#"><input type="submit" value="" /></a>
+		<a href="<?php echo base_url('search');?>"></a>
 	</div>
+	</form>
 	<div class="mid_content">
 		<div class="content_box">	
 			<div class="box_demo search_results">

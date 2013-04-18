@@ -14,9 +14,6 @@ class Search extends CI_Controller
 		{
 			$data['books'] = $this->search_model->get_book_by_keywords($_POST['keywords']);
 			$this->load->view('search',$data);
-		}else
-		{
-			header("location: ./home");
 		}
 		
 	}
