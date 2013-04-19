@@ -39,8 +39,9 @@ class Register extends CI_Controller
 			$dormitory = $this->input->post('dormitory');	
 			$status = 1;//注册标识码
 			$activationKey = mt_rand() . mt_rand() . mt_rand() . mt_rand() . mt_rand();//生成随机激活码	
-			
-			if($this->user_model->add($username,$password,$truename,$student_id,$faculty,$major,$grade,$phone_num,$subphone_num,$dormitory,$activationKey,$status))
+			$points = 30; //初始积分为30
+
+			if($this->user_model->add($username,$password,$truename,$student_id,$faculty,$major,$grade,$phone_num,$subphone_num,$dormitory,$activationKey,$status,$points))
 			{
 				//如何提示邮件发送成功提示信息
 				echo "<script>alert("we have sent an message to your email,please check it out!")</script>";	
