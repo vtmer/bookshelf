@@ -8,13 +8,11 @@ class Home extends CI_Controller
 		$this->load->library('parser');
 		$this->load->helper('form');
 	}
-	public function index()
+	public function index($page=1)
 	{	
 		$data['book_need'] = $this->home_model->get_book_need('网络工程','2011');
 		$match = array();
 		$i = 0;
-		$offset = 0;
-		$length = 5;
 		foreach ($data as $value) 
 		{
 			foreach ($value as $row) 
@@ -26,7 +24,15 @@ class Home extends CI_Controller
 			}
 		}
 		$data['system_match'] = $this->home_model->get_system_match($match);
-
+		//分页
+		$this->load->library('Pager');
+		$this->pager->set(0,1);//设置每页显示的条数
+		$data['system_match']['page'] = $this->pager->get_pagenum($data['system_match']['user']);//获取总页数
+		$data['system_match']['user'] = $this->pager->get_pagedata($data['system_match']['user'],$page);
+		$data['system_match']['currentpage'] = $this->pager->get_currentpage();
+		$data['system_match']['nextpage'] = $this->pager->get_nextpage();
+		$data['system_match']['prevpage'] = $this->pager->get_prevpage();
+		//END
 		$header = array('title'=>'工大书架','css_file'=>'home.css');
 		$footer = array('js_file'=>'home.js');
 
@@ -34,6 +40,7 @@ class Home extends CI_Controller
 		$this->load->view('home',$data);
 		$this->parser->parse('template/footer',$footer);
 	}
+
 	public function book_info($book_id)
 	{
 		$header = array('title'=>'书籍信息','css_file'=>'book_info.css');
@@ -54,20 +61,21 @@ class Home extends CI_Controller
 		$this->load->view('book_info',$data);
 		$this->parser->parse('template/footer',$footer);
 	}
+	
 	public function book_owner($user_id)
 	{
 		$header = array('title'=>'书籍拥有者','css_file'=>'book_owner.css');
 		$footer = array('js_file'=>'book_owner.js');
 
-		$data['user']=$this->home_model->get_userinfo($user_id);
+		$data['user'] = $this->home_model->get_userinfo($user_id);
 
 		if (!$data['user']) 
 		{
 			show_404();
 			exit();
 		}
-		$data['books']=$this->home_model->get_userbook($user_id);
-		var_dump($data);
+		$data['books'] = $this->home_model->get_userbook($user_id);
+		//var_dump($data);
 		$this->parser->parse('template/header',$header);
 		$this->load->view('book_owner',$data);
 		$this->parser->parse('template/footer',$footer);

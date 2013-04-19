@@ -218,12 +218,28 @@
 					</tbody>
 				</table>
 				<ul class="pages">
+					<li class="prev"><a href='<?php echo site_url('home/index')."/".(int)($system_match['prevpage']);?>'></a></li>
+					<?php for ($i=1; $i <= $system_match['page']; $i++) 
+					{ 
+						if($i==$system_match['currentpage'])
+						{
+							echo "<li class='page on_select'><a href='".site_url('home/index')."/$i'></a></li>";
+						}
+						else
+						{
+							echo "<li class='page'><a href='".site_url('home/index')."/$i'></a></li>";
+						}
+					}
+					?>
+					<li class="next"><a href="<?php echo site_url('home/index').'/'.(int)($system_match['nextpage']);?>"></a></li>
+					<!--
 					<li class="prev"><a href=""></a></li>
 					<li class="page"><a href=""></a></li>
 					<li class="page on_select"><a href=""></a></li>
 					<li class="page"><a href=""></a></li>
 					<li class="page"><a href=""></a></li>
 					<li class="next"><a href=""></a></li>
+					-->
 				</ul>
 			</div>
 			<div class="bottom_shadow"></div>
