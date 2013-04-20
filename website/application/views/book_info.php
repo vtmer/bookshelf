@@ -67,7 +67,7 @@
 				<ul class="get_book">
 					<?php for ($i=0; $i<$n ; $i++) 
 					{ 
-						echo '<li><a href="'.site_url('home/check_step')."/book/".$book_info[$i]->id."/user/".$user['user'][$i]['id'].'">借阅</a></li>';
+						echo '<li><a href="'.site_url('home/check_step')."/book/".$book_info[0]->id."/user/".$user['user'][$i]['id'].'">借阅</a></li>';
 					}?>
 					<!--
 					<li><a href="check_step.html">借阅</a></li>
@@ -78,7 +78,7 @@
 					-->
 				</ul>
 				<ul class="pages">
-					<li class="prev"><a href='<?php echo site_url('home/book_info')."/".($page['prevpage']);?>'></a></li>
+					<li class="prev"><a href='<?php echo site_url('home/book_info')."/".$book_info[0]->id.'/'.$page['prevpage'];?>'></a></li>
 					<?php for ($i=1; $i <= $page['num']; $i++) 
 					{ 
 						if($i==$page['currentpage'])
@@ -87,11 +87,11 @@
 						}
 						else
 						{
-							echo "<li class='page'><a href='".site_url('home/book_info')."/$i'></a></li>";
+							echo "<li class='page'><a href='".site_url('home/book_info').'/'.$book_info[0]->id."/$i'></a></li>";
 						}
 					}
 					?>
-					<li class="next"><a href="<?php echo site_url('home/book_info').'/'.($page['nextpage']);?>"></a></li>
+					<li class="next"><a href="<?php echo site_url('home/book_info').'/'.$book_info[0]->id.'/'.$page['nextpage'];?>"></a></li>
 					<!--
 					<li class="prev"><a href=""></a></li>
 					<li class="page"><a href=""></a></li>

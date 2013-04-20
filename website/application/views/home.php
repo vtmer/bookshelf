@@ -119,7 +119,7 @@
 									-->
 									</ul>
 									<span>全选</span>
-									<a href="check_step.html" class="order"></a>
+									<a href="<?php echo site_url('home/check_step');?>" class="order"></a>
 								</div>
 							</td>
 						</tr>

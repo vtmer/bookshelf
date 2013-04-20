@@ -28,7 +28,7 @@ class Home extends CI_Controller
 		//分页
 		$this->pager->set(0,1);//设置每页显示的条数
 		$data['page']['num'] = $this->pager->get_pagenum($data['system_match']['user']);//获取总页数
-		$data['system_match']['user'] = $this->pager->get_pagedata($data['system_match']['user'],$page);
+		$data['system_match']['user'] = $this->pager->get_pagedata($data['system_match']['user'],$page);//当前页数据
 		$data['page']['currentpage'] = $this->pager->get_currentpage();
 		$data['page']['nextpage'] = $this->pager->get_nextpage();
 		$data['page']['prevpage'] = $this->pager->get_prevpage();
@@ -41,11 +41,12 @@ class Home extends CI_Controller
 		$this->parser->parse('template/footer',$footer);
 	}
 
-	public function book_info($book_id,$page=1)
+	public function book_info($book_id)
 	{
 		$header = array('title'=>'书籍信息','css_file'=>'book_info.css');
 		$footer = array('js_file'=>'book_info.js');
-
+		//从URI中获取页数为第四个分段home/book_owner/3/1
+		$page = $this->uri->segment(4,1);
 		$this->load->model('search_model');
 
 		$data['book_info'] = $this->search_model->get_book_by_id($book_id);
@@ -59,7 +60,7 @@ class Home extends CI_Controller
 		//分页
 		$this->pager->set(0,1);//设置每页显示的条数
 		$data['page']['num'] = $this->pager->get_pagenum($data['user']['user']);//获取总页数
-		$data['user']['user'] = $this->pager->get_pagedata($data['user']['user'],$page);
+		$data['user']['user'] = $this->pager->get_pagedata($data['user']['user'],$page);//当前页数据
 		$data['page']['currentpage'] = $this->pager->get_currentpage();
 		$data['page']['nextpage'] = $this->pager->get_nextpage();
 		$data['page']['prevpage'] = $this->pager->get_prevpage();
@@ -70,11 +71,12 @@ class Home extends CI_Controller
 		$this->parser->parse('template/footer',$footer);
 	}
 	
-	public function book_owner($user_id,$page=1)
+	public function book_owner($user_id)
 	{
 		$header = array('title'=>'书籍拥有者','css_file'=>'book_owner.css');
 		$footer = array('js_file'=>'book_owner.js');
-
+		//从URI中获取页数为第四个分段:home/book_owner/3/1
+		$page = $this->uri->segment(4,1);
 		$data['user'] = $this->home_model->get_userinfo($user_id);
 		if (!$data['user']) 
 		{
@@ -84,9 +86,9 @@ class Home extends CI_Controller
 		$data['books'] = $this->home_model->get_userbook($user_id);
 		$data['user'][0]['booknum'] = count($data['books']);
 		//分页		
-		$this->pager->set(0,5);//设置每页显示的条数	
+		$this->pager->set(0,1);//设置每页显示的条数	
 		$data['page']['num'] = $this->pager->get_pagenum($data['books']);//获取总页数
-		$data['books'] = $this->pager->get_pagedata($data['books'],$page);
+		$data['books'] = $this->pager->get_pagedata($data['books'],$page);//当前页数据
 		$data['page']['currentpage'] = $this->pager->get_currentpage();
 		$data['page']['nextpage'] = $this->pager->get_nextpage();
 		$data['page']['prevpage'] = $this->pager->get_prevpage();
@@ -95,11 +97,20 @@ class Home extends CI_Controller
 		$this->load->view('book_owner',$data);
 		$this->parser->parse('template/footer',$footer);
 	}
-	
+
 	public function check_step()
 	{
+		$header = array('title'=>'借书页面','css_file'=>'check_step.css');
+		$footer = array('js_file'=>'check_step');
+
 		echo 'book='.$this->uri->segment(4);
 		echo '<br/>user='.$this->uri->segment(6);
+
+		$data;
+
+		$this->parser->parse('template/header',$header);
+		$this->load->view('check_step',$data);
+		$this->parser->parse('template/footer',$footer);
 	}
 }
 

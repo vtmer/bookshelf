@@ -84,7 +84,7 @@
 					</tbody>
 				</table>
 				<ul class="pages">
-					<li class="prev"><a href='<?php echo site_url('home/index')."/".($page['prevpage']);?>'></a></li>
+					<li class="prev"><a href='<?php echo site_url('home/book_owner')."/".$user[0]['id'].'/'.$page['prevpage'];?>'></a></li>
 					<?php for ($i=1; $i <= $page['num']; $i++) 
 					{ 
 						if($i==$page['currentpage'])
@@ -93,11 +93,11 @@
 						}
 						else
 						{
-							echo "<li class='page'><a href='".site_url('home/book_owner')."/$i'></a></li>";
+							echo "<li class='page'><a href='".site_url('home/book_owner').'/'.$user[0]['id']."/$i'></a></li>";
 						}
 					}
 					?>
-					<li class="next"><a href="<?php echo site_url('home/book_owner').'/'.($page['nextpage']);?>"></a></li>
+					<li class="next"><a href="<?php echo site_url('home/book_owner').'/'.$user[0]['id'].'/'.($page['nextpage']);?>"></a></li>
 					<!--
 					<li class="prev"><a href=""></a></li>
 					<li class="page"><a href=""></a></li>
