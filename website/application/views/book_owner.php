@@ -14,7 +14,7 @@
 					<li><?php echo $user[0]['truename'];?></li>
 					<li>专业：<span><?php echo $user[0]['major'];?></span></li>
 					<li>年级：<span><?php echo $user[0]['grade']."级";?></span></li>
-					<li>拥有书本数：<span>##</span></li>
+					<li>拥有书本数：<span><?php echo $user[0]['booknum'];?></span></li>
 					<li>分享度：<span>##</span></li>
 				</ul>
 				<table>
@@ -84,12 +84,28 @@
 					</tbody>
 				</table>
 				<ul class="pages">
+					<li class="prev"><a href='<?php echo site_url('home/index')."/".($page['prevpage']);?>'></a></li>
+					<?php for ($i=1; $i <= $page['num']; $i++) 
+					{ 
+						if($i==$page['currentpage'])
+						{
+							echo "<li class='page on_select'><a href='".site_url('home/book_owner')."/$i'></a></li>";
+						}
+						else
+						{
+							echo "<li class='page'><a href='".site_url('home/book_owner')."/$i'></a></li>";
+						}
+					}
+					?>
+					<li class="next"><a href="<?php echo site_url('home/book_owner').'/'.($page['nextpage']);?>"></a></li>
+					<!--
 					<li class="prev"><a href=""></a></li>
 					<li class="page"><a href=""></a></li>
 					<li class="page on_select"><a href=""></a></li>
 					<li class="page"><a href=""></a></li>
 					<li class="page"><a href=""></a></li>
 					<li class="next"><a href=""></a></li>
+					-->
 				</ul>
 			</div>
 			<div class="bottom_shadow"></div><!-- 块级区域下方的底层阴影 -->

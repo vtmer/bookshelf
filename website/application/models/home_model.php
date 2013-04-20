@@ -69,7 +69,7 @@ class Home_Model extends CI_Model
   	public function get_userbook($user_id)
   	{
   		$sql = "SELECT * FROM `circulating_book`,`allbook` WHERE `circulating_book`.`from_id`=? AND `allbook`.`ISBN`=`circulating_book`.`ISBN`";
-  		$query = $this->db->query($sql,array($user_id,$user_id));
+  		$query = $this->db->query($sql,array($user_id));
   		return $query->result_array();
   	}
 }

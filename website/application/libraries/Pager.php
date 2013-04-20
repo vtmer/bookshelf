@@ -11,7 +11,7 @@
 class Pager
 {
 	protected $offset;//初始索引
-	protected $length=5;//长度
+	protected $length;//长度
 	protected $current_page = 1;
 	protected $pagenum;
 
@@ -55,7 +55,7 @@ class Pager
 	{
 		if((int)$page)
 		{
-			$this->offset = $page*$this->length-1;
+			$this->offset = ($page-1)*$this->length;
 			$this->current_page = $page;
 			return array_slice($data,$this->offset,$this->length);
 		}
