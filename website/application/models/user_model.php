@@ -15,8 +15,7 @@ class User_model extends CI_Model
 	}	
 	
 	//注册时向数据库添加数据
-	public function add($username,$password,$truename,$student_id,$faculty,$major,
-						$grade,$phone_num,$subphone_num,$dormitory,$activatekey,$status,$points)
+	public function add($username,$password,$truename,$student_id,$faculty,$major,$grade,$phone_num,$subphone_num,$dormitory,$activationkey,$status,$points)
 	{
 		$query = $this->db->get_where('user',array('username' => $username,));
 
@@ -24,42 +23,42 @@ class User_model extends CI_Model
 		{
 			return FALSE;
 		}
-
-		$this->db->insert('user',array(
-				'username' => $username,
-				'password' => md5($password),
-				'truename' => $truename,
-				'student_id' => $student_id,
-				'faculty' => $faculty,
-				'major' => $major,
-				'grade' => $grade,
-				'phone_num' => $phone_num,
-				'subphone_num' => $subphone_num,
-				'dormitory' => $dormitory,
-				'activatekey' => $activatekey,
-				'status' => $status,
-				'points' => $points));
-
-		return TRUE;
+		else
+		{
+			$this->db->insert('user',array(
+					'username' => $username,
+					'password' => md5($password),
+					'truename' => $truename,
+					'student_id' => $student_id,
+					'faculty' => $faculty,
+					'major' => $major,
+					'grade' => $grade,
+					'phone_number' => $phone_num,
+					'subphone_number' => $subphone_num,
+					'dormitory' => $dormitory,
+					'activationkey' => $activationkey,
+					'status' => $status,
+					'points' => $points));
+			return TRUE;
+		}	
 	}
 
 	//注册后进行邮箱验证
-	public function verify($queryString)
+	public function verify($uid,$activationkey)
 	{
-		$query = $this->db->get_where('user',array('activatekey' => $queryString));
-		return ($query->num_rows() ==1) ? TRUE : FALSE; 
+		$query = $this->db->get_where('user',array('id' => $uid,'activationkey' => $activationkey));
+		return ($query->num_rows() == 1) ? TRUE : FALSE; 
 	}	
 
 	//根据email获取该用户id
 	public function get_id($username)
 	{
 		$query = $this->db->get_where('user',array('username' => $username));
-		if($query->num_rows() > 0)
+		if($query->num_rows() == 1)
 		{
 			$row = $query->row();
-			$uid = $row['id'];
 		}	
-		return $uid;
+		return $row;
 	}
 }
 
