@@ -25,7 +25,7 @@ class Home_Model extends CI_Model
   		$book = array();
   		$user = array();
   		$i = 0;
-  		$sql = "SELECT `from_id`,`ISBN`,`name` FROM `circulating_book` WHERE book_status=1";
+  		$sql = "SELECT `from_user_id`,`ISBN`,`name` FROM `circulating_book` WHERE book_status=1";
   		$query = $this->db->query($sql);
   		$result = $query->result_array();
   		foreach ($match as $value) 
