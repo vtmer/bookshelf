@@ -1,4 +1,3 @@
-
 <div class="main">
 	<form action="<?php echo site_url('search'); ?>" method="POST"> 
 	<div class="search_bar">

@@ -25,7 +25,7 @@ class Home_Model extends CI_Model
   		$book = array();
   		$user = array();
   		$i = 0;
-  		$sql = "SELECT `from_id`,`ISBN`,`name` FROM `circulating_book` WHERE book_status=1";
+  		$sql = "SELECT `book_id` FROM `circulating_book` WHERE book_status=1";
   		$query = $this->db->query($sql);
   		$result = $query->result_array();
   		foreach ($match as $value) 
@@ -68,7 +68,7 @@ class Home_Model extends CI_Model
   	}
   	public function get_userbook($user_id)
   	{
-  		$sql = "SELECT * FROM `circulating_book`,`allbook` WHERE `circulating_book`.`from_id`=? AND `allbook`.`ISBN`=`circulating_book`.`ISBN`";
+  		$sql = "SELECT * FROM `circulating_book`,`allbook` WHERE `circulating_book`.`from_id`=? AND `allbook`.`ISBN`=`circulating_book`.`book_id`";
   		$query = $this->db->query($sql,array($user_id));
   		return $query->result_array();
   	}

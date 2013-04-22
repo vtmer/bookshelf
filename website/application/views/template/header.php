@@ -13,15 +13,17 @@
 <div id="float_head">
 	<div class="header">
 		<a href="http://www.gdutonline.com" id="gdutonline"></a>
-		<span class="score">积分：0</span>
+		<?php if(isset($truename)):?>
+		<span class="score">积分:<?php echo $points;?></span>
 		<a href="message.html" id="message">收到短信息<span>(0)</span></a>
 		<div class="user_info">
-			<span class="user_name">董晓丁</span>
+		<span class="user_name"><?php echo $truename;?></span>
 			<a href="personal_info.html">个人设置</a>
 			<a href="bookshelf.html">我的书架</a>
-			<a href="#">退出</a>
+			<a href="<?php echo site_url('login/logout'); ?>">退出</a>
 		</div>
 		<a href="add_book.html" id="add_book">捐书</a>
+		<?php endif;?>
 	</div>
 </div>
 <div class="home_page">

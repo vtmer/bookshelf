@@ -10,7 +10,7 @@ class User_model extends CI_Model
 	//登陆时验证函数
 	public function is($email,$password)
 	{
-		$query = $this->db->get_where('user',array('username' => $email,'password' => md5($password)));
+		$query = $this->db->get_where('user',array('username' => $email,'password' => $password));
 		return ($query->num_rows() == 1) ? TRUE : FALSE;
 	}	
 	
@@ -51,7 +51,7 @@ class User_model extends CI_Model
 	}	
 
 	//根据email获取该用户id
-	public function get_id($username)
+	public function get($username)
 	{
 		$query = $this->db->get_where('user',array('username' => $username));
 		if($query->num_rows() == 1)
@@ -59,6 +59,16 @@ class User_model extends CI_Model
 			$row = $query->row();
 		}	
 		return $row;
+	}
+
+	public function get_points($username)
+	{
+		$query = $this->db->get_where('user',array('username' => $username));
+		if($query->num_rows() == 1)
+		{
+			$rows = $query->row();
+		}
+		return $rows->points;
 	}
 }
 
