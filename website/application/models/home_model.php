@@ -8,7 +8,7 @@ class Home_Model extends CI_Model
   	public function get_book_need($major,$grade)
   	{
 
-		$sql = "SELECT * FROM `allbook` WHERE major=? AND grade=?";
+		$sql = "SELECT `id`,`name`,`course_name`,`author`,`course_category`,`publish`,`version` FROM `allbook` WHERE major=? AND grade=?";
 		$query = $this->db->query($sql,array($major,$grade));
 		return $query->result_array();  		
   	}
@@ -25,17 +25,18 @@ class Home_Model extends CI_Model
   		$book = array();
   		$user = array();
   		$i = 0;
-  		$sql = "SELECT `from_id`,`ISBN`,`name` FROM `circulating_book` WHERE book_status=1";
+  		$sql = "SELECT `from_id`,`book_id` FROM `circulating_book` WHERE book_status=1";
   		$query = $this->db->query($sql);
   		$result = $query->result_array();
   		foreach ($match as $value) 
   		{  			
 	  		foreach ($result as $row) 
 	  		{
-	  			if($value['ISBN']==$row['ISBN']&&$value['name']==$row['name'])
+	  			if($value['id']==$row['book_id'])
 	  			{
 	  				$book[$i] = $row;
-	  				$book[$i]['book_id']=$value['id'];
+	  				$book[$i]['book_id'] = $value['id'];
+            $book[$i]['name'] = $value['name'];
 	  				$i++;
 	  			}
 	  		}  		
@@ -60,16 +61,26 @@ class Home_Model extends CI_Model
 		return array('user'=>$user,'book'=>$book);
   	}
 
-  	public function get_userinfo($book_id)
+  	public function get_userinfo($from_id)
   	{
-  		$sql = "SELECT `id`,`truename`,`faculty`,`major`,`grade`,`dormitory` FROM `user` WHERE `id`=?";
-  		$query = $this->db->query($sql,array($book_id));
+  		$sql = "SELECT `id`,`truename`,`faculty`,`major`,`grade`,`dormitory`,`phone_number`,`subphone_number` FROM `user` WHERE `id`=?";
+  		$query = $this->db->query($sql,array($from_id));
   		return $query->result_array();
   	}
   	public function get_userbook($user_id)
   	{
-  		$sql = "SELECT * FROM `circulating_book`,`allbook` WHERE `circulating_book`.`from_id`=? AND `allbook`.`ISBN`=`circulating_book`.`ISBN`";
+  		$sql = "SELECT `allbook`.`id`,`name`,`course_name`,`author`,`course_category`,`publish`,`version` FROM `circulating_book`,`allbook` WHERE `circulating_book`.`from_id`=? AND `allbook`.`id`=`circulating_book`.`book_id`";
   		$query = $this->db->query($sql,array($user_id));
   		return $query->result_array();
   	}
+    public function get_bookborrow($info)
+    {
+      $book = $this->get_userbook($info['user']);
+      var_dump($book);
+      foreach ($book as $key => $value) 
+      {
+        
+      }
+      
+    }
 }
