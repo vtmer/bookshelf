@@ -9,15 +9,13 @@ class Verify extends CI_Controller
 
 	public function index($uid,$activationkey)
 	{
-		if($this->user_model->verify($uid,$activationkey))
+		$this->user_model->activate($uid);
+		$activationkey_db = $this->user_model->get_active($uid);
+		if($activationkey == $activationkey_db)
 		{
-			echo "<script>alert('Your email verification has been successed!');</script>";	
-			if($this->is_logged_in())
-			{
-				$this->load->view('register');
-			}
+			echo "<script>alert('verify successed!');</script>";
 		}
-	 
+			redirect('login');
 	}
 
 	/*  利用jq在views页面显示提示信息

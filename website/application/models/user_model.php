@@ -10,7 +10,7 @@ class User_model extends CI_Model
 	//登陆时验证函数
 	public function is($email,$password)
 	{
-		$query = $this->db->get_where('user',array('username' => $email,'password' => $password));
+		$query = $this->db->get_where('user',array('username' => $email,'password' => $password,'status' => "1"));
 		return ($query->num_rows() == 1) ? TRUE : FALSE;
 	}	
 	
@@ -44,11 +44,23 @@ class User_model extends CI_Model
 	}
 
 	//注册后进行邮箱验证
+	/*
 	public function verify($uid,$activationkey)
 	{
 		$query = $this->db->get_where('user',array('id' => $uid,'activationkey' => $activationkey));
 		return ($query->num_rows() == 1) ? TRUE : FALSE; 
-	}	
+	}*/	
+	
+	//返回对应用户注册时的激活码
+	public function get_active($uid)
+	{
+		$query = $this->db->get_where('user',array('id' => $uid));
+		if($query->num_rows == 1)
+		{	
+			$row = $query->row();
+		}
+		return $row->activationkey;
+	}
 
 	//根据email获取该用户id
 	public function get($username)
@@ -60,15 +72,11 @@ class User_model extends CI_Model
 		}	
 		return $row;
 	}
-
-	public function get_points($username)
+	
+	public function activate($uid)
 	{
-		$query = $this->db->get_where('user',array('username' => $username));
-		if($query->num_rows() == 1)
-		{
-			$rows = $query->row();
-		}
-		return $rows->points;
+		$this->db->update('user',array('status' => "1"),array('id' => $uid));
+		//return ($query->num_rows() > 0) ? TRUE : FALSE;
 	}
 }
 

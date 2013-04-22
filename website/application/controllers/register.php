@@ -44,7 +44,7 @@ class Register extends CI_Controller
 			$phone_num = $this->input->post('phone_num');
 			$subphone_num = $this->input->post('subphone_num');
 			$dormitory = $this->input->post('dormitory');	
-			$status = 1;//注册标识码
+			$status = 0;//注册标识码
 			$activationKey = mt_rand() . mt_rand() . mt_rand() . mt_rand() . mt_rand();//生成随机激活码	
 			$points = 30; //初始积分为30
 			//echo $username." ".$password." ".$truename." ".$student_id." ".$dormitory." ".$faculty." ".$major." ".$grade." ".$phone_num." ".$subphone_num; 
@@ -59,14 +59,19 @@ class Register extends CI_Controller
 				//postmail($username,$activationKey);//发送验证邮件
 
 				//将用户信息保存至session，邮箱验证后直接可登陆
-				$row = $this->user_model->get_id($username);
+				$row = $this->user_model->get($username);
 				$uid = $row->id;
-				echo $uid;
+				$points = $row->points;
+				$truename = $row->truename;
+				$major = $row->major;
+				$grade = $row->grade;
 				$data = array(
-					'email' => $username,
+					'points' => $points,
+					'truename' => $truename,
 					'uid' => $uid,
+					'major' => $major,
+					'grade' => $grade,
 					'is_logged_in' => TRUE,
-					'is_admin' => FALSE,
 				);
 				$this->session->set_userdata($data);
 				/*echo $data['email']."</br>";
@@ -109,6 +114,8 @@ class Register extends CI_Controller
 		{
 			echo "<script>alert('sent failed!');</script>";
 		}
+		echo "<script>alert('请验证邮箱后登陆！')</script>";
+		$this->load->view('login');
 	}
 }
 

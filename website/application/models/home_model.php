@@ -5,6 +5,7 @@ class Home_Model extends CI_Model
   	{
     	$this->load->database();
   	}
+
   	public function get_book_need($major,$grade)
   	{
 
@@ -36,7 +37,7 @@ class Home_Model extends CI_Model
 	  			{
 	  				$book[$i] = $row;
 	  				$book[$i]['book_id'] = $value['id'];
-            $book[$i]['name'] = $value['name'];
+		            $book[$i]['name'] = $value['name'];
 	  				$i++;
 	  			}
 	  		}  		
@@ -67,13 +68,15 @@ class Home_Model extends CI_Model
   		$query = $this->db->query($sql,array($from_id));
   		return $query->result_array();
   	}
+
   	public function get_userbook($user_id)
   	{
   		$sql = "SELECT `allbook`.`id`,`name`,`course_name`,`author`,`course_category`,`publish`,`version` FROM `circulating_book`,`allbook` WHERE `circulating_book`.`from_id`=? AND `allbook`.`id`=`circulating_book`.`book_id`";
   		$query = $this->db->query($sql,array($user_id));
   		return $query->result_array();
-  	}
-    public function get_bookborrow($info)
+	}
+	
+	public function get_bookborrow($info)
     {
       $book = $this->get_userbook($info['user']);
       var_dump($book);

@@ -44,17 +44,18 @@ class Login extends CI_Controller
 				$uid = $row->id;
 				$points = $row->points; 
 				$truename = $row->truename;
+				$major = $row->major;
+				$grade = $row->grade;
                 /*储存用户信息至session*/
                 $data = array(
-                    'email' => $email,
 					'points' => $points,
 					'truename' => $truename,
                     'uid' => $uid,
+					'major' => $major,
+					'grade' => $grade,
                     'is_logged_in' => TRUE,
-                    'is_admin' => FALSE
                 );
 				$this->session->set_userdata($data);
-               	$this->load->view('template/header',$datas);
 				redirect('home');
 			} 
 			else 
