@@ -5,9 +5,10 @@ class Home extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('home_model');
-		$this->load->library('parser');
-		$this->load->helper('form');
+		$this->load->model('search_model');
+		$this->load->library('parser');		
 		$this->load->library('Pager');
+		$this->load->helper('form');
 	}
 	public function index($page=1)
 	{	
@@ -19,7 +20,6 @@ class Home extends CI_Controller
 			foreach ($value as $row) 
 			{
 				$match[$i]['id'] = $row['id'];
-				$match[$i]['ISBN'] = $row['ISBN'];
 				$match[$i]['name'] = $row['name'];
 				$i++;
 			}
@@ -53,8 +53,6 @@ class Home extends CI_Controller
 		$footer = array('js_file'=>'book_info.js');
 		//从URI中获取页数为第四个分段home/book_owner/3/1
 		$page = $this->uri->segment(4,1);
-		$this->load->model('search_model');
-
 		$data['book_info'] = $this->search_model->get_book_by_id($book_id);
 		if(!$data['book_info']) 
 		{
@@ -109,11 +107,13 @@ class Home extends CI_Controller
 		$header = array('title'=>'借书页面','css_file'=>'check_step.css');
 		$footer = array('js_file'=>'check_step');
 
-		echo 'book='.$this->uri->segment(4);
-		echo '<br/>user='.$this->uri->segment(6);
+		$info = $this->uri->uri_to_assoc(3);
+		var_dump($info);
 
-		$data;
-
+		$data['user'] = $this->home_model->get_userinfo($info['user']);
+		
+		$data['books'] = $this->home_model->get_bookborrow($info);
+		//var_dump($data);
 		$this->parser->parse('template/header',$header);
 		$this->load->view('check_step',$data);
 		$this->parser->parse('template/footer',$footer);
