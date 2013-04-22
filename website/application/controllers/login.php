@@ -18,7 +18,7 @@ class Login extends CI_Controller
     public function check()
     {           
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('email', 'Email', 'required|max_length[40]|valid_email');
+        $this->form_validation->set_rules('username', 'Email', 'required|max_length[40]|valid_email');
         $this->form_validation->set_rules('pwd', 'Password', 'required|min_length[8]|max_length[20]|alpha_numeric');
 
 		if ($this->form_validation->run() == FALSE) 

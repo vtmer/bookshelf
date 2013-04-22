@@ -2,7 +2,12 @@
 
 class Register extends CI_Controller
 {
-	
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('user_model');
+	}	
+
 	public function index()
 	{
 		$this->load->view('register');	
@@ -12,17 +17,19 @@ class Register extends CI_Controller
 	public function check()
 	{
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('username','Username','required|max_length[40]|valid_emails');
-		$this->form_validation->set_rules('pwd1','Password1','required|min_length[8]|max_length[20]|alpha_numeric');
+		$this->form_validation->set_rules('username','Username','required|max_length[40]|valid_email');
+		$this->form_validation->set_rules('pwd1','Password1','required|min_length[8]|max_length[16]|alpha_numeric');
 		$this->form_validation->set_rules('pwd2','Password2','required|matches[pwd1]');
 		$this->form_validation->set_rules('truename','name','required');
-		$this->form_validation->set_rules('phone_num','Phone','required|numeric|exact_length[11]');
-		$this->form_validation->set_rules('subphone_num','Subphone','required|min_length[4]|max_length[6]');
+		$this->form_validation->set_rules('phone_num','Phone','required|numeric|max_length[12]');
+		$this->form_validation->set_rules('subphone_num','Subphone','required|numeric|min_length[4]|max_length[6]');
 
-		if($this->form_validation->run == FALSE)
+		if($this->form_validation->run() == FALSE)
 		{
 			//如何提示错误
-			redirect('register');
+			//redirect('register');
+			echo "<script >alert('您填写的信息有误!');</script>";
+			$this->load->view('register');
 		}
 		else
 		{
@@ -31,7 +38,7 @@ class Register extends CI_Controller
 			$truename = $this->input->post('truename');
 			$student_id = $this->input->post('student_id');
 			//利用session保存的信息（学院、专业、年级）；
-			$faculty $this->input->post('faculty');
+			$faculty = $this->input->post('faculty');
 			$major = $this->input->post('major');
 			$grade = $this->input->post('grade'); 
 			$phone_num = $this->input->post('phone_num');
@@ -40,15 +47,21 @@ class Register extends CI_Controller
 			$status = 1;//注册标识码
 			$activationKey = mt_rand() . mt_rand() . mt_rand() . mt_rand() . mt_rand();//生成随机激活码	
 			$points = 30; //初始积分为30
-
-			if($this->user_model->add($username,$password,$truename,$student_id,$faculty,$major,$grade,$phone_num,$subphone_num,$dormitory,$activationKey,$status,$points))
+			//echo $username." ".$password." ".$truename." ".$student_id." ".$dormitory." ".$faculty." ".$major." ".$grade." ".$phone_num." ".$subphone_num; 
+		
+	
+		if($this->user_model->add($username,$password,$truename,$student_id,$faculty,$major,$grade,$phone_num,$subphone_num,$dormitory,$activationKey,$status,$points))
+		
+		
 			{
 				//如何提示邮件发送成功提示信息
-				echo "<script>alert("we have sent an message to your email,please check it out!")</script>";	
-				postmail($username,$activationKey);//发送验证邮件
+				echo "<script>alert('we have sent an message to your email,please check it out!')</script>";	
+				//postmail($username,$activationKey);//发送验证邮件
 
 				//将用户信息保存至session，邮箱验证后直接可登陆
-				$uid = $this->user_model->get_id($username);
+				$row = $this->user_model->get_id($username);
+				$uid = $row->id;
+				echo $uid;
 				$data = array(
 					'email' => $username,
 					'uid' => $uid,
@@ -56,69 +69,46 @@ class Register extends CI_Controller
 					'is_admin' => FALSE,
 				);
 				$this->session->set_userdata($data);
+				/*echo $data['email']."</br>";
+				echo $data['uid']."</br>";
+				echo $data['is_logged_in']."</br>";
+				echo $data['is_admin']."</br>";*/
 			}
 			else
 			{
 				//如何提示错误
-				redirect('register');
+				echo "<script>alert('insert failed!')</script>";				
 			}
 		}
-
-	/*	
-	    利用jq控制views页面来显示成功/错误信息提示
 	
-		private function json_response($successful,$message)
-		{
-			echo json_encode(array(
-				'issuccessful' => $successful;
-				'message' => $message;
-			));
-		}
-	*/
-	}
+	
 
-	/*使用PHPMailer类来发送邮件*/
-	public function postmail($to,$activationKey)
-	{
-		error_reporting(E_STRICT);
-		date_default_timezone_set("Asia/Beijing");
-		require('./controllers/phpmailer/class.phpmailer.php');
-		require('./controllers/phpmailer/class.smtp.php');
+	/*邮箱验证模块*/
+		$configs['protocol'] = 'smtp';
+		$configs['smtp_host'] = 'smtp.163.com';
+		$configs['smtp_user'] = 'gdutbookshelf@163.com';
+		$configs['smtp_pass'] = 'vtmerbookshelf';
+		$configs['smtp_port'] = '25';
+		$configs['mailtype'] = 'html';
+		$configs['charset'] = 'utf-8';
 
-		$mail = new PHPMailer();
-		$mail->CharSet = "UTF-8";
-		$mail->IsSMTP();
-		$mail->SMTPDebug = 2;//启用SMTP调试 
-							 //1 => error and messages
-							 //2 => messages only
-		$mail->SMTPAuth = TRUE;
-		$mail->SMTPSecure = "ssl";
-		$mail->Host = "smtp.gmail.com";
-		$mail->Port = "465";
-		$mail->Username = "gdutbookshelf@gmail.com";
-		$mail->Password = "vtmerbookshelf";
+		$this->email->initialize($configs);
 
-		$mail->SetForm('gdutbookshelf@gmail.com','gdutbookshelf');//设置发信人信息
-
-		$subject = "welcome to gudt bookshelf!";//邮件标题
-		$message = "Thank you for Registration!\rYou have register our website almost.If you want to finish the registration completely,you should follow the next-operation:Clicking the link:\rhttp://www.gdutbookshelf.com/verify.php?$activationKey\r\rAnd if this is a error,ignore this email and you'll be removed from our mailing list.\rwww.gdutbookshelf.com";//邮件正文 
+		$message = "Thank you for Registration!\nYou have register our website almost.If you want to finish the registration completely,you should follow the next-operation:Clicking the link:\nhttp://localhost/bookshelf/website/index.php/verify/index/".$uid."/".$activationKey."\n if this is a error,ignore this email and you'll be removed from our mailing list.\n www.gdutbookshelf.com";//邮件正文 
 		
-		$mail->Subject = $subject;
-		$mail->AltBody = "To view the message,please use an HTML compatible email viewer!";
-		$mail->Body = MsgHTML($message);
-		$address = $to;
-		$mail->AddAddress($address);
+		$this->email->from('gdutbookshelf@163.com','vtmerbookshelf');
+		$this->email->to($username);
+		$this->email->subject('Welcome to gdut bookshelf');
+		$this->email->message($message);
 
-		if(!$mail->Send())
+		if($this->email->send())
 		{
-			//发送成功
-			echo "Mailer Error!" . $mail->ErrorInfo;
+			echo "<script>alert('sent successfully！');</script>";
 		}
 		else
 		{
-			echo "Email has sent!";
+			echo "<script>alert('sent failed!');</script>";
 		}
-	
 	}
 }
 

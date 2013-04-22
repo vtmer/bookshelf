@@ -10,7 +10,9 @@
 		<div class="content_box">
 			<div class="box_demo search_results">
 				<h2>书源人联系方式：</h2>
-				<p><span>名称:xxx</span><span>年级：11级</span><span>长号：123456789</span><span>短号：123456</span><span>东区</span></p>
+				<?php echo 
+				"<p><span>名称:".$user[0]['truename']."</span><span>年级：".$user[0]['grade']."</span><span>长号：".$user[0]['phone_number']."</span><span>短号：".$user[0]['subphone_number']."</span><span>".$user[0]['dormitory']."</span></p>";
+				?>
 				<span class="tips">tips:在您联系书源人时请考虑当前时间，选择使用短信或是电话联系</span>
 				<h4>您要借的书籍：</h4>
 				<table>
@@ -23,6 +25,7 @@
 							<th>出版社</th>
 							<th>版次</th>
 						</tr>
+						<!--
 						<tr>
 							<td>线性代数</td>
 							<td>线性代数</td>
@@ -63,6 +66,7 @@
 							<td></td>
 							<td></td>
 						</tr>
+						-->
 					</tbody>
 				</table>
 			</div>

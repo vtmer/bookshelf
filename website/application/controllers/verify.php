@@ -7,21 +7,17 @@ class Verify extends CI_Controller
 		parent::__construct();
 	}
 
-	public function index()
+	public function index($uid,$activationkey)
 	{
-		$queryString = $_SERVER[QUERY_STRING];
-		if($this->user_model->verify($queryString))
+		if($this->user_model->verify($uid,$activationkey))
 		{
-    		if($this->is_logged_in())
+			echo "<script>alert('Your email verification has been successed!');</script>";	
+			if($this->is_logged_in())
 			{
-				redirect('home');
+				$this->load->view('register');
 			}
 		}
-		else
-		{
-			echo "<script>alert("Sorry!Your email verification has been failed!")</script>";
-		    redirect('register');
-		}
+	 
 	}
 
 	/*  利用jq在views页面显示提示信息

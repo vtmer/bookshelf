@@ -18,9 +18,9 @@
 	<img src="<?=base_url('img/shujia.jpg'); ?>" class="shujia" alt="工大书架" />
 		<form action="<?=site_url('login/check'); ?>" method="POST"> 
 			<span>已有帐号登录:</span>
-			<label for="user_name">用户名：<input type="text" id="username"/ ></label>
-			<label for="password">密码：<input type="password" id="pwd" /></label>	
-			<a href="<?=site_url('login/check'); ?>" class="confirm">登录</a>
+			<label for="user_name">用户名：<input type="text" name="username"/ ></label>
+			<label for="password">密码：<input type="password" name="pwd" /></label>	
+			<a href="<?=site_url('login/check'); ?>" class="confirm"><input type="submit" value="anniu" />登录</a>
 		</form>
 		<a href="sign_up" class="sign_up"></a>
 	</div>

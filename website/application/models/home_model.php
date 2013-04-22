@@ -13,9 +13,9 @@ class Home_Model extends CI_Model
 		return $query->result_array();  		
   	}
 /**
- * 系统匹配书源人
+ * 系统匹配书源�?
  *
- * @todo   get系统匹配书源人
+ * @todo   get系统匹配书源�?
  * @access public
  * @param  $match
  * @return array
