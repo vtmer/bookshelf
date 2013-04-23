@@ -76,14 +76,20 @@ class Home_Model extends CI_Model
   		return $query->result_array();
 	}
 	
-	public function get_bookborrow($info)
+	public function get_bookborrow($segs,$num)
     {
-      $book = $this->get_userbook($info['user']);
-      var_dump($book);
+      $book = $this->get_userbook($segs[4]);
+      $match = array();
       foreach ($book as $key => $value) 
       {
-        
+         for($i=6;$i<=$num;$i++)
+         {
+            if($value['id']==$segs[$i])
+            {
+                $match[$key] = $value;
+            }          
+         }
       }
-      
+      return $match;     
     }
 }
