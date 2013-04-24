@@ -33,7 +33,7 @@ class Home extends CI_Controller
 		$data['page']['nextpage'] = $this->pager->get_nextpage();
 		$data['page']['prevpage'] = $this->pager->get_prevpage();
 		//END
-		if($this->session->userdata['truename'])
+		if(isset($this->session->userdata['truename']))
 		{
 			$header = array('title'=>'工大书架','css_file'=>'home.css','points' => $this->session->userdata['points'],'truename' => $this->session->userdata['truename']);
 		}

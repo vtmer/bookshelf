@@ -41,7 +41,6 @@
 $route['default_controller'] = "welcome";
 $route['guide'] = 'guide';
 $route['verify'] = "verify";
-$route['registera'] = "registera";
 $route['register'] = "register";
 $route['home']="home";
 $route['login'] = "login";
