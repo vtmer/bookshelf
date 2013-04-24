@@ -10,9 +10,12 @@ class Home extends CI_Controller
 		$this->load->library('Pager');
 		$this->load->helper('form');
 	}
-	public function index($page=1)
-	{	
-		$data['book_need'] = $this->home_model->get_book_need('网络工程','2011');
+	public function index($page = 1)
+	{
+
+		var_dump($this->session->all_userdata());
+
+		$data['book_need'] = $this->home_model->get_book_need($this->session->userdata['major'],$this->session->userdata['grade']);
 		$match = array();
 		$i = 0;
 		foreach ($data as $value) 
@@ -41,6 +44,8 @@ class Home extends CI_Controller
 		{
 			$header = array('title'=>'工大书架','css_file'=>'home.css');
 		}
+		$header = array('title'=>'工大书架','css_file'=>'home.css');
+>>>>>>> 3499d7c5fb1d5976047e3148ff5a3d694e53f52e
 		$footer = array('js_file'=>'home.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('home',$data);
@@ -48,16 +53,13 @@ class Home extends CI_Controller
 	}
 
 	public function book_info($book_id)
-	{
-		$header = array('title'=>'书籍信息','css_file'=>'book_info.css');
-		$footer = array('js_file'=>'book_info.js');
+	{	
 		//从URI中获取页数为第四个分段home/book_owner/3/1
 		$page = $this->uri->segment(4,1);
 		$data['book_info'] = $this->search_model->get_book_by_id($book_id);
 		if(!$data['book_info']) 
 		{
 			show_404();
-			exit();
 		}
 		$data['user'] = $this->home_model->get_system_match(array(array('ISBN'=>$data['book_info'][0]->ISBN,
 																'name'=>$data['book_info'][0]->name,'id'=>$book_id)));
@@ -70,6 +72,8 @@ class Home extends CI_Controller
 		$data['page']['prevpage'] = $this->pager->get_prevpage();
 		//END
 		//var_dump($data['user']);
+		$header = array('title'=>'书籍信息','css_file'=>'book_info.css');
+		$footer = array('js_file'=>'book_info.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('book_info',$data);
 		$this->parser->parse('template/footer',$footer);
@@ -77,15 +81,12 @@ class Home extends CI_Controller
 	
 	public function book_owner($user_id)
 	{
-		$header = array('title'=>'书籍拥有者','css_file'=>'book_owner.css');
-		$footer = array('js_file'=>'book_owner.js');
 		//从URI中获取页数为第四个分段:home/book_owner/3/1
 		$page = $this->uri->segment(4,1);
 		$data['user'] = $this->home_model->get_userinfo($user_id);
 		if (!$data['user']) 
 		{
 			show_404();
-			exit();
 		}
 		$data['books'] = $this->home_model->get_userbook($user_id);
 		$data['user'][0]['booknum'] = count($data['books']);
@@ -97,6 +98,8 @@ class Home extends CI_Controller
 		$data['page']['nextpage'] = $this->pager->get_nextpage();
 		$data['page']['prevpage'] = $this->pager->get_prevpage();
 		//END
+		$header = array('title'=>'书籍拥有者','css_file'=>'book_owner.css');
+		$footer = array('js_file'=>'book_owner.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('book_owner',$data);
 		$this->parser->parse('template/footer',$footer);
@@ -104,18 +107,30 @@ class Home extends CI_Controller
 
 	public function check_step()
 	{
+		$segs = $this->uri->segment_array();
+		$num = $this->uri->total_segments();
+		var_dump($segs);
+
+		$data['user'] = $this->home_model->get_userinfo($segs[4]);		
+		$data['books'] = $this->home_model->get_bookborrow($segs,$num);
+		var_dump($data);
+
 		$header = array('title'=>'借书页面','css_file'=>'check_step.css');
 		$footer = array('js_file'=>'check_step');
-
-		$info = $this->uri->uri_to_assoc(3);
-		var_dump($info);
-
-		$data['user'] = $this->home_model->get_userinfo($info['user']);
-		
-		$data['books'] = $this->home_model->get_bookborrow($info);
-		//var_dump($data);
 		$this->parser->parse('template/header',$header);
 		$this->load->view('check_step',$data);
+		$this->parser->parse('template/footer',$footer);
+	}
+
+	public function receipt()
+	{
+		
+
+
+		$header = array('title'=>'确认借书','css_file'=>'receipt.css');
+		$footer = array('js_file'=>'receipt');
+		$this->parser->parse('template/header',$header);
+		$this->load->view('receipt',$data);
 		$this->parser->parse('template/footer',$footer);
 	}
 }

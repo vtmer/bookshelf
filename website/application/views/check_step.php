@@ -25,6 +25,19 @@
 							<th>出版社</th>
 							<th>版次</th>
 						</tr>
+						<?php foreach ($books as $value) 
+						{
+							echo 
+							"<tr>
+							<td>".$value['name']."</td>
+							<td>".$value['course_name']."</td>
+							<td>".$value['author']."</td>
+							<td>".$value['course_category']."</td>
+							<td>".$value['publish']."</td>
+							<td>".$value['version']."</td>
+							</tr>";
+						}
+						?>
 						<!--
 						<tr>
 							<td>线性代数</td>
@@ -76,9 +89,9 @@
 		<p class="dots"><span></span></p>
 		<p class="step_03"><span>3</span>确定预约结果</p>
 		<div class="receipt">
-			<a href="repeipt.html" class="success"></a>
+			<a href=<?php echo site_url('home/receipt/success');?> class="success"></a>
 			<span>,or</span>
-			<a href="repeipt.html" class="un_success"></a>
+			<a href=<?php echo site_url('home/receipt/fail');?> class="un_success"></a>
 			<span>?</span>
 			<p>tips:若有某一本书预约失败可在回执中取消</p>
 		</div>
