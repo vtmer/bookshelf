@@ -150,7 +150,7 @@
 		</ul>
 		
 	</div>
-	<div class="shelf_bg"><span></span></div>
+	<a href="<?php echo site_url('login'); ?>"><div class="shelf_bg"><span></span></div></a>
 
 	<script>
 	
@@ -283,6 +283,7 @@
 });
 	$(".main .second_step .step_back").bind("click",function(){
 	$("form input#college_select")[0].value = "";
+	document.location.reload();
 	$(".main .selected_logo").hide();
 	$(".main .second_step ").hide();
 	$(".main .first_step").show();
@@ -292,7 +293,6 @@
 	$("form input#grade_select")[0].value = "";
 	$(".main .third_step").hide();
 	$("form a#submit").hide();
-	$(".main .second_step #mach_elec").hide();
 	$(".main .second_step").show();
 });
 	$(".main .second_step ul li").bind("click",function(){

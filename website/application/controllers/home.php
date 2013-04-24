@@ -45,7 +45,6 @@ class Home extends CI_Controller
 			$header = array('title'=>'工大书架','css_file'=>'home.css');
 		}
 		$header = array('title'=>'工大书架','css_file'=>'home.css');
->>>>>>> 3499d7c5fb1d5976047e3148ff5a3d694e53f52e
 		$footer = array('js_file'=>'home.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('home',$data);
