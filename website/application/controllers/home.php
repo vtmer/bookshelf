@@ -109,7 +109,11 @@ class Home extends CI_Controller
 		$segs = $this->uri->segment_array();
 		$num = $this->uri->total_segments();
 		var_dump($segs);
-
+		if(($this->session->userdata['points']-($num-5)*10)<0)
+		{
+			echo "<script type='text/javascript'>alert('亲，你积分不够咯！');location='".site_url('home')."';</script>";
+			exit();
+		}
 		$data['user'] = $this->home_model->get_userinfo($segs[4]);		
 		$data['books'] = $this->home_model->get_bookborrow($segs,$num);
 		var_dump($data);
@@ -121,10 +125,20 @@ class Home extends CI_Controller
 		$this->parser->parse('template/footer',$footer);
 	}
 
-	public function receipt()
+	public function receipt($status)
 	{
-		
+		if($status=='success')
+		{
+			
+		}
+		else if($status=='fail')
+		{
 
+		}
+		else 
+		{
+			show_404();
+		}
 
 		$header = array('title'=>'确认借书','css_file'=>'receipt.css');
 		$footer = array('js_file'=>'receipt');
