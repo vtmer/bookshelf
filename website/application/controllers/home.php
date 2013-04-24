@@ -12,9 +12,6 @@ class Home extends CI_Controller
 	}
 	public function index($page = 1)
 	{
-
-		var_dump($this->session->all_userdata());
-
 		$data['book_need'] = $this->home_model->get_book_need($this->session->userdata['major'],$this->session->userdata['grade']);
 		$match = array();
 		$i = 0;
@@ -38,7 +35,7 @@ class Home extends CI_Controller
 		//END
 		if(isset($this->session->userdata['truename']))
 		{
-			$header = array('title'=>'工大书架','css_file'=>'home.css','points' => $this->session->userdata['points'],'truename' => $this->session->userdata['truename']);
+			$header = array('title'=>'工大书架','css_file'=>'home.css');
 		}
 		else
 		{
@@ -108,7 +105,6 @@ class Home extends CI_Controller
 	{
 		$segs = $this->uri->segment_array();
 		$num = $this->uri->total_segments();
-		var_dump($segs);
 		if(($this->session->userdata['points']-($num-5)*10)<0)
 		{
 			echo "<script type='text/javascript'>alert('亲，你积分不够咯！');location='".site_url('home')."';</script>";
@@ -116,7 +112,7 @@ class Home extends CI_Controller
 		}
 		$data['user'] = $this->home_model->get_userinfo($segs[4]);		
 		$data['books'] = $this->home_model->get_bookborrow($segs,$num);
-		var_dump($data);
+		$this->session->set_userdata('borrow','');
 
 		$header = array('title'=>'借书页面','css_file'=>'check_step.css');
 		$footer = array('js_file'=>'check_step');
@@ -125,21 +121,24 @@ class Home extends CI_Controller
 		$this->parser->parse('template/footer',$footer);
 	}
 
-	public function receipt($status)
+	public function receipt()
 	{
-		if($status=='success')
+		if($this->session->userdata('borrow') < time()-120)//忽略三分钟内的重复动作
 		{
-			
+			$info = array(
+				'from'=>$this->input->post('from_id');
+				'to_id'=>$this->session->userdata('uid'),
+				'book'=>$this->input->post(NULL,TRUE)
+						);
+			$this->session->set_userdata('borrow',time());
+			var_dump($info);
+			$this->home_model->update_info($info);
 		}
-		else if($status=='fail')
+		else if($this->session->userdata('borrow'))
 		{
-
+			echo 'borrow===='.$this->session->userdata('borrow');
 		}
-		else 
-		{
-			show_404();
-		}
-
+		
 		$header = array('title'=>'确认借书','css_file'=>'receipt.css');
 		$footer = array('js_file'=>'receipt');
 		$this->parser->parse('template/header',$header);

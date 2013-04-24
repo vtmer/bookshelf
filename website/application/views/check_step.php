@@ -89,9 +89,18 @@
 		<p class="dots"><span></span></p>
 		<p class="step_03"><span>3</span>确定预约结果</p>
 		<div class="receipt">
-			<a href=<?php echo site_url('home/receipt/success');?> class="success"></a>
+			<?php 
+			$hidden = array();
+			foreach ($books as $key => $value) 
+			{
+				$hidden = $hidden+array($key=>$value['id']);	
+			}
+				echo form_open('home/receipt','',$hidden);
+			?>
+			<a href='<?php echo site_url('home/receipt/success');?>' class="success"><input type='submit' value='预约成功' /></a>
 			<span>,or</span>
-			<a href=<?php echo site_url('home/receipt/fail');?> class="un_success"></a>
+			<a href=<?php echo site_url('home/receipt/fail');?> class="un_success"><input type='submit' value='预约失败' ></input></a>
+			</form>
 			<span>?</span>
 			<p>tips:若有某一本书预约失败可在回执中取消</p>
 		</div>

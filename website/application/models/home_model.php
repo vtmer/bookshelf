@@ -92,4 +92,18 @@ class Home_Model extends CI_Model
       }
       return $match;     
     }
+
+    public function update_info(array $info)
+    {
+      $sql = "UPDATE `circulating_book` SET `to_id`=?,`circulate_number`=`circulate_number`+1,`book_right`=1,`change_time`=NOW() 
+            WHERE `book_id`=?";
+      $n = count($info['book']);
+      foreach($info['book'] as $value)
+      {
+        $query = $this->db->query($sql,array($info['to_id'],$value);
+      }
+
+      $this->db->where('id',$info['to_id']);
+      $this->db->update('user',array('points'=>$n*10));
+    } 
 }
