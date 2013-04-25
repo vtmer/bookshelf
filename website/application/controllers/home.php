@@ -12,6 +12,10 @@ class Home extends CI_Controller
 	}
 	public function index($page = 1)
 	{
+		if(!isset($this->session->userdata['is_logged_in']))//如果没被引导，则跳转到引导页
+		{
+			header('location:/index.php/guide');
+		} 
 		$data['book_need'] = $this->home_model->get_book_need($this->session->userdata['major'],$this->session->userdata['grade']);
 		$match = array();
 		$i = 0;
@@ -126,7 +130,7 @@ class Home extends CI_Controller
 		if($this->session->userdata('borrow') < time()-120)//忽略三分钟内的重复动作
 		{
 			$info = array(
-				'from'=>$this->input->post('from_id');
+				'from'=>$this->input->post('from_id'),
 				'to_id'=>$this->session->userdata('uid'),
 				'book'=>$this->input->post(NULL,TRUE)
 						);

@@ -100,7 +100,7 @@ class Home_Model extends CI_Model
       $n = count($info['book']);
       foreach($info['book'] as $value)
       {
-        $query = $this->db->query($sql,array($info['to_id'],$value);
+        $query = $this->db->query($sql,array($info['to_id'],$value['id']));
       }
 
       $this->db->where('id',$info['to_id']);
