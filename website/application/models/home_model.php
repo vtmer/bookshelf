@@ -25,8 +25,13 @@ class Home_Model extends CI_Model
   	{
   		$book = array();
   		$user = array();
+      $uid = $this->session->userdata['uid'];
+      if($uid==NULL)
+      {
+        $uid = 0;
+      }
   		$i = 0;
-  		$sql = "SELECT `from_id`,`book_id` FROM `circulating_book` WHERE book_status=1";
+  		$sql = "SELECT `from_id`,`book_id` FROM `circulating_book` WHERE book_status=1 AND `from_id`!=$uid";
   		$query = $this->db->query($sql);
   		$result = $query->result_array();
   		foreach ($match as $value) 
@@ -42,7 +47,7 @@ class Home_Model extends CI_Model
 	  			}
 	  		}  		
 		}
-		$sql2 = "SELECT `id`,`truename`,`dormitory`,`major` FROM `user`"; 
+		$sql2 = "SELECT `id`,`truename`,`dormitory`,`major` FROM `user` WHERE `id`!=$uid"; 
 		$query2 = $this->db->query($sql2);
 		$result = $query2->result_array();
 		$j = 1;	
@@ -97,13 +102,15 @@ class Home_Model extends CI_Model
     {
       $sql = "UPDATE `circulating_book` SET `to_id`=?,`circulate_number`=`circulate_number`+1,`book_right`=1,`change_time`=NOW() 
             WHERE `book_id`=?";
-      $n = count($info['book']);
-      foreach($info['book'] as $value)
+      $n = (count($info['book'])-1)*10;
+      foreach($info['book'] as $key=>$value)
       {
-        $query = $this->db->query($sql,array($info['to_id'],$value);
+        if($key!='from_id')
+        {
+          $query = $this->db->query($sql,array($info['to_id'],$value));
+        }
       }
-
-      $this->db->where('id',$info['to_id']);
-      $this->db->update('user',array('points'=>$n*10));
+      $this->db->query("UPDATE `user` SET `points`=`points`-$n WHERE `id`=".$info['to_id']);
+      $this->db->query("UPDATE `user` SET `points`=`points`+$n WHERE `id`=".$info['from_id']);
     } 
 }

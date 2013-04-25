@@ -12,6 +12,10 @@ class Home extends CI_Controller
 	}
 	public function index($page = 1)
 	{
+		if(!isset($this->session->userdata['is_logged_in']))//如果没被引导，则跳转到引导页
+		{
+			header('location:/index.php/guide');
+		} 
 		$data['book_need'] = $this->home_model->get_book_need($this->session->userdata['major'],$this->session->userdata['grade']);
 		$match = array();
 		$i = 0;
@@ -105,10 +109,18 @@ class Home extends CI_Controller
 	{
 		$segs = $this->uri->segment_array();
 		$num = $this->uri->total_segments();
-		if(($this->session->userdata['points']-($num-5)*10)<0)
+		if(($this->session->userdata['points']!=NULL))
 		{
-			echo "<script type='text/javascript'>alert('亲，你积分不够咯！');location='".site_url('home')."';</script>";
-			exit();
+			if(($this->session->userdata['points']-($num-5)*10)<0)
+			{
+				echo "<script type='text/javascript'>alert('亲，你积分不够咯！');location='".site_url('home')."';</script>";
+				exit();
+			}
+		}
+		else
+		{
+			echo "<script type='text/javascript'>alert('亲，登录后就可以借书咯！');location='".site_url('login')."';</script>";
+				exit();
 		}
 		$data['user'] = $this->home_model->get_userinfo($segs[4]);		
 		$data['books'] = $this->home_model->get_bookborrow($segs,$num);
@@ -123,20 +135,21 @@ class Home extends CI_Controller
 
 	public function receipt()
 	{
-		if($this->session->userdata('borrow') < time()-120)//忽略三分钟内的重复动作
+		if($this->session->userdata('borrow') < time()-1200)//忽略2分钟内的重复动作
 		{
 			$info = array(
-				'from'=>$this->input->post('from_id');
+				'from_id'=>$this->input->post('from_id'),
 				'to_id'=>$this->session->userdata('uid'),
 				'book'=>$this->input->post(NULL,TRUE)
 						);
 			$this->session->set_userdata('borrow',time());
-			var_dump($info);
 			$this->home_model->update_info($info);
+			echo "<script type='text/javascript'>setTimeout('window.location.href='site_url('home')',3000)alert('hahahha')</script>";
 		}
 		else if($this->session->userdata('borrow'))
 		{
-			echo 'borrow===='.$this->session->userdata('borrow');
+			echo 'you had borrow at the time ===='.$this->session->userdata('borrow');
+			echo "<script type='text/javascript'>setTimeout(\"window.location.href='".site_url('home')."',3000\");</script>";
 		}
 		
 		$header = array('title'=>'确认借书','css_file'=>'receipt.css');

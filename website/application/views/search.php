@@ -34,7 +34,7 @@
 						{
 							echo 
 							"<tr>
-							<td><a href='".site_url('home/book_info')."/".$value['id']."'>".$value['name']."</a></td>
+							<td><a href='".site_url('home/book_info')."/".$value['book_id']."'>".$value['name']."</a></td>
 							<td>".$value['course_name']."</td>
 							<td>".$value['author']."</td>
 							<td>".$value['course_category']."</td>

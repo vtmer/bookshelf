@@ -17,7 +17,30 @@ class Guide extends CI_Controller
 		//$faculty = $this->input->post('faculty');
 		$major = $this->input->post('major');
 		$grade = $this->input->post('grade');
-
+		$data = getdate();
+		$year =$data['year'];
+		$month = $data['mon'];
+		if($month < 9)
+		{
+			$year-=1;
+		}
+		switch ($grade) {
+			case '大一':
+				$grade = $year;
+				break;
+			case '大二':
+				$grade = $year - 1;
+				break;
+			case '大三':
+				$grade = $year - 2;
+				break;
+			case '大四':
+				$grade = $year - 3;
+				break;
+			default:
+				#code...
+				break;
+		}
 		//echo $faculty."</br>".$major."</br>".$grade;
 		$data = array(
 			'truename' => NULL,	
@@ -28,8 +51,6 @@ class Guide extends CI_Controller
 			'is_logged_in' => FALSE,
 		);
 		$this->session->set_userdata($data);
-		$this->load->view('home');
+		header('location:/index.php/home');
 	}
 }
-
-?>
