@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "welcome";
+$route['default_controller'] = "guide";
 $route['guide'] = 'guide';
 $route['verify'] = "verify";
 $route['register'] = "register";

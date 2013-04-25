@@ -12,7 +12,7 @@
 				<p><?php echo $this->session->userdata['grade'].'级  '.$this->session->userdata['major'];
 					if($this->session->userdata['is_logged_in']==NULL)
 					{
-						echo "[<a href='site_url('guide')' alt='修改'>修改</a>]";
+						echo "[<a href='".site_url('guide')."' alt='修改'>修改</a>]";
 					}
 					?>
 				</p>
