@@ -9,8 +9,13 @@
 		<div class="content_box">
 			<div class="box_demo needed_book">
 				<h3>您本学期需要的教材有：</h3>
-				<p><?php echo $this->session->userdata['grade'].'级  '.$this->session->userdata['major'];?> 
-					[<a href="<?php echo site_url('guide');?>" alt="修改">修改</a>]</p>
+				<p><?php echo $this->session->userdata['grade'].'级  '.$this->session->userdata['major'];
+					if($this->session->userdata['is_logged_in']==NULL)
+					{
+						echo "[<a href='site_url('guide')' alt='修改'>修改</a>]";
+					}
+					?>
+				</p>
 				<table>
 					<tbody>
 						<tr>
