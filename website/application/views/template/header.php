@@ -22,7 +22,7 @@
 			<a href="bookshelf.html">我的书架</a>
 			<a href="<?php echo site_url('login/logout'); ?>">退出</a>
 		</div>
-		<a href="add_book.html" id="add_book">捐书</a>
+		<a href="<?php echo site_url('add_book')?>" id="add_book">捐书</a>
 		<?php else: ?>		
 		<span class="user_name">
 			<a href="<?php echo site_url('login'); ?>">---------------------》》》》请登录《《《《--------------------</a>
