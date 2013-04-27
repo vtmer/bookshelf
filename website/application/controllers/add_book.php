@@ -31,11 +31,16 @@ class Add_book extends CI_Controller
 		$term = $this->input->post('term');
 		$print = $this->input->post('print');
 
-		//echo $title."</br>".$isbn."</br>".$author."</br>".$publish."</br>".$version."</br>".$course_name."</br>".$course_type."</br>".$major."</br>".$grade."</br>".$term;
-		if($this->course_model->addbook($title,$isbn,$author,$publish,$version,$course_name,$course_type,$major,$grade,$term,$print))
+		if($this->course_model->addbook($isbn,$title,$print))
 		{
 			echo "<script>alert('恭喜你!你已经成功捐出书本!');</script>";
-			redirect('add_book');
+			redirect('add_book','refresh');		
+		}
+		else
+		{
+			//redirect('add_book');
+			echo "<script>alert('对不起！您所捐的书不符合捐书规则!');</script>";
+			redirect('add_book','refresh');
 		}
 	}
 }

@@ -13,7 +13,7 @@
 <div id="float_head">
 	<div class="header">
 		<a href="http://www.gdutonline.com" id="gdutonline"></a>
-		<?php if(($this->session->userdata['is_logged_in'])!=NULL):?>
+		<?php if(isset($this->session->userdata['is_logged_in'])) :?>
 		<span class="score">积分:<?php echo $this->session->userdata['points'];?></span>
 		<a href="message.html" id="message">收到短信息<span>(0)</span></a>
 		<div class="user_info">

@@ -13,6 +13,7 @@
 						<input type="text" value="请输入书籍的ISBN码" id="isbncode"/>
 						<a href="#" class="next_step" onclick="do_jsonp() ">下一步</a>
 						<img src="<?php echo base_url('img/tip.jpg'); ?>" alt="ISBN码位于书籍背面标价处"/>
+						</br></br><p>若书本为胶印，请直接忽略ISBN，直接点击下一步</p>
 					</div>
 				</div>
 				<div class="step2">
@@ -34,20 +35,20 @@
 							适用专业:<input type="text" id="major" name="major" value="" />
 							适用年级:
 							<select name="grade">
-							<option value="大一" selected="selected">大一</option>
-							<option value="大二">大二</option>
-							<option value="大三">大三</option>
-							<option value="大四">大四</option>
+							<option value="one" selected="selected">大一</option>
+							<option value="two">大二</option>
+							<option value="three">大三</option>
+							<option value="four">大四</option>
 							</select>
 							适用学期:
 							<select name="term">
-							<option value="第一学期">第一学期</option>
-							<option value="第二学期">第二学期</option>
+							<option value="one">第一学期</option>
+							<option value="two">第二学期</option>
 							</select>
 							是否为胶印:
 							<select name="print">
-							<option value="是">是</option>
-							<option value="否" selected="selected">否</option>
+							<option value="1">是</option>
+							<option value="0" selected="selected">否</option>
 							</select>
 							<input type="submit" id="submit" value="确认"/> 
 							<a href="<?php echo site_url('add_book'); ?>" class="next_step">下一步</a>
