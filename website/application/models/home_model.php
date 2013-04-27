@@ -13,14 +13,7 @@ class Home_Model extends CI_Model
 		$query = $this->db->query($sql,array($major,$grade));
 		return $query->result_array();  		
   	}
-/**
- * 系统匹配书源�?
- *
- * @todo   get系统匹配书源�?
- * @access public
- * @param  $match
- * @return array
- */
+
   	public function get_system_match(array $match)
   	{
   		$book = array();
@@ -98,7 +91,7 @@ class Home_Model extends CI_Model
       return $match;     
     }
 
-    public function update_info(array $info)
+  public function update_info(array $info)
     {
       $sql = "UPDATE `circulating_book` SET `to_id`=?,`circulate_number`=`circulate_number`+1,`book_right`=1,`change_time`=NOW() 
             WHERE `book_id`=?";
@@ -112,5 +105,23 @@ class Home_Model extends CI_Model
       }
       $this->db->query("UPDATE `user` SET `points`=`points`-$n WHERE `id`=".$info['to_id']);
       $this->db->query("UPDATE `user` SET `points`=`points`+$n WHERE `id`=".$info['from_id']);
+      //发送站内信息
+      $books = array();
+      $from = $info['from_id'];
+      $to = $info['to_id'];
+      $from_user = $this->get_userinfo($from);
+      $title = $from_user[0]['truename']."向你预约了书本";
+      $content = "你好，<a href='".site_url('home/book_owner').'/'.$from."'>".$from_user[0]['truename']."</a>向你预约了书本如下：<br/>";
+      foreach($info['book'] as $key=>$value)
+      {
+        if($key!='from_id')
+        {
+          $books = $this->search_model->get_book_by_id($value);
+          $content .="<a href='".site_url('home/book_info').'/'.$value."'>《".$books[0]->name."》</a><br/>";
+        }
+      }
+      $content = mysql_real_escape_string($content);//转义特殊字符
+      $sql2 = "INSERT INTO `message` (`from`,`to`,`title`,`content`) VALUES ('3','24','$title','$content')";
+      $this->db->query($sql2);
     } 
 }

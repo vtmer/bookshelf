@@ -71,7 +71,7 @@ class Home extends CI_Controller
 		$data['page']['nextpage'] = $this->pager->get_nextpage();
 		$data['page']['prevpage'] = $this->pager->get_prevpage();
 		//END
-		//var_dump($data['user']);
+		var_dump($data);
 		$header = array('title'=>'书籍信息','css_file'=>'book_info.css');
 		$footer = array('js_file'=>'book_info.js');
 		$this->parser->parse('template/header',$header);
@@ -135,7 +135,7 @@ class Home extends CI_Controller
 
 	public function receipt()
 	{
-		if($this->session->userdata('borrow') < time()-1200)//忽略2分钟内的重复动作
+		if($this->session->userdata('borrow') < time()-120)//忽略2分钟内的重复动作
 		{
 			$info = array(
 				'from_id'=>$this->input->post('from_id'),
@@ -144,12 +144,11 @@ class Home extends CI_Controller
 						);
 			$this->session->set_userdata('borrow',time());
 			$this->home_model->update_info($info);
-			echo "<script type='text/javascript'>setTimeout('window.location.href='site_url('home')',3000)alert('hahahha')</script>";
+			echo "<script type='text/javascript'>setTimeout(\"window.location.href='".site_url('home')."'\",3000);</script>";
 		}
 		else if($this->session->userdata('borrow'))
 		{
-			echo 'you had borrow at the time ===='.$this->session->userdata('borrow');
-			echo "<script type='text/javascript'>setTimeout(\"window.location.href='".site_url('home')."',3000\");</script>";
+			echo "<script type='text/javascript'>setTimeout(\"window.location.href='".site_url('home')."'\",3000);</script>";
 		}
 		
 		$header = array('title'=>'确认借书','css_file'=>'receipt.css');

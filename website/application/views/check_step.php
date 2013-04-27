@@ -99,9 +99,10 @@
 				echo form_hidden('from_id',$user[0]['id']);
 			?>
 			<a href="<?php echo site_url('home/receipt/success');?>" class="success"><input type='submit' value='预约成功' /></a>
-			<span>,or</span>
-			<a href="<?php echo site_url('home/receipt/fail');?>" class="un_success"><input type='submit' value='预约失败' ></input></a>
 			</form>
+			<span>,or</span>
+			<a href="<?php echo site_url('home');?>" class="un_success"><input type='submit' value='预约失败' ></input></a>
+			
 			<span>?</span>
 			<p>tips:若有某一本书预约失败可在回执中取消</p>
 		</div>
