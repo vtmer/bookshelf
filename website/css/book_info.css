@@ -26,7 +26,7 @@ div.search_results table td:nth-child(3){ width:180px; text-align:center;}
 
 
 div.search_results div.book_img { float:left; width:134px; height:152px; margin-left:20px; margin-bottom:20px; padding:5px; background:url('../img/book_img.jpg') no-repeat;}
-div.search_results div.book_img img { width:124px; height:142px;}
+div.search_results div.book_img img { width:134px; height:152px;}
 div.search_results ul.get_book { float:left; margin:30px 20px 0;}
 div.search_results ul.get_book li { height:32px;}
 div.search_results ul.get_book li a {float:left; width:75px; height:28px; background:#c6c4b6; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center;}

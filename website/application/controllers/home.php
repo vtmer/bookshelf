@@ -37,14 +37,6 @@ class Home extends CI_Controller
 		$data['page']['nextpage'] = $this->pager->get_nextpage();
 		$data['page']['prevpage'] = $this->pager->get_prevpage();
 		//END
-		if(isset($this->session->userdata['truename']))
-		{
-			$header = array('title'=>'工大书架','css_file'=>'home.css');
-		}
-		else
-		{
-			$header = array('title'=>'工大书架','css_file'=>'home.css');
-		}
 		$header = array('title'=>'工大书架','css_file'=>'home.css');
 		$footer = array('js_file'=>'home.js');
 		$this->parser->parse('template/header',$header);
@@ -151,6 +143,7 @@ class Home extends CI_Controller
 			echo "<script type='text/javascript'>setTimeout(\"window.location.href='".site_url('home')."'\",3000);</script>";
 		}
 		
+
 		$header = array('title'=>'确认借书','css_file'=>'receipt.css');
 		$footer = array('js_file'=>'receipt');
 		$this->parser->parse('template/header',$header);

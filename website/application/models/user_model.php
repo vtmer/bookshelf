@@ -72,12 +72,50 @@ class User_model extends CI_Model
 		}	
 		return $row;
 	}
-	
+
+	//根据email激活用户帐号
 	public function activate($uid)
 	{
 		$this->db->update('user',array('status' => "1"),array('id' => $uid));
 		//return ($query->num_rows() > 0) ? TRUE : FALSE;
 	}
+	
+	//用户预约确认后向其发送确认信息
+	public function send_comfirm()
+	{
+		$from = "系统管理员";
+		$uid = $this->session->userdata['uid'];
+		$title = "预约确认";
+		$content = "恭喜你已经完成预约的第一步，如果您在线下成功借书，请点击确认按钮，否则请点击取消！";
+		$status = "0";
+		$query = $this->db->insert('message',array('from' => $from,'to' => $to,'title' => $title,'content' => $content,'status' => $status));
+		if($query->num_rows() > 0)
+		{
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+
+	public function select_message($uid)
+	{
+		$query = $this->db->get_where('message',array('to' => $uid,));
+		return $query->result_array(); 
+	}
+
+	public function confirm($message_id)
+	{
+		$this->db->update('message',array('status' => "1"));
+	}
+
+	public function show_message_num($uid)
+	{
+		$query = $this->db->get_where('message',array('to' => $uid,'status' => '0'));
+		return $query->num_rows();
+	}
+
 }
 
 /*End of file user_model.php*/

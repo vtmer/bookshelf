@@ -91,6 +91,11 @@ class Home_Model extends CI_Model
       return $match;     
     }
 
+	public function count_message()
+	{
+		return $this->db->count_all_results('message');	
+	}
+
   public function update_info(array $info)
     {
       $sql = "UPDATE `circulating_book` SET `to_id`=?,`circulate_number`=`circulate_number`+1,`book_right`=1,`change_time`=NOW() 
@@ -107,11 +112,14 @@ class Home_Model extends CI_Model
       $this->db->query("UPDATE `user` SET `points`=`points`+$n WHERE `id`=".$info['from_id']);
       //发送站内信息
       $books = array();
-      $from = $info['from_id'];
-      $to = $info['to_id'];
+      $from = $info['to_id'];
+      $to = $info['from_id'];
       $from_user = $this->get_userinfo($from);
       $title = $from_user[0]['truename']."向你预约了书本";
-      $content = "你好，<a href='".site_url('home/book_owner').'/'.$from."'>".$from_user[0]['truename']."</a>向你预约了书本如下：<br/>";
+      $content = "你好，<a href='".site_url('home/book_owner').'/'.$from."'>".$from_user[0]['truename']."</a>向你预约了书本如下：</br>";
+      $create_time = date("Y/m/d");
+      //$from = $this->session->userdata['uid'];
+
       foreach($info['book'] as $key=>$value)
       {
         if($key!='from_id')
@@ -120,8 +128,12 @@ class Home_Model extends CI_Model
           $content .="<a href='".site_url('home/book_info').'/'.$value."'>《".$books[0]->name."》</a><br/>";
         }
       }
+	  $message_id = $this->count_message() + 1;
+	  $url = "message/confirm/".$message_id;
+	  //echo "<script>alert('".$message_id."')</script>";
+      $content .= "若你核对完信息后，请点击后面的确认链接<a href='".site_url($url)."'><strong>确认</strong></a>";
       $content = mysql_real_escape_string($content);//转义特殊字符
-      $sql2 = "INSERT INTO `message` (`from`,`to`,`title`,`content`) VALUES ('3','24','$title','$content')";
+      $sql2 = "INSERT INTO `message` (`from`,`to`,`title`,`content`,`create_time`) VALUES ('$from','$to','$title','$content','$create_time')";
       $this->db->query($sql2);
     } 
 }

@@ -9,13 +9,13 @@
 <script language="javascript" src="<?php echo base_url('js/jquery-1.7.2.js');?>">
 </script>
 </head>
-<body>
+<body onload="do_jsonp();">
 <div id="float_head">
 	<div class="header">
 		<a href="http://www.gdutonline.com" id="gdutonline"></a>
-		<?php if(isset($this->session->userdata['is_logged_in'])) :?>
+		<?php if($this->session->userdata['is_logged_in']!==FALSE) :?>
 		<span class="score">积分:<?php echo $this->session->userdata['points'];?></span>
-		<a href="message.html" id="message">收到短信息<span>(0)</span></a>
+		<a href="<?php echo site_url('message'); ?>" id="message">收到短信息(<span><?php echo $this->session->userdata['messages']; ?>)<span></a>
 		<div class="user_info">
 		<span class="user_name"><?php echo $this->session->userdata['truename'];?></span>
 			<a href="personal_info.html">个人设置</a>
