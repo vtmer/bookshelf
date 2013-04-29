@@ -2,16 +2,39 @@
 class Home_Model extends CI_Model
 {
 	public function __construct()
-  	{
-    	$this->load->database();
-  	}
+	{
+  	$this->load->database();
+	}
 
 	public function get_book_need($major,$grade)
 	{
-
-	$sql = "SELECT `id`,`name`,`course_name`,`author`,`course_category`,`publish`,`version` FROM `allbook` WHERE major=? AND grade=?";
-	$query = $this->db->query($sql,array($major,$grade));
-	return $query->result_array();  		
+    $data = getdate();
+    $year =$data['year'];
+    $month = $data['mon'];
+    if($month < 9)
+    {
+      $year-=1;
+    }
+    switch ($grade) {
+      case $year:
+        $grade = '大一';
+        break;
+      case $year - 1:
+        $grade = '大二';
+        break;
+      case $year - 2:
+        $grade = '大三';
+        break;
+      case $year - 3:
+        $grade = '大四';
+        break;
+      default:
+        #code...
+        break;
+    }
+  	$sql = "SELECT ab.`id`,`name`,`course_name`,`author`,`course_category`,`publish`,`version` FROM `allbook` ab,`allbook_mg` abmg WHERE major=? AND grade=? AND `ab`.`id`=`abmg`.`book_id`";
+  	$query = $this->db->query($sql,array($major,$grade));
+  	return $query->result_array();  		
 	}
 
   public function get_system_match(array $match)
