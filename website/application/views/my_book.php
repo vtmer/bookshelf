@@ -21,12 +21,22 @@
 						<?php foreach ($books as $book): ?>
 						<tr>
 							<td><?php echo $book['name'];?></td>
-							<td><?php if($book['book_status']==0) echo "闲置中"; 
+							<td>
+								<?php if($book['book_status']==0) echo "闲置中"; 
 										elseif ($book['book_status']==1) echo "预约中";
 										else echo "借出";	
-							?></td>
+								?>
+							</td>
 							<td><?php if($book['book_right']) echo "共同";else echo "私有"; ?></td>
-							<td class="remove"><?php if($book['book_status']==0) echo "<a href='#'>下架</a>";?></td>
+							<td class="remove">
+								<?php if($book['book_status']==0&&$book['book_right']==0):?>
+								<form action="<?php echo site_url('home/my_book'); ?>" method="POST">
+									<input type="hidden" name="book_id" value="<?php echo $book['id'];?>" />
+									<a href='#'><input type='submit' value='下架' />下架</a>
+								</form>		
+								<?php endif;?>
+							</td>
+							
 						</tr>
 						<?php endforeach ?>						
 						<!--

@@ -160,18 +160,19 @@ class Home extends CI_Controller
 
 	public function my_book($page = 1)
 	{
-
+		if($id = $this->input->post('book_id'))
+		{
+			$this->home_model->pull_off($id);
+		}
 		$data['books'] = $this->home_model->get_userbook($this->session->userdata('uid'));
-		//var_dump($data);
 		//分页		
-		$this->pager->set(0,1);//设置每页显示的条数	
+		$this->pager->set(0,5);//设置每页显示的条数	
 		$data['page']['num'] = $this->pager->get_pagenum($data['books']);//获取总页数
 		$data['books'] = $this->pager->get_pagedata($data['books'],$page);//当前页数据
 		$data['page']['currentpage'] = $this->pager->get_currentpage();
 		$data['page']['nextpage'] = $this->pager->get_nextpage();
 		$data['page']['prevpage'] = $this->pager->get_prevpage();
 		//END
-
 		$header = array('title'=>'我的书架','css_file'=>'my_book.css');
 		$footer = array('js_file'=>'my_book.js');
 		$this->parser->parse('template/header',$header);
