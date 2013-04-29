@@ -119,7 +119,7 @@ class Home extends CI_Controller
 		$this->session->set_userdata('borrow','');
 
 		$header = array('title'=>'借书页面','css_file'=>'check_step.css');
-		$footer = array('js_file'=>'check_step');
+		$footer = array('js_file'=>'check_step.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('check_step',$data);
 		$this->parser->parse('template/footer',$footer);
@@ -145,10 +145,32 @@ class Home extends CI_Controller
 		
 
 		$header = array('title'=>'确认借书','css_file'=>'receipt.css');
-		$footer = array('js_file'=>'receipt');
+		$footer = array('js_file'=>'receipt.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('receipt',$data);
 		$this->parser->parse('template/footer',$footer);
+	}
+
+	public function my_book($page = 1)
+	{
+		if($id = $this->input->post('book_id'))
+		{
+			$this->home_model->pull_off($id);
+		}
+		$data['books'] = $this->home_model->get_userbook($this->session->userdata('uid'));
+		//分页		
+		$this->pager->set(0,5);//设置每页显示的条数	
+		$data['page']['num'] = $this->pager->get_pagenum($data['books']);//获取总页数
+		$data['books'] = $this->pager->get_pagedata($data['books'],$page);//当前页数据
+		$data['page']['currentpage'] = $this->pager->get_currentpage();
+		$data['page']['nextpage'] = $this->pager->get_nextpage();
+		$data['page']['prevpage'] = $this->pager->get_prevpage();
+		//END
+		$header = array('title'=>'我的书架','css_file'=>'my_book.css');
+		$footer = array('js_file'=>'my_book.js');
+		$this->parser->parse('template/header',$header);
+		$this->load->view('my_book',$data);
+		$this->parser->parse('template/footer',$footer);		
 	}
 }
 
