@@ -22,7 +22,7 @@ class Message extends CI_Controller
 		$data['page']['prevpage'] = $this->pager->get_prevpage();
 	 
 		$header = array('title' => '信息页面','css_file' => 'message.css');
-		$footer = array('js_file' => 'message');
+		$footer = array('js_file' => 'message.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('message',$data);		
 		$this->parser->parse('template/footer',$footer);

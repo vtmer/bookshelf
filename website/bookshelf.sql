@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 04 月 30 日 05:18
+-- 生成日期: 2013 年 04 月 30 日 05:39
 -- 服务器版本: 5.5.20
 -- PHP 版本: 5.3.10
 
@@ -91,9 +91,9 @@ CREATE TABLE IF NOT EXISTS `message` (
   `title` varchar(30) NOT NULL,
   `content` text NOT NULL,
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0=>未读;1=>已读',
-  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_time` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 -- --------------------------------------------------------
 

@@ -138,7 +138,7 @@ class Home_Model extends CI_Model
       $to = $info['from_id'];
       $from_user = $this->get_userinfo($from);
       $title = $from_user[0]['truename']."向你预约了书本";
-      $content = "你好，<a href='".site_url('home/book_owner').'/'.$from."'>".$from_user[0]['truename']."</a>向你预约了书本如下：</br>";
+      $content = "你好，<strong><a href='".site_url('home/book_owner').'/'.$from."'>".$from_user[0]['truename']."</a></strong>向你预约了书本如下：</br>";
       $create_time = date("Y/m/d");
       
     foreach($info['book'] as $key=>$value)
@@ -146,7 +146,7 @@ class Home_Model extends CI_Model
       if($key!='from_id')
       {
         $books = $this->search_model->get_book_by_id($value);
-        $content .="<a href='".site_url('home/book_info').'/'.$value."'>《".$books[0]->name."》</a><br/>";
+        $content .="<strong><a href='".site_url('home/book_info').'/'.$value."'>《".$books[0]->name."》</a></strong><br/>";
       }
     }
       $message_id = $this->count_message() + 1;
