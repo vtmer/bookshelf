@@ -46,7 +46,6 @@ class Login extends CI_Controller
 				$truename = $row->truename;
 				$major = $row->major;
 				$grade = $row->grade;
-				$messages = $this->user_model->show_message_num($uid);
                 /*储存用户信息至session*/
                 $data = array(
 					'points' => $points,
@@ -54,7 +53,6 @@ class Login extends CI_Controller
                     'uid' => $uid,
 					'major' => $major,
 					'grade' => $grade,
-					'messages' => $messages,
                     'is_logged_in' => TRUE,
                 );
 				$this->session->set_userdata($data);

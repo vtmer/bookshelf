@@ -1,7 +1,8 @@
 <div class="main">
+	<form action="<?php echo site_url('search'); ?>" method="POST">
 	<div class="search_bar">
-		<input type="text" value="请输入要查找的书目" />
-		<a href="search.html"></a>
+		<input type="text" name="keywords" value="请输入要查找的书目" />
+		<a href="#"><input type='submit' value='' /></a>
 	</div>
 	<div class="mid_content">
 		<h3>个人信息设置：</h3>

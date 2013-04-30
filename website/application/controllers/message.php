@@ -21,7 +21,8 @@ class Message extends CI_Controller
 		$data['page']['nextpage'] = $this->pager->get_nextpage();
 		$data['page']['prevpage'] = $this->pager->get_prevpage();
 	 
-		$header = array('title' => '信息页面','css_file' => 'message.css');
+        $messages = $this->user_model->show_message_num($this->session->userdata['uid']);
+		$header = array('title' => '信息页面','css_file' => 'message.css','messages' => $messages);
 		$footer = array('js_file' => 'message.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('message',$data);		

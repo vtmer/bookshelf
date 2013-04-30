@@ -9,7 +9,8 @@ class Add_book extends CI_Controller
 
 	public function index()
 	{	
-		$header = array('title'=>'捐书页面','css_file'=>'add_book.css');
+        $messages = $this->user_model->show_message_num($this->session->userdata['uid']);
+		$header = array('title'=>'捐书页面','css_file'=>'add_book.css','messages' => $messages);
 		$footer = array('js_file'=>'add_book');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('add_book');

@@ -107,7 +107,12 @@ class User_model extends CI_Model
 
 	public function confirm($message_id)
 	{
+		$this->db->where('id',$message_id);
 		$this->db->update('message',array('status' => "1"));
+
+	/*	$this->db->where('id' => $book_id);
+		$this->db->update('circulating_book',array('book_status' => '2'));
+		i*/
 	}
 
 	public function show_message_num($uid)
@@ -115,6 +120,7 @@ class User_model extends CI_Model
 		$query = $this->db->get_where('message',array('to' => $uid,'status' => '0'));
 		return $query->num_rows();
 	}
+
 
 }
 

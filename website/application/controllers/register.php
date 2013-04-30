@@ -65,14 +65,12 @@ class Register extends CI_Controller
 				$truename = $row->truename;
 				$major = $row->major;
 				$grade = $row->grade;
-				$messages = $this->user_model->show_message_num($uid);
 				$data = array(
 					'points' => $points,
 					'truename' => $truename,
 					'uid' => $uid,
 					'major' => $major,
 					'grade' => $grade,
-					'messages' => $messages,
 					'is_logged_in' => TRUE,
 				);
 				$this->session->set_userdata($data);
