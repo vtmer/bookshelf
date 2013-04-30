@@ -179,6 +179,21 @@ class Home extends CI_Controller
 		$this->load->view('my_book',$data);
 		$this->parser->parse('template/footer',$footer);		
 	}
+
+	public function personal_config()
+	{
+
+		$id = $this->session->userdata('uid');
+		$data['user'] = $this->home_model->get_userinfo($id);
+		var_dump($data);
+		$this->home_model->count_userbook($id);
+
+		$header = array('title'=>'个人信息','css_file'=>'config.css');
+		$footer = array('js_file'=>'personal_info.js');
+		$this->parser->parse('template/header',$header);
+		$this->load->view('personal_info',$data);
+		$this->parser->parse('template/footer',$footer);
+	}
 }
 
 

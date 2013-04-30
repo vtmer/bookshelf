@@ -18,7 +18,7 @@
 		<a href="<?php echo site_url('message'); ?>" id="message">收到短信息(<span><?php echo $messages; ?>)<span></a>
 		<div class="user_info">
 		<span class="user_name"><?php echo $this->session->userdata['truename'];?></span>
-			<a href="personal_info.html">个人设置</a>
+			<a href="<?php echo site_url('home/personal_config');?>">个人设置</a>
 			<a href="<?php echo site_url('home/my_book');?>">我的书架</a>
 			<a href="<?php echo site_url('login/logout'); ?>">退出</a>
 		</div>
