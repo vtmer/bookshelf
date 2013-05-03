@@ -39,7 +39,7 @@
     					<br>
     				</p>
     				<ul class="nav">
-						<li>
+						<li class="active">
 							<a href="<?php echo site_url('management'); ?>">图书列表</a>
 						</li>
     					<li>
@@ -48,7 +48,7 @@
     					<li>
 							<a href="<?php echo site_url('management/edit_user'); ?>">编辑用户权限</a>
     					</li>
-    					<li class="active">
+    					<li>
 							<a href="<?php echo site_url('management/edit_pwd'); ?>" class="text-right">修改密码</a>
     					</li>
     				</ul>
@@ -58,16 +58,104 @@
     		</div>
     	</div>
     </div>
-    <div class="container">
-
-      <form class="form-signin">
-        <input type="password" class="input-block-level" placeholder="请输入原密码">
-        <input type="password" class="input-block-level" placeholder="请输入新密码">
-        <input type="password" class="input-block-level" placeholder="请再一次输入新密码">
-        
-        <button class="btn btn-large btn-primary" type="submit">确认修改</button>
-      </form>
-
+    <div class="container jetstrap-highlighted jetstrap-selected">
+    	<div class="control-group">
+    		<div class="controls">
+    		</div>
+    	</div>
+    	<div class="container">
+    	</div>
+    	<div class="navbar">
+    	</div>
+    	<form>
+    		<div class="row-fluid">
+    		</div>
+    		<table class="table">
+    			<tbody>
+    				<tr>
+    					<td>
+    						图书ID	
+    					</td>
+    					<td>
+    						ISBN
+    					</td>
+    					<td>
+    						书名
+    					</td>
+    					<td>
+    						作者
+    					</td>
+    					<td>
+    						出版社
+    					</td>
+    					<td>
+    						操作
+    					</td>
+    				</tr>
+    				<tr>
+    					<td>
+    						1
+    					</td>
+    					<td>
+    						9787040223903
+    					</td>
+    					<td>
+    						计算机组成原理
+    					</td>
+    					<td>
+    						唐朔飞
+    					</td>
+    					<td>
+    						高等教育出版社
+    					</td>
+    					<td>
+    						<button type="submit" class="btn">
+    							下架
+    						</button>
+    					</td>
+    			</tr>
+                			<tr>
+    					<td>
+    						2
+    					</td>
+    					<td>
+							9787302147510
+    					</td>
+    					<td>
+    						数据结构
+    					</td>
+    					<td>
+    						严蔚敏,吴伟民
+    					</td>
+    					<td>
+    						清华大学出版社
+    					</td>
+    					<td>
+    						<button type="submit" class="btn">
+    							下架	
+    						</button>
+    					</td>
+    				</tr>
+    			</tbody>
+    		</table>
+    	</form>
+    	<div class="row-fluid">
+    	</div>
+    	<table class="table">
+    		<tbody>
+    			<tr>
+    			</tr>
+    		</tbody>
+    	</table>
+    	<table class="table">
+    		<tbody>
+    			<tr>
+    				
+    				
+    				
+    			</tr>
+    		</tbody>
+    	</table>
     </div>
     <div class="container-fluid">
     	<div class="row-fluid">
@@ -77,11 +165,13 @@
     	<!--/row-->
     	<div class="container">
     	</div>
-    	
+    	<hr>
     	<footer>
-    		
+    		<p class="pull-right">
+    			© Company 2013
+    		</p>
     	</footer>
-    <div class="container"><div class="container"></div></div></div>
+    </div>
     <!--/.fluid-container-->
 
     <style>
@@ -102,35 +192,6 @@
           padding-right: 5px;
         }
       }
-
-      .form-signin {
-        max-width: 300px;
-        padding: 19px 29px 29px;
-        margin: 60px auto 20px;
-        background-color: #fff;
-        border: 1px solid #e5e5e5;
-        -webkit-border-radius: 5px;
-           -moz-border-radius: 5px;
-                border-radius: 5px;
-        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-                box-shadow: 0 1px 2px rgba(0,0,0,.05);
-      }
-      .form-signin .form-signin-heading{
-        margin: 10px 22px 30px;
-      }
-      
-      .form-signin .checkbox {
-        margin-bottom: 10px;
-      }
-      .form-signin input[type="text"],
-      .form-signin input[type="password"] {
-        font-size: 16px;
-        height: auto;
-        margin-bottom: 15px;
-        padding: 7px 9px;
-      }
-
       
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">

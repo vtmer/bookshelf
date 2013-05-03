@@ -16,7 +16,7 @@ class Admin extends CI_Controller
 	{
 		$admin = $this->input->post('admin');
 		$admin_pwd = $this->input->post('admin_pwd');	
-		$this->load->view('manage_addbook');
+		redirect('management','refresh');
 	}
 }
 

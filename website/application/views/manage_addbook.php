@@ -39,8 +39,11 @@
     					<br>
     				</p>
     				<ul class="nav">
+						<li>
+							<a href="<?php echo site_url('management'); ?>">图书列表</a>
+						</li>
     					<li class="active">
-							<a href="<?php echo site_url('management'); ?>">添加图书</a>
+							<a href="<?php echo site_url('management/add_book'); ?>">添加图书</a>
     					</li>
     					<li>
 							<a href="<?php echo site_url('management/edit_user'); ?>">编辑用户权限</a>
@@ -51,7 +54,7 @@
     				</ul>
     			</div>
     			<!--/.nav-collapse -->
-    			<a class="btn pull-right" id="logout">退出</a>
+				<a href="<?php echo site_url('admin'); ?>" class="btn pull-right" id="logout">退出</a>
     		</div>
     	</div>
     </div>

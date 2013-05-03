@@ -9,6 +9,11 @@ class Management extends CI_Controller
 
 	public function index()
 	{
+		$this->load->view('manage_booklist');
+	}
+
+	public function add_book()
+	{
 		$this->load->view('manage_addbook');
 	}
 
