@@ -3,9 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>引导页</title>
-<link href="css/reset.css" type="text/css" rel="stylesheet" />
-<link href="css/index.css" type="text/css" rel="stylesheet" />
-<script language="javascript" src="js/jquery-1.7.2.js">
+<link href="<?php echo base_url('css/reset.css'); ?>" type="text/css" rel="stylesheet" />
+<link href="<?php echo base_url('css/index.css'); ?>" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="<?php echo base_url('js/jquery-1.7.2.js'); ?>">
 </script>
 </head>
 <body>
@@ -30,29 +30,23 @@
 		</ul>
 	</div>
 	<div class="selected_logo"><span></span>
-	<form>
+	<form action="<?php echo site_url('guide/choose'); ?>" method="post">
 		<label>
-		<input type="text" id="college_select" />
+		<input type="text" id="college_select" name="faculty" />
 		</label>
 		<label>
-		<input type="text" id="major_select" />
+		<input type="text" id="major_select" name="major" />
 		</label>
 		<label>
-		<input type="text" id="grade_select" />
+		<input type="text" id="grade_select" name="grade" />
 		</label>
-		<a href="home.html" id="submit" value="确定">确定</a>
+		<input type="submit" id="submit" value="确定">
 	</form>
 	</div>
 	<div class="second_step">
 		<span class="step_back"></span>
 		<h3>请选择您所在的专业:</h3>
 		<ul>
-			<li>工业工程</li>
-			<li>车辆工程</li>
-			<li>包装工程</li>
-			<li>数字媒体技术</li>
-			<li>机械自动化制造及其自动化（机械电子工程方向）</li>
-			<li>机械自动化制造及其自动化（微电子制造装备及其自动化方向）</li>	
 			<div class="bottom_shadow"></div>		
 		</ul>
 		
@@ -71,5 +65,6 @@
 	</div>
 	<div class="shelf_bg"><span></span></div>
 </div><!--end of main-->
+<script type="text/javascript" src="<?php echo base_url('js/guide.js'); ?>"></script>
 </body>
 </html>

@@ -35,7 +35,11 @@ class Pager
 		{
 			return $this->current_page+1;
 		}
-		else
+		else if($this->pagenum==0)
+		{
+			return 1;
+		}
+		else 
 		{
 			return $this->pagenum;
 		}

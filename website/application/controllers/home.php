@@ -10,9 +10,13 @@ class Home extends CI_Controller
 		$this->load->library('Pager');
 		$this->load->helper('form');
 	}
-	public function index($page=1)
-	{	
-		$data['book_need'] = $this->home_model->get_book_need('网络工程','2011');
+	public function index($page = 1)
+	{
+		if(!isset($this->session->userdata['is_logged_in']))//如果没被引导，则跳转到引导页
+		{
+			header('location:/index.php/guide');
+		} 
+		$data['book_need'] = $this->home_model->get_book_need($this->session->userdata['major'],$this->session->userdata['grade']);
 		$match = array();
 		$i = 0;
 		foreach ($data as $value) 
@@ -33,14 +37,8 @@ class Home extends CI_Controller
 		$data['page']['nextpage'] = $this->pager->get_nextpage();
 		$data['page']['prevpage'] = $this->pager->get_prevpage();
 		//END
-		if($this->session->userdata['truename'])
-		{
-			$header = array('title'=>'工大书架','css_file'=>'home.css','points' => $this->session->userdata['points'],'truename' => $this->session->userdata['truename']);
-		}
-		else
-		{
-			$header = array('title'=>'工大书架','css_file'=>'home.css');
-		}
+        $messages = $this->user_model->show_message_num($this->session->userdata['uid']);
+		$header = array('title'=>'工大书架','css_file'=>'home.css','messages' => $messages); 
 		$footer = array('js_file'=>'home.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('home',$data);
@@ -48,16 +46,13 @@ class Home extends CI_Controller
 	}
 
 	public function book_info($book_id)
-	{
-		$header = array('title'=>'书籍信息','css_file'=>'book_info.css');
-		$footer = array('js_file'=>'book_info.js');
+	{	
 		//从URI中获取页数为第四个分段home/book_owner/3/1
 		$page = $this->uri->segment(4,1);
 		$data['book_info'] = $this->search_model->get_book_by_id($book_id);
 		if(!$data['book_info']) 
 		{
 			show_404();
-			exit();
 		}
 		$data['user'] = $this->home_model->get_system_match(array(array('ISBN'=>$data['book_info'][0]->ISBN,
 																'name'=>$data['book_info'][0]->name,'id'=>$book_id)));
@@ -69,7 +64,10 @@ class Home extends CI_Controller
 		$data['page']['nextpage'] = $this->pager->get_nextpage();
 		$data['page']['prevpage'] = $this->pager->get_prevpage();
 		//END
-		//var_dump($data['user']);
+		var_dump($data);
+        $messages = $this->user_model->show_message_num($this->session->userdata['uid']);
+		$header = array('title'=>'书籍信息','css_file'=>'book_info.css','messages' => $messages);
+		$footer = array('js_file'=>'book_info.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('book_info',$data);
 		$this->parser->parse('template/footer',$footer);
@@ -77,15 +75,12 @@ class Home extends CI_Controller
 	
 	public function book_owner($user_id)
 	{
-		$header = array('title'=>'书籍拥有者','css_file'=>'book_owner.css');
-		$footer = array('js_file'=>'book_owner.js');
 		//从URI中获取页数为第四个分段:home/book_owner/3/1
 		$page = $this->uri->segment(4,1);
 		$data['user'] = $this->home_model->get_userinfo($user_id);
 		if (!$data['user']) 
 		{
 			show_404();
-			exit();
 		}
 		$data['books'] = $this->home_model->get_userbook($user_id);
 		$data['user'][0]['booknum'] = count($data['books']);
@@ -97,6 +92,9 @@ class Home extends CI_Controller
 		$data['page']['nextpage'] = $this->pager->get_nextpage();
 		$data['page']['prevpage'] = $this->pager->get_prevpage();
 		//END
+        $messages = $this->user_model->show_message_num($this->session->userdata['uid']);
+		$header = array('title'=>'书籍拥有者','css_file'=>'book_owner.css','messages' => $messages);
+		$footer = array('js_file'=>'book_owner.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('book_owner',$data);
 		$this->parser->parse('template/footer',$footer);
@@ -104,18 +102,96 @@ class Home extends CI_Controller
 
 	public function check_step()
 	{
-		$header = array('title'=>'借书页面','css_file'=>'check_step.css');
-		$footer = array('js_file'=>'check_step');
+		$segs = $this->uri->segment_array();
+		$num = $this->uri->total_segments();
+		if(($this->session->userdata['points']!=NULL))
+		{
+			if(($this->session->userdata['points']-($num-5)*10)<0)
+			{
+				echo "<script type='text/javascript'>alert('亲，你积分不够咯！');location='".site_url('home')."';</script>";
+				exit();
+			}
+		}
+		else
+		{
+			echo "<script type='text/javascript'>alert('亲，登录后就可以借书咯！');location='".site_url('login')."';</script>";
+				exit();
+		}
+		$data['user'] = $this->home_model->get_userinfo($segs[4]);		
+		$data['books'] = $this->home_model->get_bookborrow($segs,$num);
+		$this->session->set_userdata('borrow','');
 
-		$info = $this->uri->uri_to_assoc(3);
-		var_dump($info);
-
-		$data['user'] = $this->home_model->get_userinfo($info['user']);
-		
-		$data['books'] = $this->home_model->get_bookborrow($info);
-		//var_dump($data);
+        $messages = $this->user_model->show_message_num($this->session->userdata['uid']);
+		$header = array('title'=>'借书页面','css_file'=>'check_step.css','messages' => $messages);
+		$footer = array('js_file'=>'check_step.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('check_step',$data);
+		$this->parser->parse('template/footer',$footer);
+	}
+
+	public function receipt()
+	{
+		if($this->session->userdata('borrow') < time()-120)//忽略2分钟内的重复动作
+		{
+			$info = array(
+				'from_id'=>$this->input->post('from_id'),
+				'to_id'=>$this->session->userdata('uid'),
+				'book'=>$this->input->post(NULL,TRUE)
+						);
+			$this->session->set_userdata('borrow',time());
+			$this->home_model->update_info($info);
+			echo "<script type='text/javascript'>setTimeout(\"window.location.href='".site_url('home')."'\",3000);</script>";
+		}
+		else if($this->session->userdata('borrow'))
+		{
+			echo "<script type='text/javascript'>setTimeout(\"window.location.href='".site_url('home')."'\",3000);</script>";
+		}
+		
+
+        $messages = $this->user_model->show_message_num($this->session->userdata['uid']);
+		$header = array('title'=>'确认借书','css_file'=>'receipt.css','messages' => $messages);
+		$footer = array('js_file'=>'receipt.js');
+		$this->parser->parse('template/header',$header);
+		$this->load->view('receipt',$data);
+		$this->parser->parse('template/footer',$footer);
+	}
+
+	public function my_book($page = 1)
+	{
+		if($id = $this->input->post('book_id'))
+		{
+			$this->home_model->pull_off($id);
+		}
+		$data['books'] = $this->home_model->get_userbook($this->session->userdata('uid'));
+		//分页		
+		$this->pager->set(0,5);//设置每页显示的条数	
+		$data['page']['num'] = $this->pager->get_pagenum($data['books']);//获取总页数
+		$data['books'] = $this->pager->get_pagedata($data['books'],$page);//当前页数据
+		$data['page']['currentpage'] = $this->pager->get_currentpage();
+		$data['page']['nextpage'] = $this->pager->get_nextpage();
+		$data['page']['prevpage'] = $this->pager->get_prevpage();
+		//END
+
+        $messages = $this->user_model->show_message_num($this->session->userdata['uid']);
+		$header = array('title'=>'我的书架','css_file'=>'my_book.css','messages' => $messages);
+		$footer = array('js_file'=>'my_book.js');
+		$this->parser->parse('template/header',$header);
+		$this->load->view('my_book',$data);
+		$this->parser->parse('template/footer',$footer);		
+	}
+
+	public function personal_config()
+	{
+
+		$id = $this->session->userdata('uid');
+		$data['user'] = $this->home_model->get_userinfo($id);
+		var_dump($data);
+		$this->home_model->count_userbook($id);
+
+		$header = array('title'=>'个人信息','css_file'=>'config.css');
+		$footer = array('js_file'=>'personal_info.js');
+		$this->parser->parse('template/header',$header);
+		$this->load->view('personal_info',$data);
 		$this->parser->parse('template/footer',$footer);
 	}
 }

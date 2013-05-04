@@ -10,85 +10,47 @@ class Guide extends CI_Controller
 	public function index()
 	{
 		$this->load->view('guide');
-		//echo "计算机学院"；
-			/*
-		$datas = array(
-			'机电工程学院' => array(
-				
-				'工程工业',
-				'车辆工程',
-				'包装工程',
-				'数字媒体技术',
-				'机械自动化制造及其自动化（机械电子工程方向）',
-				'机械自动化制造及其自动化（微电子制造装备及其自动化）')，
+	}
 
-			'自动化学院' => array(
-				'自动化',
-				'电气工程及其自动化（电气与电子技术方向）',
-				'电气工程及其自动化（电力系统自动化方向）',
-				'电子信息科学与技术','物联网工程'),
-
-			'轻工化工学院' => array(
-				'化学工程与工艺',
-				'食品科学与工程',
-				'生物工程',
-				'应用化学',
-				'制药工程'),
-
-			'信息工程学院' => array(
-				'通信工程',
-				'信息工程（电子信息工程方向）',
-				'信息工程学院（应用电子技术方向）',
-				'测控技术与仪器（计算机测控技术方向）',
-				'测控技术与仪器（光机电一体化方向）'),
-
-			'土木与交通学院' => array(
-				'土木工程',
-				'土木工程（道路与桥梁工程方向）',
-				'工程管理',
-				'给水排水工程',
-				'建筑环境与设备工程',
-				'交通运输',
-				'测绘工程'),
-
-			'计算机学院' => array(
-				'计算机科学与技术',
-				'软件工程',
-				'网络工程'),
-
-			'材料与能源学院' => array(
-				'材料成型及控制工程（成型加工及模具CAD/CAM方向）',
-				'材料成型及控制工程（材料加工控制及信息化方向）',
-				'金属材料工程',
-				'高分子材料与工程',
-				'热能与动力工程（制冷与空调方向）',
-				'热能与动力工程（热电工程方向）',
-				'电子科学与技术',
-				'微电子学'),
-
-			'环境科学与工程学院' => array(
-				'环境工程',
-				'环境科学',
-				'生物工程（环境生物技术方向）',
-				'安全工程'),
-
-			'外国语学院' => array(
-				'英语（翻译方向）',
-				'英语（科技方向）',
-				'商务英语',
-				'日语'),
-
-			'物理与光电工程学院' => array(
-				'电子科学与技术（光电子技术、微电子技术方向）',
-				'光信息科学与技术'),
-		)
-		
-		/*
-		foreach($datas['计算机学院'] as $value)
+	public function choose()
+	{
+		//$faculty = $this->input->post('faculty');
+		$major = $this->input->post('major');
+		$grade = $this->input->post('grade');
+		$data = getdate();
+		$year =$data['year'];
+		$month = $data['mon'];
+		if($month < 9)
 		{
-			echo $value."</br>";
-		}*/
+			$year-=1;
+		}
+		switch ($grade) {
+			case '大一':
+				$grade = $year;
+				break;
+			case '大二':
+				$grade = $year - 1;
+				break;
+			case '大三':
+				$grade = $year - 2;
+				break;
+			case '大四':
+				$grade = $year - 3;
+				break;
+			default:
+				#code...
+				break;
+		}
+		//echo $faculty."</br>".$major."</br>".$grade;
+		$data = array(
+			'truename' => NULL,	
+			'uid' => NULL,
+			'points' => NULL,
+			'major' => $major,
+			'grade' => $grade,
+			'is_logged_in' => FALSE,
+		);
+		$this->session->set_userdata($data);
+		header('location:/index.php/home');
 	}
 }
-
-?>

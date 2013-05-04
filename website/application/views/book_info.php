@@ -9,13 +9,17 @@
 		<h3>书籍信息</h3>
 		<div class="content_box">
 			<div class="box_demo search_results">
-				<div class="book_img"></div>
+				<div class="book_img">
+					<img src="" id="image" value="9787040223903"/>
+				</div>
 				<dl>
+					<input type="hidden" id="isbncode" value="<?php echo $book_info[0]->ISBN; ?>" />
 					<dt><?php echo $book_info[0]->name;?></dt>
 					<dd>作者：<span><?php echo $book_info[0]->author;?></span></dd>
 					<dd>发放对象:<span><?php echo $book_info[0]->course_category;?></span></dd>
 					<dd>出版社:<span><?php echo $book_info[0]->publish;?></span></dd>
 					<dd>版次:<span><?php echo $book_info[0]->version;?></span></dd>
+		
 				</dl>
 				<table>
 					<tbody>
