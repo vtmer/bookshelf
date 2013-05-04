@@ -10,7 +10,7 @@
 		<h3>个人信息设置：</h3>
 		<div class="content_box">
 			<div class="box_demo personal_config">
-				<form action="<?php echo site_url('home/personal_config');?>" mehtod="POST">
+				<form action="<?php echo site_url('home/personal_config');?>" method="post">
 				<div class="left">
 					<label>用户名：<span><?php echo $user[0]['truename'];?></span></label>
 					<label for="password">密码：<input type="password" name="pwd" id="password" /></label>
@@ -22,13 +22,17 @@
 					<label for="mini_phone">短号：<input type="text" id="mini_phone" name="subphone_number" value="<?php echo $user[0]['subphone_number'];?>"/></label>
 					<label>宿舍区：
 						<div class="select_button">
-							<label><input type="radio" value="西区" name="qu" checked="checked" class="qu"/>西区</label>
-
-							<label><input type="radio" value="东区" name="qu" class="qu"/>东区</label>
+							<?php if($user[0]['dormitory']=='西区'):?>
+							<label><input type="radio" value="西区" name="dormitory" checked="checked" class="qu"/>西区</label>
+							<label><input type="radio" value="东区" name="dormitory" class="qu"/>东区</label>
+							<?php else: ?>
+							<label><input type="radio" value="西区" name="dormitory" class="qu"/>西区</label>
+							<label><input type="radio" value="东区" name="dormitory"  checked="checked" class="qu"/>东区</label>
+							<?php endif;?>
 						</div>
 					</label> 
 					<label for="mail">邮箱：<input type="text" id="mail" name="username" value="<?php echo $user[0]['username'];?>"/></label>
-					<a href="#" class="back_up"><input type="submit" value="好了，修改完了，保存吧！"/>好了，修改完了，保存吧！</a>
+					<a href="#" class="back_up"></a><input type="submit" value="好了，修改完了，保存吧！"/>好了，修改完了，保存吧！
 				</div>
 				</form>
 				<div class="right">
@@ -36,9 +40,9 @@
 						<li><?php echo $user[0]['truename'];?></li>
 						<li class="gray"><?php echo $user[0]['faculty'];?></li>
 						<li class="gray"><?php echo $user[0]['grade']."级 ".$user[0]['major'];?></li>
-						<li>捐书：5本</li>
-						<li>借入：n本</li>
-						<li>借出：9本</li>
+						<li>捐书：<?php echo $book_num[0][0]->lend_book;?>本</li>
+						<li>借入：<?php echo $book_num[1][0]->borrow_book;?>本</li>
+						<li>借出：<?php echo $book_num[2][0]->lend_out;?>本</li>
 					</ul>
 				</div>
 				

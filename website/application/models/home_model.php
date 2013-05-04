@@ -166,17 +166,35 @@ class Home_Model extends CI_Model
   public function count_userbook($id)
   {
     $num = array();
-    $sql = "SELECT COUNT(*) as lend_book FROM `circulating_book` WHERE `from_id`=$id ";
-    $sql2 = "SELECT COUNT(*) as borrow_book FROM `circulating_book` WHERE `to_id`=$id ";
+    $sql = "SELECT COUNT(*) as `lend_book` FROM `circulating_book` WHERE `from_id`=$id ";
+    $sql2 = "SELECT COUNT(*) as `borrow_book` FROM `circulating_book` WHERE `to_id`=$id ";
+    $sql3 = "SELECT COUNT(*) as `lend_out` FROM `circulating_book` WHERE `from_id`=$id AND `book_status`=2";
     $result = $this->db->query($sql);
     $result2 = $this->db->query($sql2);
+    $result3 = $this->db->query($sql3);
     $num[0] = $result->result();
     $num[1] = $result2->result();
-    var_dump($num);
+    $num[2] = $result3->result();
+    return $num;
   }
   public function update_config($data)
   {
-    $sql = "UPDATE `user` SET `faculty`=?,`major`=?,`grade`=?,`phone_number`=?,`subphone_number`=?,`dormitory`=?,`username`=? WHERE `id`=?";
-    //$query = $this->db->query($sql,$data);
+    $id = $this->session->userdata('uid');
+    $sql = "UPDATE `user` SET `faculty`=?,`major`=?,`grade`=?,`phone_number`=?,`subphone_number`=?,`dormitory`=?,`username`=?,`password`=? WHERE `id`=$id ";
+    $sql2 = "UPDATE `user` SET `faculty`=?,`major`=?,`grade`=?,`phone_number`=?,`subphone_number`=?,`dormitory`=?,`username`=? WHERE `id`=$id ";
+    
+    if(strlen($data['phone_number'])!=11)
+    {
+      return 0;
+    }
+    if($data['pwd']!=NULL)
+    {
+      $query = $this->db->query($sql,array($data['faculty'],$data['major'],$data['grade'],$data['phone_number'],$data['subphone_number'],$data['dormitory'],$data['username'],md5($data['pwd'])));
+    }
+    else
+    {
+      $query = $this->db->query($sql2,array($data['faculty'],$data['major'],$data['grade'],$data['phone_number'],$data['subphone_number'],$data['dormitory'],$data['username']));
+    }
+    return $this->db->affected_rows();
   }
 }

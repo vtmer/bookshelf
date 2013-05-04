@@ -182,11 +182,21 @@ class Home extends CI_Controller
 
 	public function personal_config()
 	{
-
+		if($this->input->post())
+		{
+			$flag = $this->home_model->update_config($this->input->post());
+			if($flag==1)
+			{
+				echo "<script type='text/javascript'>alert('修改成功！');</script>";
+			}
+			else
+			{
+				echo "<script type='text/javascript'>alert('修改失败！');</script>";
+			}
+		}
 		$id = $this->session->userdata('uid');
 		$data['user'] = $this->home_model->get_userinfo($id);
-		var_dump($data);
-		$this->home_model->count_userbook($id);
+		$data['book_num'] = $this->home_model->count_userbook($id);
 
 		$header = array('title'=>'个人信息','css_file'=>'config.css');
 		$footer = array('js_file'=>'personal_info.js');
