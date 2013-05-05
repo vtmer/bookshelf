@@ -21,7 +21,8 @@ class Add_book extends CI_Controller
 	public function add()
 	{
 		$title = $this->input->post('booktitle');
-		$isbn = $this->input->post('isbn');
+		$isbn = $this->input->post('isbncode');
+		/*
 		$author = $this->input->post('author');
 		$publish = $this->input->post('publish');
 		$version = $this->input->post('version');
@@ -30,6 +31,7 @@ class Add_book extends CI_Controller
 		$major = $this->input->post('major');
 		$grade = $this->input->post('grade');
 		$term = $this->input->post('term');
+		*/
 		$print = $this->input->post('print');
 
 		if($this->course_model->addbook($isbn,$title,$print))

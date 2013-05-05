@@ -4,7 +4,7 @@ function do_jsonp()
 		$.getJSON("https://api.douban.com/v2/book/isbn/"+id+"?callback=?",
 			function(data) {
 				$('#booktitle').val(data.title);
-				$('#isbn').val(data.isbn13);
+				$('#isbn').html("ISBN:"+data.isbn13);
 				$('#author').val(data.author);
 				$('#publish').val(data.publisher);
 				var title = data.title;
