@@ -37,8 +37,7 @@ class Home extends CI_Controller
 		$data['page']['nextpage'] = $this->pager->get_nextpage();
 		$data['page']['prevpage'] = $this->pager->get_prevpage();
 		//END
-        $messages = $this->user_model->show_message_num($this->session->userdata['uid']);
-		$header = array('title'=>'工大书架','css_file'=>'home.css','messages' => $messages); 
+		$header = array('title'=>'工大书架','css_file'=>'home.css'); 
 		$footer = array('js_file'=>'home.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('home',$data);
@@ -65,8 +64,7 @@ class Home extends CI_Controller
 		$data['page']['prevpage'] = $this->pager->get_prevpage();
 		//END
 		var_dump($data);
-        $messages = $this->user_model->show_message_num($this->session->userdata['uid']);
-		$header = array('title'=>'书籍信息','css_file'=>'book_info.css','messages' => $messages);
+		$header = array('title'=>'书籍信息','css_file'=>'book_info.css');
 		$footer = array('js_file'=>'book_info.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('book_info',$data);
@@ -92,8 +90,7 @@ class Home extends CI_Controller
 		$data['page']['nextpage'] = $this->pager->get_nextpage();
 		$data['page']['prevpage'] = $this->pager->get_prevpage();
 		//END
-        $messages = $this->user_model->show_message_num($this->session->userdata['uid']);
-		$header = array('title'=>'书籍拥有者','css_file'=>'book_owner.css','messages' => $messages);
+		$header = array('title'=>'书籍拥有者','css_file'=>'book_owner.css');
 		$footer = array('js_file'=>'book_owner.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('book_owner',$data);
@@ -121,8 +118,7 @@ class Home extends CI_Controller
 		$data['books'] = $this->home_model->get_bookborrow($segs,$num);
 		$this->session->set_userdata('borrow','');
 
-        $messages = $this->user_model->show_message_num($this->session->userdata['uid']);
-		$header = array('title'=>'借书页面','css_file'=>'check_step.css','messages' => $messages);
+		$header = array('title'=>'借书页面','css_file'=>'check_step.css');
 		$footer = array('js_file'=>'check_step.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('check_step',$data);
@@ -148,8 +144,7 @@ class Home extends CI_Controller
 		}
 		
 
-        $messages = $this->user_model->show_message_num($this->session->userdata['uid']);
-		$header = array('title'=>'确认借书','css_file'=>'receipt.css','messages' => $messages);
+		$header = array('title'=>'确认借书','css_file'=>'receipt.css');
 		$footer = array('js_file'=>'receipt.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('receipt',$data);
@@ -172,8 +167,7 @@ class Home extends CI_Controller
 		$data['page']['prevpage'] = $this->pager->get_prevpage();
 		//END
 
-        $messages = $this->user_model->show_message_num($this->session->userdata['uid']);
-		$header = array('title'=>'我的书架','css_file'=>'my_book.css','messages' => $messages);
+		$header = array('title'=>'我的书架','css_file'=>'my_book.css');
 		$footer = array('js_file'=>'my_book.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('my_book',$data);
