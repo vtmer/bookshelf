@@ -143,7 +143,6 @@ class Home extends CI_Controller
 			echo "<script type='text/javascript'>setTimeout(\"window.location.href='".site_url('home')."'\",3000);</script>";
 		}
 		
-
 		$header = array('title'=>'确认借书','css_file'=>'receipt.css');
 		$footer = array('js_file'=>'receipt.js');
 		$this->parser->parse('template/header',$header);

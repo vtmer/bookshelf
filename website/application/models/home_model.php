@@ -125,7 +125,7 @@ class Home_Model extends CI_Model
     $n = (count($info['book'])-1)*10;
     foreach($info['book'] as $key=>$value)
     {
-      if($key!='from_id')
+      if(is_numeric($key))
       {
         $query = $this->db->query($sql,array($info['to_id'],$value));
       }
@@ -140,11 +140,11 @@ class Home_Model extends CI_Model
     $title = $from_user[0]['truename']."向你预约了书本";
     $content = "你好，<strong><a href='".site_url('home/book_owner').'/'.$from."'>".$from_user[0]['truename']."</a></strong>向你预约了书本如下：</br>";
     $create_time = date("Y/m/d");
-      
+
     foreach($info['book'] as $key=>$value)
     {
-      if($key!='from_id')
-      {
+      if(is_numeric($key))
+      {      
         $books = $this->search_model->get_book_by_id($value);
         $content .= "<strong><a href='".site_url('home/book_info').'/'.$value."'>《".$books[0]->name."》</a></strong><br/>";
       }

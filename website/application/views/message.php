@@ -4,6 +4,7 @@
 		<input type="text" name="keywords" value="请输入要查找的书目" />
 		<a href="#"><input type='submit' value='' /></a>
 	</div>
+	</form>
 	<div class="mid_content">
 		<h3>个人信息设置：</h3>
 		<div class="content_box">
@@ -14,10 +15,10 @@
 				<div class="message_box">
 				<h5><span class="readed"><?php if($row['status']=='0') echo "未读";else echo "已读";?></span><span><?php echo $row['title'];?></span><span><?php echo $row['create_time'];?></span></h5>
 					<div class="message_contant">
-					<p><?php echo $row['content'];?><p>
+					<p><?php echo $row['content'];?></p>
 						<span class="hide"></span>
-						<!--<input type="image" src="<?php echo base_url('img/cancle.png'); ?>"/>
-						<input type="image" src="<?php echo base_url('img/confirm.png'); ?>" class="confirm"/>-->
+						<input type="image" src="<?php echo base_url('img/cancle.png'); ?>"/>
+						<input type="image" src="<?php echo base_url('img/confirm.png'); ?>" class="confirm"/>
 					</div>
 				</div>
 				<?php endforeach;?>
