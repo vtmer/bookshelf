@@ -38,6 +38,10 @@
         margin-bottom: 15px;
         padding: 7px 9px;
       }
+	  .alert{
+		margin-top:25px;
+		margin-bottom:0px;
+	  }
 
     </style>
 </head>
@@ -60,8 +64,16 @@
           <input type="checkbox" value="remember-me">记住我 
         </label>
         <button class="btn btn-large btn-primary" type="submit">登陆</button>
+		<?php if(isset($error)): ?>
+ 			<div class="row">
+ 		   	<div class="span4">
+     			<div class="alert alert-error">
+   				     <strong>Login Failed!</strong>
+  			    </div>
+    		</div>
+			</div>
+		<?php endif;?>
       </form>
-
     </div> <!-- /container -->
 
     <!-- Le javascript
