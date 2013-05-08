@@ -33,7 +33,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
     	<div class="navbar-inner">
     		<div class="container-fluid">
-				<a class="brand" href="<?php echo site_url('management'); ?>">工大书架后台管理</a>
+				<a class="brand" href="<?php echo site_url('admin'); ?>">工大书架后台管理</a>
     			<div class="nav-collapse collapse">
     				<p class="navbar-text pull-right">
     					<br>
@@ -67,7 +67,7 @@
     	</div>
     	<div class="navbar">
     	</div>
-    	<form>
+		<form action="<?php echo site_url('manage_addbook/add'); ?>" method="post">
     		<div class="row-fluid">
     			<div class="span4">
     				<div class="control-group">
@@ -80,26 +80,26 @@
     							<div class="controls pull-right">
     							</div>
     						</div>
-    						<input type="text" id="isbn1" placeholder="请输入ISBN..." class=""></br>
-    						<input type="text" id="title1" placeholder="书名..." class="">
+    						<input type="text" id="isbn1" placeholder="请输入ISBN..." name="isbn1"></br>
+    						<input type="text" id="title1" placeholder="书名..." name="title1">
     						<div class="control-group">
     							<div class="controls">
-    								<input type="text" id="author1" placeholder="作者..." class="">
+    								<input type="text" id="author1" placeholder="作者..." name="author1">
     							</div>
     						</div>
     					</div>
     				</div>
     				<div class="control-group">
     					<div class="controls">
-    						<input type="text" id="publish1" placeholder="出版社..." class="">
+    						<input type="text" id="publish1" placeholder="出版社..." name="publish1">
     						<div class="control-group">
     							<div class="control-group">
     								<div class="controls">
-    									<input type="text" id="version1" placeholder="版次..." class="">
+    									<input type="text" id="version1" placeholder="版次..." name="version1">
     								</div>
     							</div>
     							<div class="controls">
-    								<input type="text" id="course_name1" placeholder="课程名称..." class="">
+    								<input type="text" id="course_name1" placeholder="课程名称..." name="course_name1">
     							</div>
     						</div>
     						<div class="control-group">
@@ -108,14 +108,14 @@
     									<div class="controls">
     									</div>
     								</div>
-    								<input type="text" id="course_category1" placeholder="课程种类（如班级课程、公选课程）..." class="">
+    								<input type="text" id="course_category1" placeholder="课程种类（如班级课程、公选课程）..." name="course_category1">
     							</div>
     						</div>
     					</div>
     				</div>
     				<div class="control-group">
     					<div class="controls">
-    						<select id="term1" class="">
+    						<select id="term1" name="term1">
     							<option value="1">
     								第一学期
     							</option>
@@ -127,7 +127,7 @@
     						</select>
     						<div class="control-group">
     							<div class="controls">
-    								<select id="print1" class="">
+    								<select id="print1" name="print1">
     									<option value="0">
     										不是胶印
     									</option>
@@ -141,9 +141,7 @@
     						</div>
     					</div>
     				</div>
-    				<button type="submit" class="btn btn-info pull-left" id="get_info1">
-    					获取图书信息
-    				</button>
+    					<a href="#" onclick="do_jsonp('isbn1','title1','author1','publish1')" class="btn btn-info pull-left">获取图书信息</a>
     			</div>
     			
     			
@@ -219,9 +217,7 @@
     						</div>
     					</div>
     				</div>
-    				<button type="submit" class="btn btn-info pull-left" id="get_info2">
-    					获取图书信息	
-    				</button>
+    					<a href="#" onclick="do_jsonp('isbn2','title2','author2','publish2')" class="btn btn-info pull-left">获取图书信息</a>
     			</div><div class="span4">
     				<div class="control-group">
     					<div class="controls">
@@ -294,11 +290,8 @@
     						</div>
     					</div>
     				</div>
-    				<button type="submit" class="btn btn-info pull-left" id="get_info3">
-    					获取图书信息
-    				</button>
+    					<a href="#" onclick="do_jsonp('isbn3','title3','author3','publish3')" class="btn btn-info pull-left">获取图书信息</a>
     			</div></div>
-    	</form>
     	<div class="row-fluid">
     	</div>
     	<hr class=""><div class="container">
@@ -311,7 +304,7 @@
     		<div class="navbar">
     		</div>
     		
-    		<form><div class="row-fluid"><div class="span4">
+    		<div class="row-fluid"><div class="span4">
     				<div class="control-group">
     					<div class="controls">
     					</div>
@@ -383,9 +376,7 @@
     						</div>
     					</div>
     				</div>
-    				<button type="submit" class="btn btn-info jetstrap-selected pull-left" id="get_info4">
-    					获取图书信息
-    				</button>
+    					<a href="#" onclick="do_jsonp('isbn4','title4','author4','publish4')" class="btn btn-info pull-left">获取图书信息</a>
     			</div><div class="span4">
     				<div class="control-group">
     					<div class="controls">
@@ -458,9 +449,7 @@
     						</div>
     					</div>
     				</div>
-    				<button type="submit" class="btn btn-info pull-left" id="get_info5">
-    					获取图书信息
-    				</button>
+    					<a href="#" onclick="do_jsonp('isbn5','title5','author5','publish5')" class="btn btn-info pull-left">获取图书信息</a>
     			</div><div class="span4 pull-right">
     				<div class="control-group">
     					<div class="controls">
@@ -533,14 +522,26 @@
     						</div>
     					</div>
     				</div>
-    				<button type="submit" class="btn btn-info pull-left" id="get_info6">
-    					获取图书信息
-    				</button>
-    			</div></div></form><div class="container"></div><div class="row-fluid">
+    					<a href="#" onclick="do_jsonp('isbn6','title6','author6','publish6')" class="btn btn-info pull-left">获取图书信息</a>
+    			</div></div><div class="container"></div><div class="row-fluid">
     		</div>
     	</div>
     </div>
-    <div class="container"><div class="alert"><h3 class="">Alert!</h3><p class="">This is not a test</p></div><button type="submit" class="btn pull-right btn-large" id="submit_all">确认添加书本</button></div><div class="container-fluid">
+
+	<?php if(isset($success)): ?>
+	<div class="alert alert-success">
+	  <button type="button" class="close" data-dismiss="alert">&times;</button>
+		  <strong>书本添加成功！</strong> 
+	</div>	
+	<?php elseif(isset($error)): ?>
+	<div class="alert">
+	  <button type="button" class="close" data-dismiss="alert">&times;</button>
+		  <strong>书本添加失败！</strong>
+	</div>
+	<?php endif;?>
+
+	<button type="submit" class="btn pull-right btn-large" id="submit_all">确认添加书本</button></div><div class="container-fluid">
+    	</form>
     	<div class="row-fluid">
     		<!--/span-->
     		<!--/span-->
@@ -567,6 +568,20 @@
         padding: 9px 0;
       }
       
+	  .btn-large{
+		margin-top:100px;
+		margin-right:240px;	
+	  }
+		
+	  .alert{
+		padding:20px 40px 20px 40px;
+		margin-left:90px;
+		margin-right:240px;
+		margin-bottom:20px;
+	  }
+	  strong{
+		font-size:20px;
+	  } 
       @media (max-width: 980px) {
         /* Enable use of floated navbar text */
         .navbar-text.pull-right {
@@ -582,7 +597,17 @@
 	<script src="<?php echo base_url('./js/bootstrap.js'); ?>">
     </script>
     <script>
+	function do_jsonp(isbn,title,author,publish) 
+	{
+		var id = document.getElementById(isbn).value;
+		$.getJSON("https://api.douban.com/v2/book/isbn/"+id+"?callback=?",
+		function(data) {
+				$('#'+title).val(data.title);
+				$('#'+author).val(data.author);
+				$('#'+publish).val(data.publisher);
+		});
 
+	}
     </script>
   </body>
 </html>

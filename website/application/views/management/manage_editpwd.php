@@ -33,7 +33,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
     	<div class="navbar-inner">
     		<div class="container-fluid">
-				<a class="brand" href="<?php echo site_url('management'); ?>">工大书架后台管理</a>
+				<a class="brand" href="<?php echo site_url('admin'); ?>">工大书架后台管理</a>
     			<div class="nav-collapse collapse">
     				<p class="navbar-text pull-right">
     					<br>

@@ -33,7 +33,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
     	<div class="navbar-inner">
     		<div class="container-fluid">
-				<a class="brand" href="<?php echo site_url('management'); ?>">工大书架后台管理</a>
+				<a class="brand" href="<?php echo site_url('admin'); ?>">工大书架后台管理</a>
     			<div class="nav-collapse collapse">
     				<p class="navbar-text pull-right">
     					<br>
@@ -67,7 +67,6 @@
     	</div>
     	<div class="navbar">
     	</div>
-    	<form>
     		<div class="row-fluid">
     		</div>
     		<table class="table">
@@ -92,67 +91,57 @@
     						操作
     					</td>
     				</tr>
+					<?php foreach($users as $row): ?>
     				<tr>
     					<td>
-    						1
-    					</td>
-    					<td class="">
-    						xxxabc@gmail.com
-    					</td>
-    					<td class="">
-    						某XX
-    					</td>
-    					<td class="">
-    						计算机科学与技术
+    						<?php echo $row['id'];?>	
     					</td>
     					<td>
-    						2013-04-22 10:58:46
+							<?php echo $row['username'];?>	
     					</td>
     					<td>
-    						<button type="submit" class="btn">
-    							冻结帐号
-    						</button>
-    					</td>
-    			</tr>
-                			<tr>
-    					<td>
-    						2
-    					</td>
-    					<td class="">
-            		  		xhxabc@gmail.com
-    					</td>
-    					<td class="">
-    						某XX
-    					</td>
-    					<td class="">
-    						计算机科学与技术
+    						<?php echo $row['truename'];?>
     					</td>
     					<td>
-    						2013-04-22 10:58:46
+    						<?php echo $row['major'];?>	
     					</td>
+    					<td>
+    						<?php echo $row['register_time'];?>	
+    					</td>
+						<?php if($row['status'] == 1):?>
+						<form action="<?php echo site_url('manage_edituser/set_user_down/'.$row['id']); ?>" method="post" >
     					<td>
     						<button type="submit" class="btn">
     							冻结帐号
     						</button>
     					</td>
-    				</tr>
+						</form>
+						<?php elseif($row['status'] == -1):?>
+						<form action="<?php echo site_url('manage_edituser/set_user_up/'.$row['id']); ?>" method="post" >
+    					<td>
+    						<button type="submit" class="btn">
+    							恢复帐号
+    						</button>
+    					</td>
+						</form>
+						<?php endif;?>
+    					</tr>
+						<?php endforeach;?>
     			</tbody>
     		</table>
-    	</form>
     	<div class="row-fluid">
     	</div>
     	<table class="table">
     		<tbody>
     			<tr>
-    			</tr>
-    		</tbody>
-    	</table>
-    	<table class="table">
-    		<tbody>
-    			<tr>
-    				
-    				
-    				
+					<ul class="pager">
+					  <li class="previous">
+					  <a href="<?php echo site_url('manage_edituser/index')."/".($page['prevpage']);?>">&larr; Older</a>
+					  </li>
+					  <li class="next">
+					  <a href="<?php echo site_url('manage_edituser/index')."/".($page['nextpage']);?>">Newer &rarr;</a>
+					  </li>
+					</ul>
     			</tr>
     		</tbody>
     	</table>

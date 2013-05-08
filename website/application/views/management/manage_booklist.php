@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
   
   <head>
@@ -33,7 +33,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
     	<div class="navbar-inner">
     		<div class="container-fluid">
-				<a class="brand" href="<?php echo site_url('management'); ?>">工大书架后台管理</a>
+				<a class="brand" href="<?php echo site_url('admin'); ?>">工大书架后台管理</a>
     			<div class="nav-collapse collapse">
     				<p class="navbar-text pull-right">
     					<br>
@@ -67,7 +67,7 @@
     	</div>
     	<div class="navbar">
     	</div>
-    	<form>
+
     		<div class="row-fluid">
     		</div>
     		<table class="table">
@@ -92,58 +92,59 @@
     						操作
     					</td>
     				</tr>
+					<?php foreach($booklists as $row): ?>
     				<tr>
     					<td>
-    						1
+							<?php echo $row['id'];?>
     					</td>
     					<td>
-    						9787040223903
+							<?php echo $row['ISBN'];?>
     					</td>
     					<td>
-    						计算机组成原理
+    						<?php echo $row['name'];?>	
     					</td>
     					<td>
-    						唐朔飞
+							<?php echo $row['author'];?>
     					</td>
     					<td>
-    						高等教育出版社
+							<?php echo $row['publish'];?>
     					</td>
+						<?php if($row['status'] == 1):?>
+						<form action="<?php echo site_url('manage_booklist/set_book_down/'.$row['id']); ?>" method="post" >
     					<td>
     						<button type="submit" class="btn">
     							下架
     						</button>
     					</td>
-    			</tr>
-                			<tr>
-    					<td>
-    						2
-    					</td>
-    					<td>
-							9787302147510
-    					</td>
-    					<td>
-    						数据结构
-    					</td>
-    					<td>
-    						严蔚敏,吴伟民
-    					</td>
-    					<td>
-    						清华大学出版社
-    					</td>
+						</form>
+						<?php elseif($row['status'] == 0):?>
+						<form action="<?php echo site_url('manage_booklist/set_book_up/'.$row['id']); ?>" method="post" >
     					<td>
     						<button type="submit" class="btn">
-    							下架	
+    							上架
     						</button>
     					</td>
+						</form>
+						<?php endif;?>
     				</tr>
+					<?php endforeach;?>
+
     			</tbody>
     		</table>
-    	</form>
+
     	<div class="row-fluid">
     	</div>
     	<table class="table">
     		<tbody>
     			<tr>
+                    <ul class="pager">
+                    <li class="previous">
+					<a href='<?php echo site_url('manage_booklist/index')."/".($page['prevpage']);?>'>&larr; Older</a>
+                     </li>
+                     <li class="next">
+					 <a href='<?php echo site_url('manage_booklist/index')."/".($page['nextpage']);?>'>Newer &rarr;</a>
+                    </li>
+                    </ul>
     			</tr>
     		</tbody>
     	</table>
