@@ -24,7 +24,7 @@ class ExceltoMysql
 	}
 	protected function ExceltoMysql() 
 	{
-		echo "this is default ";
+		
 	}
 	protected function ExceltoMysql2($table,$file)
 	{
