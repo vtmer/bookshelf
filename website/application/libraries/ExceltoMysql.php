@@ -41,7 +41,7 @@ class ExceltoMysql
 	{
 		if($this->table == '') exit("Please set tablename!");
 		$query = mysql_query("SHOW COLUMNS FROM $this->table");
-		$this->fieldNum = mysql_num_fields($query);
+		$this->fieldNum = mysql_num_rows($query);
 		while($fieldArray = mysql_fetch_assoc($query))
 		{
 			$this->field[] = $fieldArray['Field'];
