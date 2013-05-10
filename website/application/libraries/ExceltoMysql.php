@@ -1,8 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 /**
  *从Excel批量导入数据到MySql
- *注意Excel必须先转换为CSV格式，首行为字段名且与数据库中的顺序一致，
- *然后用记事本把编码转换为UTF-8
+ *注意Excel必须先转换为CSV格式，首行为字段名且与数据库中的顺序一致
  * @access public
  * @param $table,$file
  * @author chile
@@ -50,6 +49,7 @@ class ExceltoMysql
 	}
 	public function InsertToMysql()
 	{
+		mysql_query("SET NAMES gbk");
 	    $handle = fopen($this->file,'r') or exit("Unable to open $this->file file!");
 	    //字段匹配验证
 	    $firstRow = fgetcsv($handle);
