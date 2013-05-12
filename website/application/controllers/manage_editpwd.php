@@ -4,7 +4,14 @@ class Manage_editpwd extends CI_Controller
 {
 	public function index()
 	{
-		$this->load->view('management/manage_editpwd');
+		if(!$this->is_logged_in())
+		{
+			show_error('You don\'t have the permission to access this site!');
+		}
+		else
+		{
+			$this->load->view('management/manage_editpwd');
+		}
 	}
 	
 	public function update_pwd()
@@ -25,12 +32,31 @@ class Manage_editpwd extends CI_Controller
 
 	public function error()
 	{
-		$this->load->view('management/manage_editpwd',array('error' => TRUE));
+		if(!$this->is_logged_in())
+		{
+			show_error('You don\'t have the permission to access this site!');
+		}
+		else
+		{
+			$this->load->view('management/manage_editpwd',array('error' => TRUE));
+		}
 	}
 
 	public function success()
 	{
-		$this->load->view('management/manage_editpwd',array('success' => TRUE));
+		if(!$this->is_logged_in())
+		{
+			show_error('You don\'t have the permission to access this site!');
+		}
+		else
+		{
+			$this->load->view('management/manage_editpwd',array('success' => TRUE));
+		}
+	}
+	
+	private function is_logged_in()
+	{
+		return $this->session->userdata('admin');
 	}
 }
 

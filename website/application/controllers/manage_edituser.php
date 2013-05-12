@@ -10,6 +10,12 @@ class Manage_edituser extends CI_Controller
 	
 	public function index($page = 1)
 	{
+		if(!$this->is_logged_in())
+		{
+			show_error('You don\'t have the permission to access this site!');
+		}
+		else
+		{
 		$data['users'] = $this->admin_model->show_users();
 				
 		$this->pager->set(0,1);
@@ -19,8 +25,8 @@ class Manage_edituser extends CI_Controller
 		$data['page']['nextpage'] = $this->pager->get_nextpage();
 		$data['page']['prevpage'] = $this->pager->get_prevpage();
 
-
 		$this->load->view('management/manage_edituser',$data);
+		}
 	}
 
 	public function set_user_down($id)
@@ -33,6 +39,11 @@ class Manage_edituser extends CI_Controller
 	{
 		$this->admin_model->set_user_up($id);
 		redirect('manage_edituser','refresh');
+	}
+
+	private function is_logged_in()
+	{
+		return $this->session->userdata('admin');
 	}
 }
 

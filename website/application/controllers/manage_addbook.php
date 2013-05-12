@@ -4,8 +4,14 @@ class Manage_addbook extends CI_Controller
 {
 	public function index()
 	{
-		$this->load->view('management/manage_addbook');
-
+		if(!$this->is_logged_in())
+		{
+			show_error('You don\'t have the permission to access this site!');
+		}
+		else
+		{
+			$this->load->view('management/manage_addbook');
+		}
 	}
 
 	public function add()
@@ -142,12 +148,32 @@ class Manage_addbook extends CI_Controller
 
 	public function error()
 	{
-		$this->load->view('management/manage_addbook',array('error' => TRUE));
+		if(!$this->is_logged_in())
+		{
+			show_error('You don\'t have the permission to access this site!');
+		}
+		else
+		{
+			$this->load->view('management/manage_addbook',array('error' => TRUE));
+		}
+		
 	}
 
 	public function success()
 	{
-		$this->load->view('management/manage_addbook',array('success' => TRUE));
+		if(!$this->is_logged_in())
+		{
+			show_error('You don\'t have the permission to access this site!');
+		}
+		else
+		{
+			$this->load->view('management/manage_addbook',array('success' => TRUE));
+		}
+	}
+
+	private function is_logged_in()
+	{
+		return $this->session->userdata('admin');
 	}
 }
 
