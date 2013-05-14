@@ -56,14 +56,14 @@ class Home extends CI_Controller
 		$data['user'] = $this->home_model->get_system_match(array(array('ISBN'=>$data['book_info'][0]->ISBN,
 																'name'=>$data['book_info'][0]->name,'id'=>$book_id)));
 		//分页
-		$this->pager->set(0,1);//设置每页显示的条数
+		$this->pager->set(0,5);//设置每页显示的条数
 		$data['page']['num'] = $this->pager->get_pagenum($data['user']['user']);//获取总页数
 		$data['user']['user'] = $this->pager->get_pagedata($data['user']['user'],$page);//当前页数据
 		$data['page']['currentpage'] = $this->pager->get_currentpage();
 		$data['page']['nextpage'] = $this->pager->get_nextpage();
 		$data['page']['prevpage'] = $this->pager->get_prevpage();
 		//END
-		var_dump($data);
+		//var_dump($data);
 		$header = array('title'=>'书籍信息','css_file'=>'book_info.css');
 		$footer = array('js_file'=>'book_info.js');
 		$this->parser->parse('template/header',$header);
