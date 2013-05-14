@@ -76,11 +76,11 @@ class ExceltoMysql
 	    	{
 	    		if($key!=$this->fieldNum-1)
 	    		{
-	    			$sql2 .= "'".$charArray[$key]."',";
+	    			$sql2 .= "trim(both from '".$charArray[$key]."'),";
 	    		}
 	    		else
 	    		{
-	    			$sql2 .= "'".$charArray[$key]."');";
+	    			$sql2 .= "trim(both from '".$charArray[$key]."'));";
 	    		}
 	    	}
 	    	$sql3 = $sql.$sql2;
