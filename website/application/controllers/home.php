@@ -136,6 +136,7 @@ class Home extends CI_Controller
 						);
 			$this->session->set_userdata('borrow',time());
 			$this->home_model->update_info($info);
+			$this->user_model->show_user_point($this->session->userdata('uid'));
 			echo "<script type='text/javascript'>setTimeout(\"window.location.href='".site_url('home')."'\",3000);</script>";
 		}
 		else if($this->session->userdata('borrow'))
@@ -182,9 +183,17 @@ class Home extends CI_Controller
 			{
 				echo "<script type='text/javascript'>alert('修改成功！');</script>";
 			}
+			else if($flag==2)
+			{
+				echo "<script type='text/javascript'>alert('修改密码成功！请重新登录！');window.location.href='".site_url('login/logout')."'</script>";
+			}
+			else if($flag==3)
+			{
+				echo "<script type='text/javascript'>alert('与原密码一致，请重试！');</script>";
+			}
 			else
 			{
-				echo "<script type='text/javascript'>alert('修改失败！');</script>";
+				echo "<script type='text/javascript'>alert('修改失败，请重试！');</script>";
 			}
 		}
 		$id = $this->session->userdata('uid');

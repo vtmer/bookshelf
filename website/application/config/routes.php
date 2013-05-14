@@ -43,6 +43,7 @@ $route['guide'] = 'guide';
 $route['verify'] = "verify";
 $route['register'] = "register";
 $route['home']="home";
+$route['search']="search";
 $route['login'] = "login";
 $route['404_override'] = '';
 

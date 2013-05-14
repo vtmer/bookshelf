@@ -1,6 +1,6 @@
 
 <div class="main">
-	<form action="<?php echo site_url('search'); ?>" method="POST"> 
+	<form action="<?php echo site_url('search'); ?>" method="get"> 
 	<div class="search_bar">
 	<input type="text" name="keywords" value="请输入要查找的书目" />
 	<a href="#"><input type='submit' value='' /></a>

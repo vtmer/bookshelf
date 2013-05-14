@@ -190,11 +190,20 @@ class Home_Model extends CI_Model
     if($data['pwd']!=NULL)
     {
       $query = $this->db->query($sql,array($data['faculty'],$data['major'],$data['grade'],$data['phone_number'],$data['subphone_number'],$data['dormitory'],$data['username'],md5($data['pwd'])));
+      if($this->db->affected_rows())
+      {
+        return 2;
+      }
+      else return 3;
     }
     else
     {
       $query = $this->db->query($sql2,array($data['faculty'],$data['major'],$data['grade'],$data['phone_number'],$data['subphone_number'],$data['dormitory'],$data['username']));
+       if($this->db->affected_rows())
+       {
+          return 1;
+       }
+       else return 0;
     }
-    return $this->db->affected_rows();
   }
 }

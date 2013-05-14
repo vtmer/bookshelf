@@ -84,7 +84,7 @@ class ExceltoMysql
 	    		}
 	    	}
 	    	$sql3 = $sql.$sql2;
-	    	mysql_query($sql3) or exit("已成功导入".(int)($n-1)."行，错误发生在".$n."行；<br/>错误信息：".mysql_error());
+	    	mysql_query($sql3) or exit("已成功导入".(int)($n-2)."行，错误发生在".$n."行；<br/>错误信息：".mysql_error());
 	    	$n++;
 	    }
 	    return $n;   	

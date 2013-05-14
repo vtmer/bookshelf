@@ -1,5 +1,5 @@
 <div class="main">
-	<form action="<?php echo site_url('search'); ?>" method="POST">
+	<form action="<?php echo site_url('search'); ?>" method="get">
 	<div class="search_bar">
 		<input type="text" name="keywords" value="请输入要查找的书目" />
 		<a href="#"><input type='submit' value='' /></a>
@@ -17,8 +17,8 @@
 					<div class="message_contant">
 					<p><?php echo $row['content'];?></p>
 						<span class="hide"></span>
-						<input type="image" src="<?php echo base_url('img/cancle.png'); ?>"/>
-						<input type="image" src="<?php echo base_url('img/confirm.png'); ?>" class="confirm"/>
+						<!--<input type="image" src="<?php echo base_url('img/cancle.png'); ?>"/>
+						<input type="image" src="<?php echo base_url('img/confirm.png'); ?>" class="confirm"/>-->
 					</div>
 				</div>
 				<?php endforeach;?>

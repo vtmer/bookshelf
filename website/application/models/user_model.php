@@ -121,7 +121,13 @@ class User_model extends CI_Model
 		return $query->num_rows();
 	}
 
-
+	public function show_user_point($uid)
+	{
+		$query = mysql_query("SELECT `points` FROM `user` WHERE id=$uid");
+		$result = mysql_fetch_assoc($query);
+		$this->session->set_userdata('points', $result['points']);
+		return $result['points'];
+	}
 }
 
 /*End of file user_model.php*/
