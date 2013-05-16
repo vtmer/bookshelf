@@ -1,11 +1,8 @@
 
 <div class="main">
-	<form action="<?php echo site_url('search'); ?>" method="get"> 
-	<div class="search_bar">
-	<input type="text" name="keywords" value="请输入要查找的书目" />
-	<a href="#"><input type='submit' value='' /></a>
-	</div>
-	</form>
+
+<?php include "template/search_bar.php"; ?>
+
 	<div class="mid_content">
 		<h3>我的书架</h3>
 		<div class="content_box">
@@ -32,7 +29,7 @@
 								<?php if($book['book_status']==0&&$book['book_right']==0):?>
 								<form action="<?php echo site_url('home/my_book'); ?>" method="POST">
 									<input type="hidden" name="book_id" value="<?php echo $book['id'];?>" />
-									<a href='#'><input type='submit' value='下架' />下架</a>
+									<input type="submit" value="下架" />
 								</form>		
 								<?php endif;?>
 							</td>

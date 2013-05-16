@@ -31,7 +31,6 @@ class Admin extends CI_Controller
 			$data = array(
 				'uid' => $uid,
 				'admin' => TRUE,
-				'is_logged_in' => TRUE,
 			);
 			$this->session->set_userdata($data);
 

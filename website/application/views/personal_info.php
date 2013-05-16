@@ -1,11 +1,8 @@
 
 <div class="main">
-	<form action="<?php echo site_url('search'); ?>" method="get"> 
-	<div class="search_bar">
-	<input type="text" name="keywords" value="请输入要查找的书目" />
-	<a href="#"><input type='submit' value='' /></a>
-	</div>
-	</form>
+	
+	<?php include "template/search_bar.php"; ?>
+
 	<div class="mid_content">
 		<h3>个人信息设置：</h3>
 		<div class="content_box">
@@ -32,7 +29,7 @@
 						</div>
 					</label> 
 					<label for="mail">邮箱：<input type="text" id="mail" name="username" value="<?php echo $user[0]['username'];?>"/></label>
-					<a href="#" class="back_up"></a><input type="submit" value="好了，修改完了，保存吧！"/>好了，修改完了，保存吧！
+					<input type="submit" class="config_submit" value="好了，修改完了，保存吧！" />
 				</div>
 				</form>
 				<div class="right">

@@ -2,8 +2,8 @@
 div.main {..........}
 div.main { overflow:hidden; width:960px; margin:auto;}
 div.search_bar { width:482px; height:94px; margin:auto; background:url('../img/search.jpg') no-repeat;}
-div.search_bar input { width:392px; height:27px; margin:23px 0 0 14px; background:none; border:none;}
-div.search_bar a { float:right; width:50px; height:50px; margin:11px 11px 0 0 ; background:none; border:none; cursor:pointer;}
+div.search_bar .search_input { width:392px; height:27px; margin:23px 0 0 14px; background:none; border:none;}
+div.search_bar .search_submit { float:right; width:50px; height:50px; margin:11px 11px 0 0 ; background:none; border:none; cursor:pointer;}
 
 
 div.mid_content { position:relative; width:100%; padding-top:88px; background:url('../img/shelf.png') 77px 0 no-repeat; }
@@ -29,8 +29,8 @@ div.personal_config div.right ul li.gray { color:gray;}
 div.personal_config ul.pages { position:absolute; bottom:30px; right:140px;}
 
 
-div.personal_config a.back_up { position:absolute; bottom:30px; left:215px; height:30px; background:#c6c4b6; padding:0 17px; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center;}
-div.personal_config a.back_up:hover { background:#e8a126; color:#fff;} 
+div.personal_config .config_submit { height:30px; border:none; margin-left:99px; background:#c6c4b6; padding:0 17px; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center; cursor:pointer;}
+div.personal_config .config_submit:hover { background:#e8a126; color:#fff;} 
 
 div.footer {.........}
 div.footer {float:left; width:100%; height:222px; margin-top:300px; background:url('../img/bottom_bg.jpg') repeat-x;}
