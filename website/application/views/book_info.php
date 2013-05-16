@@ -68,7 +68,9 @@
 				<ul class="get_book">
 					<?php for ($i=0; $i<$n ; $i++) 
 					{ 
-						echo '<li><a href="'.site_url('home/check_step')."/user/".$user['user'][$i]['id']."/book/".$book_info[0]->id.'">借阅</a></li>';
+						echo '<form action='.site_url('home/check_step')."/user/".$user['user'][$i]['id']."/book/".$book_info[0]->id.' '.'method="post">';
+						echo '<li><input type="submit" value="借阅" /></li>';
+						echo '</form>';
 					}?>
 					<!--
 					<li><a href="check_step.html">借阅</a></li>

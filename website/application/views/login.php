@@ -20,7 +20,7 @@
 			<span>已有帐号登录:</span>
 			<label for="user_name">用户名：<input type="text" name="username"/ ></label>
 			<label for="password">密码：<input type="password" name="pwd" /></label>	
-			<a href="<?php echo site_url('login/check'); ?>" class="confirm"><input type="submit" value="anniu" />登录</a>
+			<input type="submit" class="confirm" value="登陆" />
 
 		</form>
 		<a href="<?php echo site_url('register');?>" class="sign_up"></a>

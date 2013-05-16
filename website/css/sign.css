@@ -19,7 +19,7 @@ div.sign form { float:left; font-size:14px;}
 div.sign form span { margin-left:20px; color:#626262; }
 div.sign form label { display:block; width:220px; margin:15px 0; text-align:right;}
 div.sign form label input { height:24px; width:140px;}
-div.sign form a.confirm { float:right; width:145px; height:30px; background:#e8a126; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center; color:#fff;}
+div.sign form input.confirm{ float:right; width:145px; height:30px; background:#e8a126; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center; color:#fff;}
 
 div.sign a.sign_up { float:right; width:217px; height:157px; background:url('../img/sign_up.jpg') no-repeat;}
 
