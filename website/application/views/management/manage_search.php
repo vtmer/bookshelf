@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
   
   <head>
@@ -45,7 +45,7 @@
     					<li>
 							<a href="<?php echo site_url('manage_addbook'); ?>">添加图书</a>
     					</li>
-    					<li class="active">
+    					<li>
 							<a href="<?php echo site_url('manage_edituser'); ?>">编辑用户权限</a>
     					</li>
     					<li>
@@ -53,7 +53,7 @@
     					</li>
 						<li>
 							<form action="<?php echo site_url('admin/search_judge'); ?>" class="navbar-search pull-left" method="post">
-  								<input type="text" class="search-query" placeholder="Search" name="keywords">
+								<input type="text" class="search-query" placeholder="ISBN/书名/作者/出版社..." name="keywords">
 								<input class="btn btn-inverse" type="submit" value="搜索"/>
 							</form>
 						</li>
@@ -73,103 +73,114 @@
     	</div>
     	<div class="navbar">
     	</div>
+		<?php if(isset($error)):?>
+		<div class="alert alert-block">
+			<strong>抱歉，没有找到相关记录哦！</strong> 
+		</div>
+		<?php elseif(isset($success)):?>
+		<div class="alert alert-success">
+			<strong>操作成功！</strong>
+		</div>
+		<?php else:?>
     		<div class="row-fluid">
     		</div>
     		<table class="table">
     			<tbody>
     				<tr>
     					<td>
-    						用户ID
-    					</td>
-    					<td class="">
-    						邮箱
+    						图书ID	
     					</td>
     					<td>
-    						姓名
+    						ISBN
     					</td>
     					<td>
-    						专业
+    						书名
     					</td>
     					<td>
-    						注册时间
+    						作者
+    					</td>
+    					<td>
+    						出版社
     					</td>
     					<td>
     						操作
     					</td>
     				</tr>
-					<?php foreach($users as $row): ?>
-    				<tr>
-    					<td>
-    						<?php echo $row['id'];?>	
-    					</td>
-    					<td>
-							<?php echo $row['username'];?>	
-    					</td>
-    					<td>
-    						<?php echo $row['truename'];?>
-    					</td>
-    					<td>
-    						<?php echo $row['major'];?>	
-    					</td>
-    					<td>
-    						<?php echo $row['register_time'];?>	
-    					</td>
-						<?php if($row['status'] == 1):?>
-						<form action="<?php echo site_url('manage_edituser/set_user_down/'.$row['id']); ?>" method="post" >
-    					<td>
-    						<button type="submit" class="btn">
-    							冻结帐号
-    						</button>
-    					</td>
-						</form>
-						<?php elseif($row['status'] == -1):?>
-						<form action="<?php echo site_url('manage_edituser/set_user_up/'.$row['id']); ?>" method="post" >
-    					<td>
-    						<button type="submit" class="btn">
-    							恢复帐号
-    						</button>
-    					</td>
-						</form>
-						<?php endif;?>
-    					</tr>
-						<?php endforeach;?>
-    			</tbody>
-    		</table>
-    	<div class="row-fluid">
-    	</div>
-    	<table class="table">
-    		<tbody>
-    			<tr>
-					<ul class="pager">
-					  <li class="previous">
-					  <a href="<?php echo site_url('manage_edituser/index')."/".($page['prevpage']);?>">&larr; Older</a>
-					  </li>
-					  <li class="next">
-					  <a href="<?php echo site_url('manage_edituser/index')."/".($page['nextpage']);?>">Newer &rarr;</a>
-					  </li>
-					</ul>
-    			</tr>
-    		</tbody>
-    	</table>
-    </div>
-    <div class="container-fluid">
-    	<div class="row-fluid">
-    		<!--/span-->
-    		<!--/span-->
-    	</div>
-    	<!--/row-->
-    	<div class="container">
-    	</div>
-    	<hr>
-    	<footer>
-    		<p class="pull-right">
-    			© 2013 vtmer-studio. All rights reserved.
-    		</p>
-    	</footer>
-    </div>
-    <!--/.fluid-container-->
+                            <?php foreach($search as $row): ?>
+                    <tr>
+                        <td>
+                            <?php echo $row['id'];?>
+                        </td>
+                        <td>
+                            <?php echo $row['ISBN'];?>
+                        </td>
+                        <td>
+                            <?php echo $row['name'];?>  
+                        </td>
+                        <td>
+                            <?php echo $row['author'];?>
+                        </td>
+                        <td>
+                            <?php echo $row['publish'];?>
+                        </td>
+                        <?php if($row['status'] == 1):?>
+                        <form action="<?php echo site_url('admin/set_book_down/'.$row['id']); ?>" method="post" >
+                        <td>
+                            <button type="submit" class="btn">
+                                下架
+                            </button>
+                        </td>
+                        </form>
+                        <?php elseif($row['status'] == 0):?>
+                        <form action="<?php echo site_url('admin/set_book_up/'.$row['id']); ?>" method="post" >
+                        <td>
+                            <button type="submit" class="btn">
+                                上架
+                            </button>
+                        </td>
+                        </form>
+                        <?php endif;?>
+                    </tr>
+                    <?php endforeach;?>
 
-    <style>
+                    </tbody>
+            </table>
+                    <div class="row-fluid">
+        </div>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <ul class="pager">
+                    <li class="previous">
+                    <a href='<?php echo site_url('admin/search/')."/".($page['prevpage']);?>'>&larr; Older</a>
+                     </li>
+                     <li class="next">
+                    <a href='<?php echo site_url('admin/search/')."/".($page['nextpage']);?>'>Newer &rarr;</a>
+                    </li>
+                    </ul>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+	<?php endif;?>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <!--/span-->
+            <!--/span-->
+        </div>
+        <!--/row-->
+        <div class="container">
+        </div>
+        <hr>
+        <footer>
+            <p class="pull-right">
+                © 2013 vtmer-studio. All rights reserved. 
+            </p>
+        </footer>
+    </div>
+
+        <style>
       
       body {
         padding-top: 60px;
@@ -179,9 +190,9 @@
         padding: 9px 0;
       }
       .navbar-search .search-query{
-        margin-left:20px;   
-      }
-
+		margin-left:20px;	
+	  }
+      
       @media (max-width: 980px) {
         /* Enable use of floated navbar text */
         .navbar-text.pull-right {
@@ -194,7 +205,7 @@
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
     </script>
-	<script src="<?php echo base_url('./js/bootstrap.js'); ?>">
+    <script src="<?php echo base_url('./js/bootstrap.js'); ?>">
     </script>
     <script>
 

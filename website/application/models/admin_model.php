@@ -119,6 +119,16 @@ class Admin_model extends CI_Model
 			return TRUE;
 		}
 	}
+
+	public function search($keywords)
+	{
+		$this->db->like('ISBN',$keywords);
+		$this->db->or_like('name',$keywords);
+		$this->db->or_like('author',$keywords);
+		$this->db->or_like('publish',$keywords);	
+		$query = $this->db->get('allbook');
+		return $query->result_array();	
+	}
 }
 
 ?>

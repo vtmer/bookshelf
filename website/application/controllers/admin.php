@@ -67,6 +67,76 @@ class Admin extends CI_Controller
 			$this->load->view('admin_login');	
 		}
 	}
+	
+	public function search_judge()
+	{
+		$keywords = $this->input->post('keywords');
+		$result = $this->admin_model->search($keywords);
+		if($keywords == NULL||!$result)
+		{
+			redirect('admin/error_search');
+		}	
+		else
+		{
+			$this->search($keywords);
+		}
+	}
+	public function search($keywords)
+	{
+		$page = 1;
+		if(!$this->is_logged_in())
+		{
+			show_error('You don\'t have the permission to access this site!');
+		}
+		else
+		{
+			$data['search'] = $this->admin_model->search($keywords);
+			$this->pager->set(0,10);
+			$data['page']['num'] = $this->pager->get_pagenum($data['search']);//获取总页数
+			$data['search'] = $this->pager->get_pagedata($data['search'],$page);//当前页数据
+			$data['page']['currentpage'] = $this->pager->get_currentpage();
+			$data['page']['nextpage'] = $this->pager->get_nextpage();
+			$data['page']['prevpage'] = $this->pager->get_prevpage();
+			
+			$this->load->view('management/manage_search',$data);
+		}
+	}
+
+	public function set_book_down($id)
+	{
+		$this->admin_model->set_book_down($id);
+		redirect('admin/success_search');
+	}
+
+	public function set_book_up($id)
+	{
+		$this->admin_model->set_book_up($id);
+		redirect('admin/success_search');
+	}
+
+	public function error_search()
+	{
+		if(!$this->is_logged_in())
+		{
+			show_error('You don\'t have the permission to access this site!');
+		}
+		else
+		{
+			$this->load->view('management/manage_search',array('error' => TRUE));
+		}
+	}
+
+	public function success_search()
+	{
+		if(!$this->is_logged_in())
+		{
+			show_error('You don\'t have the permission to access this site!');
+		}
+		else
+		{
+			$this->load->view('management/manage_search',array('success' => TRUE));
+		}
+	}
 }
 
 ?>

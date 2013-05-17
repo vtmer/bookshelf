@@ -51,6 +51,12 @@
     					<li>
 							<a href="<?php echo site_url('manage_editpwd'); ?>" class="text-right">修改密码</a>
     					</li>
+						<li>
+							<form action="<?php echo site_url('admin/search_judge'); ?>" class="navbar-search pull-left" method="post">
+	 	 						<input type="text" class="search-query" placeholder="" name="keywords">
+								<input class="btn btn-inverse" type="submit" value="搜索"/>
+							</form>
+						</li>
     				</ul>
     			</div>
     			<!--/.nav-collapse -->
@@ -551,8 +557,8 @@
     	</div>
     	<hr class="">
     	<footer>
-    		<p class="">
-    			© Company 2013
+    		<p class="pull-right">
+    			© 2013 vtmer-studio. All rights reserved.
     		</p>
     	</footer>
     </div>
@@ -582,6 +588,9 @@
 	  strong{
 		font-size:20px;
 	  } 
+      .navbar-search .search-query{
+        margin-left: 20px;
+      }
       @media (max-width: 980px) {
         /* Enable use of floated navbar text */
         .navbar-text.pull-right {
