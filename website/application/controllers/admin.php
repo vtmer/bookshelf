@@ -70,18 +70,23 @@ class Admin extends CI_Controller
 	
 	public function search_judge()
 	{
+		$this->session->unset_userdata('keywords');
 		$keywords = $this->input->post('keywords');
 		$result = $this->admin_model->search($keywords);
+
+		$data = array('keywords' => $keywords);
+		$this->session->set_userdata($data);
+
 		if($keywords == NULL||!$result)
 		{
 			redirect('admin/error_search');
 		}	
 		else
 		{
-			$this->search($keywords);
+			redirect('admin/search');
 		}
 	}
-	public function search($keywords)
+	public function search()
 	{
 		$page = 1;
 		if(!$this->is_logged_in())
@@ -90,6 +95,7 @@ class Admin extends CI_Controller
 		}
 		else
 		{
+			$keywords = $this->session->userdata('keywords');
 			$data['search'] = $this->admin_model->search($keywords);
 			$this->pager->set(0,10);
 			$data['page']['num'] = $this->pager->get_pagenum($data['search']);//获取总页数
