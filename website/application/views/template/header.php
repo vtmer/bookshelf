@@ -24,8 +24,8 @@
 		</div>
 		<a href="<?php echo site_url('add_book')?>" id="add_book">捐书</a>
 		<?php else: ?>		
-		<span class="user_name">
-			<a href="<?php echo site_url('login'); ?>">---------------------》》》》请登录《《《《--------------------</a>
+		<span id="add_book">
+			<a href="<?php echo site_url('login'); ?>">请登录</a>
 		</span>
 		<?php endif;?>
 	</div>
