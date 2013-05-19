@@ -21,17 +21,19 @@
 			<label for="user_name">用户名：<input type="text" name="username"/ ></label>
 			<label for="password">密码：<input type="password" name="pwd" /></label>	
 			<input type="submit" class="confirm" value="登陆" />
-
 		</form>
 		<a href="<?php echo site_url('register');?>" class="sign_up"></a>
-	</div>
-
-	<?php if(isset($error)):?>
-	<strong>Login failed!</strong>
-	<?php endif;?>
+</div>
 
 	<div class="bottom_shadow"></div>
 	<div class="shelf_bg"></div>
+
+	<?php if(isset($error)):?>
+		<div class="alert">
+		    <strong>登陆失败！</strong>
+		</div>
+	<?php endif;?>
+
 </div><!--end of main-->
 <script>
 document.getElementById('home_page').getElementsByTagName('a')[0].innerText= " ";
