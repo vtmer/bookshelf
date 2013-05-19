@@ -166,15 +166,14 @@ class Home_Model extends CI_Model
   public function count_userbook($id)
   {
     $num = array();
-    $sql = "SELECT COUNT(*) as `lend_book` FROM `circulating_book` WHERE `from_id`=$id ";
-    $sql2 = "SELECT COUNT(*) as `borrow_book` FROM `circulating_book` WHERE `to_id`=$id ";
-    $sql3 = "SELECT COUNT(*) as `lend_out` FROM `circulating_book` WHERE `from_id`=$id AND `book_status`=2";
-    $result = $this->db->query($sql);
-    $result2 = $this->db->query($sql2);
-    $result3 = $this->db->query($sql3);
-    $num[0] = $result->result();
-    $num[1] = $result2->result();
-    $num[2] = $result3->result();
+	$query = $this->db->get_where('user',array('id' => $id)); 
+	if($query->num_rows() == 1)
+	{
+	    $row = $query->row(); 
+	}
+    $num[0] = $row->donate_book; 
+    $num[1] = $row->borrow_book;
+    $num[2] = $row->lend_book;
     return $num;
   }
   public function update_config($data)

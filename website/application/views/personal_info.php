@@ -37,9 +37,9 @@
 						<li><?php echo $user[0]['truename'];?></li>
 						<li class="gray"><?php echo $user[0]['faculty'];?></li>
 						<li class="gray"><?php echo $user[0]['grade']."级 ".$user[0]['major'];?></li>
-						<li>捐书：<?php echo $book_num[0][0]->lend_book;?>本</li>
-						<li>借入：<?php echo $book_num[1][0]->borrow_book;?>本</li>
-						<li>借出：<?php echo $book_num[2][0]->lend_out;?>本</li>
+						<li>捐书：<?php echo $book_num[0][0];?>本</li>
+						<li>借入：<?php echo $book_num[1][0];?>本</li>
+						<li>借出：<?php echo $book_num[2][0];?>本</li>
 					</ul>
 				</div>
 				
