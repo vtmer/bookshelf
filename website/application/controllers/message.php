@@ -14,7 +14,7 @@ class Message extends CI_Controller
 		$status = '0';
 		$data['messages'] = $this->user_model->select_message($uid,$status);
 
-		$this->pager->set(0,3);//设置每页显示的条数
+		$this->pager->set(0,8);//设置每页显示的条数
 		$data['page']['num'] = $this->pager->get_pagenum($data['messages']);//获取总页数
 		$data['messages'] = $this->pager->get_pagedata($data['messages'],$page);//当前页数据
 		$data['page']['currentpage'] = $this->pager->get_currentpage();
@@ -32,6 +32,7 @@ class Message extends CI_Controller
 	public function confirm($message_id)
 	{
 		$this->user_model->confirm($message_id);
+		echo "<script>alert('恭喜你！你已确认成功！');</script>";
 		redirect('message','refresh');
 	}
 }

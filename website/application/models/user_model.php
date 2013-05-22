@@ -110,7 +110,40 @@ class User_model extends CI_Model
 		$this->db->where('id',$message_id);
 		$this->db->update('message',array('status' => "1"));
 
-	/*	$this->db->where('id' => $book_id);
+		//获取该条信息的发送者和接收者
+		$query = $this->db->get_where('message',array('id' => $message_id)); 
+		if($query->num_rows() == 1)
+		{
+			$row = $query->row();
+		}
+		$from = $row->from;
+		$to = $row->to;
+		
+		//获取信息发送者的积分
+		$query_user_from = $this->db->get_where('user',array('id' => $from));
+		if($query_user_from->num_rows() == 1)
+		{
+			$row_from = $query_user_from->row();
+			$from_point = $row_from->points - 10;
+		}
+		
+		//获取信息接收者的积分
+		$query_user_to = $this->db->get_where('user',array('id' => $to));
+		if($query_user_to->num_rows() == 1)
+		{
+			$row_to = $query_user_to->row();
+			$to_point = $row_to->points + 5;
+		}
+
+		//更新信息发送者的积分（积分减少10）
+		$this->db->where('id',$from);
+		$this->db->update('user',array('points' => $from_point));
+
+		//更新信息接收者的积分（积分增加5）
+		$this->db->where('id',$to);
+		$this->db->update('user',array('points' => $to_point));
+		/*	
+		$this->db->where('id' => $book_id);
 		$this->db->update('circulating_book',array('book_status' => '2'));
 		i*/
 	}
@@ -123,10 +156,12 @@ class User_model extends CI_Model
 
 	public function show_user_point($uid)
 	{
-		$query = mysql_query("SELECT `points` FROM `user` WHERE id=$uid");
-		$result = mysql_fetch_assoc($query);
-		$this->session->set_userdata('points', $result['points']);
-		return $result['points'];
+		$query = $this->db->get_where('user',array('id' => $this->session->userdata('uid')));
+	   	if($query->num_rows() == 1)
+		{
+			$row = $query->row();
+		}	
+		return $points = $row->points;
 	}
 }
 
