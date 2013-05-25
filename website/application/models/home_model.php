@@ -180,8 +180,8 @@ class Home_Model extends CI_Model
   	public function update_config($data)
   	{
   		$id = $this->session->userdata('uid');
-    	$sql = "UPDATE `user` SET `faculty`=?,`major`=?,`grade`=?,`phone_number`=?,`subphone_number`=?,`dormitory`=?,`username`=?,`password`=? WHERE `id`=$id ";
-    	$sql2 = "UPDATE `user` SET `faculty`=?,`major`=?,`grade`=?,`phone_number`=?,`subphone_number`=?,`dormitory`=?,`username`=? WHERE `id`=$id ";
+    	$sql = "UPDATE `user` SET `faculty`=?,`major`=?,`grade`=?,`phone_number`=?,`subphone_number`=?,`dormitory`=?,`password`=? WHERE `id`=$id ";
+    	$sql2 = "UPDATE `user` SET `faculty`=?,`major`=?,`grade`=?,`phone_number`=?,`subphone_number`=?,`dormitory`=? WHERE `id`=$id ";
     
     	if(strlen($data['phone_number'])!=11)
     	{
@@ -189,7 +189,7 @@ class Home_Model extends CI_Model
     	}
     	if($data['pwd']!=NULL)
     	{
-      		$query = $this->db->query($sql,array($data['faculty'],$data['major'],$data['grade'],$data['phone_number'],$data['subphone_number'],$data['dormitory'],$data['username'],md5($data['pwd'])));
+      		$query = $this->db->query($sql,array($data['faculty'],$data['major'],$data['grade'],$data['phone_number'],$data['subphone_number'],$data['dormitory'],md5($data['pwd'])));
       		if($this->db->affected_rows())
       		{
         		return 2;
@@ -198,7 +198,7 @@ class Home_Model extends CI_Model
     	}	
     	else
     	{
-      		$query = $this->db->query($sql2,array($data['faculty'],$data['major'],$data['grade'],$data['phone_number'],$data['subphone_number'],$data['dormitory'],$data['username']));
+      		$query = $this->db->query($sql2,array($data['faculty'],$data['major'],$data['grade'],$data['phone_number'],$data['subphone_number'],$data['dormitory']));
        		if($this->db->affected_rows())
        		{
           		return 1;

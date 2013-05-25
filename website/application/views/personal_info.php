@@ -28,7 +28,8 @@
 							<?php endif;?>
 						</div>
 					</label> 
-					<label for="mail">邮箱：<input type="text" id="mail" name="username" value="<?php echo $user[0]['username'];?>"/></label>
+
+					<!--<label for="mail">邮箱：<input type="text" id="mail" name="username" value="<?php echo $user[0]['username'];?>"/></label>-->
 					<input type="submit" class="config_submit" value="好了，修改完了，保存吧！" />
 				</div>
 				</form>
