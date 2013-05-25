@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>登录页</title>
 <link href="<?php echo base_url('css/reset.css'); ?>" type="text/css" rel="stylesheet" />
-<link href="<?php echo base_url('css/sign.css'); ?>" type="text/css" rel="stylesheet" />
+<link href="<?php echo base_url('css/login.css'); ?>" type="text/css" rel="stylesheet" />
 <script language="javascript" src="<?php echo base_url('js/jquery-1.7.2.js'); ?>">
 </script>
 </head>

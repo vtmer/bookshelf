@@ -10,12 +10,15 @@ class Register extends CI_Controller
 
 	public function index()
 	{
-		$this->load->view('register');	
+		$footer = array('js_file' => 'sign_up.js');
+		$this->load->view('sign_up');	
+		$this->parser->parse('template/footer',$footer);
 	}
 
 	//注册时验证函数
 	public function check()
 	{
+		/*
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('username','Username','required|max_length[40]|valid_email');
 		$this->form_validation->set_rules('pwd1','Password1','required|min_length[8]|max_length[16]|alpha_numeric');
@@ -23,7 +26,7 @@ class Register extends CI_Controller
 		$this->form_validation->set_rules('truename','name','required');
 		$this->form_validation->set_rules('phone_num','Phone','required|numeric|max_length[12]');
 		$this->form_validation->set_rules('subphone_num','Subphone','required|numeric|min_length[4]|max_length[6]');
-
+		
 		if($this->form_validation->run() == FALSE)
 		{
 			//如何提示错误
@@ -31,10 +34,13 @@ class Register extends CI_Controller
 			echo "<script >alert('请按要求填写相关信息!');</script>";
 			redirect('register','refresh');
 		}
-		else
-		{
+		*/
             $username = $this->input->post('username');
-		    $password = $this->input->post('pwd1');
+			if($this->user_model->check_is($username))
+			{
+				redirect('register/error','refresh');	
+			}
+			$password = $this->input->post('pwd');
 			$truename = $this->input->post('truename');
 			$student_id = $this->input->post('student_id');
 			//利用session保存的信息（学院、专业、年级）；
@@ -83,7 +89,6 @@ class Register extends CI_Controller
 				//如何提示错误
 				echo "<script>alert('系统错误！')</script>";				
 			}
-		}
 	
 	
 
@@ -98,11 +103,11 @@ class Register extends CI_Controller
 
 		$this->email->initialize($configs);
 
-		$message = "Thank you for Registration!\nYou have register our website almost.If you want to finish the registration completely,you should follow the next-operation:Clicking the link:\n <a href='http://localhost/bookshelf/website/index.php/verify/index/".$uid."/".$activationKey."'>验证链接</a>\n if this is a error,ignore this email and you'll be removed from our mailing list.\n www.gdutbookshelf.com";//邮件正文 
+		$message = "感谢你的注册！接下来请点击验证链接,便能完成注册:\n <a href='http://localhost/bookshelf/website/index.php/verify/index/".$uid."/".$activationKey."'>验证链接</a>\n @维生数-工大书架";//邮件正文 
 		
-		$this->email->from('gdutbookshelf@163.com','vtmerbookshelf');
+		$this->email->from('gdutbookshelf@163.com','维生数工作室');
 		$this->email->to($username);
-		$this->email->subject('Welcome to gdut bookshelf');
+		$this->email->subject('欢迎注册工大书架');
 		$this->email->message($message);
 
 		if($this->email->send())
@@ -114,6 +119,13 @@ class Register extends CI_Controller
 			echo "<script>alert('sent failed!');</script>";
 		}
 		redirect('login','refresh');
+	}
+
+	public function error()
+	{
+		$footer = array('js_file' => 'sign_up.js');
+		$this->load->view('sign_up',array('error' => TRUE));	
+		$this->parser->parse('template/footer',$footer);
 	}
 }
 

@@ -13,7 +13,13 @@ class User_model extends CI_Model
 		$query = $this->db->get_where('user',array('username' => $email,'password' => $password,'status' => "1"));
 		return ($query->num_rows() == 1) ? TRUE : FALSE;
 	}	
-	
+
+	//注册时验证邮箱是否存在
+	public function check_is($mail)
+	{
+		$query = $this->db->get_where('user',array('username' => $mail));
+		return ($query->num_rows() == 1) ? TRUE : FALSE;
+	}
 	//注册时向数据库添加数据
 	public function add($username,$password,$truename,$student_id,$faculty,$major,$grade,$phone_num,$subphone_num,$dormitory,$activationkey,$status,$points)
 	{
