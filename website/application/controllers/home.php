@@ -14,7 +14,7 @@ class Home extends CI_Controller
 	{
 		if(!isset($this->session->userdata['is_logged_in']))//如果没被引导，则跳转到引导页
 		{
-			header('location:/bookshelf/website/index.php/guide');
+			header('location:/index.php/guide');
 		} 
 		$data['book_need'] = $this->home_model->get_book_need($this->session->userdata['major'],$this->session->userdata['grade']);
 		$match = array();
@@ -30,7 +30,7 @@ class Home extends CI_Controller
 		}
 		$data['system_match'] = $this->home_model->get_system_match($match);
 		//分页
-		$this->pager->set(0,1);//设置每页显示的条数
+		$this->pager->set(0,5);//设置每页显示的条数
 		$data['page']['num'] = $this->pager->get_pagenum($data['system_match']['user']);//获取总页数
 		$data['system_match']['user'] = $this->pager->get_pagedata($data['system_match']['user'],$page);//当前页数据
 		$data['page']['currentpage'] = $this->pager->get_currentpage();
@@ -99,11 +99,11 @@ class Home extends CI_Controller
 
 	public function check_step()
 	{
-		$segs = $this->uri->segment_array();
-		$num = $this->uri->total_segments();
+		$bookArray = $this->input->post();
+		$num =count($bookArray)-1;
 		if(($this->session->userdata['points']))
 		{
-			if(($this->session->userdata['points']-($num-5)*10) < 0)
+			if(($this->session->userdata['points']-$num*10) < 0)
 			{
 				echo "<script type='text/javascript'>alert('亲，你积分不够咯！');location='".site_url('home')."';</script>";
 				exit();
@@ -114,8 +114,8 @@ class Home extends CI_Controller
 			echo "<script type='text/javascript'>alert('亲，登录后就可以借书咯！');location='".site_url('login')."';</script>";
 			exit();
 		}
-		$data['user'] = $this->home_model->get_userinfo($segs[4]);		
-		$data['books'] = $this->home_model->get_bookborrow($segs,$num);
+		$data['user'] = $this->home_model->get_userinfo($bookArray['user']);		
+		$data['books'] = $this->home_model->get_bookborrow($bookArray);
 		$this->session->set_userdata('borrow','');
 
 		$header = array('title'=>'借书页面','css_file'=>'check_step.css');

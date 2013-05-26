@@ -90,25 +90,25 @@ class Home_Model extends CI_Model
 
 	public function get_userbook($user_id)
 	{
-		$sql = "SELECT `allbook`.`id`,`name`,`course_name`,`author`,`course_category`,`publish`,`version`,`book_right`,`book_status` 
-            FROM `circulating_book`,`allbook` WHERE `circulating_book`.`from_id`=? AND `allbook`.`id`=`circulating_book`.`book_id`";
+		$sql = "SELECT ab.`id`,`name`,`course_name`,`author`,`course_category`,`publish`,`version`,`book_right`,`book_status` 
+            FROM `circulating_book` cb INNER JOIN `allbook` ab WHERE cb.`from_id`=? AND ab.`id`=cb.`book_id`";
 		$query = $this->db->query($sql,array($user_id));
 		return $query->result_array();
 	}
 	
-	public function get_bookborrow($segs,$num)
+	public function get_bookborrow($bookArray)
   	{
-    	$book = $this->get_userbook($segs[4]);
+    	$book = $this->get_userbook($bookArray['user']);
     	$match = array();
     	foreach ($book as $key => $value) 
-    	{
-       		for($i=6;$i<=$num;$i++)
-       		{
-          		if($value['id']==$segs[$i])
-          		{
-              		$match[$key] = $value;
-          		}          
-       		}
+    	{       		
+        foreach ($bookArray as $bookkey => $books) 
+        {
+         if($value['id']==$books)
+          {
+              $match[$key] = $value;
+          }           		 
+       	}
    		}	
     return $match;     
   	}
