@@ -37,8 +37,9 @@ div.message ul.pages li.prev a{ width:38px; height:38px;  background-position:0p
 div.message ul.pages li.prev a:hover { background-position:0px -40px;}
 div.message ul.pages li.next a{ width:38px; height:38px;  background-position:-45px 0px;}
 div.message ul.pages li.next a:hover {  background-position:-45px -40px;}
-div.message ul.pages li.page a{ margin-top:10px; width:15px; height:15px; background-position:-92px -12px;} 
+div.message ul.pages li.page a{ margin-top:10px; width:15px; height:15px; background-position:-92px -12px; line-height:38px; text-indent:5px; color:#85847d;} 
 div.message ul.pages li.page a:hover,div.message ul.pages li.on_select a { background-position:-93px -34px;}
+.message .pages .on_select a{ font-weight:bold;}
 
 
 

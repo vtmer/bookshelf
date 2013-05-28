@@ -90,7 +90,7 @@
 						}
 						else
 						{
-							echo "<li class='page'><a href='".site_url('home/book_owner').'/'.$user[0]['id']."/$i'></a></li>";
+							echo "<li class='page'><a href='".site_url('home/book_owner').'/'.$user[0]['id']."/$i'>$i</a></li>";
 						}
 					}
 					?>
