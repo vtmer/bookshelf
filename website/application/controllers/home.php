@@ -101,6 +101,7 @@ class Home extends CI_Controller
 	{
 		$bookArray = $this->input->post();
 		$num =count($bookArray)-1;
+		if($num<=0)  header('location:/index.php/home');
 		if(($this->session->userdata['points']))
 		{
 			if(($this->session->userdata['points']-$num*10) < 0)
