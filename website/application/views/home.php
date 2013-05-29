@@ -85,23 +85,8 @@
 
 					</tbody>
 				</table>
-				<ul class="pages">
-					<li class="prev"><a href='<?php echo site_url('home/index')."/".($page['prevpage']);?>'></a></li>
-					<?php for ($i=1; $i <= $page['num']; $i++) 
-					{ 
-						if($i==$page['currentpage'])
-						{
-							echo "<li class='page on_select'><a href='".site_url('home/index')."/$i'></a></li>";
-						}
-						else
-						{
-							echo "<li class='page'><a href='".site_url('home/index')."/$i'></a></li>";
-						}
-					}
-					?>
-					<li class="next"><a href="<?php echo site_url('home/index').'/'.($page['nextpage']);?>"></a></li>
+				<?php echo $this->pagination->create_links();?><!-- 输出分页模块 -->
 
-				</ul>
 			</div>
 			<div class="bottom_shadow"></div>
 		</div><!-- end of content_box 包裹整块质感效果的div -->

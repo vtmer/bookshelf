@@ -6,9 +6,8 @@ class Home extends CI_Controller
 		parent::__construct();
 		$this->load->model('home_model');
 		$this->load->model('search_model');
-		$this->load->library('parser');		
-		$this->load->library('Pager');
 		$this->load->helper('form');
+		$this->config->load('pager_config',TRUE);
 	}
 	public function index($page = 1)
 	{
@@ -31,11 +30,13 @@ class Home extends CI_Controller
 		$data['system_match'] = $this->home_model->get_system_match($match);
 		//分页
 		$this->pager->set(0,5);//设置每页显示的条数
-		$data['page']['num'] = $this->pager->get_pagenum($data['system_match']['user']);//获取总页数
+		$data['page']['num'] = count($data['system_match']['user']);//获取总数
 		$data['system_match']['user'] = $this->pager->get_pagedata($data['system_match']['user'],$page);//当前页数据
-		$data['page']['currentpage'] = $this->pager->get_currentpage();
-		$data['page']['nextpage'] = $this->pager->get_nextpage();
-		$data['page']['prevpage'] = $this->pager->get_prevpage();
+		$pager_config = $this->config->item('pager_config');
+		$pager_config['base_url'] = site_url('home/index/');
+		$pager_config['total_rows'] = $data['page']['num'];
+		$pager_config['per_page'] = 5; //设置每页显示的条数
+		$this->pagination->initialize($pager_config); 
 		//END
 		$header = array('title'=>'工大书架','css_file'=>'home.css'); 
 		$footer = array('js_file'=>'home.js');
@@ -57,13 +58,15 @@ class Home extends CI_Controller
 																'name'=>$data['book_info'][0]->name,'id'=>$book_id)));
 		//分页
 		$this->pager->set(0,5);//设置每页显示的条数
-		$data['page']['num'] = $this->pager->get_pagenum($data['user']['user']);//获取总页数
+		$data['page']['num'] = count($data['user']['user']);//获取总数
 		$data['user']['user'] = $this->pager->get_pagedata($data['user']['user'],$page);//当前页数据
-		$data['page']['currentpage'] = $this->pager->get_currentpage();
-		$data['page']['nextpage'] = $this->pager->get_nextpage();
-		$data['page']['prevpage'] = $this->pager->get_prevpage();
+		$pager_config = $this->config->item('pager_config');
+		$pager_config['uri_segment'] = 4;
+		$pager_config['base_url'] = site_url('home/book_info/');
+		$pager_config['total_rows'] = $data['page']['num'];
+		$pager_config['per_page'] = 5; //设置每页显示的条数
+		$this->pagination->initialize($pager_config); 
 		//END
-		//var_dump($data);
 		$header = array('title'=>'书籍信息','css_file'=>'book_info.css');
 		$footer = array('js_file'=>'book_info.js');
 		$this->parser->parse('template/header',$header);
@@ -83,12 +86,15 @@ class Home extends CI_Controller
 		$data['books'] = $this->home_model->get_userbook($user_id);
 		$data['user'][0]['booknum'] = count($data['books']);
 		//分页		
-		$this->pager->set(0,1);//设置每页显示的条数	
-		$data['page']['num'] = $this->pager->get_pagenum($data['books']);//获取总页数
+		$this->pager->set(0,5);//设置每页显示的条数	
+		$data['page']['num'] = count($data['books']);//获取总数
 		$data['books'] = $this->pager->get_pagedata($data['books'],$page);//当前页数据
-		$data['page']['currentpage'] = $this->pager->get_currentpage();
-		$data['page']['nextpage'] = $this->pager->get_nextpage();
-		$data['page']['prevpage'] = $this->pager->get_prevpage();
+		$pager_config = $this->config->item('pager_config');
+		$pager_config['uri_segment'] = 4;
+		$pager_config['base_url'] = site_url('home/book_owner/'.$user_id);
+		$pager_config['total_rows'] = $data['page']['num'];
+		$pager_config['per_page'] = 5; //设置每页显示的条数
+		$this->pagination->initialize($pager_config); 
 		//END
 		$header = array('title'=>'书籍拥有者','css_file'=>'book_owner.css');
 		$footer = array('js_file'=>'book_owner.js');
@@ -160,12 +166,14 @@ class Home extends CI_Controller
 		}
 		$data['books'] = $this->home_model->get_userbook($this->session->userdata('uid'));
 		//分页		
-		$this->pager->set(0,5);//设置每页显示的条数	
-		$data['page']['num'] = $this->pager->get_pagenum($data['books']);//获取总页数
+		$this->pager->set(0,5);//设置每页显示的数据条数	
+		$data['page']['num'] = count($data['books']);//获取总数
 		$data['books'] = $this->pager->get_pagedata($data['books'],$page);//当前页数据
-		$data['page']['currentpage'] = $this->pager->get_currentpage();
-		$data['page']['nextpage'] = $this->pager->get_nextpage();
-		$data['page']['prevpage'] = $this->pager->get_prevpage();
+		$pager_config = $this->config->item('pager_config');
+		$pager_config['base_url'] = site_url('home/my_book/');
+		$pager_config['total_rows'] = $data['page']['num'];
+		$pager_config['per_page'] = 5; //设置每页显示的条数
+		$this->pagination->initialize($pager_config); 
 		//END
 
 		$header = array('title'=>'我的书架','css_file'=>'my_book.css');

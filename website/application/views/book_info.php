@@ -82,30 +82,7 @@
 					<li><a href="check_step.html">借阅</a></li>
 					-->
 				</ul>
-				<ul class="pages">
-					<li class="prev"><a href='<?php echo site_url('home/book_info')."/".$book_info[0]->id.'/'.$page['prevpage'];?>'></a></li>
-					<?php for ($i=1; $i <= $page['num']; $i++) 
-					{ 
-						if($i==$page['currentpage'])
-						{
-							echo "<li class='page on_select'><a href='".site_url('home/book_info')."/$i'></a></li>";
-						}
-						else
-						{
-							echo "<li class='page'><a href='".site_url('home/book_info').'/'.$book_info[0]->id."/$i'></a></li>";
-						}
-					}
-					?>
-					<li class="next"><a href="<?php echo site_url('home/book_info').'/'.$book_info[0]->id.'/'.$page['nextpage'];?>"></a></li>
-					<!--
-					<li class="prev"><a href=""></a></li>
-					<li class="page"><a href=""></a></li>
-					<li class="page on_select"><a href=""></a></li>
-					<li class="page"><a href=""></a></li>
-					<li class="page"><a href=""></a></li>
-					<li class="next"><a href=""></a></li>
-					-->
-				</ul>
+				<?php echo $this->pagination->create_links();?><!-- 输出分页模块 -->
 			</div>
 			<div class="bottom_shadow"></div><!-- 块级区域下方的底层阴影 -->
 		</div><!-- 包裹整块质感效果的div -->
