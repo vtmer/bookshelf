@@ -9,15 +9,15 @@
  */
 class ExceltoMysql
 {
-	protected $table = 'allbook';		//表名
-	protected $file;					//文件目录
-	protected $field;					//字段名
-	protected $fieldNum;				//字段数目
+	protected $table;
+	protected $file;
+	protected $field;
+	protected $fieldNum;
 	public function __construct()
 	{
 		switch(func_num_args())
 		{
-			case 1:$this->ExceltoMysql2(func_get_arg(0));break;
+			case 2:$this->ExceltoMysql2(func_get_arg(0),func_get_arg(1));break;
 			default:$this->ExceltoMysql();break;
 		}
 	}
@@ -25,13 +25,15 @@ class ExceltoMysql
 	{
 		
 	}
-	protected function ExceltoMysql2($file)
+	protected function ExceltoMysql2($table,$file)
 	{
+		$this->table = $table;
 		$this->file = $file;
 		$this->get_field();
 	}
-	public function setFilePath($file)//设置文件目录
+	public function set($table,$file)
 	{
+		$this->table = $table;
 		$this->file = $file;
 		$this->get_field();
 	}
@@ -45,13 +47,19 @@ class ExceltoMysql
 			$this->field[] = $fieldArray['Field'];
 		}
 	}
+	protected function get_bookid($bookname)
+	{
+		$sql = "SELECT `id` from `allbook` where `name` = trim(both from '$bookname')";
+		$query = mysql_query($sql);
+		return mysql_fetch_assoc($query);
+	}
 	public function InsertToMysql()
 	{
 		mysql_query("SET NAMES gbk");
 	    $handle = fopen($this->file,'r') or exit("Unable to open $this->file file!");
-	    //字段匹配验证
-	    $firstRow = fgetcsv($handle);//读取第一行
-	    if(count($firstRow)!=($this->fieldNum+2))
+	    //验证字段数目
+	    $firstRow = fgetcsv($handle);
+	    if(count($firstRow)!=$this->fieldNum)
 	    {
 	    	exit("Unmatch fields' number!");
 		}
@@ -60,51 +68,42 @@ class ExceltoMysql
 			$error = "";
 	    	foreach ($diff as $key => $value) 
 	    	{
-	    		if($value=='major'||$value=='grade')
-	    		{}
-	    		else
-	    		{
-	    			$error .= " '$value' ";
-	    		}	
+	    		$error .= " '$value' ";
 	    	}
-	    	if($error!="")
-	    	{
-	    		exit('Please check field:'.$error."in the file $this->file!");
-	    	}
+	    	exit('Please check field:'.$error."in the file $this->file!");
 		}
 		//END
 		$sql = "INSERT INTO $this->table VALUES (";	
 		$n = 2;
-		$string =  "SELECT auto_increment as id FROM information_schema.`TABLES` WHERE TABLE_NAME='$this->table'";
-		(int)$lastRowID = mysql_fetch_assoc(mysql_query($string));//获取自增的allbook.id的下一个值
-		(int)$i = 0;
-	    while($charArray = fgetcsv($handle))//这里是第二行开始读取了
+	    while($charArray = fgetcsv($handle))//这里是第二行读取了    
 	    {
+	    	if($this->table=='allbook_mg')	//如果是'allbook_mg'表则进行字段转换
+    		{
+    			$result = $this->get_bookid($charArray[3]);
+    			if($result)
+    			{
+    				$charArray[3] = $result['id'];
+    			}
+    			else
+    			{
+    				exit("已成功导入".(int)($n-2)."行错误发生在".$n."行<br/>错误信息：《".$charArray[3]."》课本不存在！");
+    			} 				
+    		}
 	    	$sql2 = "";
 	    	foreach ($charArray as $key => $value) 
-	    	{
-	    		if($key<11)
+	    	{	
+	    		if($key!=$this->fieldNum-1)
 	    		{
-		    		if($key<10)
-		    		{
-		    			$sql2 .= "trim(both from '".$value."'),";
-		    		}
-		    		else
-		    		{
-		    			$sql2 .= "trim(both from '".$value."'));";
-		    		}
+	    			$sql2 .= "trim(both from '".$value."'),";
 	    		}
-	    		elseif($key==11)
+	    		else
 	    		{
-	    			
-	    			mysql_query("INSERT INTO `allbook_mg` VALUES(null,trim(both from '".$charArray[11]."'),trim(both from '".$charArray[12]."'),'".(int)($lastRowID['id']+$i)."')") 
-	    			or exit(mysql_error());
-	    		}	
+	    			$sql2 .= "trim(both from '".$value."'));";
+	    		}
 	    	}
 	    	$sql3 = $sql.$sql2;
-	    	mysql_query($sql3) or exit("已成功导入".(int)($n-2)."行，错误发生在".$n."行；<br/>错误信息：".mysql_error());
+	    	mysql_query($sql3) or exit("已成功导入".(int)($n-2)."行错误发生在".$n."行<br/>错误信息：".mysql_error());
 	    	$n++;
-	    	$i++;
 	    }
 	    return $n-2;   	
 	}
