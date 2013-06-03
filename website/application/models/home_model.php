@@ -22,7 +22,7 @@ class Home_Model extends CI_Model
       	case $year - 1:
        	 	$grade = '大二';
         	break;
-      	case $year - 2:
+      	case $year - 2:    
         	$grade = '大三';
         	break;
       	case $year - 3:

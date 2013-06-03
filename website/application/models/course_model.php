@@ -27,7 +27,7 @@ class Course_model extends CI_Model
 			$points = $row_user->points;
 			$donate_book = $row_user->donate_book;
 			$points = $points + 8;
-			$donate_book = $donate_book + 1;
+			$donate_book = $donate_book + 1;  
 			$book_id = $row->id;
 			$from_id = $this->session->userdata('uid');	
 			$this->db->insert('circulating_book',array(

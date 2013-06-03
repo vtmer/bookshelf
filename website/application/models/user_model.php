@@ -25,7 +25,7 @@ class User_model extends CI_Model
 	{
 		$query = $this->db->get_where('user',array('username' => $username,));
 
-		if($query->num_rows() == 1)		
+		if($query->num_rows() == 1)		  
 		{
 			return FALSE;
 		}

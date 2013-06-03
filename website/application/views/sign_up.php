@@ -14,7 +14,7 @@
 	<div class="header">
 		<a href="http://www.gdutonline.com" id="gdutonline"></a>
 		<!--<span class="score">积分：0</span>
-		<a href="message.html" id="message">收到短信息<span>(0)</span></a>
+		<a href="message.html" id="message">收到短信息<span>(0)</span></a>  
 		<div class="user_info">
 			<span class="user_name">董晓丁</span>
 			<a href="personal_info.html">个人设置</a>
