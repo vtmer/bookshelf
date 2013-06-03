@@ -42,6 +42,9 @@
 		margin-top:25px;
 		margin-bottom:0px;
 	  }
+	  #return{
+	  	margin-left:140px;
+	  }
 
     </style>
 </head>
@@ -64,6 +67,7 @@
           <input type="checkbox" value="remember-me">记住我 
         </label>
         <button class="btn btn-large btn-primary" type="submit">登陆</button>
+		<a href="<?php echo site_url('login'); ?>" class="btn btn-large btn-primary" type="submit" id="return">返回</a>
 		<?php if(isset($error)): ?>
  			<div class="row">
  		   	<div class="span4">

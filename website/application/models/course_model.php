@@ -16,7 +16,7 @@ class Course_model extends CI_Model
 		}
 		else//该书为胶印
 		{
-			$query = $this->db->get_where('allbook',array('name' => $title,'ISBN' => NULL));
+			$query = $this->db->get_where('allbook',array('name' => $title,'ISBN' => ''));
 			$query_points = $this->db->get_where('user',array('id' => $this->session->userdata('uid')));
 		}
 
@@ -25,7 +25,9 @@ class Course_model extends CI_Model
 			$row = $query->row();
 			$row_user = $query_points->row();
 			$points = $row_user->points;
+			$donate_book = $row_user->donate_book;
 			$points = $points + 8;
+			$donate_book = $donate_book + 1;
 			$book_id = $row->id;
 			$from_id = $this->session->userdata('uid');	
 			$this->db->insert('circulating_book',array(
@@ -33,7 +35,7 @@ class Course_model extends CI_Model
 					'book_id' => $book_id,
 				));	
 			$this->db->where('id',$this->session->userdata('uid'));
-			$this->db->update('user',array('points' => $points));
+			$this->db->update('user',array('points' => $points,'donate_book' => $donate_book));
 			return TRUE;
 		}
 		else

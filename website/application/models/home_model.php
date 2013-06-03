@@ -140,20 +140,21 @@ class Home_Model extends CI_Model
     	$title = $from_user[0]['truename']."向你预约了书本";
     	$content = "你好，<strong><a href='".site_url('home/book_owner').'/'.$from."'>".$from_user[0]['truename']."</a></strong>向你预约了书本如下：</br>";
     	$create_time = date("Y/m/d");
-
+      $book_num = 0;
     	foreach($info['book'] as $key=>$value)
     	{
       		if(is_numeric($key))
       		{      
         		$books = $this->search_model->get_book_by_id($value);
         		$content .= "<strong><a href='".site_url('home/book_info').'/'.$value."'>《".$books[0]->name."》</a></strong><br/>";
-      		}
+      		  $book_num ++;
+          }
     	}
     	$message_id = $this->count_message() + 1;
     	$url = "message/confirm/".$message_id;
     	$content .= "若你核对完信息后，请点击后面的确认链接---><a href='".site_url($url)."'><strong>确认</strong></a>";
     	$content = mysql_real_escape_string($content);//转义特殊字符
-    	$sql2 = "INSERT INTO `message` (`from`,`to`,`title`,`content`,`create_time`) VALUES ('$from','$to','$title','$content','$create_time')";
+    	$sql2 = "INSERT INTO `message` (`from`,`to`,`title`,`content`,`book_num`,`create_time`) VALUES ('$from','$to','$title','$content','$book_num','$create_time')";
     	$this->db->query($sql2);
   	} 	 
 

@@ -83,9 +83,9 @@
 						<span class="notice">若无短号，可不填写</span>
 					</label>
 					<label><span>生活区</span>
-						<div class="select_button" name="dormitory">
-							<label><input type="radio" value="西区" name="qu" checked="checked" class="qu"/>西区</label>
-							<label><input type="radio" value="东区" name="qu" class="qu"/>东区</label>
+						<div class="select_button">
+							<label><input type="radio" value="西区" checked="checked" class="qu" name="dormitory"/>西区</label>
+							<label><input type="radio" value="东区" class="qu" name="dormitory"/>东区</label>
 						</div>
 					</label>
 					<p class="notice">以上内容皆为必填项，为了保障良好的借书环境，请认真阅读填写.</p>

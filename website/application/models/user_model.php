@@ -124,13 +124,15 @@ class User_model extends CI_Model
 		}
 		$from = $row->from;
 		$to = $row->to;
+		$book_num = $row->book_num;
 		
 		//获取信息发送者的积分
 		$query_user_from = $this->db->get_where('user',array('id' => $from));
 		if($query_user_from->num_rows() == 1)
 		{
 			$row_from = $query_user_from->row();
-			$from_point = $row_from->points - 10;
+			$from_point = $row_from->points - 10 * $book_num;
+			$borrow_book = $row_from->borrow_book + $book_num;
 		}
 		
 		//获取信息接收者的积分
@@ -138,16 +140,17 @@ class User_model extends CI_Model
 		if($query_user_to->num_rows() == 1)
 		{
 			$row_to = $query_user_to->row();
-			$to_point = $row_to->points + 5;
+			$to_point = $row_to->points + 5 * $book_num;
+			$lend_book = $row_to->lend_book + $book_num;
 		}
 
 		//更新信息发送者的积分（积分减少10）
 		$this->db->where('id',$from);
-		$this->db->update('user',array('points' => $from_point));
+		$this->db->update('user',array('points' => $from_point,'borrow_book' => $borrow_book));
 
 		//更新信息接收者的积分（积分增加5）
 		$this->db->where('id',$to);
-		$this->db->update('user',array('points' => $to_point));
+		$this->db->update('user',array('points' => $to_point,'lend_book' => $borrow_book));
 		/*	
 		$this->db->where('id' => $book_id);
 		$this->db->update('circulating_book',array('book_status' => '2'));
