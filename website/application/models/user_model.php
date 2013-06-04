@@ -105,56 +105,79 @@ class User_model extends CI_Model
 		}
 	}
 
-	public function select_message($uid,$status)
+	public function select_message($uid)
 	{
-		$query = $this->db->get_where('message',array('to' => $uid,'status' => $status));
+		$query = $this->db->get_where('message',array('to' => $uid));
 		return $query->result_array(); 
 	}
 
 	public function confirm($message_id)
 	{
-		$this->db->where('id',$message_id);
-		$this->db->update('message',array('status' => "1"));
-
-		//获取该条信息的发送者和接收者
-		$query = $this->db->get_where('message',array('id' => $message_id)); 
-		if($query->num_rows() == 1)
+		$query_judge = $this->db->get_where('message',array('id' => $message_id));
+		if($query_judge->num_rows() == 1)
 		{
-			$row = $query->row();
-		}
-		$from = $row->from;
-		$to = $row->to;
-		$book_num = $row->book_num;
+			$row = $query_judge->row();
+			$judge_flag = $row->status;
+			if($judge_flag == 0)
+			{
+				$this->db->where('id',$message_id);
+				$this->db->update('message',array('status' => "1"));
 		
-		//获取信息发送者的积分
-		$query_user_from = $this->db->get_where('user',array('id' => $from));
-		if($query_user_from->num_rows() == 1)
-		{
-			$row_from = $query_user_from->row();
-			$from_point = $row_from->points - 10 * $book_num;
-			$borrow_book = $row_from->borrow_book + $book_num;
-		}
+				//获取该条信息的发送者和接收者
+				/*$query = $this->db->get_where('message',array('id' => $message_id)); 
+				if($query->num_rows() == 1)
+				{
+					$row = $query->row();
+				}*/
+				$from = $row->from;
+				$to = $row->to;
+				$book_num = $row->book_num;
+				$book_array = $row->book_array;
+				
+				//获取信息发送者的积分
+				$query_user_from = $this->db->get_where('user',array('id' => $from));
+				if($query_user_from->num_rows() == 1)
+				{
+					$row_from = $query_user_from->row();
+					$from_point = $row_from->points - 10 * $book_num;
+					$borrow_book = $row_from->borrow_book + $book_num;
+				}
 		
-		//获取信息接收者的积分
-		$query_user_to = $this->db->get_where('user',array('id' => $to));
-		if($query_user_to->num_rows() == 1)
-		{
-			$row_to = $query_user_to->row();
-			$to_point = $row_to->points + 5 * $book_num;
-			$lend_book = $row_to->lend_book + $book_num;
+				//获取信息接收者的积分
+				$query_user_to = $this->db->get_where('user',array('id' => $to));
+				if($query_user_to->num_rows() == 1)
+				{
+					$row_to = $query_user_to->row();
+					$to_point = $row_to->points + 5 * $book_num;
+					$lend_book = $row_to->lend_book + $book_num;
+				}
+
+				//更新信息发送者的积分（积分减少10）
+				$this->db->where('id',$from);
+				$this->db->update('user',array('points' => $from_point,'borrow_book' => $borrow_book));
+		
+				//更新信息接收者的积分（积分增加5）
+				$this->db->where('id',$to);
+				$this->db->update('user',array('points' => $to_point,'lend_book' => $borrow_book));
+				/*	
+				$this->db->where('id' => $book_id);
+				$this->db->update('circulating_book',array('book_status' => '2'));
+				i*/
+				$book_array_explode = array();
+				$book_array_explode = explode(" ",$book_array);
+    			foreach($book_array_explode as $value)
+    			{
+    		  		if(is_numeric($value))
+					{
+						$this->db->where('book_id',$value);
+						$this->db->update('circulating_book',array('book_status' => 2));		
+      				}
+    			}
+
+				return TRUE;
+			}
 		}
-
-		//更新信息发送者的积分（积分减少10）
-		$this->db->where('id',$from);
-		$this->db->update('user',array('points' => $from_point,'borrow_book' => $borrow_book));
-
-		//更新信息接收者的积分（积分增加5）
-		$this->db->where('id',$to);
-		$this->db->update('user',array('points' => $to_point,'lend_book' => $borrow_book));
-		/*	
-		$this->db->where('id' => $book_id);
-		$this->db->update('circulating_book',array('book_status' => '2'));
-		i*/
+			return FALSE;
 	}
 
 	public function show_message_num($uid)

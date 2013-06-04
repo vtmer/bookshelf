@@ -91,4 +91,4 @@
 			<div class="bottom_shadow"></div>
 		</div><!-- end of content_box 包裹整块质感效果的div -->
 	</div>
-</div><!--end of main-->
+</div><!--end of main--> 

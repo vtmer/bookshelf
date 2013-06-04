@@ -31,8 +31,14 @@ class Message extends CI_Controller
 
 	public function confirm($message_id)
 	{
-		$this->user_model->confirm($message_id);
-		echo "<script>alert('恭喜你！你已确认成功！');</script>";
+		if($this->user_model->confirm($message_id))
+		{
+			echo "<script>alert('恭喜你！你已确认成功！');</script>";
+		}
+		else
+		{
+			echo "<script>alert('重复确认或确认无效！')</script>";
+		}
 		redirect('message','refresh');
 	}
 }

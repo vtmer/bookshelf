@@ -138,12 +138,13 @@ class Home_Model extends CI_Model
 	{
 		return $this->db->count_all_results('message');	
 	}
+	
 
   	public function update_info(array $info)
   	{
     	$sql = "UPDATE `circulating_book` SET `to_id`=?,`circulate_number`=`circulate_number`+1,`book_right`=1,`change_time`=NOW() ,`book_status`=1
           WHERE `book_id`=?";
-    	$n = (count($info['book'])-1)*10;
+    	//$n = (count($info['book'])-1)*10;
     	foreach($info['book'] as $key=>$value)
     	{
       		if(is_numeric($key))
@@ -151,8 +152,8 @@ class Home_Model extends CI_Model
         		$query = $this->db->query($sql,array($info['to_id'],$value));
       		}
     	}
-    	$this->db->query("UPDATE `user` SET `points`=`points`-$n WHERE `id`=".$info['to_id']);
-    	$this->db->query("UPDATE `user` SET `points`=`points`+$n WHERE `id`=".$info['from_id']);
+    	//$this->db->query("UPDATE `user` SET `points`=`points`-$n WHERE `id`=".$info['to_id']);
+    	//$this->db->query("UPDATE `user` SET `points`=`points`+$n WHERE `id`=".$info['from_id']);
     	//发送站内信息
     	$books = array();
     	$from = $info['to_id'];
@@ -161,21 +162,25 @@ class Home_Model extends CI_Model
     	$title = $from_user[0]['truename']."向你预约了书本";
     	$content = "你好，<strong><a href='".site_url('home/book_owner').'/'.$from."'>".$from_user[0]['truename']."</a></strong>向你预约了书本如下：</br>";
     	$create_time = date("Y/m/d");
-      $book_num = 0;
+		$book_num = 0;
+		$book_array = array();
+		$i = 0;
     	foreach($info['book'] as $key=>$value)
     	{
       		if(is_numeric($key))
-      		{      
+			{   
+			 	$book_array[$i++] = $value;		
         		$books = $this->search_model->get_book_by_id($value);
         		$content .= "<strong><a href='".site_url('home/book_info').'/'.$value."'>《".$books[0]->name."》</a></strong><br/>";
-      		  $book_num ++;
+	      		$book_num ++;
           }
     	}
     	$message_id = $this->count_message() + 1;
     	$url = "message/confirm/".$message_id;
     	$content .= "若你核对完信息后，请点击后面的确认链接---><a href='".site_url($url)."'><strong>确认</strong></a>";
     	$content = mysql_real_escape_string($content);//转义特殊字符
-    	$sql2 = "INSERT INTO `message` (`from`,`to`,`title`,`content`,`book_num`,`create_time`) VALUES ('$from','$to','$title','$content','$book_num','$create_time')";
+		$book_array_implode = implode(" ",$book_array);
+    	$sql2 = "INSERT INTO `message` (`from`,`to`,`title`,`content`,`book_num`,`book_array`,`create_time`) VALUES ('$from','$to','$title','$content','$book_num','$book_array_implode','$create_time')";
     	$this->db->query($sql2);
   	} 	 
 
