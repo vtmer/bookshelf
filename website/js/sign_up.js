@@ -137,7 +137,7 @@ var check_func = {
 			$notice.addClass("notice alert").text("请填写您的手机号码");
 			return false;
 		}
-		var phoneReg = /^((13[0-9]{1})|159|153)+\d{8}$/;
+		var phoneReg = /^((1[0-9]{1}[0-9]{1}))+\d{8}$/;
 		if(!phoneReg.test(value)){
 			$notice.addClass("notice alert").text("手机号码格式错误");
 			return false;
