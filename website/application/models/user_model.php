@@ -105,9 +105,9 @@ class User_model extends CI_Model
 		}
 	}
 
-	public function select_message($uid)
+	public function select_message($uid,$status)
 	{
-		$query = $this->db->get_where('message',array('to' => $uid));
+		$query = $this->db->get_where('message',array('to' => $uid,'status' => $status));
 		return $query->result_array(); 
 	}
 
