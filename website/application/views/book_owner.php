@@ -12,7 +12,7 @@
 					<li>专业：<span><?php echo $user[0]['major'];?></span></li>
 					<li>年级：<span><?php echo $user[0]['grade']."级";?></span></li>
 					<li>拥有书本数：<span><?php echo $user[0]['booknum'];?></span></li>
-					<li>分享度：<span>##</span></li>
+					<li>分享度：<span><?php echo $user[0]['share'].'%';?></span></li>
 				</ul>
 				<table>
 					<tbody>

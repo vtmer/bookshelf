@@ -85,6 +85,7 @@ class Home extends CI_Controller
 		}
 		$data['books'] = $this->home_model->get_userbook($user_id);
 		$data['user'][0]['booknum'] = count($data['books']);
+		$data['user'][0]['share'] = $this->home_model->calcul_share($user_id);
 		//分页		
 		$this->pager->set(0,5);//设置每页显示的条数	
 		$data['page']['num'] = count($data['books']);//获取总数

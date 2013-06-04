@@ -88,6 +88,27 @@ class Home_Model extends CI_Model
 		return $query->result_array();
 	}
 
+	public function calcul_share($from_id)
+	{
+		$query = $this->db->get_where('user',array('id' => $from_id));
+		if($query->num_rows() == 1)
+		{
+			$row = $query->row();
+		}
+		$donate = $row->donate_book;
+		$borrow = $row->borrow_book;
+		$lend = $row->lend_book;
+		if($donate == 0 && $lend == 0)
+		{
+			return $share = 0;
+		}
+		else
+		{
+			$share = ($donate + $lend * 0.8 + $borrow * 0.5)/($donate + $lend + $borrow);
+			return round($share * 100,1);
+		}
+	}
+
 	public function get_userbook($user_id)
 	{
 		$sql = "SELECT ab.`id`,`name`,`course_name`,`author`,`course_category`,`publish`,`version`,`book_right`,`book_status` 
