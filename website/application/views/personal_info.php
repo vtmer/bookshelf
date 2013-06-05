@@ -7,9 +7,9 @@
 		<h3>个人信息设置：</h3>
 		<div class="content_box">
 			<div class="box_demo personal_config">
-				<form action="<?php echo site_url('home/personal_config');?>" method="post">
+				<form action="<?php echo site_url('home/personal_config');?>" method="post" class="ajaxForm">
 				<div class="left">
-					<label>用户名：<span><?php echo $user[0]['truename'];?></span></label>
+					<label>用户名：<span class="user_name"><?php echo $user[0]['truename'];?></span></label>
 					<label for="password">密码：<input type="password" name="pwd" id="password" /></label>
 					<label for="password_once">确认密码：<input type="password" name="pwd2" id="password_once"/></label>
 					<label for="college">学院：<input type="text" id="college" name="faculty" value="<?php echo $user[0]['faculty'];?>"/></label>
@@ -28,8 +28,6 @@
 							<?php endif;?>
 						</div>
 					</label> 
-
-					<!--<label for="mail">邮箱：<input type="text" id="mail" name="username" value="<?php echo $user[0]['username'];?>"/></label>-->
 					<input type="submit" class="config_submit" value="好了，修改完了，保存吧！" />
 				</div>
 				</form>
