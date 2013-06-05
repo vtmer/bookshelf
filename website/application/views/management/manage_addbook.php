@@ -51,6 +51,9 @@
     					<li>
 							<a href="<?php echo site_url('manage_editpwd'); ?>" class="text-right">修改密码</a>
     					</li>
+                        <li>
+                            <a href="<?php echo site_url('manage_upload'); ?>">上传资料</a>
+                        </li>
 						<li>
 							<form action="<?php echo site_url('admin/search_judge'); ?>" class="navbar-search pull-left" method="post">
 	 	 						<input type="text" class="search-query" placeholder="" name="keywords">
