@@ -111,73 +111,64 @@ class User_model extends CI_Model
 		return $query->result_array(); 
 	}
 
-	public function confirm($message_id)
+	public function confirm($bookArray)
 	{
-		$query_judge = $this->db->get_where('message',array('id' => $message_id));
-		if($query_judge->num_rows() == 1)
+		$message_id = $bookArray['message_id'];
+		$books = array();
+		$bookArray = array_values($bookArray);//重设键值，改为索引数组
+		for($i=1;$i<count($bookArray);$i++)
 		{
-			$row = $query_judge->row();
-			$judge_flag = $row->status;
-			if($judge_flag == 0)
-			{
-				$this->db->where('id',$message_id);
-				$this->db->update('message',array('status' => "1"));
-		
-				//获取该条信息的发送者和接收者
-				/*$query = $this->db->get_where('message',array('id' => $message_id)); 
-				if($query->num_rows() == 1)
-				{
-					$row = $query->row();
-				}*/
-				$from = $row->from;
-				$to = $row->to;
-				$book_num = $row->book_num;
-				$book_array = $row->book_array;
-				
-				//获取信息发送者的积分
-				$query_user_from = $this->db->get_where('user',array('id' => $from));
-				if($query_user_from->num_rows() == 1)
-				{
-					$row_from = $query_user_from->row();
-					$from_point = $row_from->points - 10 * $book_num;
-					$borrow_book = $row_from->borrow_book + $book_num;
-				}
-		
-				//获取信息接收者的积分
-				$query_user_to = $this->db->get_where('user',array('id' => $to));
-				if($query_user_to->num_rows() == 1)
-				{
-					$row_to = $query_user_to->row();
-					$to_point = $row_to->points + 5 * $book_num;
-					$lend_book = $row_to->lend_book + $book_num;
-				}
-
-				//更新信息发送者的积分（积分减少10）
-				$this->db->where('id',$from);
-				$this->db->update('user',array('points' => $from_point,'borrow_book' => $borrow_book));
-		
-				//更新信息接收者的积分（积分增加5）
-				$this->db->where('id',$to);
-				$this->db->update('user',array('points' => $to_point,'lend_book' => $borrow_book));
-				/*	
-				$this->db->where('id' => $book_id);
-				$this->db->update('circulating_book',array('book_status' => '2'));
-				i*/
-				$book_array_explode = array();
-				$book_array_explode = explode(" ",$book_array);
-    			foreach($book_array_explode as $value)
-    			{
-    		  		if(is_numeric($value))
-					{
-						$this->db->where('book_id',$value);
-						$this->db->update('circulating_book',array('book_status' => 2));		
-      				}
-    			}
-
-				return TRUE;
-			}
+			$books[$i-1] = $bookArray[$i]; 
 		}
+		//获取该条信息的发送者和接收者
+		$sql = "SELECT `from`,`to` FROM  `message` WHERE `id`='$message_id'";
+		$query = mysql_query($sql);
+		$msgRelation = mysql_fetch_assoc($query);
+		//获取信息状态
+		$query = mysql_query("SELECT `status` FROM `message` WHERE `id`='$message_id'");
+		$status = mysql_result($query,0);
+		if($status==1) //如果信息已确认
+		{
 			return FALSE;
+		} 
+		//更新信息为已读
+		$this->db->where('id',$message_id);
+		$this->db->update('message',array('status' => "1"));
+		$book_num = count($books);
+		//获取信息发送者的积分
+		$query_user_from = $this->db->get_where('user',array('id' => $msgRelation['from']));
+		if($query_user_from->num_rows() == 1)
+		{
+			$row_from = $query_user_from->row();
+			$from_point = $row_from->points - 10 * $book_num;
+			$borrow_book = $row_from->borrow_book + $book_num;
+		}		
+		//获取信息接收者的积分
+		$query_user_to = $this->db->get_where('user',array('id' => $msgRelation['to']));
+		if($query_user_to->num_rows() == 1)
+		{
+			$row_to = $query_user_to->row();
+			$to_point = $row_to->points + 5 * $book_num;
+			$lend_book = $row_to->lend_book + $book_num;
+		}
+		//更新信息发送者的积分（积分减少10）
+		$this->db->where('id',$msgRelation['from']);
+		$this->db->update('user',array('points' => $from_point,'borrow_book' => $borrow_book));		
+		//更新信息接收者的积分（积分增加5）
+		$this->db->where('id',$msgRelation['to']);
+		$this->db->update('user',array('points' => $to_point,'lend_book' => $lend_book));
+		//更新所有书本状态
+		$sql = "SELECT * FROM  `circulating_book` WHERE `book_id`='$books[0]'";
+		$query = mysql_query($sql);
+		$bookDetail = mysql_fetch_assoc($query);
+		foreach ($books as $key => $value) 
+		{		
+			$sql = "UPDATE `circulating_book` SET `book_status` = '2',`book_right`='1',
+								`circulate_number` = ".(int)($bookDetail['circulate_number']+1).",
+								`from_id`='".$msgRelation['from']."',`to_id`='".$msgRelation['to']."',`change_time`=NOW() WHERE `book_id`='$value'";
+			mysql_query($sql);
+		}	
+		return TRUE;
 	}
 
 	public function show_message_num($uid)

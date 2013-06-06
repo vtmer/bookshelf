@@ -26,9 +26,11 @@ function getFormJson(frm) {
     return JsonData;
 }
 //调用
+
 $(document).ready(function(){
     $(".ajaxForm").bind('submit', function(){//回调函数
-        ajaxSubmit(this, function(data){     	
+        ajaxSubmit(this, function(data){  
+        //document.write(data);  	
 	        	 var jsonobj = eval('('+data+')');  
 	        	if(jsonobj.type=='alert')
 	        	{
