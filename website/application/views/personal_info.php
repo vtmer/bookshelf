@@ -39,6 +39,7 @@
 						<li>捐书：<?php echo $book_num[0][0];?>本</li>
 						<li>借入：<?php echo $book_num[1][0];?>本</li>
 						<li>借出：<?php echo $book_num[2][0];?>本</li>
+						<li>分享度：<?php echo $user['share'];?>%</li>
 					</ul>
 				</div>
 				

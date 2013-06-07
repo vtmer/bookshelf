@@ -166,14 +166,12 @@ class Home extends CI_Controller
 			$flag = $this->home_model->update_config($this->input->post());
 			if($flag==1)
 			{
-				//echo "<script type='text/javascript'>alert('修改成功！');</script>";
 				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'修改成功！');
 				echo json_encode($msg);
 				exit();
 			}
 			else if($flag==2)
 			{
-				//echo "<script type='text/javascript'>alert('修改密码成功！请重新登录！');window.location.href='".site_url('login/logout')."'</script>";
 				$url = site_url('login/logout');
 				$msg = array('type'=>'redirect','title'=>'提示信息','content'=>'修改密码成功！请重新登录！','url'=>$url);
 				echo json_encode($msg);
@@ -181,14 +179,12 @@ class Home extends CI_Controller
 			}
 			else if($flag==3)
 			{
-				//echo "<script type='text/javascript'>alert('与原密码一致，请重试！');</script>";
 				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'与原密码一致，请重试！');
 				echo json_encode($msg);
 				exit();
 			}
 			else
 			{
-				//echo "<script type='text/javascript'>alert('修改失败，请重试！');</script>";
 				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'修改失败，请重试！');
 				echo json_encode($msg);
 				exit();
@@ -197,6 +193,7 @@ class Home extends CI_Controller
 		$id = $this->session->userdata('uid');
 		$data['user'] = $this->home_model->get_userinfo($id);
 		$data['book_num'] = $this->home_model->count_userbook($id);
+		$data['user']['share'] = $this->home_model->calcul_share($id);
 
 		$header = array('title'=>'个人信息','css_file'=>'config.css');
 		$footer = array('js_file'=>'personal_info.js');
