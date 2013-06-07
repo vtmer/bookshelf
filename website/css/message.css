@@ -22,7 +22,7 @@ div.mid_content div.box_demo {min-height:320px; padding-bottom:80px;}/*浮雕快
 .main .message .message_contant { display:none; overflow:hidden; margin:0 15px; padding:10px 0px; border-top:solid 2px #787878; border-bottom:solid 2px #787878;}
 .main .message .message_contant p { font:14px "宋体"; margin:0 22px 10px; text-indent:2em; line-height:25px;}
 .main .message .message_contant span { float:right; width:22px; height:22px; margin:5px 20px 0 0; background:url('../img/hide.png') no-repeat; cursor:pointer;}
-.main .message .message_contant .ok_submit{  bottom:30px; left:40px; width:75px; height:30px; margin:0; background:#c6c4b6; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center;}
+.main .message .message_contant .ok_submit{  bottom:30px; left:40px; width:75px; height:30px; margin-left:550px; background:#c6c4b6; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center;}
 .main .message .message_contant .ok_submit:hover{ background:#e8a126; color:#fff;} 
 .main .message .message_box h5.click_h5 { border:none; font-weight:bold;} 
 .main .message ul { float:right; margin:40px 60px 0 0; list-style:none;}
