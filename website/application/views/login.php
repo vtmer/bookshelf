@@ -11,7 +11,7 @@
 <body>
 
 <div id="home_page">
-	<a href="index.html" title="前往首页">工大书架</a>
+	<a href="<?php echo site_url('home');?>" title="前往首页">工大书架</a>
 </div>
 <div class="main">
 	<div class="sign">
