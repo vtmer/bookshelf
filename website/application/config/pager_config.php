@@ -23,5 +23,6 @@
 		//自定义“数字”链接
 		$config['num_tag_open'] = '<li class="page">';
 		$config['num_tag_close'] = '</li>';
+		$config['anchor_class'] = 'class="ajax_page"';
  
 /*------END of pager_config-------------------*/

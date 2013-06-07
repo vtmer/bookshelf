@@ -190,6 +190,7 @@ class Home_Model extends CI_Model
   	{
     	$sql = "DELETE FROM `circulating_book` WHERE `book_id`=$id";
     	$this->db->query($sql);
+      return mysql_affected_rows();
   	}
   
   	public function count_userbook($id)

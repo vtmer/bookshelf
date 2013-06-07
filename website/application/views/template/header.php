@@ -19,7 +19,7 @@
 		<div class="user_info">
 		<span class="user_name"><?php echo $this->session->userdata['truename'];?></span>
 			<a href="<?php echo site_url('home/personal_config');?>">个人设置</a>
-			<a href="<?php echo site_url('home/my_book');?>">我的书架</a>
+			<a href="<?php echo site_url('my_book');?>">我的书架</a>
 			<a href="<?php echo site_url('login/logout'); ?>">退出</a>
 		</div>
 		<a href="<?php echo site_url('add_book')?>" id="add_book">捐书</a>

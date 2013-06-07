@@ -159,31 +159,6 @@ class Home extends CI_Controller
 		$this->parser->parse('template/footer',$footer);
 	}
 
-	public function my_book($page = 1)
-	{
-		if($id = $this->input->post('book_id'))
-		{
-			$this->home_model->pull_off($id);
-		}
-		$data['books'] = $this->home_model->get_userbook($this->session->userdata('uid'));
-		//分页		
-		$this->pager->set(0,5);//设置每页显示的数据条数	
-		$data['page']['num'] = count($data['books']);//获取总数
-		$data['books'] = $this->pager->get_pagedata($data['books'],$page);//当前页数据
-		$pager_config = $this->config->item('pager_config');
-		$pager_config['base_url'] = site_url('home/my_book/');
-		$pager_config['total_rows'] = $data['page']['num'];
-		$pager_config['per_page'] = 5; //设置每页显示的条数
-		$this->pagination->initialize($pager_config); 
-		//END
-
-		$header = array('title'=>'我的书架','css_file'=>'my_book.css');
-		$footer = array('js_file'=>'my_book.js');
-		$this->parser->parse('template/header',$header);
-		$this->load->view('my_book',$data);
-		$this->parser->parse('template/footer',$footer);		
-	}
-
 	public function personal_config()
 	{
 		if($this->input->post())
