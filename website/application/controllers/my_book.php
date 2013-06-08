@@ -13,15 +13,12 @@ class My_book extends CI_Controller
 		{
 			header('location:/index.php/guide');
 		} 
-		$data['books'] = $this->home_model->get_userbook($this->session->userdata('uid'));
+		$data = $this->home_model->get_userbook($this->session->userdata('uid'),0,5);
 		//分页		
-		$this->pager->set(0,5);//设置每页显示的数据条数	
-		$data['page']['num'] = count($data['books']);//获取总数
-		$data['books'] = $this->pager->get_pagedata($data['books'],1);//当前页数据
+		$data['page']['num'] = $data['pageNum'][0]['num'];//获取总数
 		$pager_config = $this->config->item('pager_config');
 		$pager_config['base_url'] = site_url('my_book/ajaxPage/');
 		$pager_config['total_rows'] = $data['page']['num'];
-		$pager_config['per_page'] = 5; //设置每页显示的条数
 		$this->pagination->initialize($pager_config); 
 		//END
 		$header = array('title'=>'我的书架','css_file'=>'my_book.css');
@@ -32,15 +29,18 @@ class My_book extends CI_Controller
 	}
 	public function ajaxPage($page = 1)
 	{
-		$data['books'] = $this->home_model->get_userbook($this->session->userdata('uid'));
+		if (!isset($page)) 
+		{
+			show_404();
+		}
+		$offset = ($page - 1)*5;
+		$length = $offset +5;
+		$data = $this->home_model->get_userbook($this->session->userdata('uid'),$offset,$length);
 		//分页		
-		$this->pager->set(0,5);//设置每页显示的数据条数	
-		$data['page']['num'] = count($data['books']);//获取总数
-		$data['books'] = $this->pager->get_pagedata($data['books'],$page);//当前页数据
+		$data['page']['num'] = $data['pageNum'][0]['num'];//获取总数
 		$pager_config = $this->config->item('pager_config');
 		$pager_config['base_url'] = site_url('my_book/ajaxPage/');
 		$pager_config['total_rows'] = $data['page']['num'];
-		$pager_config['per_page'] = 5; //设置每页显示的条数
 		$this->pagination->initialize($pager_config); 
 		$data['page'] = $this->pagination->create_links();
 		echo json_encode($data);
@@ -60,8 +60,7 @@ class My_book extends CI_Controller
 				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'书本下架失败,请重试！');
 				echo json_encode($msg);
 				exit();
-			}
-				
+			}	
 		}
 		else
 		{
@@ -70,3 +69,4 @@ class My_book extends CI_Controller
 	}
 
 }
+/*----End of my_book.php----*/

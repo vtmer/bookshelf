@@ -2,12 +2,10 @@ $(".main .search_bar input").bind("click",function(){if(this.value=="请输入�
 $(".ajax_page").bind('click', function(){
 var url = $(this).attr("href");
         $.get(url,{t:Math.random()},function(res){
-        	//document.write(res);
-        	//alert(document.URL);
         	var	jsonData =  eval('(' + res + ')');
         	update(jsonData);
         });
-event.preventDefault();
+window.event.returnValue = false;//支持IE
 });
 
 function update(dat)
@@ -42,7 +40,7 @@ function update(dat)
 	        	var	jsonData =  eval('(' + res + ')');
 	        	update(jsonData);
 	        });
-	event.preventDefault();
+	window.event.returnValue = false;//支持IE
 	});
     $(".ajaxForm").bind('submit', function(){//回调函数
         ajaxSubmit(this, function(data){  

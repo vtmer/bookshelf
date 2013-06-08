@@ -74,36 +74,6 @@ class Home extends CI_Controller
 		$this->parser->parse('template/footer',$footer);
 	}
 	
-	public function book_owner($user_id)
-	{
-		//从URI中获取页数为第四个分段:home/book_owner/3/1
-		$page = $this->uri->segment(4,1);
-		$data['user'] = $this->home_model->get_userinfo($user_id);
-		if (!$data['user']) 
-		{
-			show_404();
-		}
-		$data['books'] = $this->home_model->get_userbook($user_id);
-		$data['user'][0]['booknum'] = count($data['books']);
-		$data['user'][0]['share'] = $this->home_model->calcul_share($user_id);
-		//分页		
-		$this->pager->set(0,5);//设置每页显示的条数	
-		$data['page']['num'] = count($data['books']);//获取总数
-		$data['books'] = $this->pager->get_pagedata($data['books'],$page);//当前页数据
-		$pager_config = $this->config->item('pager_config');
-		$pager_config['uri_segment'] = 4;
-		$pager_config['base_url'] = site_url('home/book_owner/'.$user_id);
-		$pager_config['total_rows'] = $data['page']['num'];
-		$pager_config['per_page'] = 5; //设置每页显示的条数
-		$this->pagination->initialize($pager_config); 
-		//END
-		$header = array('title'=>'书籍拥有者','css_file'=>'book_owner.css');
-		$footer = array('js_file'=>'book_owner.js');
-		$this->parser->parse('template/header',$header);
-		$this->load->view('book_owner',$data);
-		$this->parser->parse('template/footer',$footer);
-	}
-
 	public function check_step()
 	{
 		$bookArray = $this->input->post();

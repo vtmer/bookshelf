@@ -57,7 +57,7 @@
 						{
 							echo 
 							"<tr>
-							<td><a href='".site_url('home/book_owner')."/".$user['id']."'/>".$user['truename'].'</a></td>
+							<td><a href='".site_url('book_owner')."/".$user['id']."'/>".$user['truename'].'</a></td>
 							<td>'.$user['dormitory'].'</td>
 							<td class="hidden_list">'.$user['number'].
 								'<div class="book_list">

@@ -36,48 +36,7 @@
 							<td>".$value['version']."</td>
 						</tr>";
 						}?>
-						<!--
-						<tr>
-							<td><a href="book_info.html">线性代数</a></td>
-							<td>线性代数</td>
-							<td>李钊</td>
-							<td>大二</td>
-							<td>人民出版社</td>
-							<td>n次</td>
-						</tr>
-						<tr>
-							<td><a href="book_info.html">大学物理</a></td>
-							<td>大学物理</td>
-							<td>爱因斯坦</td>
-							<td>大二</td>
-							<td>人民出版社</td>
-							<td>n次</td>
-						</tr>
-						<tr>
-							<td><a href="book_info.html">大学英语</a></td>
-							<td>大学英语</td>
-							<td>韩梅梅</td>
-							<td>大二</td>
-							<td>人民出版社</td>
-							<td>n次</td>
-						</tr>
-						<tr>
-							<td><a href="book_info.html">高等数学</a></td>
-							<td>高等数学</td>
-							<td>华罗庚</td>
-							<td>大二</td>
-							<td>人民出版社</td>
-							<td>n次</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						-->
+
 					</tbody>
 				</table>
 				<?php echo $this->pagination->create_links();?><!-- 输出分页模块 -->

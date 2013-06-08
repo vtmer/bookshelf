@@ -109,12 +109,15 @@ class Home_Model extends CI_Model
 		}
 	}
 
-	public function get_userbook($user_id)
+	public function get_userbook($user_id,$offset,$length)
 	{
 		$sql = "SELECT ab.`id`,`name`,`course_name`,`author`,`course_category`,`publish`,`version`,`book_right`,`book_status` 
-            FROM `circulating_book` cb INNER JOIN `allbook` ab WHERE cb.`from_id`=? AND ab.`id`=cb.`book_id`";
+            FROM `circulating_book` cb INNER JOIN `allbook` ab WHERE cb.`from_id`=? AND ab.`id`=cb.`book_id` LIMIT $offset,$length";
 		$query = $this->db->query($sql,array($user_id));
-		return $query->result_array();
+		$data['books'] = $query->result_array();
+    $query2 = $this->db->query("SELECT count(*) as num FROM `circulating_book` WHERE from_id='$user_id'"); 
+    $rowNum['pageNum'] = $query2->result_array();
+    return array_merge($data,$rowNum);
 	}
 	
 	public function get_bookborrow($bookArray)
@@ -160,7 +163,7 @@ class Home_Model extends CI_Model
     	$to = $info['from_id'];
     	$from_user = $this->get_userinfo($from);
     	$title = $from_user[0]['truename']."向你预约了书本";
-    	$content = "你好，<strong><a href='".site_url('home/book_owner').'/'.$from."'>".$from_user[0]['truename']."</a></strong>向你预约了书本如下：</br>";
+    	$content = "你好，<strong><a href='".site_url('book_owner').'/'.$from."'>".$from_user[0]['truename']."</a></strong>向你预约了书本如下：</br>";
     	$create_time = date("Y/m/d");
     	foreach($info['book'] as $key=>$value)
     	{
