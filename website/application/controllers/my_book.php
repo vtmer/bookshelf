@@ -9,9 +9,9 @@ class My_book extends CI_Controller
 	}
 	public function index()
 	{
-		if(!isset($this->session->userdata['is_logged_in']))//如果没被引导，则跳转到引导页
+		if(!isset($this->session->userdata['is_logged_in']))
 		{
-			header('location:/index.php/guide');
+			header('location:/index.php/home');
 		} 
 		$data = $this->home_model->get_userbook($this->session->userdata('uid'),0,5);
 		//分页		
