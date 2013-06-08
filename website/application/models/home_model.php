@@ -109,7 +109,7 @@ class Home_Model extends CI_Model
 		}
 	}
 
-	public function get_userbook($user_id,$offset = 0,$length = -1)
+	public function get_userbook($user_id,$offset = 0,$length = 5)
 	{
 		$sql = "SELECT ab.`id`,`name`,`course_name`,`author`,`course_category`,`publish`,`version`,`book_right`,`book_status` 
             FROM `circulating_book` cb INNER JOIN `allbook` ab WHERE cb.`from_id`=? AND ab.`id`=cb.`book_id` LIMIT $offset,$length";
