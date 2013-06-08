@@ -109,13 +109,22 @@ class Home_Model extends CI_Model
 		}
 	}
 
-	public function get_userbook($user_id,$offset = 0,$length = 5)
+	public function get_userbook($user_id,$offset,$length)
 	{
-		$sql = "SELECT ab.`id`,`name`,`course_name`,`author`,`course_category`,`publish`,`version`,`book_right`,`book_status` 
-            FROM `circulating_book` cb INNER JOIN `allbook` ab WHERE cb.`from_id`=? AND ab.`id`=cb.`book_id` LIMIT $offset,$length";
+    if(isset($offset)&&isset($length))
+    {
+		  $sql = "SELECT ab.`id`,`name`,`course_name`,`author`,`course_category`,`publish`,`version`,`book_right`,`book_status` 
+            FROM `circulating_book` AS cb INNER JOIN `allbook` AS ab WHERE cb.`from_id`=? AND ab.`id`=cb.`book_id` LIMIT $offset,$length";
+    }
+    else
+    {
+      //没有限制条数
+      $sql = "SELECT ab.`id`,`name`,`course_name`,`author`,`course_category`,`publish`,`version`,`book_right`,`book_status` 
+            FROM `circulating_book` AS cb INNER JOIN `allbook` AS ab WHERE cb.`from_id`=? AND ab.`id`=cb.`book_id` ";
+    }
 		$query = $this->db->query($sql,array($user_id));
 		$data['books'] = $query->result_array();
-    $query2 = $this->db->query("SELECT count(*) as num FROM `circulating_book` WHERE from_id='$user_id'"); 
+    $query2 = $this->db->query("SELECT count(*) AS num FROM `circulating_book` WHERE from_id='$user_id'"); 
     $rowNum['pageNum'] = $query2->result_array();
     return array_merge($data,$rowNum);
 	}
@@ -124,7 +133,7 @@ class Home_Model extends CI_Model
   	{
     	$book = $this->get_userbook($bookArray['user']);
     	$match = array();
-    	foreach ($book as $key => $value) 
+    	foreach ($book['books'] as $key => $value) 
     	{       		
         foreach ($bookArray as $bookkey => $books) 
         {
@@ -147,7 +156,6 @@ class Home_Model extends CI_Model
   	{
     	$sql = "UPDATE `circulating_book` SET `to_id`=?,`circulate_number`=`circulate_number`+1,`book_right`=1,`change_time`=NOW() ,`book_status`=1
           WHERE `book_id`=?";
-    	//$n = (count($info['book'])-1)*10;
     	foreach($info['book'] as $key=>$value)
     	{
       		if(is_numeric($key))
@@ -155,8 +163,6 @@ class Home_Model extends CI_Model
         		$query = $this->db->query($sql,array($info['to_id'],$value));
       		}
     	}
-    	//$this->db->query("UPDATE `user` SET `points`=`points`-$n WHERE `id`=".$info['to_id']);
-    	//$this->db->query("UPDATE `user` SET `points`=`points`+$n WHERE `id`=".$info['from_id']);
     	//发送站内信息
     	$books = array();
     	$from = $info['to_id'];
@@ -175,11 +181,8 @@ class Home_Model extends CI_Model
       }
     	$message_id = $this->count_message() + 1;
     	$url = "message/confirm/".$message_id;
-    	//$content .= "若你核对完信息后，请点击后面的确认链接---><a href='".site_url($url)."'><strong>确认</strong></a>";
       	$content .= "若你核对完信息后，请勾选你已借到的书籍，并点击后面的确认";
     	$content = mysql_real_escape_string($content);//转义特殊字符
-		//$book_array_implode = implode(" ",$book_array);
-    	//$sql2 = "INSERT INTO `message` (`from`,`to`,`title`,`content`,`book_num`,`book_array`,`create_time`) VALUES ('$from','$to','$title','$content','$book_num','$book_array_implode','$create_time')";
       $sql2 = "INSERT INTO `message` (`from`,`to`,`title`,`content`,`create_time`) VALUES ('$from','$to','$title','$content','$create_time')";
     	$this->db->query($sql2);
   	} 	 
