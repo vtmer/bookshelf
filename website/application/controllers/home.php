@@ -1,14 +1,13 @@
 <?php
 class Home extends CI_Controller
 {
-	public  function __construct()
+	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('home_model');
 		$this->load->model('search_model');
-		$this->load->library('parser');		
-		$this->load->library('Pager');
 		$this->load->helper('form');
+		$this->config->load('pager_config',TRUE);
 	}
 	public function index($page = 1)
 	{
@@ -30,15 +29,16 @@ class Home extends CI_Controller
 		}
 		$data['system_match'] = $this->home_model->get_system_match($match);
 		//分页
-		$this->pager->set(0,1);//设置每页显示的条数
-		$data['page']['num'] = $this->pager->get_pagenum($data['system_match']['user']);//获取总页数
+		$this->pager->set(0,5);//设置每页显示的条数
+		$data['page']['num'] = count($data['system_match']['user']);//获取总数
 		$data['system_match']['user'] = $this->pager->get_pagedata($data['system_match']['user'],$page);//当前页数据
-		$data['page']['currentpage'] = $this->pager->get_currentpage();
-		$data['page']['nextpage'] = $this->pager->get_nextpage();
-		$data['page']['prevpage'] = $this->pager->get_prevpage();
+		$pager_config = $this->config->item('pager_config');
+		$pager_config['base_url'] = site_url('home/index/');
+		$pager_config['total_rows'] = $data['page']['num'];
+		$pager_config['per_page'] = 5; //设置每页显示的条数
+		$this->pagination->initialize($pager_config); 
 		//END
-        $messages = $this->user_model->show_message_num($this->session->userdata['uid']);
-		$header = array('title'=>'工大书架','css_file'=>'home.css','messages' => $messages); 
+		$header = array('title'=>'工大书架','css_file'=>'home.css'); 
 		$footer = array('js_file'=>'home.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('home',$data);
@@ -57,56 +57,31 @@ class Home extends CI_Controller
 		$data['user'] = $this->home_model->get_system_match(array(array('ISBN'=>$data['book_info'][0]->ISBN,
 																'name'=>$data['book_info'][0]->name,'id'=>$book_id)));
 		//分页
-		$this->pager->set(0,1);//设置每页显示的条数
-		$data['page']['num'] = $this->pager->get_pagenum($data['user']['user']);//获取总页数
+		$this->pager->set(0,5);//设置每页显示的条数
+		$data['page']['num'] = count($data['user']['user']);//获取总数
 		$data['user']['user'] = $this->pager->get_pagedata($data['user']['user'],$page);//当前页数据
-		$data['page']['currentpage'] = $this->pager->get_currentpage();
-		$data['page']['nextpage'] = $this->pager->get_nextpage();
-		$data['page']['prevpage'] = $this->pager->get_prevpage();
+		$pager_config = $this->config->item('pager_config');
+		$pager_config['uri_segment'] = 4;
+		$pager_config['base_url'] = site_url('home/book_info/');
+		$pager_config['total_rows'] = $data['page']['num'];
+		$pager_config['per_page'] = 5; //设置每页显示的条数
+		$this->pagination->initialize($pager_config); 
 		//END
-		var_dump($data);
-        $messages = $this->user_model->show_message_num($this->session->userdata['uid']);
-		$header = array('title'=>'书籍信息','css_file'=>'book_info.css','messages' => $messages);
+		$header = array('title'=>'书籍信息','css_file'=>'book_info.css');
 		$footer = array('js_file'=>'book_info.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('book_info',$data);
 		$this->parser->parse('template/footer',$footer);
 	}
 	
-	public function book_owner($user_id)
-	{
-		//从URI中获取页数为第四个分段:home/book_owner/3/1
-		$page = $this->uri->segment(4,1);
-		$data['user'] = $this->home_model->get_userinfo($user_id);
-		if (!$data['user']) 
-		{
-			show_404();
-		}
-		$data['books'] = $this->home_model->get_userbook($user_id);
-		$data['user'][0]['booknum'] = count($data['books']);
-		//分页		
-		$this->pager->set(0,1);//设置每页显示的条数	
-		$data['page']['num'] = $this->pager->get_pagenum($data['books']);//获取总页数
-		$data['books'] = $this->pager->get_pagedata($data['books'],$page);//当前页数据
-		$data['page']['currentpage'] = $this->pager->get_currentpage();
-		$data['page']['nextpage'] = $this->pager->get_nextpage();
-		$data['page']['prevpage'] = $this->pager->get_prevpage();
-		//END
-        $messages = $this->user_model->show_message_num($this->session->userdata['uid']);
-		$header = array('title'=>'书籍拥有者','css_file'=>'book_owner.css','messages' => $messages);
-		$footer = array('js_file'=>'book_owner.js');
-		$this->parser->parse('template/header',$header);
-		$this->load->view('book_owner',$data);
-		$this->parser->parse('template/footer',$footer);
-	}
-
 	public function check_step()
 	{
-		$segs = $this->uri->segment_array();
-		$num = $this->uri->total_segments();
-		if(($this->session->userdata['points']!=NULL))
+		$bookArray = $this->input->post();
+		$num =count($bookArray)-1;
+		if($num<=0)  header('location:/index.php/home');
+		if(($this->session->userdata['points']))
 		{
-			if(($this->session->userdata['points']-($num-5)*10)<0)
+			if(($this->session->userdata['points']-$num*10) < 0)
 			{
 				echo "<script type='text/javascript'>alert('亲，你积分不够咯！');location='".site_url('home')."';</script>";
 				exit();
@@ -115,14 +90,13 @@ class Home extends CI_Controller
 		else
 		{
 			echo "<script type='text/javascript'>alert('亲，登录后就可以借书咯！');location='".site_url('login')."';</script>";
-				exit();
+			exit();
 		}
-		$data['user'] = $this->home_model->get_userinfo($segs[4]);		
-		$data['books'] = $this->home_model->get_bookborrow($segs,$num);
+		$data['user'] = $this->home_model->get_userinfo($bookArray['user']);		
+		$data['books'] = $this->home_model->get_bookborrow($bookArray);
 		$this->session->set_userdata('borrow','');
 
-        $messages = $this->user_model->show_message_num($this->session->userdata['uid']);
-		$header = array('title'=>'借书页面','css_file'=>'check_step.css','messages' => $messages);
+		$header = array('title'=>'借书页面','css_file'=>'check_step.css');
 		$footer = array('js_file'=>'check_step.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('check_step',$data);
@@ -140,6 +114,7 @@ class Home extends CI_Controller
 						);
 			$this->session->set_userdata('borrow',time());
 			$this->home_model->update_info($info);
+			$this->user_model->show_user_point($this->session->userdata('uid'));
 			echo "<script type='text/javascript'>setTimeout(\"window.location.href='".site_url('home')."'\",3000);</script>";
 		}
 		else if($this->session->userdata('borrow'))
@@ -147,46 +122,48 @@ class Home extends CI_Controller
 			echo "<script type='text/javascript'>setTimeout(\"window.location.href='".site_url('home')."'\",3000);</script>";
 		}
 		
-
-        $messages = $this->user_model->show_message_num($this->session->userdata['uid']);
-		$header = array('title'=>'确认借书','css_file'=>'receipt.css','messages' => $messages);
+		$header = array('title'=>'确认借书','css_file'=>'receipt.css');
 		$footer = array('js_file'=>'receipt.js');
 		$this->parser->parse('template/header',$header);
-		$this->load->view('receipt',$data);
+		$this->load->view('receipt');
 		$this->parser->parse('template/footer',$footer);
-	}
-
-	public function my_book($page = 1)
-	{
-		if($id = $this->input->post('book_id'))
-		{
-			$this->home_model->pull_off($id);
-		}
-		$data['books'] = $this->home_model->get_userbook($this->session->userdata('uid'));
-		//分页		
-		$this->pager->set(0,5);//设置每页显示的条数	
-		$data['page']['num'] = $this->pager->get_pagenum($data['books']);//获取总页数
-		$data['books'] = $this->pager->get_pagedata($data['books'],$page);//当前页数据
-		$data['page']['currentpage'] = $this->pager->get_currentpage();
-		$data['page']['nextpage'] = $this->pager->get_nextpage();
-		$data['page']['prevpage'] = $this->pager->get_prevpage();
-		//END
-
-        $messages = $this->user_model->show_message_num($this->session->userdata['uid']);
-		$header = array('title'=>'我的书架','css_file'=>'my_book.css','messages' => $messages);
-		$footer = array('js_file'=>'my_book.js');
-		$this->parser->parse('template/header',$header);
-		$this->load->view('my_book',$data);
-		$this->parser->parse('template/footer',$footer);		
 	}
 
 	public function personal_config()
 	{
-
+		if($this->input->post())
+		{
+			$flag = $this->home_model->update_config($this->input->post());
+			if($flag==1)
+			{
+				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'修改成功！');
+				echo json_encode($msg);
+				exit();
+			}
+			else if($flag==2)
+			{
+				$url = site_url('login/logout');
+				$msg = array('type'=>'redirect','title'=>'提示信息','content'=>'修改密码成功！请重新登录！','url'=>$url);
+				echo json_encode($msg);
+				exit();
+			}
+			else if($flag==3)
+			{
+				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'与原密码一致，请重试！');
+				echo json_encode($msg);
+				exit();
+			}
+			else
+			{
+				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'修改失败，请重试！');
+				echo json_encode($msg);
+				exit();
+			}
+		}
 		$id = $this->session->userdata('uid');
 		$data['user'] = $this->home_model->get_userinfo($id);
-		var_dump($data);
-		$this->home_model->count_userbook($id);
+		$data['book_num'] = $this->home_model->count_userbook($id);
+		$data['user']['share'] = $this->home_model->calcul_share($id);
 
 		$header = array('title'=>'个人信息','css_file'=>'config.css');
 		$footer = array('js_file'=>'personal_info.js');

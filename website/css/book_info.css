@@ -2,8 +2,8 @@
 div.main {..........}
 div.main { overflow:hidden; width:960px; margin:auto;}
 div.search_bar { width:482px; height:94px; margin:auto; background:url('../img/search.jpg') no-repeat;}
-div.search_bar input { width:392px; height:27px; margin:23px 0 0 14px; background:none; border:none;}
-div.search_bar a { float:right; width:50px; height:50px; margin:11px 11px 0 0 ; background:none; border:none; cursor:pointer;}
+div.search_bar .search_input { width:392px; height:27px; margin:23px 0 0 14px; background:none; border:none;}
+div.search_bar .search_submit { float:right; width:50px; height:50px; margin:11px 11px 0 0 ; background:none; border:none; cursor:pointer;}
 
 
 div.mid_content { width:100%; padding-top:88px; background:url('../img/shelf.png') 77px 0 no-repeat; }
@@ -26,11 +26,11 @@ div.search_results table td:nth-child(3){ width:180px; text-align:center;}
 
 
 div.search_results div.book_img { float:left; width:134px; height:152px; margin-left:20px; margin-bottom:20px; padding:5px; background:url('../img/book_img.jpg') no-repeat;}
-div.search_results div.book_img img { width:134px; height:152px;}
+div.search_results div.book_img img { width:124px; height:142px;}
 div.search_results ul.get_book { float:left; margin:30px 20px 0;}
 div.search_results ul.get_book li { height:32px;}
-div.search_results ul.get_book li a {float:left; width:75px; height:28px; background:#c6c4b6; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center;}
-div.search_results ul.get_book li a:hover { background:#e8a126; color:#fff;}
+div.search_results ul.get_book li input {float:left; width:75px; height:28px; border:none; background:#c6c4b6; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center;}
+div.search_results ul.get_book li input:hover { background:#e8a126; color:#fff;}
 
 div.search_results ul.pages { clear:both; float:right; margin:10px 40px;}
 div.search_results ul.pages li{ float:left; margin:0 3px;}
@@ -39,8 +39,10 @@ div.search_results ul.pages li.prev a{ width:38px; height:38px;  background-posi
 div.search_results ul.pages li.prev a:hover { background-position:0px -40px;}
 div.search_results ul.pages li.next a{ width:38px; height:38px;  background-position:-45px 0px;}
 div.search_results ul.pages li.next a:hover {  background-position:-45px -40px;}
-div.search_results ul.pages li.page a{ margin-top:10px; width:15px; height:15px; background-position:-92px -12px;} 
+div.search_results ul.pages li.page a{ margin-top:10px; width:15px; height:15px; background-position:-92px -12px; line-height:38px; text-indent:5px; color:#85847d;} 
 div.search_results ul.pages li.page a:hover,div.search_results ul.pages li.on_select a { background-position:-93px -34px;}
+.search_results .pages .on_select a{ font-weight:bold;}
+
 
 div.footer {.........}
 div.footer {float:left; width:100%; height:222px; margin-top:300px; background:url('../img/bottom_bg.jpg') repeat-x;}

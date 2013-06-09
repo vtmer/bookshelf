@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
   
   <head>
@@ -33,28 +33,37 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
     	<div class="navbar-inner">
     		<div class="container-fluid">
-				<a class="brand" href="<?php echo site_url('management'); ?>">工大书架后台管理</a>
+				<a class="brand" href="<?php echo site_url('admin'); ?>">工大书架后台管理</a>
     			<div class="nav-collapse collapse">
     				<p class="navbar-text pull-right">
     					<br>
     				</p>
     				<ul class="nav">
 						<li class="active">
-							<a href="<?php echo site_url('management'); ?>">图书列表</a>
+							<a href="<?php echo site_url('manage_booklist'); ?>">图书列表</a>
 						</li>
     					<li>
-							<a href="<?php echo site_url('management/add_book'); ?>">添加图书</a>
+							<a href="<?php echo site_url('manage_addbook'); ?>">添加图书</a>
     					</li>
     					<li>
-							<a href="<?php echo site_url('management/edit_user'); ?>">编辑用户权限</a>
+							<a href="<?php echo site_url('manage_edituser'); ?>">编辑用户权限</a>
     					</li>
     					<li>
-							<a href="<?php echo site_url('management/edit_pwd'); ?>" class="text-right">修改密码</a>
+							<a href="<?php echo site_url('manage_editpwd'); ?>" class="text-right">修改密码</a>
     					</li>
+                        <li>
+                            <a href="<?php echo site_url('manage_upload'); ?>">上传资料</a>
+                        </li>        
+						<li>
+							<form action="<?php echo site_url('admin/search_judge'); ?>" class="navbar-search pull-left" method="post">
+								<input type="text" class="search-query" placeholder="Search" name="keywords">
+								<input class="btn btn-inverse" type="submit" value="搜索"/>
+							</form>
+						</li>
     				</ul>
     			</div>
     			<!--/.nav-collapse -->
-				<a href="<?php echo site_url('admin'); ?>" class="btn pull-right" id="logout">退出</a>
+				<a href="<?php echo site_url('admin/logout'); ?>" class="btn pull-right" id="logout">退出</a>
     		</div>
     	</div>
     </div>
@@ -67,7 +76,7 @@
     	</div>
     	<div class="navbar">
     	</div>
-    	<form>
+
     		<div class="row-fluid">
     		</div>
     		<table class="table">
@@ -92,70 +101,63 @@
     						操作
     					</td>
     				</tr>
+					<?php foreach($booklists as $row): ?>
     				<tr>
     					<td>
-    						1
+							<?php echo $row['id'];?>
     					</td>
     					<td>
-    						9787040223903
+							<?php echo $row['ISBN'];?>
     					</td>
     					<td>
-    						计算机组成原理
+    						<?php echo $row['name'];?>	
     					</td>
     					<td>
-    						唐朔飞
+							<?php echo $row['author'];?>
     					</td>
     					<td>
-    						高等教育出版社
+							<?php echo $row['publish'];?>
     					</td>
+						<?php if($row['status'] == 1):?>
+						<form action="<?php echo site_url('manage_booklist/set_book_down/'.$row['id']); ?>" method="post" >
     					<td>
     						<button type="submit" class="btn">
     							下架
     						</button>
     					</td>
-    			</tr>
-                			<tr>
-    					<td>
-    						2
-    					</td>
-    					<td>
-							9787302147510
-    					</td>
-    					<td>
-    						数据结构
-    					</td>
-    					<td>
-    						严蔚敏,吴伟民
-    					</td>
-    					<td>
-    						清华大学出版社
-    					</td>
+						</form>
+						<?php elseif($row['status'] == 0):?>
+						<form action="<?php echo site_url('manage_booklist/set_book_up/'.$row['id']); ?>" method="post" >
     					<td>
     						<button type="submit" class="btn">
-    							下架	
+    							上架
     						</button>
     					</td>
+						</form>
+						<?php endif;?>
     				</tr>
+					<?php endforeach;?>
+
     			</tbody>
     		</table>
-    	</form>
+
     	<div class="row-fluid">
     	</div>
     	<table class="table">
     		<tbody>
     			<tr>
+                    <ul class="pager">
+                    <li class="previous">
+					<a href='<?php echo site_url('manage_booklist/index')."/".($page['prevpage']);?>'>&larr; Older</a>
+                     </li>
+                     <li class="next">
+					 <a href='<?php echo site_url('manage_booklist/index')."/".($page['nextpage']);?>'>Newer &rarr;</a>
+                    </li>
+                    </ul>
     			</tr>
     		</tbody>
     	</table>
-    	<table class="table">
-    		<tbody>
-    			<tr>
-    				
-    				
-    				
-    			</tr>
-    		</tbody>
-    	</table>
+    	
     </div>
     <div class="container-fluid">
     	<div class="row-fluid">
@@ -168,7 +170,7 @@
     	<hr>
     	<footer>
     		<p class="pull-right">
-    			© Company 2013
+    			© 2013 vtmer-studio. All rights reserved. 
     		</p>
     	</footer>
     </div>
@@ -183,7 +185,9 @@
       .sidebar-nav {
         padding: 9px 0;
       }
-      
+      .navbar-search .search-query{
+        margin-left: 20px;
+      }
       @media (max-width: 980px) {
         /* Enable use of floated navbar text */
         .navbar-text.pull-right {

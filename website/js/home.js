@@ -1,8 +1,10 @@
-$(".main .search_bar input").bind("click",function(){if(this.value=="请输入要查找的书目")this.value=""}).bind("blur",function(){if(!this.value)this.value="请输入要查找的书目"});
-$(".main .match_book table tr:eq(1)").children(2).addClass("hover_td");
-$(".main .match_book table tr").children(2).bind("mouseover",function(){
-	$(this).addClass("hover_td");
-});
-$(".main .match_book table tr").children(2).bind("mouseout",function(){
-	$(this).removeClass("hover_td");
-});
+$(function(){
+	var $first_tr = $(".main .match_book .hidden_list:eq(0)").addClass("hover_td");
+	$(".main .match_book .hidden_list").bind("mouseover",function(){
+		$(".main .match_book .hidden_list").removeClass("hover_td");
+		$(this).addClass("hover_td");
+	});
+	$(".select_all").bind("click", function(){
+		$(this).parent().prev().find("input[type=checkbox]").attr("checked", "checked");
+	})
+})

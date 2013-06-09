@@ -13,9 +13,10 @@ class Verify extends CI_Controller
 		$activationkey_db = $this->user_model->get_active($uid);
 		if($activationkey == $activationkey_db)
 		{
-			echo "<script>alert('verify successed!');</script>";
+			echo "<script>alert('验证成功！');</script>";
 		}
-			redirect('login');
+		$this->user_model->activate($uid);
+		redirect('login','refresh');
 	}
 
 	/*  利用jq在views页面显示提示信息

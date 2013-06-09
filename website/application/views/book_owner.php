@@ -1,11 +1,8 @@
 
 <div class="main">
-	<form action="<?php echo site_url('search'); ?>" method="POST"> 
-	<div class="search_bar">
-	<input type="text" name="keywords" value="请输入要查找的书目" />
-	<a href="#"><input type='submit' value='' /></a>
-	</div>
-	</form>
+	
+<?php include "template/search_bar.php"; ?>
+
 	<div class="mid_content">
 		<h3>书源人信息</h3>
 		<div class="content_box">
@@ -15,7 +12,7 @@
 					<li>专业：<span><?php echo $user[0]['major'];?></span></li>
 					<li>年级：<span><?php echo $user[0]['grade']."级";?></span></li>
 					<li>拥有书本数：<span><?php echo $user[0]['booknum'];?></span></li>
-					<li>分享度：<span>##</span></li>
+					<li>分享度：<span><?php echo $user[0]['share'].'%';?></span></li>
 				</ul>
 				<table>
 					<tbody>
@@ -39,74 +36,10 @@
 							<td>".$value['version']."</td>
 						</tr>";
 						}?>
-						<!--
-						<tr>
-							<td><a href="book_info.html">线性代数</a></td>
-							<td>线性代数</td>
-							<td>李钊</td>
-							<td>大二</td>
-							<td>人民出版社</td>
-							<td>n次</td>
-						</tr>
-						<tr>
-							<td><a href="book_info.html">大学物理</a></td>
-							<td>大学物理</td>
-							<td>爱因斯坦</td>
-							<td>大二</td>
-							<td>人民出版社</td>
-							<td>n次</td>
-						</tr>
-						<tr>
-							<td><a href="book_info.html">大学英语</a></td>
-							<td>大学英语</td>
-							<td>韩梅梅</td>
-							<td>大二</td>
-							<td>人民出版社</td>
-							<td>n次</td>
-						</tr>
-						<tr>
-							<td><a href="book_info.html">高等数学</a></td>
-							<td>高等数学</td>
-							<td>华罗庚</td>
-							<td>大二</td>
-							<td>人民出版社</td>
-							<td>n次</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						-->
+
 					</tbody>
 				</table>
-				<ul class="pages">
-					<li class="prev"><a href='<?php echo site_url('home/book_owner')."/".$user[0]['id'].'/'.$page['prevpage'];?>'></a></li>
-					<?php for ($i=1; $i <= $page['num']; $i++) 
-					{ 
-						if($i==$page['currentpage'])
-						{
-							echo "<li class='page on_select'><a href='".site_url('home/book_owner')."/$i'></a></li>";
-						}
-						else
-						{
-							echo "<li class='page'><a href='".site_url('home/book_owner').'/'.$user[0]['id']."/$i'></a></li>";
-						}
-					}
-					?>
-					<li class="next"><a href="<?php echo site_url('home/book_owner').'/'.$user[0]['id'].'/'.($page['nextpage']);?>"></a></li>
-					<!--
-					<li class="prev"><a href=""></a></li>
-					<li class="page"><a href=""></a></li>
-					<li class="page on_select"><a href=""></a></li>
-					<li class="page"><a href=""></a></li>
-					<li class="page"><a href=""></a></li>
-					<li class="next"><a href=""></a></li>
-					-->
-				</ul>
+				<?php echo $this->pagination->create_links();?><!-- 输出分页模块 -->
 			</div>
 			<div class="bottom_shadow"></div><!-- 块级区域下方的底层阴影 -->
 		</div><!-- 包裹整块质感效果的div -->

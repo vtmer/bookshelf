@@ -11,7 +11,7 @@ class Add_book extends CI_Controller
 	{	
         $messages = $this->user_model->show_message_num($this->session->userdata['uid']);
 		$header = array('title'=>'捐书页面','css_file'=>'add_book.css','messages' => $messages);
-		$footer = array('js_file'=>'add_book');
+		$footer = array('js_file'=>'add_book.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('add_book');
 		$this->parser->parse('template/footer',$footer);
@@ -21,7 +21,8 @@ class Add_book extends CI_Controller
 	public function add()
 	{
 		$title = $this->input->post('booktitle');
-		$isbn = $this->input->post('isbn');
+		$isbn = $this->input->post('isbncode');
+		/*
 		$author = $this->input->post('author');
 		$publish = $this->input->post('publish');
 		$version = $this->input->post('version');
@@ -30,16 +31,19 @@ class Add_book extends CI_Controller
 		$major = $this->input->post('major');
 		$grade = $this->input->post('grade');
 		$term = $this->input->post('term');
+		*/
 		$print = $this->input->post('print');
 
 		if($this->course_model->addbook($isbn,$title,$print))
 		{
+			echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
 			echo "<script>alert('恭喜你!你已经成功捐出书本!');</script>";
 			redirect('add_book','refresh');		
 		}
 		else
 		{
 			//redirect('add_book');
+			echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
 			echo "<script>alert('对不起！您所捐的书不符合捐书规则!');</script>";
 			redirect('add_book','refresh');
 		}

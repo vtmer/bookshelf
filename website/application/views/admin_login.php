@@ -17,7 +17,7 @@
         margin: 60px auto 20px;
         background-color: #fff;
         border: 1px solid #e5e5e5;
-        -webkit-border-radius: 5px;
+        -webkit-border-radius: 5px;  
            -moz-border-radius: 5px;
                 border-radius: 5px;
         -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
@@ -38,6 +38,13 @@
         margin-bottom: 15px;
         padding: 7px 9px;
       }
+	  .alert{
+		margin-top:25px;
+		margin-bottom:0px;
+	  }
+	  #return{
+	  	margin-left:140px;
+	  }
 
     </style>
 </head>
@@ -60,8 +67,17 @@
           <input type="checkbox" value="remember-me">记住我 
         </label>
         <button class="btn btn-large btn-primary" type="submit">登陆</button>
+		<a href="<?php echo site_url('login'); ?>" class="btn btn-large btn-primary" type="submit" id="return">返回</a>
+		<?php if(isset($error)): ?>
+ 			<div class="row">
+ 		   	<div class="span4">
+     			<div class="alert alert-error">
+   				     <strong>Login Failed!</strong>
+  			    </div>
+    		</div>
+			</div>
+		<?php endif;?>
       </form>
-
     </div> <!-- /container -->
 
     <!-- Le javascript

@@ -1,13 +1,14 @@
 /*css document*/
 div.main {..........}
-div.main { overflow:hidden; width:960px; margin:auto;}
+div.main { width:960px; margin:auto;}
 div.search_bar { width:482px; height:94px; margin:auto; background:url('../img/search.jpg') no-repeat;}
-div.search_bar input { width:392px; height:27px; margin:23px 0 0 14px; background:none; border:none;}
-div.search_bar a { float:right; width:50px; height:50px; margin:11px 11px 0 0 ;}
+div.search_bar .search_input { width:392px; height:27px; margin:23px 0 0 14px; background:none; border:none;}
+div.search_bar .search_submit { float:right; width:50px; height:50px; margin:11px 11px 0 0 ; background:none; border:none; cursor:pointer;}
 
 
 div.mid_content { width:100%; padding-top:88px; background:url('../img/shelf.png') 77px 0 no-repeat; }
 div.content_box { margin-bottom:90px;}
+div.mid_content div.match_book { overflow:visible;}
 
 div.mid_content div.box_demo h3 { float:left; width:200px; height:42px; margin:20px 0 10px -2px; background:url('../img/h3_bg.png') 0px 0px no-repeat; font:14px 微软雅黑; line-height:38px; color:#fff; text-indent:1em;}
 
@@ -41,27 +42,41 @@ div.match_book table td:nth-child(2){ width:115px; text-align:center;}
 div.match_book table th:nth-child(3),
 div.match_book table td:nth-child(3){ width:160px; text-align:center;}
 /*定义表格各列的宽度*/
-div.match_book table td.hover_td { background:#dedcd0 url('../img/hover_td.png') 140px 0 no-repeat;}
-div.match_book table div.book_list { display:none; position:absolute; z-index:1000; right:-301px; top:-2px; height:223px; width:306px; background:url('../img/hover_table.png') no-repeat; color:#fff;}
+div.match_book table td.hover_td { background:#dedcd0 url('../img/hover_bg.png') 140px -156px no-repeat;}
+/*div.match_book table .hidden_list { position:relative;}*/
+div.match_book table div.book_list { display:none; position:absolute; z-index:1000; right:-301px; top:-2px; width:306px;/* background:url('../img/hover_table.png') no-repeat; */color:#fff;}
 div.match_book table td.hover_td div.book_list { display:block;}
-div.match_book table div.book_list h6 { text-align:center; line-height:32px;}
-div.match_book table div.book_list ul { padding:0 4px;} 
-div.match_book table div.book_list ul li { height:30px; text-align:left; text-indent:50px;}
-div.match_book table div.book_list span { position:absolute; bottom:10px; left:26px; text-decoration:underline; cursor:pointer;}
-div.match_book table div.book_list a { position:absolute; botton:11px; right:40px; height:26px; width:74px; }
+div.match_book table div.book_list h6 { margin-top:2px; background:url("../img/hover_bg.png") no-repeat; border-radius:4px 4px 0 0; text-align:center; height:29px;}
+div.match_book table div.book_list ul li { height:31px; background:url("../img/hover_bg.png") no-repeat 0 -34px; text-align:left; text-indent:29px;}
+div.match_book table div.book_list .book_list_bottom {
+	 height:42px; background:none; background:url("../img/hover_bg.png") no-repeat 0 -69px;
+}
+.match_book .book_list ul li label { position:relative; padding-left:25px; cursor:pointer;}
+div.match_book table div.book_list ul li label input { position:absolute; top:0; left:-1px; margin-right:10px;}
+.match_book .book_list ul li label input[type=checkbox] {
+	visibility:hidden;
+}
+.match_book .book_list ul li label input[type=checkbox] + span {
+	display:inline-block; position:absolute; top:-1px; left:-2px; width:16px; height:16px;
+}
+.match_book .book_list ul li label input[type=checkbox]:checked + span { background:url("../img/hover_bg.png") no-repeat -28px -152px;}
+div.match_book table div.book_list .select_all { position:absolute; bottom:10px; left:26px; text-decoration:underline; cursor:pointer;}
+div.match_book table div.book_list #submit { position:absolute; bottom:7px; right:38px; height:32px; width:78px; border:none; background:url("../img/hover_bg.png") no-repeat 0 -116px; cursor:pointer;}
+div.match_book table div.book_list #submit:hover { background-position:-85px -116px;}
 
 
 
 
-div.match_book ul.pages { clear:both; float:right; margin:45px 40px 20px;}
+div.match_book ul.pages { clear:both; margin:45px 0 80px 230px;}
 div.match_book ul.pages li{ float:left; margin:0 3px;}
 div.match_book ul.pages li a { float:left; background:url('../img/pages.png') no-repeat;}
 div.match_book ul.pages li.prev a{ width:38px; height:38px;  background-position:0px 0px;} 
 div.match_book ul.pages li.prev a:hover { background-position:0px -40px;}
 div.match_book ul.pages li.next a{ width:38px; height:38px;  background-position:-45px 0px;}
 div.match_book ul.pages li.next a:hover {  background-position:-45px -40px;}
-div.match_book ul.pages li.page a{ margin-top:10px; width:15px; height:15px; background-position:-92px -12px;} 
+div.match_book ul.pages li.page a{ margin-top:10px; width:15px; height:15px; background-position:-92px -12px; line-height:38px; text-indent:5px; color:#85847d;} 
 div.match_book ul.pages li.page a:hover,div.match_book ul.pages li.on_select a { background-position:-93px -34px;}
+.match_book .pages .on_select a{ font-weight:bold;}
 
 
 div.footer {.........}

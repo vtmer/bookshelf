@@ -43,7 +43,9 @@ $route['guide'] = 'guide';
 $route['verify'] = "verify";
 $route['register'] = "register";
 $route['home']="home";
+$route['search']="search";
 $route['login'] = "login";
+$route['book_owner/(:num)'] = "Book_owner/index/$1";
 $route['404_override'] = '';
 
 

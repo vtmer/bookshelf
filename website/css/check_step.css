@@ -40,8 +40,8 @@ div.search_results table td:nth-child(6){ width:65px; text-align:center;}
 /*定义表格各列的宽度*/
 
 div.mid_content div.receipt { width:500px; height:100px; margin:auto; }
-div.mid_content div.receipt a.success {float:left; width:180px; height:55px; margin-bottom:10px; background:url('../img/receipt.jpg') -3px 0 no-repeat;}
-div.mid_content div.receipt a.un_success {float:left; width:180px; height:55px;  background:url('../img/receipt.jpg') -180px 0 no-repeat;}
+div.mid_content div.receipt .receipt_succ {float:left; width:180px; height:55px; margin-bottom:10px; border:none; background:url('../img/receipt.jpg') -3px 0 no-repeat; cursor:pointer;}
+div.mid_content div.receipt .receipt_unsucc {float:left; width:180px; height:55px; border:none; background:url('../img/receipt.jpg') -180px 0 no-repeat; cursor:pointer;}
 div.mid_content div.receipt span { float:left; margin:0 10px; font:36px "微软雅黑",Arial, Helvetica, sans-serif; font-weight:bold; color:#707070;}
 div.mid_content div.receipt p { clear:both; text-align:center; font-size:14px; color:#707070;}
 

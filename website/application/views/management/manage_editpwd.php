@@ -33,39 +33,66 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
     	<div class="navbar-inner">
     		<div class="container-fluid">
-				<a class="brand" href="<?php echo site_url('management'); ?>">工大书架后台管理</a>
+				<a class="brand" href="<?php echo site_url('admin'); ?>">工大书架后台管理</a>
     			<div class="nav-collapse collapse">
     				<p class="navbar-text pull-right">
     					<br>
     				</p>
     				<ul class="nav">
 						<li>
-							<a href="<?php echo site_url('management'); ?>">图书列表</a>
+							 <a href="<?php echo site_url('manage_booklist'); ?>">图书列表</a>
 						</li>
-    					<li>
-							<a href="<?php echo site_url('management/add_book'); ?>">添加图书</a>
-    					</li>
-    					<li>
-							<a href="<?php echo site_url('management/edit_user'); ?>">编辑用户权限</a>
-    					</li>
-    					<li class="active">
-							<a href="<?php echo site_url('management/edit_pwd'); ?>" class="text-right">修改密码</a>
-    					</li>
+    				<li>
+							 <a href="<?php echo site_url('manage_addbook'); ?>">添加图书</a>
+    				</li>
+    				<li>
+							 <a href="<?php echo site_url('manage_edituser'); ?>">编辑用户权限</a>
+    				</li>
+    				<li class="active">
+							 <a href="<?php echo site_url('manage_editpwd'); ?>" class="text-right">修改密码</a>
+    				</li>
+            <li>
+               <a href="<?php echo site_url('manage_upload'); ?>">上传资料</a>
+            </li>
+						<li>
+							<form action="<?php echo site_url('admin/search_judge'); ?>" class="navbar-search pull-left" method="post">
+  								<input type="text" class="search-query" placeholder="Search" name="keywords">
+								<input class="btn btn-inverse" type="submit" value="搜索"/>
+							</form>
+						</li>
     				</ul>
     			</div>
     			<!--/.nav-collapse -->
-				<a href="<?php echo site_url('admin'); ?>" class="btn pull-right" id="logout">退出</a>
+				<a href="<?php echo site_url('admin/logout'); ?>" class="btn pull-right" id="logout">退出</a>
     		</div>
     	</div>
     </div>
     <div class="container">
 
-      <form class="form-signin">
-        <input type="password" class="input-block-level" placeholder="请输入原密码">
-        <input type="password" class="input-block-level" placeholder="请输入新密码">
-        <input type="password" class="input-block-level" placeholder="请再一次输入新密码">
+	<form action="<?php echo site_url('manage_editpwd/update_pwd'); ?>" class="form-signin" method="post">
+        <input type="password" class="input-block-level" placeholder="请输入原密码" name="pwd_old1" />
+        <input type="password" class="input-block-level" placeholder="请输入新密码" name="pwd_old2" />
+        <input type="password" class="input-block-level" placeholder="请再一次输入新密码" name="pwd_new" />
         
         <button class="btn btn-large btn-primary" type="submit">确认修改</button>
+        <?php if(isset($error)): ?>
+      <div class="row">
+        <div class="span4">
+          <div class="alert alert-error">
+               <strong>Update Password Failed!</strong>
+            </div>
+        </div>
+      </div>
+    <?php endif;?>
+    <?php if(isset($success)): ?>
+      <div class="row">
+        <div class="span4">
+          <div class="alert alert-error">
+               <strong>Update Password Successfully!</strong>
+            </div>
+        </div>
+      </div>
+    <?php endif;?>
       </form>
 
     </div>
@@ -79,7 +106,9 @@
     	</div>
     	
     	<footer>
-    		
+			<p class="pull-right">
+				© 2013 vtmer-studio. All rights reserved.
+			</p	>			
     	</footer>
     <div class="container"><div class="container"></div></div></div>
     <!--/.fluid-container-->
@@ -131,6 +160,20 @@
         padding: 7px 9px;
       }
 
+      .row{
+        margin-top: 25px;
+      }
+
+      .alert{
+        margin-bottom: 0px;
+      }
+
+      .span4{
+        width:300px;
+      }
+      .navbar-search .search-query{
+        margin-left:20px; 
+      }
       
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">

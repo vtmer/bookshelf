@@ -11,7 +11,7 @@
 <body>
 
 <div id="home_page">
-	<a href="index.html" title="前往首页">工大书架</a>
+	<a href="<?php echo site_url('guide');?>" title="前往首页">工大书架</a>
 </div>
 <div class="main">
 	<div class="first_step">
@@ -63,7 +63,7 @@
 		</ul>
 		
 	</div>
-	<div class="shelf_bg"><span></span></div>
+	<div class="shelf_bg"><a href="<?php echo site_url('login'); ?>"><span></span></a></div>
 </div><!--end of main-->
 <script type="text/javascript" src="<?php echo base_url('js/guide.js'); ?>"></script>
 </body>

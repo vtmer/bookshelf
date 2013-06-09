@@ -10,31 +10,37 @@ class Register extends CI_Controller
 
 	public function index()
 	{
-		$this->load->view('register');	
+		$footer = array('js_file' => 'sign_up.js');
+		$this->load->view('sign_up');	
+		$this->parser->parse('template/footer',$footer);
 	}
 
 	//注册时验证函数
 	public function check()
 	{
+		
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('username','Username','required|max_length[40]|valid_email');
-		$this->form_validation->set_rules('pwd1','Password1','required|min_length[8]|max_length[16]|alpha_numeric');
-		$this->form_validation->set_rules('pwd2','Password2','required|matches[pwd1]');
+		$this->form_validation->set_rules('username','Username','required|max_length[50]|valid_email');
+		$this->form_validation->set_rules('pwd','Password1','required|min_length[6]|max_length[16]|alpha_numeric');
+		$this->form_validation->set_rules('pwd_confirm','Password2','required|matches[pwd]');
 		$this->form_validation->set_rules('truename','name','required');
+		$this->form_validation->set_rules('student_id','student_id','exact_length[10]');
 		$this->form_validation->set_rules('phone_num','Phone','required|numeric|max_length[12]');
-		$this->form_validation->set_rules('subphone_num','Subphone','required|numeric|min_length[4]|max_length[6]');
-
+		/*
 		if($this->form_validation->run() == FALSE)
 		{
 			//如何提示错误
 			//redirect('register');
-			echo "<script >alert('您填写的信息有误!');</script>";
-			$this->load->view('register');
+			echo "<script >alert('请按要求填写相关信息!');</script>";
+			redirect('register','refresh');
 		}
-		else
-		{
+		*/
             $username = $this->input->post('username');
-		    $password = $this->input->post('pwd1');
+			if($this->user_model->check_is($username))
+			{
+				redirect('register/error','refresh');	
+			}
+			$password = $this->input->post('pwd');
 			$truename = $this->input->post('truename');
 			$student_id = $this->input->post('student_id');
 			//利用session保存的信息（学院、专业、年级）；
@@ -55,13 +61,12 @@ class Register extends CI_Controller
 		
 			{
 				//如何提示邮件发送成功提示信息
-				echo "<script>alert('we have sent an message to your email,please check it out!')</script>";	
 				//postmail($username,$activationKey);//发送验证邮件
 
 				//将用户信息保存至session，邮箱验证后直接可登陆
 				$row = $this->user_model->get($username);
 				$uid = $row->id;
-				$points = $row->points;
+				/*$points = $row->points;
 				$truename = $row->truename;
 				$major = $row->major;
 				$grade = $row->grade;
@@ -74,7 +79,7 @@ class Register extends CI_Controller
 					'is_logged_in' => TRUE,
 				);
 				$this->session->set_userdata($data);
-				/*echo $data['email']."</br>";
+				echo $data['email']."</br>";
 				echo $data['uid']."</br>";
 				echo $data['is_logged_in']."</br>";
 				echo $data['is_admin']."</br>";*/
@@ -82,9 +87,8 @@ class Register extends CI_Controller
 			else
 			{
 				//如何提示错误
-				echo "<script>alert('insert failed!')</script>";				
+				echo "<script>alert('系统错误！')</script>";				
 			}
-		}
 	
 	
 
@@ -99,23 +103,29 @@ class Register extends CI_Controller
 
 		$this->email->initialize($configs);
 
-		$message = "Thank you for Registration!\nYou have register our website almost.If you want to finish the registration completely,you should follow the next-operation:Clicking the link:\nhttp://localhost/bookshelf/website/index.php/verify/index/".$uid."/".$activationKey."\n if this is a error,ignore this email and you'll be removed from our mailing list.\n www.gdutbookshelf.com";//邮件正文 
+		$message = "感谢你的注册！接下来请点击验证链接,便能完成注册:\n <a href='http://localhost/bookshelf/website/index.php/verify/index/".$uid."/".$activationKey."'>验证链接</a>\n @维生数-工大书架";//邮件正文 
 		
-		$this->email->from('gdutbookshelf@163.com','vtmerbookshelf');
+		$this->email->from('gdutbookshelf@163.com','维生数工作室');
 		$this->email->to($username);
-		$this->email->subject('Welcome to gdut bookshelf');
+		$this->email->subject('欢迎注册工大书架');
 		$this->email->message($message);
 
 		if($this->email->send())
 		{
-			echo "<script>alert('sent successfully！');</script>";
+			echo "<script>alert('验证邮件已发送，请注意查收！');</script>";
 		}
 		else
 		{
 			echo "<script>alert('sent failed!');</script>";
 		}
-		echo "<script>alert('请验证邮箱后登陆！')</script>";
-		$this->load->view('login');
+		redirect('login','refresh');
+	}
+
+	public function error()
+	{
+		$footer = array('js_file' => 'sign_up.js');
+		$this->load->view('sign_up',array('error' => TRUE));	
+		$this->parser->parse('template/footer',$footer);
 	}
 }
 
