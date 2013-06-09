@@ -29,45 +29,43 @@ class Login extends CI_Controller
 		
 		
 			$email = $this->input->post('username');
+			if(!$this->user_model->is_active($email))
+			{
+				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'帐号未激活！');
+				echo json_encode($msg);
+				exit();
+			}
 			$password = md5($this->input->post('pwd'));
 			if($is_user = $this->user_model->is($email,$password))
 			{
-				echo "<script>alert('check successfully!');</script>";
+				if ($is_user) 
+				{
+					$row = $this->user_model->get($email);
+					$uid = $row->id;
+					$points = $row->points; 
+					$truename = $row->truename;
+					$major = $row->major;
+					$grade = $row->grade;
+                	/*储存用户信息至session*/
+                	$data = array(
+						'points' => $points,
+						'truename' => $truename,
+                	    'uid' => $uid,
+						'major' => $major,
+						'grade' => $grade,
+                	    'is_logged_in' => TRUE,
+                	);
+					$this->session->set_userdata($data);
+					redirect('home');
+				}
 			}
-			else
-			{
-				echo "<script>alert('check failed!');</script>";
-			}
-			if ($is_user) 
-			{
-				$row = $this->user_model->get($email);
-				$uid = $row->id;
-				$points = $row->points; 
-				$truename = $row->truename;
-				$major = $row->major;
-				$grade = $row->grade;
-                /*储存用户信息至session*/
-                $data = array(
-					'points' => $points,
-					'truename' => $truename,
-                    'uid' => $uid,
-					'major' => $major,
-					'grade' => $grade,
-                    'is_logged_in' => TRUE,
-                );
-				$this->session->set_userdata($data);
-				redirect('home');
-			} 
 			else 
 			{
-                redirect('login/error');
+				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'密码错误！');
+				echo json_encode($msg);
+				exit();
 			}
 		 
-    }
-    
-    public function error()
-    {
-        $this->load->view('login', array('error' => TRUE));
     }
 
 	//退出登陆

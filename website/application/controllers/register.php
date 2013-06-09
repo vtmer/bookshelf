@@ -18,15 +18,15 @@ class Register extends CI_Controller
 	//注册时验证函数
 	public function check()
 	{
-		/*
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('username','Username','required|max_length[40]|valid_email');
-		$this->form_validation->set_rules('pwd1','Password1','required|min_length[8]|max_length[16]|alpha_numeric');
-		$this->form_validation->set_rules('pwd2','Password2','required|matches[pwd1]');
-		$this->form_validation->set_rules('truename','name','required');
-		$this->form_validation->set_rules('phone_num','Phone','required|numeric|max_length[12]');
-		$this->form_validation->set_rules('subphone_num','Subphone','required|numeric|min_length[4]|max_length[6]');
 		
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('username','Username','required|max_length[50]|valid_email');
+		$this->form_validation->set_rules('pwd','Password1','required|min_length[6]|max_length[16]|alpha_numeric');
+		$this->form_validation->set_rules('pwd_confirm','Password2','required|matches[pwd]');
+		$this->form_validation->set_rules('truename','name','required');
+		$this->form_validation->set_rules('student_id','student_id','exact_length[10]');
+		$this->form_validation->set_rules('phone_num','Phone','required|numeric|max_length[12]');
+		/*
 		if($this->form_validation->run() == FALSE)
 		{
 			//如何提示错误

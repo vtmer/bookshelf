@@ -8,10 +8,17 @@ class User_model extends CI_Model
 	}
 
 	//登陆时验证函数
+
+	public function is_active($email)
+	{
+		$query = $this->db->get_where('user',array('username' => $email,'status' => '1'));
+		return($query->num_rows() == 1) ? TRUE : FALSE ;
+	}
+
 	public function is($email,$password)
 	{
 		$query = $this->db->get_where('user',array('username' => $email,'password' => $password,'status' => "1"));
-		return ($query->num_rows() == 1) ? TRUE : FALSE;
+		return($query->num_rows() == 1) ? TRUE : FALSE;
 	}	
 
 	//注册时验证邮箱是否存在

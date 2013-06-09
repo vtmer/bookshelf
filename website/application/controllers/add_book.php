@@ -36,12 +36,14 @@ class Add_book extends CI_Controller
 
 		if($this->course_model->addbook($isbn,$title,$print))
 		{
+			echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
 			echo "<script>alert('恭喜你!你已经成功捐出书本!');</script>";
 			redirect('add_book','refresh');		
 		}
 		else
 		{
 			//redirect('add_book');
+			echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
 			echo "<script>alert('对不起！您所捐的书不符合捐书规则!');</script>";
 			redirect('add_book','refresh');
 		}

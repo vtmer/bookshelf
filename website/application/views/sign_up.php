@@ -47,7 +47,7 @@
 						<span></span>
 					</label>
 					<label for="password_confirm"><span>确认密码</span>
-						<input type="password" id="password_confirm" />
+						<input type="password" id="password_confirm" name="pwd_confirm"/>
 						<span></span>
 					</label>
 					<label for="name"><span>真实姓名</span>
