@@ -63,7 +63,7 @@
 		</ul>
 		
 	</div>
-	<div class="shelf_bg"><span></span></div>
+	<div class="shelf_bg"><a href="<?php echo site_url('login'); ?>"><span></span></a></div>
 </div><!--end of main-->
 <script type="text/javascript" src="<?php echo base_url('js/guide.js'); ?>"></script>
 </body>
