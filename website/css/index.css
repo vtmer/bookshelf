@@ -25,8 +25,8 @@ span.logo_08 { background-position:-200px -119px;}
 span.logo_09 { background-position:-300px -119px;}
 span.logo_10 { background-position:-400px -119px;}
 
-div.selected_logo { position:relative; width:200px; margin:auto;}
-div.selected_logo input { width:200px;}
+div.selected_logo { position:relative; width:400px; margin:auto;}
+div.selected_logo input { width:400px;}
 div.selected_logo input[disabled],div.selected_logo input:disabled { color:#42362d;}
 div.selected_logo span { margin-bottom:0px; cursor:auto;}
 /*第二，三部中间显示的logo和内容*/
