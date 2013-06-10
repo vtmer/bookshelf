@@ -27,6 +27,9 @@ class Login extends CI_Controller
             redirect('login/error');
 		}*/ 
 		
+                        $this->output
+                            ->set_content_type('application/json')
+                            ->set_status_header('200');
 		
 			$email = $this->input->post('username');
 			if(!$this->user_model->is_active($email))
@@ -55,15 +58,21 @@ class Login extends CI_Controller
 						'grade' => $grade,
                 	    'is_logged_in' => TRUE,
                 	);
-					$this->session->set_userdata($data);
-					redirect('home');
+                                        $this->session->set_userdata($data);
+                                        $this->output->set_output(json_encode(array(
+                                            'type' => 'redirect',
+                                            'title' => '提示信息',
+                                            'content' => '登录成功',
+                                            'url' => site_url('home')
+                                        )));
+                                        return;
 				}
 			}
 			else 
 			{
-				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'密码错误！');
-				echo json_encode($msg);
-				exit();
+                                $msg = array('type'=>'alert','title'=>'提示信息','content'=>'密码错误！');
+                                $this->output->set_output(json_encode($msg));
+                                return;
 			}
 		 
     }

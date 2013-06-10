@@ -4,9 +4,8 @@ function ajaxSubmit(frm, fn) {
     $.ajax({
         url: frm.action,
         type: frm.method,
-        data: dataPara,
-        success: fn
-    });
+        data: dataPara
+    }).done(fn);
 }
 
 //将form中的值转换为键值对。
@@ -31,7 +30,11 @@ $(document).ready(function(){
     $(".ajaxForm").bind('submit', function(){//回调函数
         ajaxSubmit(this, function(data){  
         //document.write(data);  	
-	        	 var jsonobj = eval('('+data+')');  
+                        if (typeof data !== 'object') {
+	        	    jsonobj = JSON.parse(data);
+                        } else {
+                            jsonobj = data;
+                        }
 	        	if(jsonobj.type=='alert')
 	        	{
 		            $("#popContent").html(jsonobj.content);
