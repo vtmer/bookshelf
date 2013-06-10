@@ -80,7 +80,13 @@ var check_func = {
 			$notice.addClass("notice alert").text("邮箱格式错误");
 			return false;
 		}
-		else if(mailReg.test(value)) $notice.removeClass("notice alert").text("");
+		else if(mailReg.test(value)) 
+			{
+				$notice.removeClass("notice alert").text("");
+				$.get(document.URL+"/ajax_check",{mail:$("#mail").attr("value"),t:Math.random()},function(data){		 	
+				$notice.addClass("notice alert").text("邮箱已注册，请重试！");
+				});
+			}
 	},
 	password : function(value1,value2){
 		var $notice1 = $("input#password + span"),$notice2 = $("input#password_confirm + span");
@@ -144,6 +150,28 @@ var check_func = {
 		}
 		else $notice.removeClass("notice alert").text(" ");
 		return true;
+	},
+	captcha : function(value)
+	{
+		var $notice = $("input#captcha + span");
+		if(!value){
+			$notice.addClass("notice alert").text("请输入验证码！");
+			return false;
+		}
+		else
+		{
+			$.get(document.URL+"/ajax_check",{captcha:$("#captcha").attr("value"),t:Math.random()},function(data){	
+				if(data==0)
+				{ 	
+					$notice.addClass("notice alert").text("验证码错误，请重试！");
+				}
+				else
+				{
+					$notice.removeClass("notice alert").text("");
+				}
+				});
+				return false;
+		}
 	}
 }
 $(function(){
@@ -165,6 +193,9 @@ $(function(){
 	$("input#phone").bind("blur", function(){
 		check_func.phone(this.value);
 	});
+	$("input#captcha").bind("blur", function(){
+		check_func.captcha(this.value);
+	});
 
 	$("input[type=submit]").bind("click", function(){
 		var check_control = true;
@@ -173,6 +204,7 @@ $(function(){
 		check_control = check_func.phone($("input#phone")[0].value);
 		check_control = check_func.name($("input#name")[0].value);
 		check_control = check_func.stu_id($("input#stu_id")[0].value);
+		check_control = check_func.captcha($("input#captcha")[0].value);
 		if(!check_control) return false;
 	});	
 });

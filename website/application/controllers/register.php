@@ -13,12 +13,21 @@ class Register extends CI_Controller
 		$footer = array('js_file' => 'sign_up.js');
 		$this->load->view('sign_up');	
 		$this->parser->parse('template/footer',$footer);
+		/*
+		var_dump($this->session->all_userdata());
+		var_dump(site_url());
+		var_dump(stripos("zzlchile@gmail.com","@"));
+		var_dump("mail.".substr("zzlchile@gmail.com",strripos("zzlchile@gmail.com",'@')+1));
+		$address = "http://mail.".substr("zzlchile@gmail.com",strripos("zzlchile@gmail.com",'@')+1);
+		$content = "验证邮件已发送，马上登录邮箱激活：<a href = '$address'>点击登录邮箱</a>";
+		echo $content;
+		*/
 	}
 
 	//注册时验证函数
 	public function check()
 	{
-		
+		//设置验证规则
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('username','Username','required|max_length[50]|valid_email');
 		$this->form_validation->set_rules('pwd','Password1','required|min_length[6]|max_length[16]|alpha_numeric');
@@ -26,19 +35,25 @@ class Register extends CI_Controller
 		$this->form_validation->set_rules('truename','name','required');
 		$this->form_validation->set_rules('student_id','student_id','exact_length[10]');
 		$this->form_validation->set_rules('phone_num','Phone','required|numeric|max_length[12]');
-		/*
+
+		//设置错误信息
+		$this->form_validation->set_message('required', '请检查%s');
+		
 		if($this->form_validation->run() == FALSE)
 		{
-			//如何提示错误
-			//redirect('register');
-			echo "<script >alert('请按要求填写相关信息!');</script>";
-			redirect('register','refresh');
+			//提示错误
+			$error_msg = validation_errors();
+			$msg = array('type'=>'alert','title'=>'提示信息','content'=>$error_msg);
+			echo json_encode($msg);
+			exit();
 		}
-		*/
+		
             $username = $this->input->post('username');
 			if($this->user_model->check_is($username))
 			{
-				redirect('register/error','refresh');	
+				$msg = array('type'=>'alert','title'=>'提示信息','content'=>"邮箱已被注册，请重试！");
+				echo json_encode($msg);
+				exit();	
 			}
 			$password = $this->input->post('pwd');
 			$truename = $this->input->post('truename');
@@ -55,10 +70,7 @@ class Register extends CI_Controller
 			$points = 30; //初始积分为30
 			//echo $username." ".$password." ".$truename." ".$student_id." ".$dormitory." ".$faculty." ".$major." ".$grade." ".$phone_num." ".$subphone_num; 
 		
-	
 		if($this->user_model->add($username,$password,$truename,$student_id,$faculty,$major,$grade,$phone_num,$subphone_num,$dormitory,$activationKey,$status,$points))
-		
-		
 			{
 				//如何提示邮件发送成功提示信息
 				//postmail($username,$activationKey);//发送验证邮件
@@ -87,24 +99,14 @@ class Register extends CI_Controller
 			else
 			{
 				//如何提示错误
-				echo "<script>alert('系统错误！')</script>";				
+				$msg = array('type'=>'alert','title'=>'错误信息','content'=>"系统错误，请重试！");
+				echo json_encode($msg);
+				exit();				
 			}
-	
-	
 
-	/*邮箱验证模块*/
-		$configs['protocol'] = 'smtp';
-		$configs['smtp_host'] = 'smtp.163.com';
-		$configs['smtp_user'] = 'gdutbookshelf@163.com';
-		$configs['smtp_pass'] = 'vtmerbookshelf';
-		$configs['smtp_port'] = '25';
-		$configs['mailtype'] = 'html';
-		$configs['charset'] = 'utf-8';
 
-		$this->email->initialize($configs);
-
-		$message = "感谢你的注册！接下来请点击验证链接,便能完成注册:\n <a href='http://book.vtmer.com/index.php/verify/index/".$uid."/".$activationKey."'>验证链接</a>\n @维生数-工大书架";//邮件正文 
-		
+		$message = "感谢你的注册！接下来请点击验证链接,便能完成注册:\n <a href='".site_url()."/verify/index/".$uid."/".$activationKey."'>验证链接</a>\n";//邮件正文 
+		$message .="若不是你本人的操作，对您造成的不便，我们深表歉意！\n @维生数-工大书架"; 
 		$this->email->from('gdutbookshelf@163.com','维生数工作室');
 		$this->email->to($username);
 		$this->email->subject('欢迎注册工大书架');
@@ -112,20 +114,48 @@ class Register extends CI_Controller
 
 		if($this->email->send())
 		{
-			echo "<script>alert('验证邮件已发送，请注意查收！');</script>";
+			$address = "http://mail.".substr("zzlchile@gmail.com",strripos("zzlchile@gmail.com",'@')+1);
+			$content = "验证邮件已发送，马上登录邮箱激活：<a href = '$address'>点击登录邮箱</a>";
+
+			$msg = array('type'=>'alert','title'=>'提示信息','content'=>$content);
+			echo json_encode($msg);
+			exit();	
+			//echo "<script>alert('验证邮件已发送，请注意查收！');</script>";
 		}
 		else
 		{
-			echo "<script>alert('sent failed!');</script>";
+			$msg = array('type'=>'alert','title'=>'错误信息','content'=>"注册失败！");
+			echo json_encode($msg);
+			exit();	
 		}
-		redirect('login','refresh');
 	}
 
-	public function error()
+	public function ajax_check()
 	{
-		$footer = array('js_file' => 'sign_up.js');
-		$this->load->view('sign_up',array('error' => TRUE));	
-		$this->parser->parse('template/footer',$footer);
+		$username = $this->input->get('mail');
+		$captcha = $this->input->get('captcha');
+		if($username)
+			if($this->user_model->check_is($username))
+			{
+				echo 0;//邮箱已被注册
+				return 0;
+			}else
+			{
+				echo 1;//邮箱可以注册
+				return 0;
+			}
+		if($captcha)
+			if(strcasecmp($this->session->userdata('captcha_code'),$captcha))
+			{
+				echo 0;//验证码不通过
+				return 0;
+			}else
+			{
+				echo 1;//验证码通过
+				return 0;
+			}
+		echo 0;
+		return 0;	
 	}
 }
 
