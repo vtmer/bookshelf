@@ -42,7 +42,6 @@ var gg_college = {
 	}]
 }
 
-document.getElementById('home_page').getElementsByTagName('a')[0].innerText= " ";
 function setMajor(get_college){
 	$(".main .second_step ul li").remove();
 	var get_major;
@@ -52,30 +51,33 @@ function setMajor(get_college){
 	}
 	for(var j = 0;j<get_major.length;j++){
 		var li = document.createElement("li");
-		li.innerText = get_major[j];
-		$(".main .second_step ul")[0].appendChild(li);
+		$(li).text( get_major[j]);
+		$(".main .second_step ul").append(li);
 	}
 	$(".main .second_step ul li").bind("click",function(){
-		$("form input#major_select")[0].value = this.innerText;
+		$("form input#major_select").val($(this).text());
 		$(".main .second_step").hide();$(".main .third_step").show();
 	});
 }
-$(".main .first_step ul li span.college").bind("click",function(){
-	$("form input#college_select")[0].value = $(this).next().text();
+$(function(){
+	$("#home_page a").text(" ");
+	$(".main .first_step ul li span.college").bind("click",function(){
+	$("form input#college_select").val($(this).next().text());
 	setMajor($(this).next().text());
 	$(".selected_logo span").addClass(this.className);	
 	$(".main .first_step").hide();$(".main .selected_logo").show();$(".main .second_step").show();
 });
 $(".main .second_step .step_back").bind("click",function(){
-	$("form input#college_select")[0].value = "";
+	$("form input#college_select").val(" ");
 	$(".main .selected_logo").hide();$(".main .second_step").hide();$(".main .first_step").show();
 });
 $(".main .third_step .step_back").bind("click",function(){
-	$("form input#major_select")[0].value = "";
-	$("form input#grade_select")[0].value = "";
+	$("form input#major_select").val(" ");
+	$("form input#grade_select").val(" ");
 	$(".main .third_step").hide();$("form #submit").hide();$(".main .second_step").show();
 });
 $(".main .third_step ul li").bind("click",function(){
-	$("form input#grade_select")[0].value = this.innerText;
+	$("form input#grade_select").val($(this).text())  ;
 	$("form #submit").show();
+})
 })
