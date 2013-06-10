@@ -189,9 +189,10 @@ class User_model extends CI_Model
 		$query = $this->db->get_where('user',array('id' => $this->session->userdata('uid')));
 	   	if($query->num_rows() == 1)
 		{
-			$row = $query->row();
+                    $row = $query->row();
+                    return $points = $row->points;
 		}	
-		return $points = $row->points;
+		return -1;
 	}
 }
 
