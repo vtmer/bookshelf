@@ -93,17 +93,11 @@ class Register extends CI_Controller
 	
 
 	/*邮箱验证模块*/
-		$configs['protocol'] = 'smtp';
-		$configs['smtp_host'] = 'smtp.163.com';
-		$configs['smtp_user'] = 'gdutbookshelf@163.com';
-		$configs['smtp_pass'] = 'vtmerbookshelf';
-		$configs['smtp_port'] = '25';
-		$configs['mailtype'] = 'html';
-		$configs['charset'] = 'utf-8';
+		$this->load->library('email');
+		$this->config->load('email');
 
-		$this->email->initialize($configs);
-
-		$message = "感谢你的注册！接下来请点击验证链接,便能完成注册:\n <a href='http://book.vtmer.com/index.php/verify/index/".$uid."/".$activationKey."'>验证链接</a>\n @维生数-工大书架";//邮件正文 
+		$url = 'book.vtmer.com';
+		$message = "感谢你的注册！接下来请点击验证链接,便能完成注册:\n <a href='".$url."/verify/index/".$uid."/".$activationKey."'>验证链接</a>\n @维生数-工大书架";//邮件正文 
 		
 		$this->email->from('gdutbookshelf@163.com','维生数工作室');
 		$this->email->to($username);
@@ -112,10 +106,12 @@ class Register extends CI_Controller
 
 		if($this->email->send())
 		{
+			echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />";
 			echo "<script>alert('验证邮件已发送，请注意查收！');</script>";
 		}
 		else
 		{
+			echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />";
 			echo "<script>alert('sent failed!');</script>";
 		}
 		redirect('login','refresh');

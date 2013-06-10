@@ -7,7 +7,7 @@
 		<div class="content_box">
 			<div class="box_demo search_results">
 				<div class="book_img">
-					<img src="" id="image" value="9787040223903"/>
+					<img src="" id="image" />
 				</div>
 				<dl>
 					<input type="hidden" id="isbncode" value="<?php echo $book_info[0]->ISBN; ?>" />
