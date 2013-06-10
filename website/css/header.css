@@ -29,3 +29,4 @@ div.mid_content table tr:first-child th:first-child{ border-top-left-radius:5px;
 .main table tr:first-child th:last-child{border-top-right-radius:5px;}
 div.mid_content table tr:last-child td:last-child{ border-bottom-right-radius:5px;}
 div.mid_content table tr:last-child td:first-child{ border-bottom-left-radius:5px;}/*表格在高级浏览器下的预定义*/
+div.mid_content td a { text-decoration:underline; };/*表格内a默认样式的修改*/
