@@ -12,7 +12,7 @@ div.main h3 { height:39px; margin-bottom:20px; background:url('../img/h_bg.png')
 div.first_step { margin:0 10px;}
 div.first_step ul {overflow:hidden; margin:0 10px;}
 div.first_step ul li { float:left; width:148px; margin-bottom:50px;}
-span.college { float:left; width:95px; height:105px; margin:0 26px 10px; background:url('../img/college_logo.png') no-repeat; cursor:pointer;}
+span.college { display:block; width:95px; height:105px; margin:0 auto 10px; background:url('../img/college_logo.png') no-repeat; cursor:pointer;}
 div.first_step ul li p { clear:both; font:14px "微软雅黑",Arial, Helvetica, sans-serif; font-weight:bold; text-align:center; color:#42362d;}
 span.logo_01 { background-position:0px 0px;}
 span.logo_02 { background-position:-99px 0px;}
@@ -25,8 +25,10 @@ span.logo_08 { background-position:-200px -119px;}
 span.logo_09 { background-position:-300px -119px;}
 span.logo_10 { background-position:-400px -119px;}
 
-div.selected_logo { position:relative; width:148px; margin:auto;}
-div.selected_logo span { margin-bottom:0px;}
+div.selected_logo { position:relative; width:400px; margin:auto;}
+div.selected_logo input { width:400px;}
+div.selected_logo input[disabled],div.selected_logo input:disabled { color:#42362d;}
+div.selected_logo span { margin-bottom:0px; cursor:auto;}
 /*第二，三部中间显示的logo和内容*/
 
 
@@ -48,6 +50,6 @@ div.third_step .bottom_shadow { position:absolute; bottom:-25px; z-index:-1; wid
 div.shelf_bg { clear:both; width:100%; height:65px;background:url('../img/shelf.png') no-repeat;}
 div.shelf_bg span { float:right; width:90px; height:69px; margin:-4px 50px 0 0; background:url('../img/sign_in.png') no-repeat;}
 form input { clear:both; background:transparent; border:none; font:14px "微软雅黑",Arial, Helvetica, sans-serif; font-weight:bold; text-align:center; color:#42362d;}
-form #submit { display:none; position:absolute; bottom:-145px; right:-230px; z-index:1000; height:30px; background:#c6c4b6; padding:0 17px; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center; cursor:pointer;}
+form #submit { display:none; position:absolute; width:auto; bottom:-145px; right:-230px; z-index:1000; height:30px; background:#c6c4b6; padding:0 17px; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center; cursor:pointer;}
 form #submit:hover { background:#e8a126; color:#fff;}
 div.second_step ,div.selected_logo,div.third_step { display:none;}

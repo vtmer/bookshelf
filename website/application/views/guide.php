@@ -32,13 +32,13 @@
 	<div class="selected_logo"><span></span>
 	<form action="<?php echo site_url('guide/choose'); ?>" method="post">
 		<label>
-		<input type="text" id="college_select" name="faculty" />
+		<input type="text" id="college_select" name="faculty" disabled/>
 		</label>
 		<label>
-		<input type="text" id="major_select" name="major" />
+		<input type="text" id="major_select" name="major" disabled/>
 		</label>
 		<label>
-		<input type="text" id="grade_select" name="grade" />
+		<input type="text" id="grade_select" name="grade" disabled/>
 		</label>
 		<input type="submit" id="submit" value="确定">
 	</form>

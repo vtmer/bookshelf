@@ -27,7 +27,7 @@
 						<?php foreach ($book_need as $row)
 						{   
 							echo
-							"<tr><td><a href='".site_url('home/book_info')."/".$row['id']."'>" . $row['name'] . "</a></td>".
+							"<tr><td><a target='_blank' href='".site_url('home/book_info')."/".$row['id']."'>" . $row['name'] . "</a></td>".
 							"<td>" . $row['course_name'] . "</td>".
 							"<td>" . $row['author'] ."</td>".
 							"<td>" . $row['course_category']. "</td>".

@@ -103,10 +103,23 @@ class Register extends CI_Controller
 				echo json_encode($msg);
 				exit();				
 			}
+<<<<<<< HEAD
 
 
 		$message = "感谢你的注册！接下来请点击验证链接,便能完成注册:\n <a href='".site_url()."/verify/index/".$uid."/".$activationKey."'>验证链接</a>\n";//邮件正文 
 		$message .="若不是你本人的操作，对您造成的不便，我们深表歉意！\n @维生数-工大书架"; 
+=======
+	
+	
+
+	/*邮箱验证模块*/
+		$this->load->library('email');
+		$this->config->load('email');
+
+		$url = 'book.vtmer.com';
+		$message = "感谢你的注册！接下来请点击验证链接,便能完成注册:\n <a href='".$url."/verify/index/".$uid."/".$activationKey."'>验证链接</a>\n @维生数-工大书架";//邮件正文 
+		
+>>>>>>> refs/remotes/origin/master
 		$this->email->from('gdutbookshelf@163.com','维生数工作室');
 		$this->email->to($username);
 		$this->email->subject('欢迎注册工大书架');
@@ -114,6 +127,7 @@ class Register extends CI_Controller
 
 		if($this->email->send())
 		{
+<<<<<<< HEAD
 			$address = "http://mail.".substr("zzlchile@gmail.com",strripos("zzlchile@gmail.com",'@')+1);
 			$content = "验证邮件已发送，马上登录邮箱激活：<a href = '$address'>点击登录邮箱</a>";
 
@@ -127,6 +141,15 @@ class Register extends CI_Controller
 			$msg = array('type'=>'alert','title'=>'错误信息','content'=>"注册失败！");
 			echo json_encode($msg);
 			exit();	
+=======
+			echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />";
+			echo "<script>alert('验证邮件已发送，请注意查收！');</script>";
+		}
+		else
+		{
+			echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />";
+			echo "<script>alert('sent failed!');</script>";
+>>>>>>> refs/remotes/origin/master
 		}
 	}
 
