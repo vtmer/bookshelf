@@ -10,7 +10,7 @@
 				<div class="step1 now_step">
 					<p class="steps">步骤1：输入ISBN码</p>
 					<div class="step_box">
-						<input type="text" value="请输入书籍的ISBN码" id="isbncode" name="isbncode"/>
+						<input type="text" placeholder="请输入书籍的ISBN码" id="isbncode" name="isbncode"/>
 						<a href="#" class="next_step" onclick="do_jsonp() ">下一步</a>
 						<img src="<?php echo base_url('img/tip.jpg'); ?>" alt="ISBN码位于书籍背面标价处"/>
 						<p class="tips">ISBN码可在书籍背面左图标志处找到！<span>若无ISBN码，可直接点击下一步进行捐书。</span></p>
@@ -25,8 +25,8 @@
 						</label>
 						<label>胶印：
 							<select name="print">
-								<option value="0">否</option>
-								<option value="1" selected="selected">是</option>
+								<option value="0" selected="selected">否</option>
+								<option value="1" >是</option>
 							</select>
 							<input type="submit" id="submit" value="确定" />
 						</label>
