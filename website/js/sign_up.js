@@ -82,9 +82,17 @@ var check_func = {
 		}
 		else if(mailReg.test(value)) 
 			{
-				$notice.removeClass("notice alert").text("");
-				$.get(document.URL+"/ajax_check",{mail:$("#mail").attr("value"),t:Math.random()},function(data){		 	
-				$notice.addClass("notice alert").text("邮箱已注册，请重试！");
+				$.get(document.URL+"/ajax_check",{mail:$("#mail").attr("value"),t:Math.random()},function(data){
+					if(data==1) 
+						{
+							$notice.removeClass("notice alert").text(" ");
+							return true;
+						} 
+						else
+						{
+							$notice.addClass("notice alert").text("邮箱已注册，请重试！");
+							return false;
+						}
 				});
 			}
 	},
@@ -108,7 +116,6 @@ var check_func = {
 			$notice2.removeClass("notice alert").text(" ");
 			}
 		}
-
 	},
 	name : function(value){
 		var $notice = $("input#name + span");
@@ -159,18 +166,21 @@ var check_func = {
 			return false;
 		}
 		else
-		{
+		{	
+			var	flag;
 			$.get(document.URL+"/ajax_check",{captcha:$("#captcha").attr("value"),t:Math.random()},function(data){	
 				if(data==0)
 				{ 	
 					$notice.addClass("notice alert").text("验证码错误，请重试！");
+					return false;
 				}
 				else
 				{
-					$notice.removeClass("notice alert").text("");
+					$notice.removeClass("notice alert").text(" ");
+					return true;
 				}
 				});
-				return false;
+			return true;
 		}
 	}
 }
@@ -208,3 +218,7 @@ $(function(){
 		if(!check_control) return false;
 	});	
 });
+function reloadCode()
+{
+	$("#checkCodeImg").attr("src","http://"+document.domain+"/index.php/captcha?t="+Math.random());
+}

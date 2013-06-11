@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>加入工大书架</title>
-<link href="<?php echo base_url('css/reset.css'); ?>" type="text/css" rel="stylesheet" char/>
+<link href="<?php echo base_url('css/reset.css'); ?>" type="text/css" rel="stylesheet" />
 <link href="<?php echo base_url('css/header.css'); ?>" type="text/css" rel="stylesheet" />
 <link href="<?php echo base_url('css/sign_up.css'); ?>" type="text/css" rel="stylesheet" />
 <script language="javascript" src="<?php echo base_url('js/jquery-1.7.2.js'); ?>"></script>
@@ -38,7 +38,7 @@
 		<div class="content_box">
 			<div class="box_demo sign_info">
 			<img src="<?php echo base_url('img/join_us.jpg'); ?>" alt="加入我们" class="join_us"/>
-				<form action="<?php echo site_url('register/check'); ?>" method="post" class="ajaxForm">
+				<form action="<?php echo site_url('register/check'); ?>" method="post" >
 					<label for="mail"><span>邮箱</span>
 						<input type="text" id="mail" name="username"/>
 						<span class="notice">填写常用邮箱以便验证</span>
@@ -92,8 +92,9 @@
 					<p class="notice">以上内容皆为必填项，为了保障良好的借书环境，请认真阅读填写.</p>
 					<label for="captcha"><span>验证码</span>
 						<input type="text" id="captcha" name="captcha"/>
-						<span></span><a href="javascript:reloadCode();"><img src="<?php echo site_url('captcha');?>" name="checkCodeImg" id="checkCodeImg" border="0" alt="换一张"/>换一张</a>
+						<span></span>
 					</label>
+					<label><img src="<?php echo site_url('captcha');?>" onclick="reloadCode();" id="checkCodeImg" alt="换一张"/><a href="javascript:reloadCode();">  换一张</a></label>
 					<input type="submit" class="config_submit" value="注册" />
 				</form>
 				<?php if(isset($error)): ?>
