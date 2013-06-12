@@ -33,12 +33,15 @@
 	<form action="<?php echo site_url('guide/choose'); ?>" method="post">
 		<label>
 		<input type="text" id="college_select" name="faculty" disabled/>
+		<input type="hidden" id="college_select" name="faculty" value=""/>
 		</label>
 		<label>
 		<input type="text" id="major_select" name="major" disabled/>
+		<input type="hidden" id="major_select" name="major" value=""/>
 		</label>
 		<label>
 		<input type="text" id="grade_select" name="grade" disabled/>
+		<input type="hidden" id="grade_select" name="grade" value=""/>
 		</label>
 		<input type="submit" id="submit" value="确定">
 	</form>
