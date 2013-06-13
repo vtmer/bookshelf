@@ -9,6 +9,8 @@ function do_jsonp()
 				$('#publish').val(data.publisher);
 				var title = data.title;
 				});
+		if(id !== '')
+		{$('#booktitle').attr('disabled',"true");}
 
 	}
 	var nowShowing = $(".main .step1");

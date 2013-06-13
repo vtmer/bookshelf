@@ -20,7 +20,7 @@
 					<p class="steps">步骤2：确认信息</p>
 					<div class="step_box">
 						<label for="isbn">书名
-							<input type="text" value="" placeholder="若为学校自印书籍，请直接输入书名" id="booktitle" name="booktitle" disabled/>
+							<input type="text" value="" placeholder="若为学校自印书籍，请直接输入书名" id="booktitle" name="booktitle" />
 							<span id="isbn" value=""></span>
 						</label>
 						<label>胶印：
