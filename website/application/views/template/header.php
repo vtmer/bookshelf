@@ -9,7 +9,7 @@
 <script language="javascript" src="<?php echo base_url('js/jquery-1.7.2.js');?>"></script>
 <script language="javascript" src="<?php echo base_url('js/pop_box.js');?>"></script>
 </head>
-<body onload="do_jsonp();">
+<body>
 <div id="float_head">
 	<div class="header">
 		<a href="<?php echo site_url('home');?>" id="gdutonline"></a>

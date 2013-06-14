@@ -51,6 +51,6 @@ class Guide extends CI_Controller
 			'is_logged_in' => FALSE,
 		);
 		$this->session->set_userdata($data);
-		header('location:/index.php/home');
+		header('location:/bookshelf/website/index.php/home');
 	}
 }
