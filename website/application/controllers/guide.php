@@ -50,7 +50,8 @@ class Guide extends CI_Controller
 			'grade' => $grade,
 			'is_logged_in' => FALSE,
 		);
-		$this->session->set_userdata($data);
-		header('location:/bookshelf/website/index.php/home');
+                $this->session->set_userdata($data);
+                $this->load->helper('url');
+                redirect(site_url('home'));
 	}
 }
