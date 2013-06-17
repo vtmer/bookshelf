@@ -19,11 +19,10 @@ class Register extends CI_Controller
 		var_dump(stripos("zzlchile@gmail.com","@"));
 		var_dump("mail.".substr("zzlchile@gmail.com",strripos("zzlchile@gmail.com",'@')+1));
 		$address = "http://mail.".substr("zzlchile@gmail.com",strripos("zzlchile@gmail.com",'@')+1);
-		$content = "验证邮件已发送，马上登录邮箱激活：<a href = '$address'>点击登录邮箱</a>";
-		echo $content;
-		*/
+		$content = "验证邮件已发送，马上登录邮箱激活：<a href = '$address'>点击登录邮箱</a>";*/
 		//$row = $this->user_model->get("zzlchile@gmail.com");
 		//var_dump($this->user_model->check_is("zzlchile@gmail.com"));
+		//var_dump( str_replace(" ","","zhang    af !"));
 	}
 
 	//注册时验证函数
@@ -50,7 +49,7 @@ class Register extends CI_Controller
 			exit();
 		}
 		
-            $username = $this->input->post('username');
+            $username = str_replace(" ","",$this->input->post('username'));
 			if($this->user_model->check_is($username))
 			{
 				$msg = array('type'=>'alert','title'=>'提示信息','content'=>"邮箱已被注册，请重试！");
@@ -63,15 +62,15 @@ class Register extends CI_Controller
 				echo json_encode($msg);
 				exit();	
 			}
-			$password = $this->input->post('pwd');
-			$truename = $this->input->post('truename');
-			$student_id = $this->input->post('student_id');
+			$password = str_replace(" ","",$this->input->post('pwd'));
+			$truename = str_replace(" ","",$this->input->post('truename'));
+			$student_id = str_replace(" ","",$this->input->post('student_id'));
 			//利用session保存的信息（学院、专业、年级）；
 			$faculty = $this->input->post('faculty');
 			$major = $this->input->post('major');
 			$grade = $this->input->post('grade'); 
-			$phone_num = $this->input->post('phone_num');
-			$subphone_num = $this->input->post('subphone_num');
+			$phone_num = str_replace(" ","",$this->input->post('phone_num'));
+			$subphone_num = str_replace(" ","",$this->input->post('subphone_num'));
 			$dormitory = $this->input->post('dormitory');	
 			$status = 0;//注册标识码
 			$activationKey = mt_rand() . mt_rand() . mt_rand() . mt_rand() . mt_rand();//生成随机激活码	
@@ -88,6 +87,7 @@ class Register extends CI_Controller
 				$grade = $row->grade;
 				$data = array(
 					'username'=>$username,
+					'truename'=>$truename,
 					'points' => $points,
 					'uid' => $uid,
 					'major' => $major,
@@ -109,7 +109,7 @@ class Register extends CI_Controller
 	
 		/*邮箱验证模块*/
 		$this->load->library('email');
-		$this->config->load('email');
+		//$this->config->load('email');
 		$this->email->from('gdutbookshelf@163.com','维生数工作室');
 		$this->email->to($username);
 		$this->email->subject('欢迎注册工大书架');
@@ -118,13 +118,10 @@ class Register extends CI_Controller
 		if($this->email->send())
 		{
 			//注册成功
-			redirect('register/success');
-			/*
 			$url = site_url('register/success');
 			$msg = array('type'=>'redirect','url'=>$url);
 			echo json_encode($msg);
 			exit();	
-			*/
 		}
 		else
 		{

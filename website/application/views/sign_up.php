@@ -38,7 +38,7 @@
 		<div class="content_box">
 			<div class="box_demo sign_info">
 			<img src="<?php echo base_url('img/join_us.jpg'); ?>" alt="加入我们" class="join_us"/>
-				<form action="<?php echo site_url('register/check'); ?>" method="post" >
+				<form action="<?php echo site_url('register/check'); ?>" method="post" class="ajaxForm">
 					<label for="mail"><span>邮箱</span>
 						<input type="text" id="mail" name="username"/>
 						<span class="notice">填写常用邮箱以便验证</span>

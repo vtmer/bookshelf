@@ -48,13 +48,16 @@ $(document).ready(function(){
 				}else
 				if(jsonobj.type=='redirect')
 				{
-					$("#popContent").html(jsonobj.content);
-		            $("#pop_title").html(jsonobj.title);
-		          	var h = $(document).height();
-					$('#screen').css({ 'height': h });	
-					$('#screen').show();
-					$('.popbox').center();
-					$('.popbox').fadeIn();
+					if(typeof jsonobj.content!='undefined')
+					{
+						$("#popContent").html(jsonobj.content);
+			            $("#pop_title").html(jsonobj.title);
+			          	var h = $(document).height();
+						$('#screen').css({ 'height': h });	
+						$('#screen').show();
+						$('.popbox').center();
+						$('.popbox').fadeIn();
+					}
 					setTimeout("window.location.href='"+jsonobj.url+"'",1000);
 				}
              });

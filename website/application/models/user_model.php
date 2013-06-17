@@ -194,6 +194,19 @@ class User_model extends CI_Model
 		}	
 		return -1;
 	}
+	public function send_sys_msg($uid,$content)
+	{
+		$data = array(
+			'from'=>'系统',
+			'to'=>$uid,
+			'title'=>'欢迎加入工大书架',
+			'content'=>$content,
+			'status'=>0,
+			'create_time'=>date('Y-m-d')
+			);
+		$this->db->insert('message', $data);
+		return mysql_affected_rows();
+	}
 }
 
 /*End of file user_model.php*/
