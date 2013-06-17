@@ -167,20 +167,20 @@ var check_func = {
 		}
 		else
 		{	
-			var	flag;
+			$flag = false;
 			$.get(document.URL+"/ajax_check",{captcha:$("#captcha").attr("value"),t:Math.random()},function(data){	
 				if(data==0)
 				{ 	
 					$notice.addClass("notice alert").text("验证码错误，请重试！");
-					return false;
+					$flag = false;
 				}
 				else
 				{
 					$notice.removeClass("notice alert").text(" ");
-					return true;
+					$flag = true;
 				}
 				});
-			return true;
+			return $flag;
 		}
 	}
 }
