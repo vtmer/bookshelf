@@ -13,16 +13,6 @@ class Register extends CI_Controller
 		$footer = array('js_file' => 'sign_up.js');
 		$this->load->view('sign_up');	
 		$this->parser->parse('template/footer',$footer);
-		/*
-		var_dump($this->session->all_userdata());
-		var_dump(site_url());
-		var_dump(stripos("zzlchile@gmail.com","@"));
-		var_dump("mail.".substr("zzlchile@gmail.com",strripos("zzlchile@gmail.com",'@')+1));
-		$address = "http://mail.".substr("zzlchile@gmail.com",strripos("zzlchile@gmail.com",'@')+1);
-		$content = "验证邮件已发送，马上登录邮箱激活：<a href = '$address'>点击登录邮箱</a>";*/
-		//$row = $this->user_model->get("zzlchile@gmail.com");
-		//var_dump($this->user_model->check_is("zzlchile@gmail.com"));
-		//var_dump( str_replace(" ","","zhang    af !"));
 	}
 
 	//注册时验证函数
@@ -109,7 +99,7 @@ class Register extends CI_Controller
 	
 		/*邮箱验证模块*/
 		$this->load->library('email');
-		//$this->config->load('email');
+		$this->config->load('email');
 		$this->email->from('gdutbookshelf@163.com','维生数工作室');
 		$this->email->to($username);
 		$this->email->subject('欢迎注册工大书架');
@@ -137,7 +127,7 @@ class Register extends CI_Controller
 		$address = $this->session->userdata('username');
 		$data['url'] = "http://mail.".substr($address,strripos($address,'@')+1);
 		$this->load->view('sign_up_success',$data);
-		$this->load->view('template/footer');
+		$this->parser->parse('template/footer',array('js_file' => 'sign_up_success.js'));
 	} 
 
 	public function ajax_check()

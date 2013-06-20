@@ -86,14 +86,20 @@ var check_func = {
 					if(data==1) 
 						{
 							$notice.removeClass("notice alert").text(" ");
-							return true;
 						} 
 						else
 						{
 							$notice.addClass("notice alert").text("邮箱已注册，请重试！");
-							return false;
 						}
 				});
+				if($notice.text()==" ") 
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				} 
 			}
 	},
 	password : function(value1,value2){
@@ -114,6 +120,7 @@ var check_func = {
 			}
 			else {
 			$notice2.removeClass("notice alert").text(" ");
+			return true;
 			}
 		}
 	},
@@ -167,20 +174,24 @@ var check_func = {
 		}
 		else
 		{	
-			$flag = false;
 			$.get(document.URL+"/ajax_check",{captcha:$("#captcha").attr("value"),t:Math.random()},function(data){	
 				if(data==0)
 				{ 	
 					$notice.addClass("notice alert").text("验证码错误，请重试！");
-					$flag = false;
 				}
 				else
 				{
 					$notice.removeClass("notice alert").text(" ");
-					$flag = true;
 				}
 				});
-			return $flag;
+			if($notice.text()==" ") 
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				} 
 		}
 	}
 }
@@ -206,7 +217,7 @@ $(function(){
 	$("input#captcha").bind("blur", function(){
 		check_func.captcha(this.value);
 	});
-
+	
 	$("input[type=submit]").bind("click", function(){
 		var check_control = true;
 		check_control = check_func.email($("input#mail")[0].value);
