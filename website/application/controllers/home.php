@@ -133,6 +133,31 @@ class Home extends CI_Controller
 	{
 		if($this->input->post())
 		{
+			//表单验证
+			//电话
+			if(!preg_match("/^13[0-9]{1}[0-9]{8}$|15[0189]{1}[0-9]{8}$|189[0-9]{8}$|188[0-9]{8}$/",$this->input->post('phone_number')))
+			{    
+			    $msg = array('type'=>'alert','title'=>'错误信息','content'=>'手机号码格式错误！');
+				echo json_encode($msg);
+				exit();           
+			}
+			//密码
+			if($this->input->post('pwd')!=$this->input->post('pwd2'))
+			{
+				$msg = array('type'=>'alert','title'=>'错误信息','content'=>'两次密码不一致，请重试！');
+				echo json_encode($msg);
+				exit(); 
+			}
+			if($this->input->post('pwd_old')!=NULL)
+			{	
+				 if(!preg_match('/^[\w~!@#$%^&*]{6,18}$/',$this->input->post('pwd')))
+				 {
+					$msg = array('type'=>'alert','title'=>'错误信息','content'=>'密码格式错误，长度大于6且小18，且不包含以下字符:~!@#$%^&*');
+					echo json_encode($msg);
+					exit(); 
+				}
+			}
+			//END
 			$flag = $this->home_model->update_config($this->input->post());
 			if($flag==1)
 			{
@@ -152,10 +177,21 @@ class Home extends CI_Controller
 				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'与原密码一致，请重试！');
 				echo json_encode($msg);
 				exit();
+			}else if($flag == 4)
+			{
+				$msg = array('type'=>'alert','title'=>'错误信息','content'=>'密码错误，请重试！');
+				echo json_encode($msg);
+				exit();
+			}
+			else if($flag == 0)
+			{
+				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'你未做任何修改！');
+				echo json_encode($msg);
+				exit();
 			}
 			else
 			{
-				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'修改失败，请重试！');
+				$msg = array('type'=>'alert','title'=>'错误信息','content'=>'系统错误，请稍后再试！');
 				echo json_encode($msg);
 				exit();
 			}

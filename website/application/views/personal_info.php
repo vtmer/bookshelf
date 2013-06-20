@@ -10,8 +10,17 @@
 				<form action="<?php echo site_url('home/personal_config');?>" method="post" class="ajaxForm">
 				<div class="left">
 					<label>用户名：<span class="user_name"><?php echo $user[0]['truename'];?></span></label>
-					<label for="password">密码：<input type="password" name="pwd" id="password" /></label>
+					
+					<input type="button" class="config_submit" value="修改密码" id="config_pwd"/>
+					<style>
+					#div_pwd{padding: 15px 0 0 0;overflow: hidden; width: 300px;height: 0px;}
+					</style>
+					<div id="div_pwd" class="div_pwd">
+						<label for="pwd_old">旧密码：<input type="password" name="pwd_old" id="pwd_old"/></label>
+					<label for="password">新密码：<input type="password" name="pwd" id="password" /></label>
 					<label for="password_once">确认密码：<input type="password" name="pwd2" id="password_once"/></label>
+					<input type="button" class="config_submit" value="取消" id="cancle_pwd"/>
+					</div>
 					<label for="college">学院：<span class="user_name" ><?php echo $user[0]['faculty'];?></label>
 					<label for="major">专业：<span class="user_name"   ><?php echo $user[0]['major'];?></label>
 					<label for="grade">年级：<span class="user_name"  ><?php echo $user[0]['grade'];?></label>
@@ -48,3 +57,7 @@
 		</div><!-- 包裹整块质感效果的div -->
 	</div>
 </div><!--end of main-->
+<script type="text/javascript">
+
+
+</script>

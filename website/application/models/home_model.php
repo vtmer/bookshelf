@@ -213,28 +213,29 @@ class Home_Model extends CI_Model
   		$id = $this->session->userdata('uid');
     	$sql = "UPDATE `user` SET `phone_number`=?,`subphone_number`=?,`dormitory`=?,`password`=? WHERE `id`=$id ";
     	$sql2 = "UPDATE `user` SET `phone_number`=?,`subphone_number`=?,`dormitory`=? WHERE `id`=$id ";
-    
-    	if(strlen($data['phone_number'])!=11)
-    	{
-      		return 0;
-    	}
+
     	if($data['pwd']!=NULL)
     	{
-      		$query = $this->db->query($sql,array($data['phone_number'],$data['subphone_number'],$data['dormitory'],md5($data['pwd'])));
+          $query = $this->db->get_where('user', array('id' => $id,'password'=>md5($data['pwd_old'])));
+          if(count($query->result())==0)
+          {
+            return 4;//密码错误
+          }
+      		$this->db->query($sql,array($data['phone_number'],$data['subphone_number'],$data['dormitory'],md5($data['pwd'])));
       		if($this->db->affected_rows())
       		{
-        		return 2;
+        		return 2;//修改密码成功
       		}	
-      		else return 3;
+      		else return 3;//与原密码一致
     	}	
     	else
     	{
-      		$query = $this->db->query($sql2,array($data['phone_number'],$data['subphone_number'],$data['dormitory']));
+      		$this->db->query($sql2,array($data['phone_number'],$data['subphone_number'],$data['dormitory']));
        		if($this->db->affected_rows())
        		{
-          		return 1;
+          		return 1;//修改信息成功
        		}
-       		else return 0;
+       		else return 0;//修改信息与原来的一致
     	}
   	}	
 }
