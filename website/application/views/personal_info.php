@@ -12,9 +12,6 @@
 					<label>用户名：<span class="user_name"><?php echo $user[0]['truename'];?></span></label>
 					
 					<input type="button" class="config_submit" value="修改密码" id="config_pwd"/>
-					<style>
-					#div_pwd{padding: 15px 0 0 0;overflow: hidden; width: 300px;height: 0px;}
-					</style>
 					<div id="div_pwd" class="div_pwd">
 						<label for="pwd_old">旧密码：<input type="password" name="pwd_old" id="pwd_old"/></label>
 					<label for="password">新密码：<input type="password" name="pwd" id="password" /></label>
@@ -57,7 +54,3 @@
 		</div><!-- 包裹整块质感效果的div -->
 	</div>
 </div><!--end of main-->
-<script type="text/javascript">
-
-
-</script>
