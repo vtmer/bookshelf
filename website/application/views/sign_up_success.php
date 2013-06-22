@@ -29,7 +29,7 @@
 		<div class="content_box">
 			<div class="box_demo receipt">
 				<span>恭喜你注册成功</span>
-				<p>验证邮件已发送，马上登录邮箱激活：<a href = '<?php echo $url;?>'>点击登录邮箱</a></p>
+				<p>验证邮件已发送，马上登录邮箱激活：<a href = '<?php echo $url;?>' target="view_window">点击登录邮箱</a></p>
 				<p>希望您使用愉快</p>
 			</div>
 			<div class="bottom_shadow"></div><!-- 块级区域下方的底层阴影 -->

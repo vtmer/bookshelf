@@ -125,7 +125,14 @@ class Register extends CI_Controller
 		if(!($this->session->userdata('username'))) 
 			show_404();
 		$address = $this->session->userdata('username');
-		$data['url'] = "http://mail.".substr($address,strripos($address,'@')+1);
+		if(substr($address,strripos($address,'@')+1)=="gmail.com")
+		{
+			$data['url'] = "https://mail.google.com";
+		}
+		else
+		{
+			$data['url'] = "http://mail.".substr($address,strripos($address,'@')+1);
+		}
 		$this->load->view('sign_up_success',$data);
 		$this->parser->parse('template/footer',array('js_file' => 'sign_up_success.js'));
 	} 
