@@ -43,7 +43,6 @@
 		<input type="text" id="grade_select" name="grade" disabled/>
 		<input type="hidden" id="grade_select" name="grade" value=""/>
 		</label>
-		<input type="submit" id="submit" value="确定">
 	</form>
 	</div>
 	<div class="second_step">
