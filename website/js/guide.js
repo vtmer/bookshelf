@@ -78,6 +78,6 @@ $(".main .third_step .step_back").bind("click",function(){
 });
 $(".main .third_step ul li").bind("click",function(){
 	$("form input#grade_select").val($(this).text())  ;
-	$("form #submit").show();
+	$("form").submit();
 })
 })
