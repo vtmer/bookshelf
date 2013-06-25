@@ -22,5 +22,11 @@ div.sign form label input { height:24px; width:140px;}
 div.sign form a.confirm { float:right; width:145px; height:30px; background:#e8a126; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center; color:#fff;}
 
 div.sign a.sign_up { float:right; width:217px; height:157px; background:url('../img/sign_up.jpg') no-repeat;}
+.sign .sign_up:hover:after{-webkit-animation:flash 2s linear infinite;-moz-animation:flash 2s linear infinite;-ms-animation:flash 2s linear infinite;animation:flash 2s linear infinite}
+.sign .sign_up:after {content:" ";position:absolute;display:block;top:-45px;left:-115px;width:30px;height:247px;background:rgba(255,255,255,.3);-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg)}
+@-webkit-keyframes flash{100%{left:1000px}}
+@-moz-keyframes flash{100%{left:1000px}}
+@-ms-keyframes flash{100%{left:1000px}}
+@-keyframes flash{100%{left:1000px}}
 
 div.shelf_bg { clear:both; width:100%; height:65px; margin-top:50px; background:url('../img/shelf.png') no-repeat;}
