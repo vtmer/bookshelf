@@ -5,7 +5,7 @@
 	<div class="mid_content">
 		<div class="content_box">
 			<div class="box_demo needed_book">
-				<h3>您本学期需要的教材有：</h3>
+				<h3>您本学期需要借的教材有：</h3>
 				<p><?php echo $this->session->userdata['grade'].'级  '.$this->session->userdata['major'];
 					if($this->session->userdata['is_logged_in']==NULL)
 					{
