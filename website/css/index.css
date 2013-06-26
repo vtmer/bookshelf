@@ -2,7 +2,11 @@
 body { background:#cfcaa5 url('../img/bg.jpg') repeat-x;}
 div#home_page {  margin:50px auto 30px; width:400px; height:125px; background:url('../img/default.png') no-repeat;}
 div#home_page a { float:left; width:400px; height:125px;}
-
+#home_page .campus { position:absolute; bottom:-50px; right:-75px; font:16px "微软雅黑",Arial, Helvetica, sans-serif;}
+.campus li { visibility:hidden; padding:4px 6px; text-align:center; cursor:pointer; color:#69645a;}
+.campus li:hover { background:#f4c676; border-radius:5px;}
+.campus:hover li { visibility:visible;}
+#home_page .campus .current { visibility:visible;}
 
 div.main {...........}
 div.main { width:807px; margin:auto; }
@@ -12,18 +16,33 @@ div.main h3 { height:39px; margin-bottom:20px; background:url('../img/h_bg.png')
 div.first_step { margin:0 10px;}
 div.first_step ul {overflow:hidden; margin:0 10px;}
 div.first_step ul li { float:left; width:148px; margin-bottom:50px;}
-span.college { display:block; width:95px; height:105px; margin:0 auto 10px; background:url('../img/college_logo.png') no-repeat; cursor:pointer;}
+.first_step ul li:hover p { color:#eca721;}
+span.college { display:block; width:95px; height:105px; margin:0 auto 10px; cursor:pointer;}
 div.first_step ul li p { clear:both; font:14px "微软雅黑",Arial, Helvetica, sans-serif; font-weight:bold; text-align:center; color:#42362d;}
-span.logo_01 { background-position:0px 0px;}
-span.logo_02 { background-position:-99px 0px;}
-span.logo_03 { background-position:-197px 0px;}
-span.logo_04 { background-position:-296px 0px;}
-span.logo_05 { background-position:-396px 0px;}
-span.logo_06 { background-position:0px -119px;}
-span.logo_07 { background-position:-100px -119px;}
-span.logo_08 { background-position:-200px -119px;}
-span.logo_09 { background-position:-300px -119px;}
-span.logo_10 { background-position:-400px -119px;}
+
+/*学院logo的样式*/
+.daxuecheng span.college,span.daxuecheng {  background:url('../img/college_logo.png') no-repeat;}
+.longdong span.college,span.longdong{background:url('../img/college_logo_longdong.png') no-repeat;}
+.dongfenglu span.college,span.dongfenglu{ background:url('../img/college_logo_dongfeng.png') no-repeat;}
+.first_step .longdong,.first_step .dongfenglu { display:none; width:500px; margin:100px auto 0;}
+
+.main span.logo_01 { background-position:0px 0px;}
+.main span.logo_02 { background-position:-99px 0px;}
+.main span.logo_03 { background-position:-197px 0px;}
+.main span.logo_04 { background-position:-296px 0px;}
+.main span.logo_05 { background-position:-396px 0px;}
+.main span.logo_06 { background-position:0px -119px;}
+.main span.logo_07 { background-position:-100px -119px;}
+.main span.logo_08 { background-position:-200px -119px;}
+.main span.logo_09 { background-position:-300px -119px;}
+.main span.logo_10 { background-position:-400px -119px;}
+.main span.logo_11 { background-position:0px 0px;}
+.main span.logo_12 { background-position:-100px 0px;}
+.main span.logo_13 { background-position:-200px 0px;}
+.main span.logo_14 { background-position:0px 0px;}
+.main span.logo_15 { background-position:-100px 0px;}
+.main span.logo_16 { background-position:-200px 0}
+/*学院logo的样式*/
 
 div.selected_logo { position:relative; width:400px; margin:auto;}
 div.selected_logo input { width:400px;}
@@ -47,9 +66,14 @@ div.third_step ul li { float:left; height:40px; margin-right:20px; padding:0 10p
 div.third_step ul li:hover { background:#f4c676; border-radius:5px;}
 div.third_step .bottom_shadow { position:absolute; bottom:-25px; z-index:-1; width:418px; height:48px; margin-left:-9px;  background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, from(rgba(0,0,0,.15)), to(rgba(0,0,0,0)));}
 
-div.shelf_bg { clear:both; width:100%; height:65px;background:url('../img/shelf.png') no-repeat;}
-div.shelf_bg span { float:right; width:90px; height:69px; margin:-4px 50px 0 0; background:url('../img/sign_in.png') no-repeat;}
+/*登录、注册的样式*/
+div.shelf_bg { position:relative; clear:both; width:100%; height:65px;background:url('../img/shelf.png') no-repeat;}
+div.shelf_bg .login_box { position:absolute; top:-4px; right:50px; width:90px; height:69px;}
+.shelf_bg .login { position:absolute; width:90px; height:69px;  background:url('../img/sign_in.png') no-repeat; text-indent:-999px;}
+.shelf_bg .login:hover { background-position:-96px 0;}
+.shelf_bg .sign { position:absolute; top:5px; right:-20px; height:50px; width:24px;  background:url('../img/sign_in.png') -2px -70px no-repeat; text-indent:-999px;}
+.shelf_bg .sign:hover { background-position:-36px -70px;}
+/*登录、注册的样式*/
+
 form input { clear:both; background:transparent; border:none; font:14px "微软雅黑",Arial, Helvetica, sans-serif; font-weight:bold; text-align:center; color:#42362d;}
-form #submit { display:none; position:absolute; width:auto; bottom:-145px; right:-230px; z-index:1000; height:30px; background:#c6c4b6; padding:0 17px; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center; cursor:pointer;}
-form #submit:hover { background:#e8a126; color:#fff;}
-div.second_step ,div.selected_logo,div.third_step { display:none;}
+div.second_step ,div.selected_logo,div.third_step,,input#campus_select { display:none;}
