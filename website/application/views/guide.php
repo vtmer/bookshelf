@@ -12,11 +12,16 @@
 
 <div id="home_page">
 	<a href="<?php echo site_url('guide');?>" title="前往首页">工大书架</a>
+	<ul class="campus">
+		<li class="current" data-no="daxuecheng">[大学城]</li>
+		<li data-no="longdong">[龙洞]</li>
+		<li data-no="dongfenglu">[东风路]</li>
+	</ul>
 </div>
 <div class="main">
 	<div class="first_step">
 		<h3>请选择你所在的学院:</h3>
-		<ul>
+		<ul class="daxuecheng">
 			<li><span class="college logo_01"></span><p>机电工程学院</p></li>
 			<li><span class="college logo_02"></span><p>自动化学院</p></li>
 			<li><span class="college logo_03"></span><p>轻工化工学院</p></li>
@@ -28,9 +33,23 @@
 			<li><span class="college logo_09"></span><p>外国语学院</p></li>
 			<li><span class="college logo_10"></span><p>物理与光电工程学院</p></li>
 		</ul>
+		<ul class="longdong">
+			<li><span class="college logo_11"></span><p>管理学院</p></li>
+			<li><span class="college logo_12"></span><p>经济与贸易学院</p></li>
+			<li><span class="college logo_13"></span><p>应用数学学院</p></li>
+		</ul>
+		<ul class="dongfenglu">
+			<li><span class="college logo_14"></span><p>建筑学院</p></li>
+			<li><span class="college logo_15"></span><p>艺术设计学院</p></li>
+			<li><span class="college logo_16"></span><p>政法学院</p></li>
+		</ul>
 	</div>
 	<div class="selected_logo"><span></span>
 	<form action="<?php echo site_url('guide/choose'); ?>" method="post">
+		<label>
+		<input type="text" id="campus_select" name="campus" disabled />
+		<input type="text" id="campus_select" name="campus" vlaue="" />
+		</label>
 		<label>
 		<input type="text" id="college_select" name="faculty" disabled/>
 		<input type="hidden" id="college_select" name="faculty" value=""/>
@@ -65,7 +84,10 @@
 		</ul>
 		
 	</div>
-	<div class="shelf_bg"><a href="<?php echo site_url('login'); ?>"><span></span></a></div>
+	<div class="shelf_bg">
+		<a href="<?php echo site_url('login'); ?>">登录</a>
+		<a href="<?php echo site_url('sign_up'); ?>#" class="sign">注册</a>
+	</div>
 </div><!--end of main-->
 <script type="text/javascript" src="<?php echo base_url('js/guide.js'); ?>"></script>
 </body>
