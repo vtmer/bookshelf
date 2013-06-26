@@ -14,8 +14,8 @@ div.mid_content div.box_demo h3 { float:left; width:200px; height:42px; margin:2
 
 div.needed_book {.........}
 div.needed_book p { clear:both; margin-bottom:20px; text-indent:2em; font-size:14px; color:#565656;}
-div.needed_book p a { color:#565656;}
-div.needed_book p a:hover { color:#000;}
+div.needed_book p a { color:#418FDF;}
+div.needed_book p a:hover { color:#000; text-decoration:underline;}
 div.needed_book table { margin-bottom:30px;}
 div.needed_book table th:nth-child(1),
 div.needed_book table td:nth-child(1){ width:120px; text-align:center;}
