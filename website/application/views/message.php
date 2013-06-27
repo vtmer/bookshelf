@@ -3,7 +3,7 @@
 	<?php include "template/search_bar.php"; ?>
 
 	<div class="mid_content">
-		<h3>个人信息设置：</h3>
+		<h3>我的短消息：</h3>
 		<div class="content_box">
 			<div class="box_demo message">
 				<h5><span>状态</span><span>标题</span><span>时间</span></h5>
