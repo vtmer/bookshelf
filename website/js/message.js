@@ -4,9 +4,11 @@ $(".main .message .message_box h5").bind("click",function(){
 $(".main .message .message_box span.hide").bind("click",function(){
 	$(this).parent().slideUp();
 	$(this).parent().prev().removeClass("click_h5");
+	$("html,body").animate({scrollTop:$(".mid_content").offset().top},600);
 })
 $(".main .message .message_box input.confirm").bind("click",function(){
 	$(this).parent().slideUp();
 	$(this).parent().prev().removeClass("click_h5");
 	getChild = $(this).parent().prev().children(".readed").html("已读");
+	$("html,body").animate({scrollTop:$(".mid_content").offset().top},600);
 })
