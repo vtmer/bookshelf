@@ -76,4 +76,4 @@ div.shelf_bg .login_box { position:absolute; top:-4px; right:50px; width:90px; h
 /*登录、注册的样式*/
 
 form input { clear:both; background:transparent; border:none; font:14px "微软雅黑",Arial, Helvetica, sans-serif; font-weight:bold; text-align:center; color:#42362d;}
-div.second_step ,div.selected_logo,div.third_step,,input#campus_select { display:none;}
+div.second_step ,div.selected_logo,div.third_step,input#campus_select { display:none;}
