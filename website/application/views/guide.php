@@ -85,8 +85,10 @@
 		
 	</div>
 	<div class="shelf_bg">
-		<a href="<?php echo site_url('login'); ?>">登录</a>
-		<a href="<?php echo site_url('sign_up'); ?>#" class="sign">注册</a>
+		<div class="login_box">
+		<a href="<?php echo site_url('login'); ?>" class="login">登录</a>
+		<a href="<?php echo site_url('sign_up'); ?>" class="sign">注册</a>
+		</div>
 	</div>
 </div><!--end of main-->
 <script type="text/javascript" src="<?php echo base_url('js/guide.js'); ?>"></script>
