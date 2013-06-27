@@ -69,9 +69,9 @@ div.third_step .bottom_shadow { position:absolute; bottom:-25px; z-index:-1; wid
 /*登录、注册的样式*/
 div.shelf_bg { position:relative; clear:both; width:100%; height:65px;background:url('../img/shelf.png') no-repeat;}
 div.shelf_bg .login_box { position:absolute; top:-4px; right:50px; width:90px; height:69px;}
-.shelf_bg .login { position:absolute; width:90px; height:69px;  background:url('../img/sign_in.png') no-repeat; text-indent:-999px;}
+.shelf_bg .login { overflow:hidden; position:absolute; width:90px; height:69px;  background:url('../img/sign_in.png') no-repeat; text-indent:-9999px;}
 .shelf_bg .login:hover { background-position:-96px 0;}
-.shelf_bg .sign { position:absolute; top:5px; right:-20px; height:50px; width:24px;  background:url('../img/sign_in.png') -2px -70px no-repeat; text-indent:-999px;}
+.shelf_bg .sign { overflow:hidden; position:absolute; top:5px; right:-20px; height:50px; width:24px;  background:url('../img/sign_in.png') -2px -70px no-repeat; text-indent:-9999px;}
 .shelf_bg .sign:hover { background-position:-36px -70px;}
 /*登录、注册的样式*/
 
