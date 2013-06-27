@@ -1,6 +1,4 @@
-$(".main .search_bar input").bind("click",function(){if(this.value=="请输入要查找的书目")this.value=""}).bind("blur",function(){if(!this.value)this.value="请输入要查找的书目"});
-function show()
-{
+function show(){
 	if($("#div_pwd").height()<175) $("#div_pwd").height($("#div_pwd").height()+10); 
 	else clearTimeout($timer);
 }
