@@ -3,7 +3,7 @@
 	<?php include "template/search_bar.php"; ?>
 
 	<div class="mid_content">
-		<h3>个人信息设置：</h3>
+		<h3>捐献书籍：</h3>
 		<div class="content_box">
 			<div class="box_demo add_book">
 			<form action="<?php echo site_url('add_book/add'); ?>" method="post">
