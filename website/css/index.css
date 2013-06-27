@@ -1,7 +1,7 @@
 /*css document*/
 body { background:#cfcaa5 url('../img/bg.jpg') repeat-x;}
 div#home_page { position:relative; margin:50px auto 30px; width:400px; height:125px; background:url('../img/default.png') no-repeat;}
-div#home_page a { float:left; width:400px; height:125px;}
+div#home_page a { float:left; width:400px; height:125px; text-indent:-999px;}
 #home_page .campus { position:absolute; bottom:-50px; right:-75px; font:16px "微软雅黑",Arial, Helvetica, sans-serif;}
 .campus li { visibility:hidden; padding:4px 6px; text-align:center; cursor:pointer; color:#69645a;}
 .campus li:hover { background:#f4c676; border-radius:5px;}
