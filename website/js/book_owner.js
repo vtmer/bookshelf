@@ -1,4 +1,3 @@
-$(".main .search_bar input").bind("click",function(){if(this.value=="请输入要查找的书目")this.value=""}).bind("blur",function(){if(!this.value)this.value="请输入要查找的书目"});
 $(".ajax_page").bind('click', function(){
 var url = $(this).attr("href");
         $.get(url,{t:Math.random()},function(res){
