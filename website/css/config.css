@@ -14,7 +14,7 @@ div.content_box { margin-bottom:90px;}
 
 div.personal_config {........}
 div.personal_config div.left { float:left; width:65%; border-right:dashed 1px #717171;}
-div.personal_config div.left label { display:block; width:300px; height:30px; margin-bottom:15px; line-height:30px; text-align:right; font-size:14px;}
+div.personal_config div.left label { overflow:hidden; display:block; width:300px; margin-bottom:15px; line-height:30px; text-align:right; font-size:14px;}
 div.personal_config div.left label span.user_name { float:right; width:200px; margin-left:15px; text-align:left;}
 div.personal_config div.left label input { width:200px; height:25px; margin-left:15px; background:none; border:solid 1px #767676; border-radius:4px;}
 div.personal_config div.left label div.select_button { float:right; width:200px; height:40px; margin:3px 0 0 15px;}
@@ -25,7 +25,7 @@ div.personal_config div.left label div.select_button label { float:left; display
 
 div.personal_config div.right { float:right; width:32%;}
 div.personal_config div.right ul { margin-top:20px;}
-div.personal_config div.right ul li { height:30px; font-size:14px;}
+div.personal_config div.right ul li { line-height:30px; font-size:14px;}
 div.personal_config div.right ul li.gray { color:gray;}
 div.personal_config ul.pages { position:absolute; bottom:30px; right:140px;}
 
