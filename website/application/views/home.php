@@ -43,7 +43,7 @@
 		</div><!-- end of content_box 包裹整块质感效果的div -->
 		<div class="content_box">
 			<div class="box_demo match_book">
-				<h3>系统匹配结果：</h3>
+				<h3>这些人有你想要的书：</h3>
 				<table>
 					<tbody>
 					<tr>

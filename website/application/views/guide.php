@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>引导页</title>
+<title>选择你的专业(工大书架)</title>
 <link href="<?php echo base_url('css/reset.css'); ?>" type="text/css" rel="stylesheet" />
 <link href="<?php echo base_url('css/index.css'); ?>" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="<?php echo base_url('js/jquery-1.7.2.js'); ?>">

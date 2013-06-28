@@ -181,7 +181,7 @@ class Home_Model extends CI_Model
       }
     	$message_id = $this->count_message() + 1;
     	$url = "message/confirm/".$message_id;
-      	$content .= "若你核对完信息后，请勾选你已借到的书籍，并点击后面的确认";
+      	$content .= "若你核对完信息后，请勾选你已借出的书籍，并点击后面的确认";
     	$content = mysql_real_escape_string($content);//转义特殊字符
       $sql2 = "INSERT INTO `message` (`from`,`to`,`title`,`content`,`create_time`) VALUES ('$from','$to','$title','$content','$create_time')";
     	$this->db->query($sql2);
