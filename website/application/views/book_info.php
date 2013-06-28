@@ -19,6 +19,29 @@
 					<dd>版次:<span><?php echo $book_info[0]->version;?></span></dd>
 		
 				</dl>
+<span style="float:right;">
+<script type="text/javascript" charset="utf-8">
+(function(){
+  var _w = 90 , _h = 24;
+  var param = {
+    url:location.href,
+    type:'2',
+    count:'1', /**是否显示分享数，1显示(可选)*/
+    appkey:'1693113172', /**您申请的应用appkey,显示分享来源(可选)*/
+    title:'我在工大书架找到一本教材《<?php if(strlen($book_info[0]->name) > 50) {echo substr($book_info[0]->name,0,40)."...";} else{echo $book_info[0]->name;}?>》，妈妈再也不用担心我借不到教材了。', /**分享的文字内容(可选，默认为所在页面的title)*/
+    pic:'<?php echo base_url("images/" . $book_info[0]->ISBN . ".jpg");?>', /**分享图片的路径(可选)*/
+    ralateUid:'', /**关联用户的UID，分享微博会@该用户(可选)*/
+    language:'zh_cn', /**设置语言，zh_cn|zh_tw(可选)*/
+    dpc:1
+  }
+  var temp = [];
+  for( var p in param ){
+    temp.push(p + '=' + encodeURIComponent( param[p] || '' ) )
+  }
+  document.write('<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://service.weibo.com/staticjs/weiboshare.html?' + temp.join('&') + '" width="'+ _w+'" height="'+_h+'"></iframe>')
+  })();
+</script>
+</span>
 				<table>
 					<tbody>
 						<tr>
