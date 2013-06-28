@@ -23,7 +23,7 @@ class Message extends CI_Controller
 		$this->pagination->initialize($pager_config); 
 	 
         $messages = $this->user_model->show_message_num($this->session->userdata['uid']);
-		$header = array('title' => '信息页面','css_file' => 'message.css','messages' => $messages);
+		$header = array('title' => '我收到的信息','css_file' => 'message.css','messages' => $messages);
 		$footer = array('js_file' => 'message.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('message',$data);		
@@ -37,7 +37,7 @@ class Message extends CI_Controller
 			$bookArray = $this->input->post();
 			if($this->user_model->confirm($bookArray))
 			{
-				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'恭喜你！你已确认成功！');
+				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'已确认！');
 				echo json_encode($msg);
 				exit();
 			}

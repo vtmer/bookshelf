@@ -14,7 +14,8 @@ class Book_owner extends CI_Controller
 			show_404();
 		}
 		$data = $this->home_model->get_userbook($user_id,0,5);
-		$data['user'] = $this->home_model->get_userinfo($user_id);
+        $user = $this->home_model->get_userinfo($user_id);
+		$data['user'] = $user;
 		if (!count($data['user'])) 
 		{
 			show_404();
@@ -29,7 +30,7 @@ class Book_owner extends CI_Controller
 		//$pager_config['per_page'] = 5; //设置每页显示的条数,默认为5
 		$this->pagination->initialize($pager_config); 
 		//END
-		$header = array('title'=>'书籍拥有者','css_file'=>'book_owner.css');
+		$header = array('title'=>$user[0]['truename'] . '-个人信息(工大书架)','css_file'=>'book_owner.css');
 		$footer = array('js_file'=>'book_owner.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('book_owner',$data);

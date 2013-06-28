@@ -49,7 +49,9 @@ class Home extends CI_Controller
 	{	
 		//从URI中获取页数为第四个分段home/book_owner/3/1
 		$page = $this->uri->segment(4,1);
-		$data['book_info'] = $this->search_model->get_book_by_id($book_id);
+
+        $bookinfo = $this->search_model->get_book_by_id($book_id);
+		$data['book_info'] = $bookinfo;
 		if(!$data['book_info']) 
 		{
 			show_404();
@@ -67,7 +69,7 @@ class Home extends CI_Controller
 		$pager_config['per_page'] = 5; //设置每页显示的条数
 		$this->pagination->initialize($pager_config); 
 		//END
-		$header = array('title'=>'书籍信息','css_file'=>'book_info.css');
+		$header = array('title'=>$bookinfo[0]->name . '(工大书架)','css_file'=>'book_info.css');
 		$footer = array('js_file'=>'book_info.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('book_info',$data);
