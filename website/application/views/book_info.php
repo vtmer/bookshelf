@@ -11,7 +11,7 @@
 				<img src="<?php echo $book_url;?>" id="image" />
 				</div>
 				<dl>
-					<input type="text" id="isbncode" value="<?php echo $book_info[0]->ISBN; ?>" />
+					<input type="hidden" id="isbncode" value="<?php echo $book_info[0]->ISBN; ?>" />
 					<dt><?php if(strlen($book_info[0]->name) > 50) {echo substr($book_info[0]->name,0,40)."...";} else{echo $book_info[0]->name;}?></dt>
 					<dd>作者：<span><?php echo $book_info[0]->author;?></span></dd>
 					<dd>发放对象:<span><?php echo $book_info[0]->course_category;?></span></dd>

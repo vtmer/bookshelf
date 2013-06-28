@@ -1,5 +1,7 @@
 <?php 
 
+ob_start();
+
 class Message extends CI_Controller
 {
 	public function __construct()

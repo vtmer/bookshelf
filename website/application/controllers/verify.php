@@ -29,6 +29,7 @@ class Verify extends CI_Controller
 			";
 			$this->user_model->send_sys_msg($uid,$content);
 			$this->session->unset_userdata('username');//从session删除用户名
+			echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
 			echo "<script>alert('验证成功！');</script>";
 		}
 		$this->user_model->activate($uid);
