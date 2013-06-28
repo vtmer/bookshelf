@@ -113,13 +113,13 @@ class Home_Model extends CI_Model
 	{
     if(isset($offset)&&isset($length))
     {
-		  $sql = "SELECT ab.`id`,`name`,`course_name`,`author`,`course_category`,`publish`,`version`,`book_right`,`book_status` 
+		  $sql = "SELECT ab.`id` AS book_id,cb.`id` AS cb_id,`name`,`course_name`,`author`,`course_category`,`publish`,`version`,`book_right`,`book_status` 
             FROM `circulating_book` AS cb INNER JOIN `allbook` AS ab WHERE cb.`from_id`=? AND ab.`id`=cb.`book_id` LIMIT $offset,$length";
     }
     else
     {
       //没有限制条数
-      $sql = "SELECT ab.`id`,`name`,`course_name`,`author`,`course_category`,`publish`,`version`,`book_right`,`book_status` 
+      $sql = "SELECT ab.`id` AS book_id,cb.`id` AS cb_id,`name`,`course_name`,`author`,`course_category`,`publish`,`version`,`book_right`,`book_status` 
             FROM `circulating_book` AS cb INNER JOIN `allbook` AS ab WHERE cb.`from_id`=? AND ab.`id`=cb.`book_id` ";
     }
 		$query = $this->db->query($sql,array($user_id));
@@ -189,10 +189,14 @@ class Home_Model extends CI_Model
 
   	public function pull_off($id)
   	{
-    	$sql = "DELETE FROM `circulating_book` WHERE `book_id`=$id";
-    	$this->db->query($sql);
-      return mysql_affected_rows();
-  	}
+    	$sql = "DELETE FROM `circulating_book` WHERE `id`=$id";
+      $this->db->query($sql);
+      $query = mysql_affected_rows();
+      $sql2 = "UPDATE `user` SET `points` = `points` - 8 ,`donate_book` = `donate_book` - 1 WHERE `id` = ".$this->session->userdata['uid'];
+      $this->db->query($sql2);
+      $query2 = mysql_affected_rows();
+      return 2==$query+$query2 ? true:false;
+    }
   
   	public function count_userbook($id)
   	{

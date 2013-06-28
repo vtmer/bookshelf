@@ -28,7 +28,7 @@
 							<td class="remove">
 								<?php if($book['book_status']==0&&$book['book_right']==0):?>
 								<form action="<?php echo site_url('my_book/pull_off'); ?>" method="POST" class="ajaxForm">
-									<input type="hidden" name="book_id" value="<?php echo $book['id'];?>" />
+									<input type="hidden" name="book_id" value="<?php echo $book['cb_id'];?>" />
 									<input type="submit" value="下架" />
 								</form>		
 								<?php endif;?>
