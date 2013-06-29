@@ -83,8 +83,8 @@ class Home_Model extends CI_Model
 
   	public function get_userinfo($from_id)
 	{
-		$sql = "SELECT `id`,`username`,`truename`,`faculty`,`major`,`grade`,`dormitory`,`phone_number`,`subphone_number` FROM `user` WHERE `id`=?";
-		$query = $this->db->query($sql,array($from_id));
+    $this->db->select('id,username,truename,faculty,major,grade,dormitory,phone_number,subphone_number,points');
+    $query = $this->db->get_where('user', array('id' => $from_id));
 		return $query->result_array();
 	}
 

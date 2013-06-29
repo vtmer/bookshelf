@@ -39,7 +39,7 @@
 			<span>已有帐号登录:</span>
 			<label for="user_name">用户名：<input type="text" name="username"/ ></label>
 			<label for="password">密码：<input type="password" name="pwd" /></label>
-			<label for="remember" class="check_label"><input type="checkbox" id="remember"/><span unselectable="on">自动登录</span></label>
+			<label for="remember" class="check_label"><input type="checkbox" id="remember" name="auto_login" value="true"/><span unselectable="on">一周内自动登录</span></label>
 			<a href="#" class="forget">忘记密码？</a>
 			<input type="submit" class="confirm" value="登陆" />
 		</form>

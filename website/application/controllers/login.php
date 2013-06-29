@@ -2,11 +2,32 @@
 
 class Login extends CI_Controller
 {
+	public function __construct()
+	{
+		parent::__construct();
+	}
     public function index()
     {
 		if (!$this->is_logged_in()) 
 		{
-            $this->load->view('login');
+			if(isset($_COOKIE['uid']))
+			{
+				echo '正在跳转......';
+				$uid = substr($_COOKIE['uid'], 32);
+				$user_data = $this->home_model->get_userinfo($uid);
+				//储存用户信息至session
+                	$data = array(
+						'points' => $user_data[0]['points'],
+						'truename' => $user_data[0]['truename'],
+                	    'uid' => $user_data[0]['id'],
+						'major' => $user_data[0]['major'],
+						'grade' => $user_data[0]['grade'],
+                	    'is_logged_in' => TRUE,
+                	);
+	            $this->session->set_userdata($data);
+	            header("Location:".site_url('home'));
+			}
+			$this->load->view('login');
 		} 
 		else 
 		{
@@ -26,10 +47,11 @@ class Login extends CI_Controller
 		{
             redirect('login/error');
 		}*/ 
-		
-                        $this->output
-                            ->set_content_type('application/json')
-                            ->set_status_header('200');
+		//var_dump($this->input->post('auto_login'));
+		//exit()
+            $this->output
+                ->set_content_type('application/json')
+                ->set_status_header('200');
 		
 			$email = $this->input->post('username');
 			if(!$this->user_model->is_active($email))
@@ -49,7 +71,7 @@ class Login extends CI_Controller
 					$truename = $row->truename;
 					$major = $row->major;
 					$grade = $row->grade;
-                	/*储存用户信息至session*/
+                	//储存用户信息至session
                 	$data = array(
 						'points' => $points,
 						'truename' => $truename,
@@ -58,21 +80,27 @@ class Login extends CI_Controller
 						'grade' => $grade,
                 	    'is_logged_in' => TRUE,
                 	);
-                                        $this->session->set_userdata($data);
-                                        $this->output->set_output(json_encode(array(
-                                            'type' => 'redirect',
-                                            'title' => '提示信息',
-                                            'content' => '登录成功',
-                                            'url' => site_url('home')
-                                        )));
-                                        return;
+	                $this->session->set_userdata($data);
+	                //设置cookies
+	                if($this->input->post('auto_login'))
+	                {
+		                $user_id = md5($uid).$uid;//按照md5(uid)+uid加密
+		                setcookie('uid',$user_id,time()+3600*24*7);//持续一周
+		            }
+	                $this->output->set_output(json_encode(array(
+	                    'type' => 'redirect',
+	                    'title' => '提示信息',
+	                    'content' => '登录成功',
+	                    'url' => site_url('home')
+	                )));
+	                return;
 				}
 			}
 			else 
 			{
-                                $msg = array('type'=>'alert','title'=>'提示信息','content'=>'密码错误！');
-                                $this->output->set_output(json_encode($msg));
-                                return;
+                $msg = array('type'=>'alert','title'=>'提示信息','content'=>'密码错误！');
+                $this->output->set_output(json_encode($msg));
+                return;
 			}
 		 
     }
@@ -88,6 +116,7 @@ class Login extends CI_Controller
 		{
             $this->session->set_userdata(array('is_logged_in' => FALSE));
             $this->session->sess_destroy();
+            setcookie("uid", "", time()-3600*24*7);//让cookie过期
             $this->load->view('login');
         }
     }
