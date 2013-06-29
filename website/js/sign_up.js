@@ -263,36 +263,50 @@ $(function(){
 		}
 		var getStr = unescape(getCookie.substring(c_start,c_end));	
 		getStr = getStr.split(";");
-		switch(getStr[0]){
-			case "daxuecheng" : getStr[0] = "大学城";
+		if(getStr.length == 4){
+			switch(getStr[0]){
+				case "daxuecheng" : getStr[0] = "大学城";
+					break;
+				case "longdong" : getStr[0] = "龙洞";
+					break;
+				case "dongfenglu" : getStr[0] = "东风路";
+					break;
 				break;
-			case "longdong" : getStr[0] = "龙洞";
-				break;
-			case "dongfenglu" : getStr[0] = "东风路";
-				break;
-			break;
-	 	};
-	 	var getCampus = $("#campus option"), getCollege =$("#college option"), getMajor = $("#major option"); 
-	 	for(var i=0; i<$("#campus option").length; i++){
-	 		if($("#campus option")[i].innerText == getStr[0]){
-	 			$("#campus option")[i].selected = true;
-	 			var campus_data = $("#campus option:eq("+ i + ")").attr("data-base").split(",");
-	 			change_select.college(campus_data[0],campus_data[1]);
-	 			break;
-	 		}
-	 	}
-	 	for(var i=0; i<getCollege.length; i++){
-	 		if(getCollege[i].innerText == getStr[1]){
-	 			getCollege[i].selected = true;
-	 			var college_data = $("#college option:eq("+ i + ")").attr("data-base");
-				change_select.major(college_data); break;
-	 		}
-	 	}
-	 	for(var i=0; i<getMajor.length; i++){
-	 		if(getMajor[i].innerText == getStr[2]){
-	 			getMajor[i].selected = true; break;
-	 		}
-	 	}
+		 	};
+		 	switch(getStr[3]){
+		 		case "大一" : getStr[3] = 0;
+		 			break;
+		 		case "大二" : getStr[3] = 1;
+		 			break;
+		 		case "大三" : getStr[3] = 2;
+		 			break;
+		 		case "大四" : getStr[3] = 3;
+		 			break;
+		 		break;
+		 	};
+		 	var getCampus = $("#campus option"), getCollege =$("#college option"), getMajor = $("#major option"); 
+		 	for(var i=0; i<$("#campus option").length; i++){
+		 		if($("#campus option")[i].innerText == getStr[0]){
+		 			$("#campus option")[i].selected = true;
+		 			var campus_data = $("#campus option:eq("+ i + ")").attr("data-base").split(",");
+		 			change_select.college(campus_data[0],campus_data[1]);
+		 			break;
+		 		}
+		 	}
+		 	for(var i=0; i<getCollege.length; i++){
+		 		if(getCollege[i].innerText == getStr[1]){
+		 			getCollege[i].selected = true;
+		 			var college_data = $("#college option:eq("+ i + ")").attr("data-base");
+					change_select.major(college_data); break;
+		 		}
+		 	}
+		 	for(var i=0; i<getMajor.length; i++){
+		 		if(getMajor[i].innerText == getStr[2]){
+		 			getMajor[i].selected = true; break;
+		 		}
+		 	}
+		 	$("#grade option:eq(" + getStr[3] + ")")[0].selected = true;
+		}
 	}()
 	//以上是获取cookie填写专业
 	$("input#mail").bind("blur", function(){
