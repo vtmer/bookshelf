@@ -293,7 +293,7 @@ $(function(){
 	 			getMajor[i].selected = true; break;
 	 		}
 	 	}
-	}
+	}()
 	//以上是获取cookie填写专业
 	$("input#mail").bind("blur", function(){
 		check_func.email(this.value);
