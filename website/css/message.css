@@ -19,6 +19,7 @@ div.mid_content div.box_demo {min-height:320px; padding-bottom:80px;}/*浮雕快
 .main .message h5 span:nth-child(2) {float:left; width:450px;} 
 .main .message h5 span:nth-child(3) {float:left; width:90px;}
 .main .message .message_box h5 { border-bottom:solid 1px #c4c4c4; font-weight:normal; cursor:pointer;} 
+.main .message .message_box h5.unread { font-weight:bold;}
 .main .message .message_contant { display:none; overflow:hidden; margin:0 15px; padding:10px 0px; border-top:solid 2px #787878; border-bottom:solid 2px #787878;}
 .main .message .message_contant p { font:14px "宋体"; margin:0 22px 10px; text-indent:2em; line-height:25px;}
 .main .message .message_contant span { float:right; width:22px; height:22px; margin:5px 20px 0 0; background:url('../img/hide.png') no-repeat; cursor:pointer;}
