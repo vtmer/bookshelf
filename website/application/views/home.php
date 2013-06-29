@@ -52,7 +52,14 @@
 						<th>拥有你需要的教材数</th>
 					</tr>
 
-					<?php 
+					<?php
+					if(empty($system_match['user']))
+					{
+						echo "
+						<tr>
+						<th colspan=3>暂时没找到哦！</th>
+						</tr>";
+					} 
 					foreach ($system_match['user'] as $user) 
 						{
 							echo 

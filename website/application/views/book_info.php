@@ -49,7 +49,15 @@
 							<th>专业</th>
 							<th>生活区</th>
 						</tr>
-						<?php $n = 0;
+						<?php 
+						if(empty($user['user']))
+						{
+							echo "
+							<tr>
+							<th colspan=3>暂时没找到哦！</th>
+							</tr>";
+						}
+						$n = 0;
 						foreach ($user['user'] as $value) 
 						{
 							echo
@@ -60,33 +68,6 @@
 						</tr>";
 						$n++;
 						}?>
-						<!--
-						<tr>
-							<td><a href="book_info.html">xxx</a></td>
-							<td>线性代数</td>
-							<td>n次</td>
-						</tr>
-						<tr>
-							<td><a href="book_info.html">大学物理</a></td>
-							<td>大学物理</td>
-							<td>n次</td>
-						</tr>
-						<tr>
-							<td><a href="book_info.html">大学英语</a></td>
-							<td>大学英语</td>
-							<td>n次</td>
-						</tr>
-						<tr>
-							<td><a href="book_info.html">高等数学</a></td>
-							<td>高等数学</td>
-							<td>n次</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					-->
 					</tbody>
 				</table>
 				<ul class="get_book">
@@ -98,13 +79,6 @@
 						echo '<li><input type="submit" value="借阅" /></li>';
 						echo '</form>';
 					}?>
-					<!--
-					<li><a href="check_step.html">借阅</a></li>
-					<li><a href="check_step.html">借阅</a></li>
-					<li><a href="check_step.html">借阅</a></li>
-					<li><a href="check_step.html">借阅</a></li>
-					<li><a href="check_step.html">借阅</a></li>
-					-->
 				</ul>
 				<?php echo $this->pagination->create_links();?><!-- 输出分页模块 -->
 			</div>
