@@ -60,8 +60,17 @@
 						<input type="text" id="stu_id" name="student_id"/>
 						<span></span>
 					</label>
+					<label><span>校区</span>
+						<select id="campus" name="campus">
+							<option data-base="0,9">大学城</option>
+							<option data-base="10,12">龙洞</option>
+							<option data-base="13,15">东风路</option>
+						</select>
+						<span></span>
+					</label>
 					<label><span>学院</span>
-						<select id="college" name="faculty">
+						<select id="college">
+							<option data-base="-1">请选择学院</option>
 						</select>
 						<span></span>
 					</label>
