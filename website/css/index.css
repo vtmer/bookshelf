@@ -2,11 +2,13 @@
 body { background:#cfcaa5 url('../img/bg.jpg') repeat-x;}
 div#home_page { position:relative; margin:50px auto 30px; width:400px; height:125px; background:url('../img/default.png') no-repeat;}
 div#home_page a { float:left; width:400px; height:125px; text-indent:-999px;}
-#home_page .campus { position:absolute; bottom:-50px; right:-75px; font:16px "微软雅黑",Arial, Helvetica, sans-serif;}
-.campus li { visibility:hidden; padding:4px 6px; text-align:center; cursor:pointer; color:#69645a;}
+#home_page .campus { position:absolute; top:88px; right:-75px; font:16px "微软雅黑",Arial, Helvetica, sans-serif;}
+#home_page .campus:after { content:"切换校区？"; position:absolute; top:9px; left:72px; width:80px; font-size:10px; color:#418FDF;}
+#home_page .campus:hover:after { height:80px;}
+.campus li { display:none; padding:4px 6px; text-align:center; cursor:pointer; color:#69645a;}
 .campus li:hover { background:#f4c676; border-radius:5px;}
-.campus:hover li { visibility:visible;}
-#home_page .campus .current { visibility:visible;}
+.campus:hover li { display:block;}
+#home_page .campus .current { display:block; font-weight:bold;}
 
 div.main {...........}
 div.main { width:807px; margin:auto; }
