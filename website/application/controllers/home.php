@@ -120,11 +120,11 @@ class Home extends CI_Controller
 			$this->session->set_userdata('borrow',time());
 			$this->home_model->update_info($info);
 			$this->user_model->show_user_point($this->session->userdata('uid'));
-			echo "<script type='text/javascript'>setTimeout(\"window.location.href='".site_url('home')."'\",3000);</script>";
+			echo "<script type='text/javascript'>setTimeout(\"window.location.href='".site_url('home')."'\",10000);</script>";
 		}
 		else if($this->session->userdata('borrow'))
 		{
-			echo "<script type='text/javascript'>setTimeout(\"window.location.href='".site_url('home')."'\",3000);</script>";
+			echo "<script type='text/javascript'>setTimeout(\"window.location.href='".site_url('home')."'\",10000);</script>";
 		}
 		
 		$header = array('title'=>'确认借书','css_file'=>'receipt.css');

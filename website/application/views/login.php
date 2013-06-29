@@ -41,7 +41,7 @@
 			<label for="password">密码：<input type="password" name="pwd" /></label>
 			<label for="remember" class="check_label"><input type="checkbox" id="remember" name="auto_login" value="true"/><span unselectable="on">一周内自动登录</span></label>
 			<a href="#" class="forget">忘记密码？</a>
-			<input type="submit" class="confirm" value="登陆" />
+			<input type="submit" class="confirm" value="登录" />
 		</form>
 		<a href="<?php echo site_url('register');?>" class="sign_up"></a>
 </div>

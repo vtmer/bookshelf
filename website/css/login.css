@@ -24,7 +24,7 @@ div.sign form input.confirm:active { background:#e8a126;}
 div.sign form .forget { float:right; text-decoration: underline; color:#626262; font-size:12px;}
 
 /*记住密码的特殊样式*/
-div.sign form .check_label { float:left; width:72px; margin:0; margin-left:70px; font-size:12px; line-height:12px;}
+div.sign form .check_label { float:left; width:101px; margin:0; margin-left:40px; font-size:12px; line-height:12px;}
 div.sign form #remember { width:auto; height:auto;}
 div.sign .check_label span { float:right; margin:1px 0 0 4px; -webkit-user-select:none; -mos-user-select:none;}
 

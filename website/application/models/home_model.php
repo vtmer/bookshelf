@@ -137,7 +137,7 @@ class Home_Model extends CI_Model
     	{       		
         foreach ($bookArray as $bookkey => $books) 
         {
-         if($value['id']==$books)
+         if($value['book_id']==$books)
           {
               $match[$key] = $value;
           }           		 

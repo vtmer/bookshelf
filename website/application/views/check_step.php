@@ -93,7 +93,7 @@
 			$hidden = array();
 			foreach ($books as $key => $value) 
 			{
-				$hidden = $hidden+array($key=>$value['id']);	
+				$hidden = $hidden+array($key=>$value['book_id']);	
 			}
 				echo form_open('home/receipt','',$hidden);
 				echo form_hidden('from_id',$user[0]['id']);
