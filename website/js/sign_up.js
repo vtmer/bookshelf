@@ -216,7 +216,7 @@ $(function(){
 	}
 	var qu_select = $(".select_button").children().clone();
 	change_select.college(0,9);
-	function(){
+	(function(){
 		var set_time = new Date;
 		var year = (set_time.getMonth() > 8) ? set_time.getFullYear() : set_time.getFullYear()-1;
 		for(var i=0; i < 4; i++){
@@ -224,7 +224,8 @@ $(function(){
 			option.innerText = year-i;
 			$("#grade").append(option);
 		}
-	}();
+	})();
+	// 增加年级选择框
 	$("#campus").bind("change",function(){
 		$("#college").children().remove();
 		$("#major").children().remove();
