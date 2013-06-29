@@ -250,6 +250,51 @@ $(function(){
 		$("#grade").append(option);
 	}
 	// 以上是选择框的联动动作
+	var checkCookie = function(){
+		var getCookie = document.cookie;
+		var c_star,c_end;
+		if(getCookie.length >0){
+			c_start = getCookie.indexOf("getSelect=");
+			if(c_start != -1){
+				c_start +=  10;
+				c_end = getCookie.indexOf(";",c_start);
+				if(c_end == -1) c_end = getCookie.length;
+			}	
+		}
+		var getStr = unescape(getCookie.substring(c_start,c_end));	
+		getStr = getStr.split(";");
+		switch(getStr[0]){
+			case "daxuecheng" : getStr[0] = "大学城";
+				break;
+			case "longdong" : getStr[0] = "龙洞";
+				break;
+			case "dongfenglu" : getStr[0] = "东风路";
+				break;
+			break;
+	 	};
+	 	var getCampus = $("#campus option"), getCollege =$("#college option"), getMajor = $("#major option"); 
+	 	for(var i=0; i<$("#campus option").length; i++){
+	 		if($("#campus option")[i].innerText == getStr[0]){
+	 			$("#campus option")[i].selected = true;
+	 			var campus_data = $("#campus option:eq("+ i + ")").attr("data-base").split(",");
+	 			change_select.college(campus_data[0],campus_data[1]);
+	 			break;
+	 		}
+	 	}
+	 	for(var i=0; i<getCollege.length; i++){
+	 		if(getCollege[i].innerText == getStr[1]){
+	 			getCollege[i].selected = true;
+	 			var college_data = $(this).find("option:selected").attr("data-base");
+				change_select.major(college_data); break;
+	 		}
+	 	}
+	 	for(var i=0; i<getMajor.length; i++){
+	 		if(getMajor[i].innerText == getStr[2]){
+	 			getMajor[i].selected = true; break;
+	 		}
+	 	}
+	}
+	//以上是获取cookie填写专业
 	$("input#mail").bind("blur", function(){
 		check_func.email(this.value);
 		});
