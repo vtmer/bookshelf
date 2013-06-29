@@ -284,7 +284,7 @@ $(function(){
 	 	for(var i=0; i<getCollege.length; i++){
 	 		if(getCollege[i].innerText == getStr[1]){
 	 			getCollege[i].selected = true;
-	 			var college_data = $(this).find("option:selected").attr("data-base");
+	 			var college_data = $("#college option:eq("+ i + ")").attr("data-base");
 				change_select.major(college_data); break;
 	 		}
 	 	}
