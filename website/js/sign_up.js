@@ -216,6 +216,15 @@ $(function(){
 	}
 	var qu_select = $(".select_button").children().clone();
 	change_select.college(0,9);
+	function(){
+		var set_time = new Date;
+		var year = (set_time.getMonth() > 8) ? set_time.getFullYear() : set_time.getFullYear()-1;
+		for(var i=0; i < 4; i++){
+			var option = document.createElement("option");
+			option.innerText = year-i;
+			$("#grade").append(option);
+		}
+	}();
 	$("#campus").bind("change",function(){
 		$("#college").children().remove();
 		$("#major").children().remove();
@@ -237,18 +246,14 @@ $(function(){
 				$(".select_button").append(qu_select);
 		}
 	})
+	// 校区选择动作
 	$("#college").change(function(){
 		$("#college option[data-base=-1]").remove();
 		var getMajor = $(this).find("option:selected").attr("data-base");
 		change_select.major(getMajor);
 	})
-	var set_time = new Date;
-	var year = (set_time.getMonth() > 8) ? set_time.getFullYear() : set_time.getFullYear()-1;
-	for(var i=0; i < 4; i++){
-		var option = document.createElement("option");
-		option.innerText = year-i;
-		$("#grade").append(option);
-	}
+	// 学院选择动作
+	
 	// 以上是选择框的联动动作
 	var checkCookie = function(){
 		var getCookie = document.cookie;
@@ -284,15 +289,18 @@ $(function(){
 		 			break;
 		 		break;
 		 	};
-		 	var getCampus = $("#campus option"), getCollege =$("#college option"), getMajor = $("#major option"); 
+		 	var getCampus = $("#campus option");
 		 	for(var i=0; i<$("#campus option").length; i++){
 		 		if($("#campus option")[i].innerText == getStr[0]){
 		 			$("#campus option")[i].selected = true;
 		 			var campus_data = $("#campus option:eq("+ i + ")").attr("data-base").split(",");
+		 			$("#college").children().remove();
+					$("#major").children().remove();
 		 			change_select.college(campus_data[0],campus_data[1]);
 		 			break;
 		 		}
 		 	}
+		 	 getCollege =$("#college option");
 		 	for(var i=0; i<getCollege.length; i++){
 		 		if(getCollege[i].innerText == getStr[1]){
 		 			getCollege[i].selected = true;
@@ -300,6 +308,7 @@ $(function(){
 					change_select.major(college_data); break;
 		 		}
 		 	}
+		 	getMajor = $("#major option"); 
 		 	for(var i=0; i<getMajor.length; i++){
 		 		if(getMajor[i].innerText == getStr[2]){
 		 			getMajor[i].selected = true; break;
