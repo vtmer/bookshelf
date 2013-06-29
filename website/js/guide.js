@@ -120,7 +120,9 @@ $(function(){
 
 	// 下面是第三步的动作
 	$(".main .third_step ul li").bind("click",function(){
-		$("form input#grade_select").val($(this).text())  ;
+		$("form input#grade_select").val($(this).text());
+		var getSelect = $("#campus_select").val() + ";" + $("#college_select").val() + ";" + $("#major_select").val()+ ";" + $("#grade_select").val();
+		document.cookie = "getSelect" + "=" + escape(getSelect);
 		$("form").submit();
 	})
 });
