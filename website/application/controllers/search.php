@@ -5,31 +5,32 @@ class Search extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('search_model');
-		$this->load->library('parser');
-		$this->load->library('Pager');
+		$this->config->load('pager_config',TRUE);
 	}
 
 	public function index()
 	{
 		if(!$page = $this->input->get('page'))
-			{
-				$page = 1;
-			}
-		$this->load->helper('form');
+		{
+			$page = 1;
+		}
 
 		$header = array('title'=>'搜索书籍','css_file'=>'search.css');
 	    $footer = array('js_file'=>'search.js');
-
+	    $per_page = 10;//每页显示的条数
+	    $offset = ($page - 1)*$per_page;
 		if($keywords = $this->input->get('keywords'))
 		{
-			$data['books'] = $this->search_model->get_book_by_keywords($keywords);
+			$data = $this->search_model->get_book_by_keywords($keywords,$offset, $per_page);
+			//var_dump($data);
 			//分页		
-			$this->pager->set(0,5);//设置每页显示的条数	
-			$data['page']['num'] = $this->pager->get_pagenum($data['books']);//获取总页数
-			$data['books'] = $this->pager->get_pagedata($data['books'],$page);//当前页数据
-			$data['page']['currentpage'] = $this->pager->get_currentpage();
-			$data['page']['nextpage'] = $this->pager->get_nextpage();
-			$data['page']['prevpage'] = $this->pager->get_prevpage();
+			$pager_config = $this->config->item('pager_config');
+			$pager_config['page_query_string'] = TRUE;
+			$pager_config['query_string_segment'] = 'page';
+			$pager_config['base_url'] = site_url('search?keywords='.$keywords);
+			$pager_config['total_rows'] = $data['num'];//获取总数
+			$pager_config['per_page'] = $per_page; //设置每页显示的条数
+			$this->pagination->initialize($pager_config); 
 			//END
 			$this->parser->parse('template/header',$header);	
 			$this->load->view('search',$data);
@@ -39,6 +40,29 @@ class Search extends CI_Controller
 		{
 			redirect('home');
 		}	
+	}
+	public function ajaxPage()
+	{
+		if(!$page = $this->input->get('page'))
+		{
+			$page = 1;			
+		}
+		$per_page = 10;//每页显示的条数
+	    $offset = ($page - 1)*$per_page;
+	    $keywords = $this->input->get('keywords');
+	    $data = $this->search_model->get_book_by_keywords($keywords,$offset, $per_page);
+		//分页		
+		$pager_config = $this->config->item('pager_config');
+		$pager_config['page_query_string'] = TRUE;
+		$pager_config['query_string_segment'] = 'page';
+		$pager_config['base_url'] = site_url('search?keywords='.$keywords);
+		$pager_config['total_rows'] = $data['num'];//获取总数
+		$pager_config['per_page'] = $per_page; //设置每页显示的条数
+		$this->pagination->initialize($pager_config); 
+		$data['page'] = $this->pagination->create_links();
+		//var_dump($data);exit();
+		echo json_encode($data);
+		exit();
 	}
 		
 }
