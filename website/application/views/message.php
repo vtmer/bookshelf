@@ -10,7 +10,7 @@
 
 				<?php foreach($messages as $row):?>
 				<div class="message_box">
-				<h5><span class="readed"><?php if($row['status']=='0') echo "未读";else echo "已读";?></span><span><?php echo $row['title'];?></span><span><?php echo $row['create_time'];?></span></h5>
+				<?php if($row['status']=='0') echo "<h5 class='unread'><span class='readed'>未读";else echo "<h5><span class='readed'>已读";?></span><span><?php echo $row['title'];?></span><span><?php echo $row['create_time'];?></span></h5>
 					<div class="message_contant">
 						<form action='<?php echo site_url('message/confirm');?>' method='post' class='ajaxForm'>
 						<input type="hidden" name="message_id" value="<?php echo $row['id'];?>" />
