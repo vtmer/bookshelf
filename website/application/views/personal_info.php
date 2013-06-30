@@ -28,9 +28,13 @@
 							<?php if($user[0]['dormitory']=='西区'):?>
 							<label><input type="radio" value="西区" name="dormitory" checked="checked" class="qu"/>西区</label>
 							<label><input type="radio" value="东区" name="dormitory" class="qu"/>东区</label>
-							<?php else: ?>
+							<?php elseif($user[0]['dormitory']=='东区'): ?>
 							<label><input type="radio" value="西区" name="dormitory" class="qu"/>西区</label>
 							<label><input type="radio" value="东区" name="dormitory"  checked="checked" class="qu"/>东区</label>
+							<?php elseif($user[0]['dormitory']=='东风路'): ?>
+                            <span class="user_name"><?php echo $user[0]['dormitory']; ?></span>
+                            <?php elseif($user[0]['dormitory']=='龙洞'): ?>
+                            <span class="user_name"><?php echo $user[0]['dormitory']; ?></span>
 							<?php endif;?>
 						</div>
 					</label> 

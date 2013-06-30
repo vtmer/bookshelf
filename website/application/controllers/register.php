@@ -56,17 +56,27 @@ class Register extends CI_Controller
 			$truename = str_replace(" ","",$this->input->post('truename'));
 			$student_id = str_replace(" ","",$this->input->post('student_id'));
 			//利用session保存的信息（学院、专业、年级）；
-			$faculty = $this->input->post('faculty');
+			$campus = $this->input->post('campus');
+			$faculty = $this->input->post('college');
 			$major = $this->input->post('major');
 			$grade = $this->input->post('grade'); 
 			$phone_num = str_replace(" ","",$this->input->post('phone_num'));
 			$subphone_num = str_replace(" ","",$this->input->post('subphone_num'));
-			$dormitory = $this->input->post('dormitory');	
+			
+			if($campus == '龙洞')
+			{
+				$dormitory = '龙洞'
+		   	}
+			else if($campus == '东风路')
+		   	{
+				$dormitory = '东风路';
+	        }
+
 			$status = 0;//注册标识码
 			$activationKey = mt_rand() . mt_rand() . mt_rand() . mt_rand() . mt_rand();//生成随机激活码	
 			$points = 30; //初始积分为30
 		
-		if($this->user_model->add($username,$password,$truename,$student_id,$faculty,$major,$grade,$phone_num,$subphone_num,$dormitory,$activationKey,$status,$points))
+		if($this->user_model->add($username,$password,$truename,$student_id,$campus,$faculty,$major,$grade,$phone_num,$subphone_num,$dormitory,$activationKey,$status,$points))
 			{
 				//将数据插入数据库
 				//将用户信息保存至session，邮箱验证后直接可登陆

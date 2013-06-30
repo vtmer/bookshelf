@@ -28,7 +28,7 @@ class User_model extends CI_Model
 		return ($query->num_rows() == 1) ? TRUE : FALSE;
 	}
 	//注册时向数据库添加数据
-	public function add($username,$password,$truename,$student_id,$faculty,$major,$grade,$phone_num,$subphone_num,$dormitory,$activationkey,$status,$points)
+	public function add($username,$password,$truename,$student_id,$campus,$faculty,$major,$grade,$phone_num,$subphone_num,$dormitory,$activationkey,$status,$points)
 	{
 		$query = $this->db->get_where('user',array('username' => $username,));
 
@@ -43,6 +43,7 @@ class User_model extends CI_Model
 					'password' => md5($password),
 					'truename' => $truename,
 					'student_id' => $student_id,
+					'campus' => $campus,
 					'faculty' => $faculty,
 					'major' => $major,
 					'grade' => $grade,

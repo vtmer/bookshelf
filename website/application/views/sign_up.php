@@ -69,7 +69,7 @@
 						<span></span>
 					</label>
 					<label><span>学院</span>
-						<select id="college">
+						<select id="college" name="college">
 							<option data-base="-1">请选择学院</option>
 						</select>
 						<span></span>
