@@ -31,6 +31,16 @@ div.search_results table th:nth-child(6),
 div.search_results table td:nth-child(6){ width:65px; text-align:center;}
 /*定义表格各列的宽度*/
 
+ul.pages { clear:both; float:right; margin:10px 40px;}
+ul.pages li{ float:left; margin:0 3px;}
+ul.pages li a { float:left; background:url('../img/pages.png') no-repeat;}
+ul.pages li.prev a{ width:38px; height:38px;  background-position:0px 0px;} 
+ul.pages li.prev a:hover { background-position:0px -40px;}
+ul.pages li.next a{ width:38px; height:38px;  background-position:-45px 0px;}
+ul.pages li.next a:hover {  background-position:-45px -40px;}
+ul.pages li.page a{ margin-top:10px; width:15px; height:15px; background-position:-92px -12px; line-height:38px; text-indent:5px; color:#85847d;} 
+ul.pages li.page a:hover,ul.pages li.on_select a { background-position:-93px -34px;}
+ .pages .on_select a{ font-weight:bold;}
 
 div.footer {.........}
 div.footer {float:left; width:100%; height:222px; margin-top:300px; background:url('../img/bottom_bg.jpg') repeat-x;}
