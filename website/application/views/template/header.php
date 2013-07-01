@@ -24,12 +24,8 @@
 		</div>
 		<a href="<?php echo site_url('add_book')?>" id="add_book">捐书</a>
 		<?php else: ?>		
-		<span id="login">
-			<a href="<?php echo site_url('login'); ?>">登录</a>
-		</span>
-		<span id="register">
-			<a href="<?php echo site_url('register'); ?>">注册</a>
-		</span>
+		<a href="<?php echo site_url('login');  id="login" ?>">登录</a>
+		<a href="<?php echo site_url('register');  id="register" ?>">注册</a>
 		<?php endif;?>
 	</div>
 </div>
