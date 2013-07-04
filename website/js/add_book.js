@@ -85,6 +85,11 @@ $(".next_step").bind("click",function(){
 
 function do_jsonp() 
 	{
+		var rule = /^[0-9]*$/;
+		if(!rule.test($('#isbncode').val()))//如果不是数字
+		{
+			return false;
+		}
 		var id = $('#isbncode').val();
 		$.getJSON("https://api.douban.com/v2/book/isbn/"+id+"?callback=?",
 			function(data) {
