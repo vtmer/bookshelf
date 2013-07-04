@@ -88,12 +88,14 @@ class Home extends CI_Controller
 		{
 			if(($this->session->userdata['points']-$num*10) < 0)
 			{
+				echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
 				echo "<script type='text/javascript'>alert('亲，你积分不够咯！');location='".site_url('home')."';</script>";
 				exit();
 			}
 		}
 		else
 		{
+			echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
 			echo "<script type='text/javascript'>alert('亲，登录后就可以借书咯！');location='".site_url('login')."';</script>";
 			exit();
 		}
