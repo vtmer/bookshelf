@@ -57,7 +57,7 @@ class Register extends CI_Controller
 			$student_id = str_replace(" ","",$this->input->post('student_id'));
 			//利用session保存的信息（学院、专业、年级）；
 			$campus = $this->input->post('campus');
-			$faculty = $this->input->post('faculty');
+			$faculty = $this->input->post('college');
 			$major = $this->input->post('major');
 			$grade = $this->input->post('grade'); 
 			$phone_num = str_replace(" ","",$this->input->post('phone_num'));
