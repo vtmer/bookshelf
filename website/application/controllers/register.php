@@ -65,7 +65,7 @@ class Register extends CI_Controller
 			
 			if($campus == '龙洞')
 			{
-				$dormitory = '龙洞'
+				$dormitory = '龙洞';
 		   	}
 			else if($campus == '东风路')
 		   	{
