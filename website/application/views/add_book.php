@@ -10,7 +10,7 @@
 				<div class="step1 now_step">
 					<p class="steps">步骤1：输入ISBN码或书名</p>
 					<div class="step_box">
-						<input type="text" autocomplete="off" placeholder="请输入书名或ISBN" id="isbncode" name="isbncode" onkeyup="lookup(this.value);" />
+						<input type="text" autocomplete="off" placeholder="请输入书名或ISBN" id="isbncode" name="isbncode"  />
 						<div class="suggestionsBox" id="suggestions" style="display: none;">
 						<div class="suggestionList" id="autoSuggestionsList"></div>
 						</div> 
