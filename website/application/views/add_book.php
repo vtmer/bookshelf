@@ -8,20 +8,24 @@
 			<div class="box_demo add_book">
 			<form action="<?php echo site_url('add_book/add'); ?>" method="post">
 				<div class="step1 now_step">
-					<p class="steps">步骤1：输入ISBN码</p>
+					<p class="steps">步骤1：输入ISBN码或书名</p>
 					<div class="step_box">
-						<input type="text" placeholder="请输入书籍的ISBN码" id="isbncode" name="isbncode"/>
-						<a href="#" class="next_step" onclick="do_jsonp() ">下一步</a>
+						<input type="text" autocomplete="off" placeholder="请输入书名或ISBN" id="isbncode" name="isbncode" onkeyup="lookup(this.value);" />
+						<div class="suggestionsBox" id="suggestions" style="display: none;">
+						<div class="suggestionList" id="autoSuggestionsList"></div>
+						</div> 
+
+						<a href="#" class="next_step" onclick="do_jsonp()">下一步</a>
 						<img src="<?php echo base_url('img/tip.jpg'); ?>" alt="ISBN码位于书籍背面标价处"/>
-						<p class="tips">ISBN码可在书籍背面左图标志处找到！<span>若无ISBN码，可直接点击下一步进行捐书。</span></p>
+						<p class="tips">ISBN码可在书籍背面左图标志处找到！<span>也可直接在输入框输入书名哦!</span></p>
 					</div>
 				</div>
 				<div class="step2">
 					<p class="steps">步骤2：确认信息</p>
 					<div class="step_box">
 						<label for="isbn">书名
-							<input type="text" value="" placeholder="若为学校自印书籍，请直接输入书名" id="booktitle" name="booktitle" />
-							<span id="isbn" value=""></span>
+							<input type="text" placeholder="书名不能为空哦！" id="booktitle" name="booktitle" />
+							<span id="isbn" name="isbn" disabled ></span>
 						</label>
 						<label>胶印：
 							<select name="print">
@@ -30,6 +34,7 @@
 							</select>
 							<input type="submit" id="submit" value="确定" />
 						</label>
+						<p class="tips">若书籍是学校自己印的（胶印书）<span>请返回上一步直接在输入框输入书名即可！</span></p>
 								<a href="#" class="prev">上一步</a>
 					</div>
 					</form>

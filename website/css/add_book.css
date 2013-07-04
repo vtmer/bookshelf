@@ -29,6 +29,8 @@ div.add_book .step1 .step_box input { float:left; width:380px; height:35px; marg
 div.add_book div.step1 .step_box img { float:left; margin:30px 20px;}
 .add_book .step1 .tips { overflow:hidden; float:right; width:300px; margin-top:30px; font-size:14px; line-height:160%; text-align:left;}
 .add_book .step1 .tips span { display:block; color:red;}
+.add_book .step2 .tips { overflow:hidden; float:right; width:300px; margin-top:-60px; font-size:14px; line-height:160%; text-align:left;}
+.add_book .step2 .tips span { display:block; color:red;}
 
 div.add_book .step2 label { display:block; margin:20px;}
 div.add_book .step2 #isbn{ width:220px; height:35px; margin:0 15px 0 10px; box-shadow:0 2px 5px -2px rgba(255,255,255,1) ,0 3px 4px -2px rgba(0,0,0,.6) inset;  background:#d7d7d7; border:none; text-indent:0.5em;}
@@ -50,3 +52,26 @@ div.footer {float:left; width:100%; height:222px; margin-top:300px; background:u
 div.footer div.safa {width:760px; height:344px; margin:-278px auto 80px; background:url('../img/safa.png') no-repeat;}
 div.footer ul { float:right; margin-top:20px; margin-right:20px; font-size:14px; color:#fff;}
 div.footer ul li { text-align:right; line-height:24px;}
+.suggestionsBox { 
+position: absolute; 
+left: 30px; 
+margin: 60px 0px 0px 0px; 
+width: 375px; 
+background-color: #212427; 
+-moz-border-radius: 7px; 
+-webkit-border-radius: 7px; 
+border: 2px solid #000; 
+color: #fff; 
+} 
+.suggestionList { 
+margin: 5px 0px 5px 5px;
+padding: 0px; 
+} 
+.suggestionList li { 
+margin: 0px 0px 3px 0px; 
+padding: 3px; 
+cursor: pointer; 
+} 
+.suggestionList li:hover { 
+background-color: #659CD8; 
+} 

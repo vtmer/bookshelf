@@ -22,21 +22,12 @@ class Add_book extends CI_Controller
 	
 	public function add()
 	{
-		$title = $this->input->post('booktitle');
-		$isbn = $this->input->post('isbncode');
-		/*
-		$author = $this->input->post('author');
-		$publish = $this->input->post('publish');
-		$version = $this->input->post('version');
-		$course_name = $this->input->post('course_name');
-		$course_type = $this->input->post('course_type');	
-		$major = $this->input->post('major');
-		$grade = $this->input->post('grade');
-		$term = $this->input->post('term');
-		*/
-		$print = $this->input->post('print');
+		//$title = $_POST['booktitle'];
+		$keywords = $_POST['isbncode'];
+		$print = $_POST['print'];
+		//echo "<script>alert(".$title.$isbn.$print.");</script>";
 
-		if($this->course_model->addbook($isbn,$title,$print))
+		if($this->course_model->addbook($keywords,$print))
 		{
 			echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
 			echo "<script>alert('恭喜你!你已经成功捐出书本!');</script>";
@@ -46,10 +37,27 @@ class Add_book extends CI_Controller
 		{
 			//redirect('add_book');
 			echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
-			echo "<script>alert('对不起！您所捐的书不符合捐书规则!');</script>";
+			echo "<script>alert('不好意思哦!我们书库暂时还不支持这本书！欢迎反馈哦！');</script>";
 			redirect('add_book','refresh');
 		}
 	}
+
+	public function search()
+	{
+		$queryString = $_POST['queryString']; 
+		if(strlen($queryString) >0) 
+		{ 
+			$sql= "SELECT name FROM allbook WHERE name LIKE '".$queryString."%' LIMIT 8"; 
+			$query = mysql_query($sql); 
+			while ($result = mysql_fetch_array($query,MYSQL_BOTH))
+			{ 
+				$name=$result['name'];
+				echo '<li onClick="fill(\''.$name.'\');">'.$name.'</li>'; 
+			} 
+		} 
+	}
+
+
 }
 
 ?>
