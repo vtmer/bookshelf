@@ -9,6 +9,8 @@ class Guide extends CI_Controller
 
 	public function index()
 	{
+		if($this->session->userdata('is_logged_in')==true)
+			redirect(site_url('home'));
 		$this->load->view('guide');
 	}
 
@@ -17,6 +19,8 @@ class Guide extends CI_Controller
 		//$faculty = $this->input->post('faculty');
 		$major = $this->input->post('major');
 		$grade = $this->input->post('grade');
+		if(!($major)||!($grade))
+			redirect(site_url('guide'));
 		$data = getdate();
 		$year =$data['year'];
 		$month = $data['mon'];
