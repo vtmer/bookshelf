@@ -9,7 +9,6 @@ class Verify extends CI_Controller
 
 	public function index($uid,$activationkey)
 	{
-		$this->user_model->activate($uid);
 		$activationkey_db = $this->user_model->get_active($uid);
 		if($activationkey == $activationkey_db)
 		{
@@ -28,24 +27,13 @@ class Verify extends CI_Controller
 			<p>&nbsp&nbsp--数字中心&维生数工作室<p/>
 			";
 			$this->user_model->send_sys_msg($uid,$content);
+			$this->user_model->activate($uid);
 			$this->session->unset_userdata('username');//从session删除用户名
-			echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
-			echo "<script>alert('验证成功！');</script>";
-		}
-		$this->user_model->activate($uid);
+			$this->load->view('verify_success');
+			$this->parser->parse('template/footer',array('js_file' => 'verify_success.js'));
+		}else
 		redirect('login','refresh');
 	}
-
-	/*  利用jq在views页面显示提示信息
-	private json_response($issuccessful,$message)
-	{
-		return json_encode(array(
-			   'issuccessful' => $issuccessful,
-			   'message' => $message
-		   ));	
-	}
-	*/
-
 	//判断是否为登陆状态
 	private function is_logged_in()
 	{

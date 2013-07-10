@@ -90,8 +90,8 @@ class User_model extends CI_Model
 	//根据email激活用户帐号
 	public function activate($uid)
 	{
-		$this->db->update('user',array('status' => "1"),array('id' => $uid));
-		//return ($query->num_rows() > 0) ? TRUE : FALSE;
+		$this->db->update('user',array('status' => "1",'activationkey'=>null),array('id' => $uid));
+		return (mysql_affected_rows() > 0) ? TRUE : FALSE;
 	}
 	
 	//用户预约确认后向其发送确认信息
