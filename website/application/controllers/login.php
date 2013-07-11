@@ -114,8 +114,8 @@ class Login extends CI_Controller
 		} 
 		else 
 		{
-            $this->session->set_userdata(array('is_logged_in' => FALSE));
             $this->session->sess_destroy();
+            $this->session->set_userdata(array('is_logged_in' => FALSE));
             setcookie("uid", "", time()-3600*24*7);//让cookie过期
             $this->load->view('login');
         }
