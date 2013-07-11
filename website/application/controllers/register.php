@@ -6,11 +6,16 @@ class Register extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('user_model');
+		$this->load->library('email');
 	}	
 
 	public function index()
 	{
+		if($this->session->userdata('is_logged_in'))
+			redirect(site_url('home'));
+		$header = array('title'=>'加入工大书架','css_file'=>'sign_up.css'); 
 		$footer = array('js_file' => 'sign_up.js');
+		$this->parser->parse('template/header',$header);
 		$this->load->view('sign_up');	
 		$this->parser->parse('template/footer',$footer);
 	}
@@ -71,6 +76,10 @@ class Register extends CI_Controller
 		   	{
 				$dormitory = '东风路';
 	        }
+	        else
+	        {
+	        	$dormitory = $this->input->post('dormitory');
+	        }
 
 			$status = 0;//注册标识码
 			$activationKey = mt_rand() . mt_rand() . mt_rand() . mt_rand() . mt_rand();//生成随机激活码	
@@ -108,13 +117,14 @@ class Register extends CI_Controller
 		$message .="若不是你本人的操作，对您造成的不便，我们深表歉意！\n @维生数-工大书架"; 
 	
 		/*邮箱验证模块*/
-		$this->load->library('email');
-		$this->config->load('email');
+
+		$this->config->load('email',TRUE);
+		$email_config = $this->config->item('email');
 		$this->email->from('gdutbookshelf@163.com','维生数工作室');
 		$this->email->to($username);
 		$this->email->subject('欢迎注册工大书架');
 		$this->email->message($message);
-
+		$this->email->initialize($email_config);
 		if($this->email->send())
 		{
 			//注册成功
