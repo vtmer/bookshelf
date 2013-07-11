@@ -66,7 +66,8 @@ $(document).ready(function(){
     //关闭按钮
     $('.close-btn,.ok-btn ').click(function(){
 		$('.popbox').fadeOut(function(){ $('#screen').hide(); 
-		window.top.location.reload();});
+		// window.top.location.reload();
+	});
 		return false;
 	});
 });
