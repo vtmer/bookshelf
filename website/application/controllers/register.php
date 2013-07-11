@@ -10,7 +10,9 @@ class Register extends CI_Controller
 
 	public function index()
 	{
+		$header = array('css_file'=>'sign_up.css');
 		$footer = array('js_file' => 'sign_up.js');
+		$this->parser->parse('template/header',$header);
 		$this->load->view('sign_up');	
 		$this->parser->parse('template/footer',$footer);
 	}
