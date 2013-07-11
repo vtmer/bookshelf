@@ -33,9 +33,5 @@ div.personal_config ul.pages { position:absolute; bottom:30px; right:140px;}
 div.personal_config .config_submit { height:30px; border:none; margin-left:99px; background:#c6c4b6; padding:0 17px; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center; cursor:pointer;}
 div.personal_config .config_submit:hover { background:#e8a126; color:#fff;} 
 
-div.footer {.........}
-div.footer {float:left; width:100%; height:222px; margin-top:300px; background:url('../img/bottom_bg.jpg') repeat-x;}
-div.footer div.safa {width:760px; height:344px; margin:-278px auto 80px; background:url('../img/safa.png') no-repeat;}
-div.footer ul { float:right; margin-top:20px; margin-right:20px; font-size:14px; color:#fff;}
-div.footer ul li { text-align:right; line-height:24px;}
+
 #div_pwd{padding: 15px 0 0 0;overflow: hidden; width: 300px;height: 0px;}

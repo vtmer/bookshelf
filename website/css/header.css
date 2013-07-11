@@ -10,6 +10,7 @@ body { background:#cfcaa5 url('../img/bg_01.jpg') repeat-x; font:12px 宋体;}
 #float_head .user_info span.user_name {display:block; width:65px; background:url('../img/abc.png') right no-repeat;}
 #float_head .user_info a { display:none; text-decoration:none; color:#fff; }
 #float_head .user_info:hover a { display:block;} 
+/*#float_head .user_info:hover a:hover { display:block; color: #000; background-color: #fff;} */
 #float_head #add_book {position:absolute; top:6px; left:541px; z-index:100; padding:0px 15px; background:#bfbfbf; border-radius:4px; color:#fff; text-decoration:none; line-height:32px;}
 #float_head #login {position:absolute; top:6px; left:830px; z-index:100; padding:0px 15px; background:#bfbfbf; border-radius:4px; color:#000; text-decoration:none; line-height:32px;}
 #float_head #register {position:absolute; top:6px; left:890px; z-index:100; padding:0px 15px; background:#bfbfbf; border-radius:4px; color:#000; text-decoration:none; line-height:32px;}

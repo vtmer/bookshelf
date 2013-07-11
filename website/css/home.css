@@ -79,8 +79,4 @@ div.match_book ul.pages li.page a:hover,div.match_book ul.pages li.on_select a {
 .match_book .pages .on_select a{ font-weight:bold;}
 
 
-div.footer {.........}
-div.footer {float:left; width:100%; height:222px; margin-top:300px; background:url('../img/bottom_bg.jpg') repeat-x;}
-div.footer div.safa {width:760px; height:344px; margin:-278px auto 80px; background:url('../img/safa.png') no-repeat;}
-div.footer ul { float:right; margin-top:20px; margin-right:20px; font-size:14px; color:#fff;}
-div.footer ul li { text-align:right; line-height:24px;}
+

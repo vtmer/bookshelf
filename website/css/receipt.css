@@ -19,10 +19,3 @@ div.mid_content div.receipt span { color:#ff0000;}
 div.mid_content div.receipt p { margin:20px 0; font:18px "微软雅黑",Arial, Helvetica, sans-serif; font-weight:bold;}
 div.mid_content div.receipt a {text-decoration:underline;}
 
-
-
-div.footer {.........}
-div.footer {float:left; width:100%; height:222px; margin-top:300px; background:url('../img/bottom_bg.jpg') repeat-x;}
-div.footer div.safa {width:760px; height:344px; margin:-278px auto 80px; background:url('../img/safa.png') no-repeat;}
-div.footer ul { float:right; margin-top:20px; margin-right:20px; font-size:14px; color:#fff;}
-div.footer ul li { text-align:right; line-height:24px;}
