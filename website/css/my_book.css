@@ -52,9 +52,3 @@ div.my_book ul.pages li.page a{ margin-top:10px; width:15px; height:15px; backgr
 div.my_book ul.pages li.page a:hover,div.my_book ul.pages li.on_select a { background-position:-93px -34px;}
 .my_book .pages .on_select a{ font-weight:bold;}
 
-
-div.footer {.........}
-div.footer {float:left; width:100%; height:222px; margin-top:300px; background:url('../img/bottom_bg.jpg') repeat-x;}
-div.footer div.safa {width:760px; height:344px; margin:-278px auto 80px; background:url('../img/safa.png') no-repeat;}
-div.footer ul { float:right; margin-top:20px; margin-right:20px; font-size:14px; color:#fff;}
-div.footer ul li { text-align:right; line-height:24px;}

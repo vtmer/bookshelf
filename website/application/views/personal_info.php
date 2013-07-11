@@ -10,7 +10,7 @@
 				<form action="<?php echo site_url('home/personal_config');?>" method="post" class="ajaxForm">
 				<div class="left">
 					<label>姓名：<span class="user_name"><?php echo $user[0]['truename'];?></span></label>
-					
+					<label>账号：<span class="user_name"><?php echo $user[0]['username'];?></span></label>			
 					<input type="button" class="config_submit" value="修改密码" id="config_pwd"/>
 					<div id="div_pwd" class="div_pwd">
 						<label for="pwd_old">旧密码：<input type="password" name="pwd_old" id="pwd_old"/></label>

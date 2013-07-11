@@ -22,8 +22,3 @@ div.sign_info p.notice { height:30px; font-size:12px; text-indent:150px; line-he
 div.sign_info .config_submit { height:30px; border:none; margin-left:150px; background:#c6c4b6; padding:0 17px; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center; cursor:pointer;}
 div.sign_info .config_submit:hover { background:#e8a126; color:#fff;} 
 
-div.footer {.........}
-div.footer {float:left; width:100%; height:222px; margin-top:300px; background:url('../img/bottom_bg.jpg') repeat-x;}
-div.footer div.safa {width:760px; height:344px; margin:-278px auto 80px; background:url('../img/safa.png') no-repeat;}
-div.footer ul { float:right; margin-top:20px; margin-right:20px; font-size:14px; color:#fff;}
-div.footer ul li { text-align:right; line-height:24px;}

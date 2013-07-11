@@ -5,6 +5,7 @@
 <title>{title}</title>
 <link href="<?php echo base_url('css/reset.css');?>" type="text/css" rel="stylesheet" />
 <link href="<?php echo base_url('css/header.css');?>" type="text/css" rel="stylesheet" />
+<link href="<?php echo base_url('css/footer.css');?>" type="text/css" rel="stylesheet" />
 <link href="<?php echo base_url('css');?>/{css_file}" type="text/css" rel="stylesheet" />
 <script language="javascript" src="<?php echo base_url('js/jquery-1.7.2.js');?>"></script>
 <script language="javascript" src="<?php echo base_url('js/pop_box.js');?>"></script>
