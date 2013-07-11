@@ -11,6 +11,7 @@ class Register extends CI_Controller
 
 	public function index()
 	{
+
 		if($this->session->userdata('is_logged_in'))
 			redirect(site_url('home'));
 		$header = array('title'=>'加入工大书架','css_file'=>'sign_up.css'); 
