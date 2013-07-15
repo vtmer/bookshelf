@@ -5,6 +5,7 @@ class Login extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->library('catch_msg');
 	}
     public function index()
     {
@@ -37,71 +38,52 @@ class Login extends CI_Controller
     
 	//登陆验证
     public function check()
-	{   
-			
-       /* $this->load->library('form_validation');
-        $this->form_validation->set_rules('username', 'Email', 'required|max_length[40]|valid_email');
-        $this->form_validation->set_rules('pwd', 'Password', 'required|min_length[8]|max_length[20]|alpha_numeric');
-
-		if ($this->form_validation->run() == FALSE) 
+	{  
+		$username = $this->input->post('username');
+		$pwd = $this->input->post('pwd');
+		$result = $this->catch_msg->is_login($username,$pwd);
+		if($result['status'])
 		{
-            redirect('login/error');
-		}*/ 
-		//var_dump($this->input->post('auto_login'));
-		//exit()
-            $this->output
-                ->set_content_type('application/json')
-                ->set_status_header('200');
-		
-			$email = $this->input->post('username');
-			if(!$this->user_model->is_active($email))
+			$row = $this->user_model->get($username);
+			if($row==null)//如果是第一次登录
 			{
-				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'帐号未激活！');
-				echo json_encode($msg);
-				exit();
+				$url = site_url('register');
+	            $msg = array('type'=>'redirect','url'=>$url);
+	            echo json_encode($msg);
+	            exit;//跳转到信息填写
 			}
-			$password = md5($this->input->post('pwd'));
-			if($is_user = $this->user_model->is($email,$password))
-			{
-				if ($is_user) 
-				{
-					$row = $this->user_model->get($email);
-					$uid = $row->id;
-					$points = $row->points; 
-					$truename = $row->truename;
-					$major = $row->major;
-					$grade = $row->grade;
-                	//储存用户信息至session
-                	$data = array(
-						'points' => $points,
-						'truename' => $truename,
-                	    'uid' => $uid,
-						'major' => $major,
-						'grade' => $grade,
-                	    'is_logged_in' => TRUE,
-                	);
-	                $this->session->set_userdata($data);
-	                //设置cookies
-	                if($this->input->post('auto_login'))
-	                {
-		                $user_id = md5($uid).$uid;//按照md5(uid)+uid加密
-		                setcookie('uid',$user_id,time()+3600*24*7);//持续一周
-		            }
-	                $this->output->set_output(json_encode(array(
-	                    'type' => 'redirect',
-	                    'title' => '提示信息',
-	                    'content' => '登录成功',
-	                    'url' => site_url('home')
-	                )));
-	                return;
-				}
-			}
-			else 
-			{
-                $msg = array('type'=>'alert','title'=>'提示信息','content'=>'密码错误！');
-                $this->output->set_output(json_encode($msg));
-                return;
-			}
+			$uid = $row->id;
+			$points = $row->points; 
+			$truename = $row->truename;
+			$major = $row->major;
+			$grade = $row->grade;
+        	//储存用户信息至session
+        	$data = array(
+				'points' => $points,
+				'truename' => $truename,
+        	    'uid' => $uid,
+				'major' => $major,
+				'grade' => $grade,
+        	    'is_logged_in' => TRUE,
+        	);
+            $this->session->set_userdata($data);
+            //设置cookies
+            if($this->input->post('auto_login'))
+            {
+                $user_id = md5($uid).$uid;//按照md5(uid)+uid加密
+                setcookie('uid',$user_id,time()+3600*24*7);//持续一周
+            }
+	        $url = site_url('home');
+            $msg = array('type'=>'redirect','url'=>$url);
+            echo json_encode($msg);
+            exit;		
+		}
+		else 
+		{
+            $msg = array('type'=>'alert','title'=>'提示信息','content'=>$result['msg']);
+           	echo json_encode($msg);
+            exit;
+		}
 		 
     }
 

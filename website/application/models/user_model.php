@@ -76,15 +76,19 @@ class User_model extends CI_Model
 		return $row->activationkey;
 	}
 
-	//根据email获取该用户id
+	//根据学号获取该用户信息
 	public function get($username)
 	{
-		$query = $this->db->get_where('user',array('username' => $username));
+		$query = $this->db->get_where('user',array('student_id' => $username));
 		if($query->num_rows() == 1)
 		{
 			$row = $query->row();
+			return $row;
 		}	
-		return $row;
+		else
+		{
+			return ;
+		}
 	}
 
 	//根据email激活用户帐号

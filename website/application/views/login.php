@@ -24,8 +24,6 @@
 /*popboxcss end*/
 </style>
 <script language="javascript" src="<?php echo base_url('js/jquery-1.7.2.js'); ?>"></script>
-<script language="javascript" src="<?php echo base_url('js/pop_box.js'); ?>">
-</script>
 </head>
 <body>
 
@@ -37,8 +35,8 @@
 	<img src="<?php echo base_url('img/shujia.jpg'); ?>" class="shujia" alt="工大书架" />
 		<form action="<?php echo site_url('login/check'); ?>" method="POST" class="ajaxForm"> 
 			<span>已有帐号登录:</span>
-			<label for="user_name">账户：<input type="text" name="username" placeholder="  请输入您的邮箱"/ ></label>
-			<label for="password">密码：<input type="password" name="pwd" /></label>
+			<label for="user_name">账户：<input type="text" name="username" value='3111006360' placeholder="  请输入您的邮箱"/ ></label>
+			<label for="password">密码：<input type="password" name="pwd" value='452402199211111255'/></label>
 			<label for="remember" class="check_label"><input type="checkbox" id="remember" name="auto_login" value="true"/><span unselectable="on">一周内自动登录</span></label>
 			<a href="#" class="forget">忘记密码？</a>
 			<input type="submit" class="confirm" value="登录" />
@@ -48,17 +46,6 @@
 
 	<div class="bottom_shadow"></div>
 	<div class="shelf_bg"></div>
-
-	<?php if(isset($active_error)):?>
-		<div class="alert">
-		    <strong>帐号未激活！</strong>
-		</div>
-	<?php elseif(isset($pwd_error)):?>
-		<div class="alert">
-		    <strong>密码错误！</strong>
-		</div>
-	<?php endif;?>
-
 </div><!--end of main-->
 <script>
 document.getElementById('home_page').getElementsByTagName('a')[0].innerText= " ";
@@ -78,5 +65,128 @@ document.getElementById('home_page').getElementsByTagName('a')[0].innerText= " "
 		</span>
 	</div>
 </div><!--popbox end-->
+<script type="text/javascript">
+//将form转为AJAX提交
+function ajaxSubmit(frm, fn) {
+    var dataPara = getFormJson(frm);
+    $.ajax({
+        url: frm.action,
+        type: frm.method,
+        data: dataPara,
+        beforeSend:function(XMLHttpRequest){
+        			var url = 'http://'+document.domain+"/img/loading.gif";
+        			$("#popContent").html("<img src="+url+" alt='loading...'/>");
+		            $("#pop_title").html("正在登录");
+		          	var h = $(document).height();
+					$('#screen').css({ 'height': h });	
+					$('#screen').show();
+					$('.popbox').center();
+					$('.popbox').fadeIn();            
+                 }
+    }).done(fn);
+}
+
+//将form中的值转换为键值对。
+function getFormJson(frm) {
+    var JsonData = {};
+    var a = $(frm).serializeArray();
+    $.each(a, function () {
+        if (JsonData[this.name] !== undefined) {
+            if (!JsonData[this.name].push) {
+                JsonData[this.name] = [JsonData[this.name]];
+            }
+            JsonData[this.name].push(this.value || '');
+        } else {
+            JsonData[this.name] = this.value || '';
+        }
+    });
+    return JsonData;
+}
+//调用
+$(document).ready(function(){
+    $(".ajaxForm").bind('submit', function(){//回调函数
+        ajaxSubmit(this, function(data){  
+                if (typeof data !== 'object') 
+                {
+    	    		jsonobj = JSON.parse(data);
+                } 
+                else 
+                {
+                    jsonobj = data;
+                }
+	        	if(jsonobj.type=='alert')
+	        	{
+		            $("#popContent").html(jsonobj.content);
+		            $("#pop_title").html(jsonobj.title);
+		          	var h = $(document).height();
+					$('#screen').css({ 'height': h });	
+					$('#screen').show();
+					$('.popbox').center();
+					$('.popbox').fadeIn();
+					if(jsonobj.content=='用户名不存在')
+					{
+						//关闭按钮
+					    $('.close-btn,.ok-btn ').click(function(){
+							$('.popbox').fadeOut(function(){ $('#screen').hide();
+								$('input[type=text]').val('');
+								$('input[type=password]').val('');
+								$('input[type=text]').focus();
+							});
+							return false;
+						});
+					}
+					else if(jsonobj.content=='密码不正确')
+					{
+						//关闭按钮
+					    $('.close-btn,.ok-btn ').click(function(){
+							$('.popbox').fadeOut(function(){ $('#screen').hide();
+							$('input[type=password]').val('');
+							$('input[type=password]').focus();
+							});
+							return false;
+						});
+					}
+				}
+				else if(jsonobj.type=='redirect')
+				{
+					window.location.href=jsonobj.url;
+				}
+             });
+        return false;
+    });
+
+});
+
+jQuery.fn.center = function(loaded) {
+	var obj = this;
+	body_width = parseInt($(window).width());
+	body_height = parseInt($(window).height());
+	block_width = parseInt(obj.width());
+	block_height = parseInt(obj.height());
+	
+	left_position = parseInt((body_width/2) - (block_width/2)  + $(window).scrollLeft());
+	if (body_width<block_width) { left_position = 0 + $(window).scrollLeft(); };
+	
+	top_position = parseInt((body_height/2) - 100 - (block_height/2) + $(window).scrollTop());
+	if (body_height - 180<block_height) { top_position = 0 + $(window).scrollTop(); };
+	
+	if(!loaded) {
+		
+		obj.css({'position': 'absolute'});
+		obj.css({ 'top': top_position, 'left': left_position });
+		$(window).bind('resize', function() { 
+			obj.center(!loaded);
+		});
+		$(window).bind('scroll', function() { 
+			obj.center(!loaded);
+		});
+		
+	} else {
+		obj.stop();
+		obj.css({'position': 'absolute'});
+		obj.animate({ 'top': top_position }, 200, 'linear');
+	}
+}
+</script>
 </body>
 </html>
