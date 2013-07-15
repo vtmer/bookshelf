@@ -35,8 +35,8 @@
 	<img src="<?php echo base_url('img/shujia.jpg'); ?>" class="shujia" alt="工大书架" />
 		<form action="<?php echo site_url('login/check'); ?>" method="POST" class="ajaxForm"> 
 			<span>已有帐号登录:</span>
-			<label for="user_name">账户：<input type="text" name="username" value='3111006360' placeholder="  请输入您的邮箱"/ ></label>
-			<label for="password">密码：<input type="password" name="pwd" value='452402199211111255'/></label>
+			<label for="user_name">账户：<input type="text" name="username" value='' placeholder="  请输入您的邮箱"/ ></label>
+			<label for="password">密码：<input type="password" name="pwd" value=''/></label>
 			<label for="remember" class="check_label"><input type="checkbox" id="remember" name="auto_login" value="true"/><span unselectable="on">一周内自动登录</span></label>
 			<a href="#" class="forget">忘记密码？</a>
 			<input type="submit" class="confirm" value="登录" />
