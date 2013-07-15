@@ -19,9 +19,9 @@
 							<th>书名</th>
 							<th>课程名称</th>
 							<th>作者</th>
-							<th>发放对象</th>
 							<th>出版社</th>
-							<th>版次</th>
+							<th>版 次</th>
+							<th>状 态</th>
 						</tr>
 						
 						<?php foreach ($book_need as $row)
@@ -30,9 +30,9 @@
 							"<tr><td><a target='_blank' href='".site_url('home/book_info')."/".$row['id']."'>" . $row['name'] . "</a></td>".
 							"<td>" . $row['course_name'] . "</td>".
 							"<td>" . $row['author'] ."</td>".
-							"<td>" . $row['course_category']. "</td>".
-							"<td>" . $row['publish'] . "</td>".
-							"<td>" . $row['version'] . "</td></tr>";			
+							"<td>" . $row['publish']. "</td>".
+							"<td>" . $row['version'] . "</td>".
+							"<td>" . $row['course_category'] . "</td></tr>";//要将course_category改成状态的ID			
 						}
 						?>
 	

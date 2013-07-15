@@ -18,17 +18,17 @@ div.needed_book p a { color:#418FDF;}
 div.needed_book p a:hover { color:#000; text-decoration:underline;}
 div.needed_book table { margin-bottom:30px;}
 div.needed_book table th:nth-child(1),
-div.needed_book table td:nth-child(1){ width:120px; text-align:center;}
+div.needed_book table td:nth-child(1){ width:180px; text-align:center;}
 div.needed_book table th:nth-child(2),
-div.needed_book table td:nth-child(2){ width:135px; text-align:center;}
+div.needed_book table td:nth-child(2){ width:120px; text-align:center;}
 div.needed_book table th:nth-child(3),
-div.needed_book table td:nth-child(3){ width:80px; text-align:center;}
+div.needed_book table td:nth-child(3){ width:140px; text-align:center;}
 div.needed_book table th:nth-child(4),
-div.needed_book table td:nth-child(4){ width:140px; text-align:center;}
+div.needed_book table td:nth-child(4){ width:150px; text-align:center;}
 div.needed_book table th:nth-child(5),
-div.needed_book table td:nth-child(5){ width:120px; text-align:center;}
+div.needed_book table td:nth-child(5){ width:70px; text-align:center;}
 div.needed_book table th:nth-child(6),
-div.needed_book table td:nth-child(6){ width:65px; text-align:center;}
+div.needed_book table td:nth-child(6){ width:70px; text-align:center;}
 
 /*定义表格各列的宽度*/
 
