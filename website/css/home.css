@@ -8,7 +8,7 @@ div.search_bar .search_submit { float:right; width:50px; height:50px; margin:11p
 
 div.mid_content { width:100%; padding-top:88px; background:url('../img/shelf.png') 77px 0 no-repeat; }
 div.content_box { margin-bottom:90px;}
-div.mid_content div.match_book { overflow:visible;}
+div.mid_content div.match_book { overflow:hidden;}
 
 div.mid_content div.box_demo h3 { float:left; width:200px; height:42px; margin:10px 0 10px -2px; background:url('../img/h3_bg.png') 0px 0px no-repeat; font:14px 微软雅黑; line-height:38px; color:#fff; text-indent:1em;}
 
@@ -55,10 +55,7 @@ div.match_book table tr.book_list .select_all { margin-right: 20px; text-decorat
 div.match_book table tr.book_list #submit { height:32px; width:78px; border:none; background:url("../img/hover_bg.png") no-repeat 0 -116px; cursor:pointer;}
 div.match_book table tr.book_list #submit:hover { background-position:-85px -116px;}
 
-
-
-
-div.match_book ul.pages { clear:both; margin:40px 0 105px 600px;}
+div.match_book ul.pages { clear:both; float: right; margin: 20px 30px 20px 0px;}
 div.match_book ul.pages li{ float:left; margin:0 3px;}
 div.match_book ul.pages li a { float:left; background:url('../img/pages.png') no-repeat;}
 div.match_book ul.pages li.prev a{ width:38px; height:38px;  background-position:0px 0px;} 
