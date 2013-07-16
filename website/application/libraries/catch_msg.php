@@ -6,65 +6,46 @@ class catch_msg
 curl 多线程抓取
 */
  /** 
-     * curl 多线程 
+     * curl 单线程 
      *  
-     * @param array $array 并行网址 
+     * @param string $url 并行网址 
      * @param int $timeout 超时时间
      * @param string $curlPost post数据
      * @param string $sessionid 会话sessionid
      * @return array 
      */
-    private $session_id = ''; 
-    private function Curl_http($array,$timeout,$curlPost='',$sessionid='')
+    private $session_id = '';
+
+    private function Curl_http($url,$timeout,$curlPost='',$sessionid='')
     {
-     	$res = array();
-     	$mh = curl_multi_init();//创建多个curl语柄
+     	$conn = curl_init($url);//创建个curl语柄
     	$startime = $this->getmicrotime();
-     	foreach($array as $k=>$url)
+
+        curl_setopt($conn, CURLOPT_TIMEOUT, $timeout);//设置超时时间
+        curl_setopt($conn, CURLOPT_USERAGENT, 'Mozilla/5.0 (compatible; MSIE 5.01; Windows NT 5.0)');
+        curl_setopt($conn, CURLOPT_MAXREDIRS, 7);//HTTp定向级别
+        curl_setopt($conn, CURLOPT_HEADER,1);
+        if($sessionid!='')
         {
-     		$conn[$k]=curl_init($url);
-            curl_setopt($conn[$k], CURLOPT_TIMEOUT, $timeout);//设置超时时间
-            curl_setopt($conn[$k], CURLOPT_USERAGENT, 'Mozilla/5.0 (compatible; MSIE 5.01; Windows NT 5.0)');
-            curl_setopt($conn[$k], CURLOPT_MAXREDIRS, 7);//HTTp定向级别
-            curl_setopt($conn[$k], CURLOPT_HEADER,1);
-            if($sessionid!='')
-            {
-                curl_setopt($conn[$k],CURLOPT_COOKIESESSION,true);//发送会话id
-                curl_setopt($conn[$k], CURLOPT_COOKIE,'ASP.NET_SessionId='.$sessionid);
-            }
-            curl_setopt($conn[$k], CURLOPT_FOLLOWLOCATION, 1); // 302 redirect
-            if($curlPost!='')
-            {
-                curl_setopt($conn[$k], CURLOPT_POST, 1);//发送表单数据
-                curl_setopt($conn[$k], CURLOPT_POSTFIELDS, $curlPost);
-            }
-            curl_setopt($conn[$k],CURLOPT_RETURNTRANSFER,1);// 返回结果，而不是输出它
-            ob_start();  
-            curl_multi_add_handle ($mh,$conn[$k]);
-     	}
-    	 //防止死循环耗死cpu 这段是根据网上的写法
-		do {
-			$mrc = curl_multi_exec($mh,$active);//当无数据，active=true
-		} while ($mrc == CURLM_CALL_MULTI_PERFORM);//当正在接受数据时
-		while ($active and $mrc == CURLM_OK) 
-        {//当无数据时或请求暂停时，active=true
-			if (curl_multi_select($mh) != -1) 
-            {
-				do {
-					$mrc = curl_multi_exec($mh, $active);
-				} while ($mrc == CURLM_CALL_MULTI_PERFORM);
-			}
-		}
-     	foreach ($array as $k => $url) 
+            curl_setopt($conn,CURLOPT_COOKIESESSION,true);//发送会话id
+            curl_setopt($conn, CURLOPT_COOKIE,'ASP.NET_SessionId='.$sessionid);
+        }
+        curl_setopt($conn, CURLOPT_FOLLOWLOCATION, 1); // 302 redirect
+        if($curlPost!='')
         {
- 		  curl_error($conn[$k]);
-    	  $res[$k]=curl_multi_getcontent($conn[$k]);//获得返回信息
-    	  $header[$k]=curl_getinfo($conn[$k]);//返回头信息
-    	  curl_close($conn[$k]);//关闭语柄
-    	  curl_multi_remove_handle($mh  , $conn[$k]);   //释放资源  
-		}
-    		
-		curl_multi_close($mh);
+            curl_setopt($conn, CURLOPT_POST, 1);//发送表单数据
+            curl_setopt($conn, CURLOPT_POSTFIELDS, $curlPost);
+        }
+        curl_setopt($conn,CURLOPT_RETURNTRANSFER,1);// 返回结果，而不是输出它
+        ob_start();
+     	$res = curl_exec($conn);//获得返回信息
+        if($res == false)
+        {
+    	    return curl_error($conn);
+        }
+        $header = curl_getinfo($conn);//返回头信息
+    	curl_close($conn);//关闭语柄
+
 		$endtime = $this->getmicrotime();
 		$diff_time = $endtime - $startime;
 		
@@ -83,13 +64,9 @@ curl 多线程抓取
 
     public function is_login($username,$pwd)//登录验证
     {
-        $array = array(
-                "http://eswis.gdut.edu.cn/"
-                //"http://jwgl.gdut.edu.cn/(vppjnrnauy3acvni03k3whig)/default2.aspx",
-                //"http://jwgldx.gdut.edu.cn/(vppjnrnauy3acvni03k3whig)/default2.aspx"
-                );
-        $data = $this->Curl_http($array,10);//调用
-        $html = $data['return'][0];//第一次获取网页
+        $url =  'http://eswis.gdut.edu.cn';               
+        $data = $this->Curl_http($url,10);//调用
+        $html = $data['return'];//第一次获取网页
         //抓取表单数据
         $location = strpos($html,'__EVENTVALIDATION');
         $sub1 = substr($html,$location);
@@ -121,9 +98,8 @@ curl 多线程抓取
                 );
         $post_data = implode('&',$postdata);
         //以上是抓取表单数据
-        $data2 = $this->Curl_http(array('http://eswis.gdut.edu.cn/default.aspx'),10,$post_data,$this->session_id);//验证登录
-        $html2 = $data2['return'][0];
-
+        $data2 = $this->Curl_http('http://eswis.gdut.edu.cn/default.aspx',10,$post_data,$this->session_id);//验证登录
+        $html2 = $data2['return'];
         $msg_pos = strpos($html2,'ctl00_msg_logon');//抓取错误信息
         $msg1 = substr($html2,$msg_pos+32, 50);
         $msg_pos = strpos($msg1,'</span>');
@@ -143,15 +119,15 @@ curl 多线程抓取
     {
         if($this->session_id=='') return '';
         //个人信息页面   
-        $data3 = $this->Curl_http(array('http://eswis.gdut.edu.cn/default.aspx?fid=7'),10,'',$this->session_id);
-        $html3 = $data3['return'][0];
+        $data3 = $this->Curl_http('http://eswis.gdut.edu.cn/default.aspx?fid=7',10,'',$this->session_id);
+        $html3 = $data3['return'];
 
         $location3 = strpos($html3,'信息汇总');//获取信息汇总链接
         $url3 = '/'.substr($html3, $location3-42,40);
         unset($html3);//释放资源
 
-        $data4 = $this->Curl_http(array('http://eswis.gdut.edu.cn'.$url3),10,'',$this->session_id); //信息汇总页面
-        $html4 = $data4['return'][0];
+        $data4 = $this->Curl_http('http://eswis.gdut.edu.cn'.$url3,10,'',$this->session_id); //信息汇总页面
+        $html4 = $data4['return'];
 
         $pos = strpos($html4,'<table id="ctl00_cph_right_table_userinf_stu" class=');//获取表格
         $str = substr($html4, $pos,3072);   
