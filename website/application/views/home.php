@@ -66,10 +66,12 @@
 							"<tr>
 							<td><a href='".site_url('book_owner')."/".$user['uid']."'/>".$user['truename'].'</a></td>
 							<td>'.$user['dormitory'].'</td>
-							<td class="hidden_list">'.count($user['book']).
-								'<div class="book_list">
-									<h6>书目</h6>';						
+
+							<td>'.count($user['book']).'本 <span class="hidden_list"> [查看]</span></td>
+							</tr>';						
 					?>				
+							<tr class="book_list">
+								<td colspan="3">
 									<form action="<?php echo site_url('home/check_step');?>" method='post' >
 									<input type="hidden" value="<?php echo $user['uid'];?>" name="user" />
 									<ul>
@@ -82,9 +84,8 @@
 									</ul>
 									<p class="book_list_bottom"><span class="select_all">全选</span><input type="submit" id="submit" value=""/></p>
 									</form>
-								</div>
-							</td>
-						</tr>
+								</td>
+							</tr>
 					<?php }?>
 
 					</tbody>
