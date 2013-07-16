@@ -6,79 +6,92 @@ class Home_Model extends CI_Model
   		$this->load->database();
 	}
 
-	public function get_book_need($major,$grade)
-	{
-    	$data = getdate();
-    	$year =$data['year'];
-    	$month = $data['mon'];
-    	if($month < 9)
-    	{
-      		$year-=1;
-    	}
-    	switch ($grade) {
-      	case $year:
-        	$grade = '大二';
-        	break;
-      	case $year - 1:
-       	 	$grade = '大三';
-        	break;
-      	case $year - 2:    
-        	$grade = '大四';
-        	break;
-      	case $year - 3:
-        	$grade = '大四';
-        	break;
-      	default:
-        	#code...
-        	break;
+  private function trans_grade($grade)
+  {
+    $data = getdate();
+      $year =$data['year'];
+      $month = $data['mon'];
+      if($month < 9)
+      {
+          $year-=1;
+      }
+      switch ($grade) {
+        case $year:
+          $grade = '大二';
+          break;
+        case $year - 1:
+          $grade = '大三';
+          break;
+        case $year - 2:    
+          $grade = '大四';
+          break;
+        case $year - 3:
+          $grade = '大四';
+          break;
+        default:
+          #code...
+          break;
     }
-  	$sql = "SELECT ab.`id`,`name`,`course_name`,`author`,`course_category`,`publish`,`version` FROM `allbook` ab,`allbook_mg` abmg WHERE major=? AND grade=? AND `ab`.`id`=`abmg`.`book_id`";
-  	$query = $this->db->query($sql,array($major,$grade));
-  	return $query->result_array();  		
-	}
-
-  	public function get_system_match(array $match)
-  	{
-		$book = array();
-		$user = array();
-    	$uid = $this->session->userdata['uid'];
-    	if($uid==NULL)
-    	{
-      		$uid = 0;
-    	}
-		$i = 0;
-		$sql = "SELECT `from_id`,`book_id` FROM `circulating_book` WHERE book_status=0 AND `from_id`!=$uid";
-		$query = $this->db->query($sql);
-		$result = $query->result_array();
-		foreach ($match as $value) 
-		{  			
-  			foreach ($result as $row) 
-  			{
-  				if($value['id']==$row['book_id'])
-  				{
-  					$book[$i] = $row;
-	        		$book[$i]['name'] = $value['name'];
-  					$i++;
-  				}
-  			}  		
-		}
-		$sql2 = "SELECT `id`,`truename`,`dormitory`,`major` FROM `user` WHERE `id`!=$uid"; 
-		$query2 = $this->db->query($sql2);
-		$result = $query2->result_array();
-		foreach ($result as $key=>$row) 
-  		{  		
-  			$j = 1;	
-	  		foreach ($book as $value)
-	  		{
-	  			if($value['from_id']==$row['id'])
-	  			{
-	  				$user[$key] = $row;
-	  				$user[$key]['number'] = $j;
-	  				$j++;	
-	  			}
-	  		}	  			
-		}
-		return array('user'=>$user,'book'=>$book);
+    return $grade;
+  }
+  public function get_book_need($grade,$major)
+  {
+    $grade = $this->trans_grade($grade);
+    $sql = "SELECT ab.`id`,`name`,`course_name`,`author`,`course_category`,`publish`,`version` FROM `allbook` ab,`allbook_mg` abmg WHERE major=? AND grade=? AND `ab`.`id`=`abmg`.`book_id`";
+    $query = $this->db->query($sql,array($major,$grade));
+    return $query->result_array();      
+  }
+  public function system_match($grade,$major,$offset,$length)
+  {
+    $grade = $this->trans_grade($grade);
+    $uid = $this->session->userdata['uid']; 
+    /*$sql = "SELECT DISTINCT SQL_CALC_FOUND_ROWS `cb`.`from_id` AS uid, `cb`.`book_id`, `ab`.`name`, `user`.`truename`, `user`.`dormitory` 
+    FROM (`allbook` AS ab) LEFT JOIN `circulating_book` AS cb ON `cb`.`book_id` = `ab`.`id` 
+                           LEFT JOIN `user` ON `cb`.`from_id` = `user`.`id` 
+                           LEFT JOIN `allbook_mg` AS abmg ON `abmg`.`book_id`=`ab`.`id` 
+                           WHERE `cb`.`book_status` = 0 AND `user`.`id` != ?
+                                 AND `abmg`.`grade` = ? AND `abmg`.`major` = ?
+                           LIMIT ?, ?";
+    $query = $this->db->query($sql, array($uid, $grade, $major ,$offset, $length ));*/
+    $this->db->select('cb.from_id AS uid, cb.book_id, ab.name, user.truename, user.dormitory')
+            ->from('allbook AS ab')
+            ->join('circulating_book AS cb', 'cb.book_id = ab.id', 'left')
+            ->join('user', 'cb.from_id = user.id', 'left')
+            ->join('allbook_mg AS abmg','abmg.book_id = ab.id','left')
+            ->where('cb.book_status',0)
+            ->where('user.id !=',$uid)
+            ->where('abmg.grade',$grade)
+            ->where('abmg.major',$major);
+    $this->db->distinct();
+    $query = $this->db->get();
+    $result = $query->result_array();
+    /*$res_num = $this->db->query('SELECT FOUND_ROWS() AS total;');
+    $res_num = $res_num->result_array();*/
+    $uid = array();
+    $books = array();
+    $res = array(array('uid'=>'','truename'=>'','dormitory'=>'','book'=>$books));
+    foreach ($result as $key => $value) 
+    {
+        $uid[] = $value['uid'];
+    }
+    $uid = array_unique($uid);//取出重复值
+    $n = count($uid);
+    for($i = 0 ; $i < $n ; $i++)
+    {
+      foreach ($result as $key => $value) 
+      {
+        if($value['uid']==$uid[$i])
+        {
+          array_push($books, array('book_id'=>$value['book_id'],'name'=>$value['name']));
+          $res[$i] =array('uid'=>$value['uid'],'truename'=>$value['truename'],'dormitory'=>$value['dormitory'],'book'=>$books);
+        }
+      }
+      $books = array();//清空
+    }
+    $res_num = count($res);
+    $res_perpage = array_slice($res,$offset,$length);
+    return array('data'=>$res_perpage,'total'=>$res_num);
+   // var_dump($res_perpage);exit;
 	}
 
   	public function get_userinfo($from_id)
@@ -109,9 +122,9 @@ class Home_Model extends CI_Model
 		}
 	}
 
-	public function get_userbook($user_id,$offset,$length)
+	public function get_userbook($user_id,$offset = '',$length = '')
 	{
-    if(isset($offset)&&isset($length))
+    if($offset!=''&&$length!='')
     {
 		  $sql = "SELECT ab.`id` AS book_id,cb.`id` AS cb_id,`name`,`course_name`,`author`,`course_category`,`publish`,`version`,`book_right`,`book_status` 
             FROM `circulating_book` AS cb INNER JOIN `allbook` AS ab WHERE cb.`from_id`=? AND ab.`id`=cb.`book_id` LIMIT $offset,$length";
@@ -132,18 +145,21 @@ class Home_Model extends CI_Model
 	public function get_bookborrow($bookArray)
   	{
     	$book = $this->get_userbook($bookArray['user']);
+      //var_dump($book['books']);
     	$match = array();
-    	foreach ($book['books'] as $key => $value) 
+      foreach ($bookArray as $bookkey => $books) 
     	{       		
-        foreach ($bookArray as $bookkey => $books) 
+        foreach ($book['books'] as $key => $value)
         {
          if($value['book_id']==$books)
           {
               $match[$key] = $value;
+              break;
           }           		 
        	}
    		}	
-    return $match;     
+          var_dump($match);    
+    return $match;
   	}
 
 	public function count_message()

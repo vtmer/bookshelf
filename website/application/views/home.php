@@ -53,33 +53,30 @@
 					</tr>
 
 					<?php
-					if(empty($system_match['user']))
+					if(empty($system_match['data']))
 					{
 						echo "
 						<tr>
 						<th colspan=3>暂时没找到哦！</th>
 						</tr>";
-					} 
-					foreach ($system_match['user'] as $user) 
+					}else 
+					foreach ($system_match['data'] as $user) 
 						{
 							echo 
 							"<tr>
-							<td><a href='".site_url('book_owner')."/".$user['id']."'/>".$user['truename'].'</a></td>
+							<td><a href='".site_url('book_owner')."/".$user['uid']."'/>".$user['truename'].'</a></td>
 							<td>'.$user['dormitory'].'</td>
-							<td class="hidden_list">'.$user['number'].
+							<td class="hidden_list">'.count($user['book']).
 								'<div class="book_list">
 									<h6>书目</h6>';						
 					?>				
 									<form action="<?php echo site_url('home/check_step');?>" method='post' >
-									<input type="hidden" value="<?php echo $user['id'];?>" name="user" />
+									<input type="hidden" value="<?php echo $user['uid'];?>" name="user" />
 									<ul>
 									<?php
-									foreach ($system_match['book'] as $book) 
+									foreach ($user['book'] as $book) 
 									{
-										if($user['id']==$book['from_id'])
-										{
 											echo "<li><label><input type='checkbox' value='".$book['book_id']."' name='book".$book['book_id']."' /><span></span>".$book['name']."</label></li>";
-										}
 									}	
 									?>
 									</ul>

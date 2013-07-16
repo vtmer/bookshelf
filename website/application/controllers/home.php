@@ -18,27 +18,15 @@ class Home extends CI_Controller
 		{
 			header('location:/index.php/guide');
 		} 
-		$data['book_need'] = $this->home_model->get_book_need($this->session->userdata['major'],$this->session->userdata['grade']);
-		$match = array();
-		$i = 0;
-		foreach ($data as $value) 
-		{
-			foreach ($value as $row) 
-			{
-				$match[$i]['id'] = $row['id'];
-				$match[$i]['name'] = $row['name'];
-				$i++;
-			}
-		}
-		$data['system_match'] = $this->home_model->get_system_match($match);
+		$data['book_need'] = $this->home_model->get_book_need($this->session->userdata['grade'],$this->session->userdata['major']);
+		$per_page = 1;//每页显示的条数
+	    $offset = ($page - 1)*$per_page;
+		$data['system_match'] = $this->home_model->system_match($this->session->userdata['grade'],$this->session->userdata['major'],$offset,$per_page);
 		//分页
-		$this->pager->set(0,5);//设置每页显示的条数
-		$data['page']['num'] = count($data['system_match']['user']);//获取总数
-		$data['system_match']['user'] = $this->pager->get_pagedata($data['system_match']['user'],$page);//当前页数据
 		$pager_config = $this->config->item('pager_config');
 		$pager_config['base_url'] = site_url('home/index/');
-		$pager_config['total_rows'] = $data['page']['num'];
-		$pager_config['per_page'] = 5; //设置每页显示的条数
+		$pager_config['total_rows'] = $data['system_match']['total'];
+		$pager_config['per_page'] = $per_page; //设置每页显示的条数
 		$this->pagination->initialize($pager_config); 
 		//END
 		$header = array('title'=>'工大书架','css_file'=>'home.css'); 
@@ -81,6 +69,7 @@ class Home extends CI_Controller
 	
 	public function check_step()
 	{
+		var_dump($this->input->post());
 		$bookArray = $this->input->post();
 		$num =count($bookArray)-1;
 		if($num<=0)  header('location:/index.php/home');
@@ -92,12 +81,6 @@ class Home extends CI_Controller
 				echo "<script type='text/javascript'>alert('亲，你积分不够咯！');location='".site_url('home')."';</script>";
 				exit();
 			}
-		}
-		else
-		{
-			echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
-			echo "<script type='text/javascript'>alert('亲，登录后就可以借书咯！');location='".site_url('login')."';</script>";
-			exit();
 		}
 		$data['user'] = $this->home_model->get_userinfo($bookArray['user']);		
 		$data['books'] = $this->home_model->get_bookborrow($bookArray);
