@@ -76,7 +76,7 @@
 						{
 							echo 
 							"<tr>
-							<td><a href='".site_url('book_owner')."/".$user['uid']."'/>".$user['truename'].'</a></td>
+							<td><a href='".site_url('book_owner')."/".$user['uid']."'>".$user['truename'].'</a></td>
 							<td>'.$user['dormitory'].'</td>
 
 							<td>'.count($user['book']).'本 <span class="hidden_list"> [查看]</span></td>
@@ -102,6 +102,7 @@
 
 					</tbody>
 				</table>
+				<p class="tips">注意：每次只可以查看一名捐书者信息</p>
 				<?php echo $this->pagination->create_links();?><!-- 输出分页模块 -->
 
 			</div>
