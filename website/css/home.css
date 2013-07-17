@@ -50,6 +50,7 @@ div.match_book table td:nth-child(3){ width:245px; text-align:center;}
 .match_book .book_list ul li label input[type=checkbox] + span {display:inline-block; position:absolute; top:0px; left:23px; width:16px; height:16px; border: 1px solid #bababa;}
 .match_book .book_list ul li label input[type=checkbox]:checked + span { background:url("../img/hover_bg.png") no-repeat -28px -152px;}
 div.match_book table span.hidden_list { color: #130e7a; cursor:pointer; }
+div.match_book table tr.book_list {display: none;}
 div.match_book table tr.book_list ul li { color: #130e7a; width: 245px; float: left; height: 31px; text-align: left; margin-top: 20px;}
 div.match_book table tr.book_list ul li label input { margin-right:10px;}
 div.match_book table tr.book_list .book_list_bottom { clear: both; height:32px; margin-right: 35px;margin-bottom: 20px; text-align: right; padding-top: 25px;}
