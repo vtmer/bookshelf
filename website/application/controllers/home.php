@@ -19,7 +19,7 @@ class Home extends CI_Controller
 			header('location:/index.php/guide');
 		} 
 		$data['book_need'] = $this->home_model->get_book_need($this->session->userdata['grade'],$this->session->userdata['major']);
-		$per_page = 1;//每页显示的条数
+		$per_page = 3;//每页显示的条数
 	    $offset = ($page - 1)*$per_page;
 		$data['system_match'] = $this->home_model->system_match($this->session->userdata['grade'],$this->session->userdata['major'],$offset,$per_page);
 		//分页
