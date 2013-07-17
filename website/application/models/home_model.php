@@ -189,8 +189,8 @@ class Home_Model extends CI_Model
     $res_num = $this->db->query('SELECT FOUND_ROWS() AS total;');
     $res_num = $res_num->result_array();
     $res_num = $res_num[0]['total'];
-    $result['total'] =$res_num;  
-    return $result;
+
+    return array('log'=>$result,'total'=>$res_num);
   }
   	public function get_userinfo($from_id)
 	{

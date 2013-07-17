@@ -52,11 +52,11 @@
 							<th>借书人</th>
 							<th>借出时间</th>
 						</tr>
-							<?php if ( count($log)<=1): ?>
+							<?php if (empty($log)): ?>
 								<tr><td colspan='3'>暂没记录</td></tr>
 							<?php endif; ?>
 
-							<?php array_pop($log);
+							<?php
 							foreach ($log as $key=>$value): ?>
 							<tr>
 								<td><?php echo $value['name'];?></td>
