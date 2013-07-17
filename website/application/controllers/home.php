@@ -19,11 +19,7 @@ class Home extends CI_Controller
 			redirect(site_url('login'));
 		} 
 		$data['book_need'] = $this->home_model->get_book_need($this->session->userdata['grade'],$this->session->userdata['major']);
-<<<<<<< HEAD
-		$per_page = 3;//每页显示的条数
-=======
 		$per_page = 10;//每页显示的条数
->>>>>>> f68f484... 优化书本详细页面
 	    $offset = ($page - 1)*$per_page;
 		$data['system_match'] = $this->home_model->system_match($this->session->userdata['grade'],$this->session->userdata['major'],$offset,$per_page);
 		//分页
