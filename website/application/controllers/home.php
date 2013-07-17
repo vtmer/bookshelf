@@ -14,14 +14,15 @@ class Home extends CI_Controller
 	}
 	public function index($page = 1)
 	{
-		if(!isset($this->session->userdata['is_logged_in']))//如果没登录，则跳转到登录
+		if(!$this->session->userdata('is_logged_in'))//如果没登录，则跳转到登录
 		{
 			redirect(site_url('login'));
-		} 
-		$data['book_need'] = $this->home_model->get_book_need($this->session->userdata['grade'],$this->session->userdata['major']);
+		}
+		$data['trans_grade'] = $this->home_model->trans_grade($this->session->userdata('grade'));
+		$data['book_need'] = $this->home_model->get_book_need($this->session->userdata('grade'),$this->session->userdata('major'));
 		$per_page = 10;//每页显示的条数
 	    $offset = ($page - 1)*$per_page;
-		$data['system_match'] = $this->home_model->system_match($this->session->userdata['grade'],$this->session->userdata['major'],$offset,$per_page);
+		$data['system_match'] = $this->home_model->system_match($this->session->userdata('grade'),$this->session->userdata('major'),$offset,$per_page);
 		//分页
 		$pager_config = $this->config->item('pager_config');
 		$pager_config['base_url'] = site_url('home/index/');
@@ -39,7 +40,7 @@ class Home extends CI_Controller
 	{
 		$per_page = 1;//每页显示的条数
 	    $offset = ($page - 1)*$per_page;
-	    $data = $this->home_model->system_match($this->session->userdata['grade'],$this->session->userdata['major'],$offset,$per_page);
+	    $data = $this->home_model->system_match($this->session->userdata('grade'),$this->session->userdata('major'),$offset,$per_page);
 		//分页
 		$pager_config = $this->config->item('pager_config');
 		$pager_config['base_url'] = site_url('home/index/');

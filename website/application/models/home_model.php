@@ -6,14 +6,23 @@ class Home_Model extends CI_Model
   		$this->load->database();
 	}
 
-  private function trans_grade($grade)
+  public function trans_grade($grade)
   {
     $data = getdate();
+      $term = 2;
       $year =$data['year'];
       $month = $data['mon'];
-      if($month < 9)
+      $school_year = $year.'-'.(int)($year+1);//9月到12月
+      if($month < 9&&$month > 2)
       {
+          $school_year = (int)($year).'-'.(int)($year+1);
           $year-=1;
+          $term = 1;
+      }
+      else
+      if($month>=1&&$month<=2)
+      {
+        $school_year = (int)($year).'-'.(int)($year+1);//由于之前已经减1了
       }
       switch ($grade) {
         case $year:
@@ -32,19 +41,60 @@ class Home_Model extends CI_Model
           #code...
           break;
     }
-    return $grade;
+    return array('grade'=>$grade , 'school_year'=>$school_year , 'term'=>$term);
   }
   public function get_book_need($grade,$major)
   {
-    $grade = $this->trans_grade($grade);
-    $sql = "SELECT ab.`id`,`name`,`course_name`,`author`,`course_category`,`publish`,`version` FROM `allbook` ab,`allbook_mg` abmg WHERE major=? AND grade=? AND `ab`.`id`=`abmg`.`book_id`";
-    $query = $this->db->query($sql,array($major,$grade));
-    return $query->result_array();      
+    $trans_grade = $this->trans_grade($grade);
+    $grade = $trans_grade['grade'];
+    $uid = $this->session->userdata('uid');
+    //$sql = "SELECT ab.`id`,`name`,`course_name`,`author`,`course_category`,`publish`,`version` FROM `allbook` ab,`allbook_mg` abmg WHERE major=? AND grade=? AND `ab`.`id`=`abmg`.`book_id`";
+    // $query = $this->db->query($sql,array($major,$grade));
+    $this->db->select("ab.id , name , course_name , author , course_category , publish , version ")
+              ->from('allbook AS ab')
+              ->join('allbook_mg AS abmg' , 'ab.id = abmg.book_id')
+              ->where('major' , $major)
+              ->where('grade' , $grade)
+              ->where('term' , $trans_grade['term']);
+    $query = $this->db->get();//获取所需要接的书本
+    $result = $query->result_array();
+
+    $this->db->select('cb.book_id , cb.book_status  ')//获取所需书本状态
+             ->from('circulating_book AS cb')
+             ->join('allbook AS ab' , 'ab.id = cb.book_id')
+             ->join('allbook_mg AS abmg' , 'ab.id = abmg.book_id')
+             ->where('cb.to_id' , $uid)
+             ->where('abmg.major' , $major)
+             ->where('abmg.grade' , $grade)
+             ->where('ab.term' , $trans_grade['term']);         
+    $query2 = $this->db->get();
+    $result2 = $query2->result_array(); 
+    //var_dump($result2);
+    foreach ($result as $key => $value) 
+    {
+      foreach ($result2 as $key2 => $value2) 
+      {
+        if($value['id'] == $value2['book_id'])
+        {
+          // echo 'a';
+           $result[$key]['book_status'] = $value2['book_status'];
+           break;
+        }   
+        else
+        {
+          //var_dump($key); 
+          $result[$key]['book_status'] = 0;
+        }
+      }   
+    }
+    //var_dump($result);exit;
+    return $result;
   }
   public function system_match($grade,$major,$offset,$length)
   {
-    $grade = $this->trans_grade($grade);
-    $uid = $this->session->userdata['uid']; 
+    $trans_grade = $this->trans_grade($grade);
+    $grade = $trans_grade['grade'];
+    $uid = $this->session->userdata('uid');
     /*$sql = "SELECT DISTINCT SQL_CALC_FOUND_ROWS `cb`.`from_id` AS uid, `cb`.`book_id`, `ab`.`name`, `user`.`truename`, `user`.`dormitory` 
     FROM (`allbook` AS ab) LEFT JOIN `circulating_book` AS cb ON `cb`.`book_id` = `ab`.`id` 
                            LEFT JOIN `user` ON `cb`.`from_id` = `user`.`id` 
@@ -75,6 +125,7 @@ class Home_Model extends CI_Model
         $uid[] = $value['uid'];
     }
     $uid = array_unique($uid);//取出重复值
+    $uid = array_values($uid);
     $n = count($uid);
     for($i = 0 ; $i < $n ; $i++)
     {
