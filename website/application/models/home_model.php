@@ -89,10 +89,35 @@ class Home_Model extends CI_Model
       $books = array();//清空
     }
     $res_num = count($res);
-    $res_perpage = array_slice($res,$offset,$length);
+    $res_perpage = array_slice($res,$offset,$length);// 分页截断
     return array('data'=>$res_perpage,'total'=>$res_num);
    // var_dump($res_perpage);exit;
 	}
+
+  public function user_borrow($book_id , $offset , $length)//查找拥有某本书的人
+  {
+   /* $this->db->select('SQL_CALC_FOUND_ROWS user.id , user.truename , user.major , user.dormitory ')
+             ->from('allbook AS ab')
+             ->join('circulating_book AS cb' , 'ab.id = cb.book_id' , 'left')
+             ->join('user' , 'user.id = cb.from_id','left')
+             ->where('cb.book_status',0)
+             ->where('cb.book_id',$book_id)
+             ->limit($length,$offset);
+    $query = $this->db->get();*/
+    $sql = "SELECT SQL_CALC_FOUND_ROWS `user`.`id`, `user`.`truename`, `user`.`major`, `user`.`dormitory` 
+            FROM (`allbook` AS ab) 
+            LEFT JOIN `circulating_book` AS cb ON `ab`.`id` = `cb`.`book_id` 
+            LEFT JOIN `user` ON `user`.`id` = `cb`.`from_id` 
+            WHERE `cb`.`book_status` = 0 AND `cb`.`book_id` = ?
+            LIMIT ?,?";
+    $query = $this->db->query($sql , array($book_id,$offset,$length));
+    $result = $query->result_array();
+    $res_num = $this->db->query('SELECT FOUND_ROWS() AS total;');//获取总数
+    $res_num = $res_num->result_array();
+    $res_num = $res_num[0]['total'];   
+    return array('user'=>$result,'total'=>$res_num);
+    //var_dump(array('user'=>$result,'total'=>$res_num));exit;
+  }
 
   	public function get_userinfo($from_id)
 	{

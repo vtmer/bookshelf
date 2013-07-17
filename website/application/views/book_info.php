@@ -50,7 +50,7 @@
 							<th>生活区</th>
 						</tr>
 						<?php 
-						if(empty($user['user']))
+						if(empty($data['user']))
 						{
 							echo "
 							<tr>
@@ -58,7 +58,7 @@
 							</tr>";
 						}
 						$n = 0;
-						foreach ($user['user'] as $value) 
+						foreach ($data['user'] as $value) 
 						{
 							echo
 							"<tr>
@@ -66,15 +66,14 @@
 							<td>".$value['major']."</td>
 							<td>".$value['dormitory']."</td>
 						</tr>";
-						$n++;
 						}?>
 					</tbody>
 				</table>
 				<ul class="get_book">
-					<?php for ($i=0; $i<$n ; $i++) 
+					<?php foreach ($data['user'] as $value)
 					{ 
 						echo "<form action='".site_url('home/check_step')."' method='post'>";
-						echo "<input type='hidden' name='user' value='".$user['user'][$i]['id']."''>";
+						echo "<input type='hidden' name='user' value='".$value['id']."''>";
 						echo "<input type='hidden' name='book' value='".$book_info[0]->id."''>";
 						echo '<li><input type="submit" value="借阅" /></li>';
 						echo '</form>';

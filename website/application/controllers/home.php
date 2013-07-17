@@ -14,12 +14,16 @@ class Home extends CI_Controller
 	}
 	public function index($page = 1)
 	{
-		if(!isset($this->session->userdata['is_logged_in']))//如果没被引导，则跳转到引导页
+		if(!isset($this->session->userdata['is_logged_in']))//如果没登录，则跳转到登录
 		{
-			header('location:/index.php/guide');
+			redirect(site_url('login'));
 		} 
 		$data['book_need'] = $this->home_model->get_book_need($this->session->userdata['grade'],$this->session->userdata['major']);
+<<<<<<< HEAD
 		$per_page = 3;//每页显示的条数
+=======
+		$per_page = 10;//每页显示的条数
+>>>>>>> f68f484... 优化书本详细页面
 	    $offset = ($page - 1)*$per_page;
 		$data['system_match'] = $this->home_model->system_match($this->session->userdata['grade'],$this->session->userdata['major'],$offset,$per_page);
 		//分页
@@ -35,32 +39,44 @@ class Home extends CI_Controller
 		$this->load->view('home',$data);
 		$this->parser->parse('template/footer',$footer);
 	}
+	public function ajaxPage($page = 1)
+	{
+		$per_page = 1;//每页显示的条数
+	    $offset = ($page - 1)*$per_page;
+	    $data = $this->home_model->system_match($this->session->userdata['grade'],$this->session->userdata['major'],$offset,$per_page);
+		//分页
+		$pager_config = $this->config->item('pager_config');
+		$pager_config['base_url'] = site_url('home/index/');
+		$pager_config['total_rows'] = $data['total'];
+		$pager_config['per_page'] = $per_page; //设置每页显示的条数
+		$this->pagination->initialize($pager_config); 
+		$data['page'] = $this->pagination->create_links();
+		echo json_encode($data);
+		exit();
+	}
 
-	public function book_info($book_id)
+	public function book_info($book_id,$page = 1)
 	{	
 		//从URI中获取页数为第四个分段home/book_owner/3/1
-		$page = $this->uri->segment(4,1);
-
+		//$page = $this->uri->segment(4,1);
         $bookinfo = $this->search_model->get_book_by_id($book_id);
 		$data['book_info'] = $bookinfo;
 		if(!$data['book_info']) 
 		{
 			show_404();
 		}
-		$data['user'] = $this->home_model->get_system_match(array(array('ISBN'=>$data['book_info'][0]->ISBN,
-																'name'=>$data['book_info'][0]->name,'id'=>$book_id)));
+		$per_page = 10;//每页显示的条数
+	    $offset = ($page - 1)*$per_page;
+		$data['data'] = $this->home_model->user_borrow($book_id , $offset , $per_page);
 		//分页
-		$this->pager->set(0,5);//设置每页显示的条数
-		$data['page']['num'] = count($data['user']['user']);//获取总数
-		$data['user']['user'] = $this->pager->get_pagedata($data['user']['user'],$page);//当前页数据
 		$pager_config = $this->config->item('pager_config');
 		$pager_config['uri_segment'] = 4;
 		$pager_config['base_url'] = site_url('home/book_info/');
-		$pager_config['total_rows'] = $data['page']['num'];
-		$pager_config['per_page'] = 5; //设置每页显示的条数
+		$pager_config['total_rows'] = $data['data']['total'];
+		$pager_config['per_page'] = $per_page; //设置每页显示的条数
 		$this->pagination->initialize($pager_config); 
 		//END
-		$header = array('title'=>$bookinfo[0]->name . '(工大书架)','css_file'=>'book_info.css');
+		$header = array('title'=>$bookinfo[0]->name . '-工大书架','css_file'=>'book_info.css');
 		$footer = array('js_file'=>'book_info.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('book_info',$data);
