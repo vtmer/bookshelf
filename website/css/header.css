@@ -22,8 +22,8 @@ div.mid_content div.box_demo { position:relative; overflow:hidden; z-index:10; w
 div.bottom_shadow { position:absolute; z-index:-1; width:800px; height:48px; margin-top:-25px; margin-left:80px;  background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, from(rgba(0,0,0,.15)), to(rgba(0,0,0,0))); background-image:-moz-linear-gradient(top,rgba(0,0,0,.15),rgba(0,0,0,0)); background-image:-o-linear-gradient(top,rgba(0,0,0,.15),rgba(0,0,0,0));}/*块级区域底层阴影,宽度，边距需细修*/
 /*列表样式*/
 div.mid_content table { clear:both; margin:auto; border:1px solid #cecece; border-collapse:separate;  border-radius:5px; border-spacing:0 0; box-shadow:0 -3px 8px -2px rgba(0,0,0,.4);}
-div.mid_content th,div.mid_content td {height:50px; /*background:#dedcd0;*/border:1px solid #cecece; border-top:none; border-left:none; line-height:30px;}
-div.mid_content th { font-size:13px; font-weight:bold; color:#5c5c5c;}
+div.mid_content th,div.mid_content td {height:50px;border:1px solid #cecece; border-top:none; border-left:none; line-height:30px;}
+div.mid_content th { font-size:13px; font-weight:bold; color:#333;height:36px;}
 div.mid_content tr:hover { background-color:rgb(247, 247, 243);}
 div.mid_content tr:nth-child(1):hover { background-color: #eeece1;}
 div.mid_content tr th:last-child,div.mid_content tr td:last-child { border-right:none;}

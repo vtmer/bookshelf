@@ -13,7 +13,7 @@
 							<th>当前所拥有书籍</th>
 							<th>当前状态</th>
 							<th>归属权</th>
-							<th></th>
+							<th>操作</th>
 						</tr>
 						<?php foreach ($books as $book): ?>
 						<tr>
@@ -29,7 +29,7 @@
 								<?php if($book['book_status']==0&&$book['book_right']==0):?>
 								<form action="<?php echo site_url('my_book/pull_off'); ?>" method="POST" class="ajaxForm">
 									<input type="hidden" name="book_id" value="<?php echo $book['cb_id'];?>" />
-									<input type="submit" value="下架" />
+									<input type="submit" value="[下架]" />
 								</form>		
 								<?php endif;?>
 							</td>
@@ -39,8 +39,24 @@
 
 					</tbody>
 				</table>
-				<a href="<?php echo site_url('home');?>" class="back_up">返回</a>	
 
+				<div class="my_history">
+					<h5><span>查看历史记录</span><span class="s_h">>></span></h5>
+					<table>
+						<tr>
+							<th>借出书籍</th>
+							<th>借书人</th>
+							<th>借出时间</th>
+						</tr>
+						<!-- 下面要绑数据 -->
+						<tr>
+							<td>something</td>
+							<td>something</td>
+							<td>2013/12/12</td>
+						</tr>
+					</table>
+				</div>
+	
 				<?php echo $this->pagination->create_links();?><!-- 输出分页模块 -->			
 
 			</div>
