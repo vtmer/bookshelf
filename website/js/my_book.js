@@ -58,3 +58,9 @@ function update(dat)
         return false;
     });
 }
+
+
+//history收缩
+$(".my_book .s_h").parent("h5").bind("click",function(){
+	$(this).next("div").slideToggle("slow");
+})

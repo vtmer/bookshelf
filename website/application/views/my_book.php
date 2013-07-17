@@ -44,8 +44,8 @@
 					</tbody>
 				</table>
 
+				<h5><span>查看历史记录</span><span class="s_h">>></span></h5>
 				<div class="my_history">
-					<h5><span>查看历史记录</span><span class="s_h">>></span></h5>
 					<table>
 						<tr>
 							<th>借出书籍</th>
@@ -64,7 +64,8 @@
 								<td><?php echo $value['time'];?></td>
 							</tr>
 						<?php endforeach; ?>					
-					</table>
+					</table>						
+
 					<?php echo $this->pagination->create_links();?><!-- 输出分页模块 -->
 				</div>
 			</div>

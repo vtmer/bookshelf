@@ -9,7 +9,7 @@ div.search_bar .search_submit { float:right; width:50px; height:50px; margin:11p
 div.mid_content { position:relative; width:100%; padding-top:88px; background:url('../img/shelf.png') 77px 0 no-repeat; }
 div.mid_content h3 { height:39px; margin-left:80px; margin-bottom:40px; background:url('../img/h_bg.png') no-repeat; font:14px "微软雅黑",Arial, Helvetica, sans-serif; line-height:33px; text-indent:1em; color:#ffffff;}
 div.content_box { margin-bottom:90px;}
-div.mid_content div.box_demo { height:400px; padding:45px 0;}/*浮雕快在高级浏览器下的预定义*/
+div.mid_content div.box_demo { /*height:400px;*/ padding:45px 0;}/*浮雕快在高级浏览器下的预定义*/
 
 div.mid_content table { clear:both; box-shadow:none; border-spacing:0 0; font-size:14px;}
 /*div.mid_content th,div.mid_content td { background:none; height:40px; line-height:40px;}*/
@@ -36,7 +36,7 @@ div.my_book table td:nth-child(4){ width:135px; text-align:center;}
 div.mid_content .remove input { border:none; background:#eeece1; font-size:13px; text-align:center; letter-spacing: 2px; color: #130e7a; cursor: pointer;}
 div.mid_content .remove input:hover { background:rgb(247, 247, 243); font-weight: bold;}
 
-div.my_history {.........}
+div.my_history { display: none;}
 div.my_history table th:nth-child(1),
 div.my_history table td:nth-child(1){ width:242px; text-align:left; padding:0px 30px;}
 div.my_history table th:nth-child(2),
@@ -44,9 +44,9 @@ div.my_history table td:nth-child(2){ width:217px; text-align:center;}
 div.my_history table th:nth-child(3),
 div.my_history table td:nth-child(3){ width:217px; text-align:center;}
 div.my_history table tr td[colspan="3"] {text-align: center;color: #130e7a;}
-div.my_history h5 { height: 30px;line-height: 30px;border-top: 1px solid #cecece;border-bottom: 1px solid #cecece;margin: 70px 30px 20px 30px;font-size: 13px;font-weight: bold;color: #130e7a;cursor: pointer;}
-div.my_history h5 span { margin-left: 30px;}
-div.my_history h5 span.s_h { float: right;margin-right: 60px;}
+div.my_book h5 { height: 30px;line-height: 30px;border-top: 1px solid #cecece;border-bottom: 1px solid #cecece;margin: 70px 30px 20px 30px;font-size: 13px;font-weight: bold;color: #130e7a;cursor: pointer;}
+div.my_book h5 span { margin-left: 30px;}
+div.my_book h5 span.s_h { float: right;margin-right: 60px;}
 
 
 /*div.my_book a.back_up { position:absolute; bottom:30px; left:140px; width:75px; height:30px; background:#c6c4b6; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center;}*/
