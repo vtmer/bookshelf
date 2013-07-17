@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `borrow_log` (
   `book_id` int(11) NOT NULL COMMENT '书本ID',
   `from_id` int(11) NOT NULL COMMENT '借出人的ID',
   `to_id` int(11) NOT NULL COMMENT '要借书的人ID',
-  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '自动存入时间',
+  `time` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
