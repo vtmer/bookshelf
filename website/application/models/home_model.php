@@ -169,7 +169,29 @@ class Home_Model extends CI_Model
     return array('user'=>$result,'total'=>$res_num);
     //var_dump(array('user'=>$result,'total'=>$res_num));exit;
   }
-
+  public function borrow_log($offset , $length)
+  {
+    $uid = $this->session->userdata('uid');
+    /*$this->db->select('ab.name  user.truename , bl.time')
+              ->from('borrow_log AS bl')
+              ->join('allbook AS ab' , 'ab.id = bl.book_id')
+             ->join('user' , 'user.id = bl.to_id')
+              ->where('bl.from_id' , $uid);
+    $query = $this->db->get();*/
+    $sql = "SELECT SQL_CALC_FOUND_ROWS `ab`.`name` , `user`.`truename`, `bl`.`time` 
+      FROM (`borrow_log` AS bl) 
+      LEFT JOIN `allbook` AS ab ON `ab`.`id` = `bl`.`book_id` 
+      LEFT JOIN `user` ON `user`.`id` = `bl`.`to_id` 
+      WHERE `bl`.`from_id` = ?
+      LIMIT ?,?";
+    $query = $this->db->query($sql,array($uid , $offset , $length));
+    $result = $query->result_array();
+    $res_num = $this->db->query('SELECT FOUND_ROWS() AS total;');
+    $res_num = $res_num->result_array();
+    $res_num = $res_num[0]['total'];
+    $result['total'] =$res_num;  
+    return $result;
+  }
   	public function get_userinfo($from_id)
 	{
     $this->db->select('id,username,truename,faculty,major,grade,dormitory,phone_number,subphone_number,points');

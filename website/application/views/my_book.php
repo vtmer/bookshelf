@@ -15,6 +15,10 @@
 							<th>归属权</th>
 							<th>操作</th>
 						</tr>
+
+						<?php if (empty($books)): ?>
+								<tr><td colspan='4'>暂没记录</td></tr>
+						<?php endif; ?>
 						<?php foreach ($books as $book): ?>
 						<tr>
 							<td><?php echo $book['name'];?></td>
@@ -48,17 +52,21 @@
 							<th>借书人</th>
 							<th>借出时间</th>
 						</tr>
-						<!-- 下面要绑数据 -->
-						<tr>
-							<td>something</td>
-							<td>something</td>
-							<td>2013/12/12</td>
-						</tr>
-					</table>
-				</div>
-	
-				<?php echo $this->pagination->create_links();?><!-- 输出分页模块 -->			
+							<?php if ( count($log)<=1): ?>
+								<tr><td colspan='3'>暂没记录</td></tr>
+							<?php endif; ?>
 
+							<?php array_pop($log);
+							foreach ($log as $key=>$value): ?>
+							<tr>
+								<td><?php echo $value['name'];?></td>
+								<td><?php echo $value['truename'];?></td>
+								<td><?php echo $value['time'];?></td>
+							</tr>
+						<?php endforeach; ?>					
+					</table>
+					<?php echo $this->pagination->create_links();?><!-- 输出分页模块 -->
+				</div>
 			</div>
 			<div class="bottom_shadow"></div><!-- 块级区域下方的底层阴影 -->
 		</div><!-- 包裹整块质感效果的div -->

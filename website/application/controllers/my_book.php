@@ -7,18 +7,22 @@ class My_book extends CI_Controller
 		$this->load->model('home_model');
 		$this->config->load('pager_config',TRUE);
 	}
-	public function index()
+	public function index($page = 1)
 	{
 		if(!isset($this->session->userdata['is_logged_in']))
 		{
 			header('location:/index.php/home');
 		} 
-		$data = $this->home_model->get_userbook($this->session->userdata('uid'),0,5);
+		$per_page = 1;//每页显示的条数
+	    $offset = ($page - 1)*$per_page;
+		$data = $this->home_model->get_userbook($this->session->userdata('uid'),$offset,$per_page);
+		$data['log'] = $this->home_model->borrow_log($offset,$per_page);
+		//var_dump($data);exit;
 		//分页		
-		$data['page']['num'] = $data['pageNum'][0]['num'];//获取总数
 		$pager_config = $this->config->item('pager_config');
 		$pager_config['base_url'] = site_url('my_book/ajaxPage/');
-		$pager_config['total_rows'] = $data['page']['num'];
+		$pager_config['total_rows'] = $data['log']['total'];
+		$pager_config['per_page'] = $per_page; //设置每页显示的条数
 		$this->pagination->initialize($pager_config); 
 		//END
 		$header = array('title'=>'我的书架','css_file'=>'my_book.css');
@@ -33,14 +37,14 @@ class My_book extends CI_Controller
 		{
 			show_404();
 		}
-		$offset = ($page - 1)*5;
-		$length = $offset +5;
-		$data = $this->home_model->get_userbook($this->session->userdata('uid'),$offset,$length);
+		$per_page = 10;//每页显示的条数
+	    $offset = ($page - 1)*$per_page;
+		//$data = $this->home_model->get_userbook($this->session->userdata('uid'),$offset,$length);
+		$data['log'] = $this->home_model->borrow_log($offset,$per_page);
 		//分页		
-		$data['page']['num'] = $data['pageNum'][0]['num'];//获取总数
 		$pager_config = $this->config->item('pager_config');
 		$pager_config['base_url'] = site_url('my_book/ajaxPage/');
-		$pager_config['total_rows'] = $data['page']['num'];
+		$pager_config['total_rows'] = $data['log']['total'];
 		$this->pagination->initialize($pager_config); 
 		$data['page'] = $this->pagination->create_links();
 		echo json_encode($data);
