@@ -74,7 +74,7 @@
 						<h5>
 						<span><a href='".site_url('book_owner')."/".$user['uid']."'>".$user['truename'].'</a></span>
 						<span>'.$user['dormitory'].'</span>
-						<span>'.count($user['book']).'本 <strong class="chankan"> [查看]</strong></span>
+						<span>'.count($user['book']).'本 <strong class="chakan"> [查看]</strong></span>
 						</h5>';						
 				?>				
 						<div class="match_book">
