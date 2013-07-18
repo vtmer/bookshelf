@@ -213,6 +213,18 @@ class User_model extends CI_Model
 		$this->db->insert('message', $data);
 		return mysql_affected_rows();
 	}
+	public function msg_readed($msg_id)
+	{
+		$this->db->where('id',$msg_id);
+		$this->db->update('message',array('status' => "1"));
+		return mysql_affected_rows();
+	}
+	public function del_msg($msg_id)
+	{
+		$this->db->where('id',$msg_id);
+		$this->db->delete('message');
+		return mysql_affected_rows();
+	}
 }
 
 /*End of file user_model.php*/
