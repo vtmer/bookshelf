@@ -14,18 +14,21 @@ div.mid_content div.box_demo {min-height:320px; padding-bottom:80px;}/*浮雕快
 
 
 
-.main .message h5 { position:relative; width:90%; height:35px; margin:auto; font:14px "微软雅黑"; font-weight:bold; text-align:center; line-height:35px;}
-.main .message h5 span:nth-child(1) {float:left; width:90px;}
-.main .message h5 span:nth-child(2) {float:left; width:450px;} 
-.main .message h5 span:nth-child(3) {float:left; width:90px;}
-.main .message .message_box h5 { border-bottom:solid 1px #c4c4c4; font-weight:normal; cursor:pointer;} 
+.main .message h5 { position:relative; width:740px; height:35px; margin:auto; border:1px solid #cecece; font:13px "微软雅黑"; font-weight:bold; text-align:center; line-height:35px;}
+.main .message h5 span:nth-child(1) {float:left; width:120px; border-right: 1px solid #cecece;}
+.main .message h5 span:nth-child(2) {float:left; width:390px; border-right: 1px solid #cecece;} 
+.main .message h5 span:nth-child(3) {float:left; width:120px; border-right: 1px solid #cecece;}
+.main .message h5 span:nth-child(4) {float:left; width:106px;}
+.main .message .message_box h5 { border-top:none; font-weight:normal;} 
+.main .message .message_box span.msg_title { cursor: pointer;} 
 .main .message .message_box h5.unread { font-weight:bold;}
-.main .message .message_contant { display:none; overflow:hidden; margin:0 15px; padding:10px 0px; border-top:solid 2px #787878; border-bottom:solid 2px #787878;}
-.main .message .message_contant p { font:14px "宋体"; margin:0 22px 10px; text-indent:2em; line-height:25px;}
-.main .message .message_contant span { float:right; width:22px; height:22px; margin:5px 20px 0 0; background:url('../img/hide.png') no-repeat; cursor:pointer;}
-.main .message .message_contant .ok_submit{  bottom:30px; left:40px; width:75px; height:30px; margin-left:550px; background:#c6c4b6; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center;}
-.main .message .message_contant .ok_submit:hover{ background:#e8a126; color:#fff;} 
-.main .message .message_box h5.click_h5 { border:none; font-weight:bold;} 
+.main .message .message_box a.del_message { color: #130e7a;}
+.main .message .message_content { display:none; overflow:hidden; margin:auto;width: 740px; padding:10px 0px; border: 1px solid #cecece;border-top: none;}
+.main .message .message_content p { font:14px "宋体"; margin:0 22px 10px; text-indent:2em; line-height:25px;}
+.main .message .message_content span { float:right; width:22px; height:22px; margin:5px 20px 0 0; background:url('../img/hide.png') no-repeat; cursor:pointer;}
+.main .message .message_content .ok_submit{  bottom:30px; left:40px; width:75px; height:30px; margin-left:550px; background:#c6c4b6; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center;}
+.main .message .message_content .ok_submit:hover{ background:#e8a126; color:#fff;} 
+.main .message .message_box h5.click_h5 { font-weight:bold;} 
 .main .message ul { float:right; margin:40px 60px 0 0; list-style:none;}
 .main .message ul li { float:left; margin:0 5px;}
 .main a.home_page { clear:both; float:left; width:80px; height:32px; margin:80px 0 0 50px; background:#e0e0e0; border:solid 1px #c3c3c3; border-radius:3px; line-height:32px; text-align:center; color:#000; text-decoration:none;}

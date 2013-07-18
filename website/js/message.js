@@ -1,5 +1,9 @@
-$(".main .message .message_box h5").bind("click",function(){
-	$(this).next().is(':visible')?$(this).removeClass("click_h5").next().hide() : $(this).addClass("click_h5").next().show();
+
+
+$(".main .message .message_box .msg_title").bind("click",function(){
+	$(".main .message .message_box .message_content").slideUp();
+	$(".main .message .message_box h5").removeClass("click_h5");
+	$(this).parent("h5").next().is(':visible')?$(this).parent("h5").removeClass("click_h5").next().slideUp() : $(this).parent("h5").addClass("click_h5").next().slideDown();
 })
 $(".main .message .message_box span.hide").bind("click",function(){
 	$(this).parent().slideUp();
