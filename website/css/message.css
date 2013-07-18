@@ -16,7 +16,7 @@ div.content_box { margin-bottom:90px;}
 .main .message ul li { float:left; margin:0 5px;}.main .message h5 span:nth-child(2) {float:left; width:390px; border-right: 1px solid #cecece;} 
 .main .message h5 span:nth-child(3) {float:left; width:120px; border-right: 1px solid #cecece;}
 .main .message h5 span:nth-child(4) {float:left; width:106px;}
-.main .message .message_box h5 { border-top:none; font-weight:normal;} 
+.main .message .message_box h5 { border-top:none; font-weight:normal; height: 50px; line-height: 50px;} 
 .main .message .message_box h5:hover { background-color: rgb(247, 247, 243);} 
 .main .message .message_box h5.unread { font-weight:bold;}
 .main .message .message_box h5.click_h5 { font-weight:bold;} 
