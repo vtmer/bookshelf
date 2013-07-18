@@ -31,10 +31,12 @@
 							<td><?php if($book['book_right']) echo "共同";else echo "私有"; ?></td>
 							<td class="remove">
 								<?php if($book['book_status']==0&&$book['book_right']==0):?>
+								<a href="<?php echo site_url('my_book/pull_off')."?book_id=".$book['cb_id'];?>" class="pull_off">[下架]</a>
+								<!--
 								<form action="<?php echo site_url('my_book/pull_off'); ?>" method="POST" class="ajaxForm">
 									<input type="hidden" name="book_id" value="<?php echo $book['cb_id'];?>" />
 									<input type="submit" value="[下架]" />
-								</form>		
+								</form>	-->	
 								<?php endif;?>
 							</td>
 							

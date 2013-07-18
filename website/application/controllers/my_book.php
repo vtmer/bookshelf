@@ -55,16 +55,16 @@ class My_book extends CI_Controller
 	}
 	public function pull_off()
 	{
-		if($id = $this->input->post('book_id'))
+		if($id = $this->input->get('book_id'))
 		{
 			if($this->home_model->pull_off($id))
 			{
-				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'书本下架成功！');
+				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'书本下架成功！','status'=>true);
 				echo json_encode($msg);
 				exit();
 			}else
 			{
-				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'书本下架失败,请重试！');
+				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'书本下架失败,请重试！','status'=>false);
 				echo json_encode($msg);
 				exit();
 			}	
