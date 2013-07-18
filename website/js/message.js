@@ -7,13 +7,16 @@ $(".main .message .message_box .msg_title").bind("click",function(){
 	var url = $(this).nextAll("a").attr("href");
     var url = url.replace("del_msg","msg_readed");
     var $flag = $(this);
-	$.get(url,function(data){
-			if(data=='true')
-			{
-				$flag.prev(".readed").html("已读");
-				$flag.prev(".readed").parent().removeClass("unread");
-			}
-		});
+    if($flag.prev(".readed").html()=="未读")
+    {
+		$.get(url,function(data){
+				if(data=='true')
+				{
+					$flag.prev(".readed").html("已读");
+					$flag.prev(".readed").parent().removeClass("unread");
+				}
+			});
+	}
 })
 // $(".main .message .message_box span.hide").bind("click",function(){
 // 	$(this).parent().slideUp();
