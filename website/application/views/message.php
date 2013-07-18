@@ -20,7 +20,7 @@
 						<input type="hidden" name="message_id" value="<?php echo $row['id'];?>" />
 						<p><?php echo $row['content'];?></p>
 						<input type='submit' value='确认' class='ok_submit'/></form>
-						<span class="hide"></span>
+						<!-- <span class="hide"></span> -->
 						<!--<input type="image" src="<?php echo base_url('img/cancle.png'); ?>"/>
 						<input type="image" src="<?php echo base_url('img/confirm.png'); ?>" class="confirm"/>-->
 					</div>
@@ -28,7 +28,7 @@
 				<?php endforeach;?>
 
 
-				<a href="<?php echo site_url('home');?>" class="home_page">返回</a>
+				<!-- <a href="<?php echo site_url('home');?>" class="home_page">返回</a> -->
 				<?php echo $this->pagination->create_links();?><!-- 输出分页模块 -->
 
 			</div>

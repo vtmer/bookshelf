@@ -6,8 +6,8 @@ $(function(){
 	// }).bind("mouseout",function(){
 	// 	$(this).removeClass("hover_td");
 	// 
-	var $chakan = $(".main .match_book .hidden_list");
-	var $book_list = $(".main .match_book .book_list");
+	var $chakan = $(".main .match_list .chakan");
+	var $book_list = $(".main .match_list .match_book");
 	$chakan.bind("click",function(){
 	var $i = $(this).parent("td").parent("tr").index();
 	var $j = ($i - 1)/2;

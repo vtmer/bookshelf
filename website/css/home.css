@@ -9,8 +9,7 @@ div.search_bar .search_submit { float:right; width:50px; height:50px; margin:11p
 div.mid_content { width:100%; padding-top:88px; background:url('../img/shelf.png') 77px 0 no-repeat; }
 div.content_box { margin-bottom:90px;}
 div.mid_content div.match_book { overflow:hidden;}
-
-div.mid_content div.box_demo h3 { float:left; width:200px; height:42px; margin:10px 0 10px -2px; background:url('../img/h3_bg.png') 0px 0px no-repeat; font:14px 微软雅黑; line-height:38px; color:#fff; text-indent:1em;}
+div.mid_content div.box_demo h3 { width:200px; height:42px; margin:10px 0 10px -2px; background:url('../img/h3_bg.png') 0px 0px no-repeat; font:14px 微软雅黑; line-height:38px; color:#fff; text-indent:1em;}
 
 div.needed_book {.........}
 div.needed_book p { clear:both; margin-bottom:20px; text-indent:2em; font-size:14px; color:#565656;}
@@ -33,33 +32,20 @@ div.needed_book table td:nth-child(6){ width:70px; text-align:center;}
 
 /*定义表格各列的宽度*/
 
-
+/*
 div.mid_content div.match_book table { position:relative; margin:none;}
 div.mid_content div.match_book h3 { margin-bottom:20px; background-position:0 -44px;}
-div.mid_content div.match_book p.tips { margin-left: 30px; margin-bottom: 20px; color: #b81313;}
+
 div.match_book table { margin-bottom: 30px;}
 div.match_book table th:nth-child(1),
 div.match_book table td:nth-child(1){ width:245px; text-align:center;}
 div.match_book table th:nth-child(2),
 div.match_book table td:nth-child(2){ width:245px; text-align:center;}
 div.match_book table th:nth-child(3),
-div.match_book table td:nth-child(3){ width:245px; text-align:center;}
+div.match_book table td:nth-child(3){ width:245px; text-align:center;}*/
 /*定义表格各列的宽度*/
 
-.match_book .book_list ul li label { position:relative; padding-left:25px; cursor:pointer;}
-.match_book .book_list ul li label input[type=checkbox] {visibility:hidden;}
-.match_book .book_list ul li label input[type=checkbox] + span {display:inline-block; position:absolute; top:0px; left:23px; width:16px; height:16px; border: 1px solid #bababa;}
-.match_book .book_list ul li label input[type=checkbox]:checked + span { background:url("../img/hover_bg.png") no-repeat -28px -152px;}
-div.match_book table span.hidden_list { color: #130e7a; cursor:pointer; }
-div.match_book table tr.book_list {display: none;}
-div.match_book table tr.book_list ul li { color: #130e7a; width: 245px; float: left; height: 31px; text-align: left; margin-top: 20px;}
-div.match_book table tr.book_list ul li label input { margin-right:10px;}
-div.match_book table tr.book_list .book_list_bottom { clear: both; height:32px; margin-right: 35px;margin-bottom: 20px; text-align: right; padding-top: 25px;}
-div.match_book table tr.book_list .select_all { margin-right: 20px; text-decoration:underline; cursor:pointer;vertical-align: top;}
-div.match_book table tr.book_list #submit { height:32px; width:78px; border:none; background:url("../img/hover_bg.png") no-repeat 0 -116px; cursor:pointer;}
-div.match_book table tr.book_list #submit:hover { background-position:-85px -116px;}
-
-div.match_book ul.pages { clear:both; float: right; margin: 20px 30px 20px 0px;}
+/*div.match_book ul.pages { clear:both; float: right; margin: 20px 30px 20px 0px;}
 div.match_book ul.pages li{ float:left; margin:0 3px;}
 div.match_book ul.pages li a { float:left; background:url('../img/pages.png') no-repeat;}
 div.match_book ul.pages li.prev a{ width:38px; height:38px;  background-position:0px 0px;} 
@@ -68,7 +54,39 @@ div.match_book ul.pages li.next a{ width:38px; height:38px;  background-position
 div.match_book ul.pages li.next a:hover {  background-position:-45px -40px;}
 div.match_book ul.pages li.page a{ margin-top:10px; width:15px; height:15px; background-position:-92px -12px; line-height:38px; text-indent:5px; color:#85847d;} 
 div.match_book ul.pages li.page a:hover,div.match_book ul.pages li.on_select a { background-position:-93px -34px;}
-.match_book .pages .on_select a{ font-weight:bold;}
+.match_book .pages .on_select a{ font-weight:bold;}*/
 
+.match_book ul li label { position:relative; padding-left:25px; cursor:pointer;}
+.match_book ul li label input[type=checkbox] {visibility:hidden;}
+.match_book ul li label input[type=checkbox] + span {display:inline-block; position:absolute; top:0px; left:23px; width:16px; height:16px; border: 1px solid #bababa;}
+.match_book ul li label input[type=checkbox]:checked + span { background:url("../img/hover_bg.png") no-repeat -28px -152px;}
+.match_book ul li { color: #130e7a; width: 245px; float: left; height: 31px; text-align: left; margin-top: 20px;}
+.match_book ul li label input { margin-right:10px;}
+.match_book .book_list_bottom { clear: both; height:32px; margin-right: 35px;margin-bottom: 20px; text-align: right; padding-top: 25px;}
+.match_book .select_all { margin-right: 20px; text-decoration:underline; cursor:pointer;vertical-align: top;}
+.match_book #submit { height:32px; width:78px; border:none; background:url("../img/hover_bg.png") no-repeat 0 -116px; cursor:pointer;}
+.match_book #submit:hover { background-position:-85px -116px;}
 
-
+.main .match_box p.tips { margin:30px 0px 20px 30px; color: #b81313;}
+.main .match_box table span.hidden_list { color: #130e7a; cursor:pointer; }
+.main .match_box h5 { position:relative; width:740px; height:35px; margin:auto; border:1px solid #cecece; font:13px "微软雅黑"; font-weight:bold; text-align:center; line-height:35px;}
+.main .match_box h5 span:nth-child(1) {float:left; width:245px; border-right: 1px solid #cecece;}
+.main .match_box h5 span:nth-child(2) {float:left; width:245px; border-right: 1px solid #cecece;} 
+.main .match_box h5 span:nth-child(3) {float:left; width:245px;}
+.main .match_box h5 span span:nth-child(1) {}
+/*.match_book {display: none;}*/
+/*.main .match_box h5 span:nth-child(4) {float:left; width:106px;}*/
+/*.main .match_box .match_box span.msg_title { color: #130e7a; cursor: pointer;} */
+/*.main .match_box .match_box a.del_message { color: #130e7a;}*/
+/*.main .match .match_content span { float:right; width:22px; height:22px; margin:5px 20px 0 0; background:url('../img/hide.png') no-repeat; cursor:pointer;}*/
+.main .match_box .match_list h5 { border-top:none; font-weight:normal;} 
+.main .match_box .match_list h5:hover { background-color: rgb(247, 247, 243);} 
+.main .match_box .match_list h5.unread { font-weight:bold;}
+.main .match_box .match_list h5.click_h5 { font-weight:bold;} 
+.main .match_box .match_book { display:block; overflow:hidden; margin:auto;width: 740px; padding:10px 0px; border: 1px solid #cecece;border-top: none;}
+.main .match_box .match_book .ok_submit{  bottom:30px; left:40px; width:75px; height:30px; margin-left:550px; background:#c6c4b6; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center;}
+.main .match_box .match_book .ok_submit:hover{ background:#e8a126; color:#fff;} 
+/*.main .match_box .match_book p { font:14px "宋体"; margin:0 22px 10px; text-indent:2em; line-height:25px;}*/
+/*.main .match_box ul { float:right; margin:40px 60px 0 0; list-style:none;}*/
+/*.main .match_box ul li { float:left; margin:0 5px;}*/
+/*.main a.home_page { clear:both; float:left; width:80px; height:32px; margin:80px 0 0 50px; background:#e0e0e0; border:solid 1px #c3c3c3; border-radius:3px; line-height:32px; text-align:center; color:#000; text-decoration:none;}*/

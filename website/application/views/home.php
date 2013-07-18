@@ -54,54 +54,46 @@
 			<div class="bottom_shadow"></div><!-- 块级区域下方的底层阴影 -->
 		</div><!-- end of content_box 包裹整块质感效果的div -->
 		<div class="content_box">
-			<div class="box_demo match_book">
+			<div class="box_demo match_box">
 				<h3>这些人有你想要的书：</h3>
-				<table>
-					<tbody>
-					<tr>
-						<th>姓名</th>
-						<th>所在生活区</th>
-						<th>拥有你需要的教材数</th>
-					</tr>
-
-					<?php
-					if(empty($system_match['data']))
+				<h5>
+					<span>姓名</span>
+					<span>所在生活区</span>
+					<span>拥有你需要的教材数</span>
+				</h5>
+				<?php
+				if(empty($system_match['data']))
+				{
+					echo 
+					"<div class='match_list'>暂时没找到哦！</div>";
+				}else 
+				foreach ($system_match['data'] as $user) 
 					{
-						echo "
-						<tr>
-						<th colspan=3>暂时没找到哦！</th>
-						</tr>";
-					}else 
-					foreach ($system_match['data'] as $user) 
-						{
-							echo 
-							"<tr>
-							<td><a href='".site_url('book_owner')."/".$user['uid']."'>".$user['truename'].'</a></td>
-							<td>'.$user['dormitory'].'</td>
+					echo 
+					"<div class='match_list'>
+						<h5>
+						<span><a href='".site_url('book_owner')."/".$user['uid']."'>".$user['truename'].'</a></span>
+						<span>'.$user['dormitory'].'</span>
+						<span>'.count($user['book']).'本 <strong class="chankan"> [查看]</strong></span>
+						</h5>';						
+				?>				
+						<div class="match_book">
+							<form action="<?php echo site_url('home/check_step');?>" method='post' >
+								<input type="hidden" value="<?php echo $user['uid'];?>" name="user" />
+								<ul>
+								<?php
+								foreach ($user['book'] as $book) 
+								{
+										echo "<li><label><input type='checkbox' value='".$book['book_id']."' name='book".$book['book_id']."' /><span></span>".$book['name']."</label></li>";
+								}	
+								?>
+								</ul>
+								<p class="book_list_bottom"><span class="select_all">全选</span><input type="submit" id="submit" value=""/></p>
+							</form>
+						</div>
+					</div>
+				<?php }?>
 
-							<td>'.count($user['book']).'本 <span class="hidden_list"> [查看]</span></td>
-							</tr>';						
-					?>				
-							<tr class="book_list">
-								<td colspan="3">
-									<form action="<?php echo site_url('home/check_step');?>" method='post' >
-									<input type="hidden" value="<?php echo $user['uid'];?>" name="user" />
-									<ul>
-									<?php
-									foreach ($user['book'] as $book) 
-									{
-											echo "<li><label><input type='checkbox' value='".$book['book_id']."' name='book".$book['book_id']."' /><span></span>".$book['name']."</label></li>";
-									}	
-									?>
-									</ul>
-									<p class="book_list_bottom"><span class="select_all">全选</span><input type="submit" id="submit" value=""/></p>
-									</form>
-								</td>
-							</tr>
-					<?php }?>
-
-					</tbody>
-				</table>
 				<p class="tips">注意：每次只可以查看一名捐书者信息</p>
 				<?php echo $this->pagination->create_links();?><!-- 输出分页模块 -->
 
