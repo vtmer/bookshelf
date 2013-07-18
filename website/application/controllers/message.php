@@ -13,14 +13,15 @@ class Message extends CI_Controller
 		$uid = $this->session->userdata['uid'];
 		$status = '0';
 		$data['messages'] = $this->user_model->select_message($uid,$status);
-		$this->pager->set(0,8);//设置每页显示的条数
-		$data['page']['num'] =count($data['messages']);//获取总页数
-		$data['messages'] = $this->pager->get_pagedata($data['messages'],$page);//当前页数据
-		$pager_config = $this->config->item('pager_config');
-		$pager_config['base_url'] = site_url('message/index/');
-		$pager_config['total_rows'] = $data['page']['num'];
-		$pager_config['per_page'] = 8; //设置每页显示的条数
-		$this->pagination->initialize($pager_config); 
+		
+		// $this->pager->set(0,8);//设置每页显示的条数
+		// $data['page']['num'] =count($data['messages']);//获取总页数
+		// $data['messages'] = $this->pager->get_pagedata($data['messages'],$page);//当前页数据
+		// $pager_config = $this->config->item('pager_config');
+		// $pager_config['base_url'] = site_url('message/index/');
+		// $pager_config['total_rows'] = $data['page']['num'];
+		// $pager_config['per_page'] = 8; //设置每页显示的条数
+		// $this->pagination->initialize($pager_config); 
 	 
         $messages = $this->user_model->show_message_num($this->session->userdata['uid']);
 		$header = array('title' => '我收到的信息','css_file' => 'message.css','messages' => $messages);

@@ -30,7 +30,7 @@
 
 
 				<!-- <a href="<?php echo site_url('home');?>" class="home_page">返回</a> -->
-				<?php echo $this->pagination->create_links();?><!-- 输出分页模块 -->
+				<!--<?php echo $this->pagination->create_links();?>--><!-- 输出分页模块 -->
 
 			</div>
 
