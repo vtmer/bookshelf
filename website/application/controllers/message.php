@@ -1,7 +1,5 @@
 <?php 
 
-ob_start();
-
 class Message extends CI_Controller
 {
 	public function __construct()
@@ -55,6 +53,32 @@ class Message extends CI_Controller
 			redirect('message','refresh');
 		}		
 	}
+	public function msg_readed($msg_id)
+	{
+		$flag = $this->user_model->msg_readed($msg_id);
+		if($flag!=0)
+		{
+			echo "true";
+			exit;
+		}
+		else
+		{
+			echo "false";
+			exit;
+		}
+	}
+	public function del_msg($msg_id)
+	{
+		$flag = $this->user_model->del_msg($msg_id);
+		if($flag!=0)
+		{
+			echo "true";
+			exit;
+		}
+		else
+		{
+			echo "false";
+			exit;
+		}
+	}
 }
-
-?>

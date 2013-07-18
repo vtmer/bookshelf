@@ -8,11 +8,12 @@
 			<div class="box_demo message">
 				<h5><span>状态</span><span>标题</span><span>时间</span><span>操作</span></h5>
 
-				<?php foreach($messages as $row):?>
+				<?php
+				 foreach($messages as $row):?>
 				<div class="message_box">
 				<?php if($row['status']=='0') echo "<h5 class='unread'><span class='readed'>未读";else echo "<h5><span class='readed'>已读";?></span><span class="msg_title"><?php echo $row['title'];?></span><span><?php echo $row['create_time'];?></span>
 
-					<a href="#" class="del_message">[删除]</a><!--z这里要绑数据-->
+					<a href="<?php echo site_url('message/del_msg')."/".$row['id'];?>" class="del_message">[删除]</a>
 
 					</h5>
 					<div class="message_content">
