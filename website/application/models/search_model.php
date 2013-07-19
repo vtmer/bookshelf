@@ -13,8 +13,9 @@ class Search_Model extends CI_Model
   	}
   	public function get_book_by_ISBN($ISBN)
   	{
-  		$sql = "SELECT * FROM `allbook` WHERE ISBN=? ";
-  		$query = $this->db->query($sql,array($ISBN));
+      $ISBN = mysql_real_escape_string($ISBN);
+  		$sql = "SELECT * FROM `allbook` WHERE ISBN LIKE ('%$ISBN%') ";
+  		$query = $this->db->query($sql);
   		return $query->result();
   	}
   	public function get_book_by_keywords($keywords,$offset = '',$length = '')

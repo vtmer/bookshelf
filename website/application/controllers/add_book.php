@@ -42,26 +42,35 @@ class Add_book extends CI_Controller
 		}*/
 		$user_info = $this->home_model->get_userinfo($this->session->userdata('uid'));
 
-		var_dump($user_info);
+		$ID_arr = $this->input->post();
+		if(!$ID_arr) redirect('add_book');
+		$flag = $this->course_model->addbook($ID_arr);
+		$data['points'] = count($ID_arr)*5;
+		if($flag)
+		{
+			$header = array('title'=>'捐书成功','css_file'=>'add_succ.css');
+			$footer = array('js_file'=>'add_succ.js');
+			$this->parser->parse('template/header',$header);
+			$this->load->view('add_succ',$data);
+			$this->parser->parse('template/footer',$footer);
+		}
+		else
+			print_r($flag);
+		//$this->course_o
 
 	}
 
 	public function search()
 	{
-		/*$queryString = $_POST['queryString']; 
-		if(strlen($queryString) >0) 
-		{ 
-			$sql= "SELECT name FROM allbook WHERE name LIKE '".$queryString."%' LIMIT 8"; 
-			$query = mysql_query($sql); 
-			while ($result = mysql_fetch_array($query,MYSQL_BOTH))
-			{ 
-				$name=$result['name'];
-				echo '<li onClick="fill(\''.$name.'\');">'.$name.'</li>'; 
-			} 
-		} */
+
 		$keywords = $this->input->get('keywords');
-		$books = $this->search_model->get_book_by_keywords($keywords);
-		// var_dump($books); 
+		if(is_numeric($keywords))
+		{
+			$books = $this->search_model->get_book_by_ISBN($keywords);
+		}else
+		{
+			$books = $this->search_model->get_book_by_keywords($keywords);
+		}
 		echo json_encode($books);
 		exit;			
 

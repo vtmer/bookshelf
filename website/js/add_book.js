@@ -62,13 +62,14 @@ function lookup(inputString) {
 					var $index = $(this).parent('li').index();
 					var $string = "<li><div><img src='http://"+document.domain+"/images/"+jsonObj[$index].ISBN+".jpg' alt='' /></div>"+
 							"<ul><li>书 名：<span>"+jsonObj[$index].name+"</span></li>"+
-								"<input type='hidden' value='"+jsonObj[$index].ISBN+"' name='"+jsonObj[$index].ISBN+"'>"+
+								"<input type='hidden' value='"+jsonObj[$index].id+"' name='"+jsonObj[$index].id+"'>"+
 								"<li>作 者：<span>"+jsonObj[$index].author+"</span></li>"+
 								"<li>出版社：<span>"+jsonObj[$index].publish+"</span></li>"+
 								"<li>版次：<span>"+jsonObj[$index].version+"</span></li>"+
 							"</ul><a href='#' class='del_book'>[删除]</a>"+
 						"</li>";
 						$('.sele_book').append($string);
+						//$('.sele_book').slideDown();
 						$('#suggest_box').slideUp('fast',function(){
 							$('#suggest_box ul').html('');
 							});
@@ -105,7 +106,18 @@ $(document).ready(function()
 		// nowShowing = $(".main .step2");
    }else
    {
-   	   startTimer($("#isbncode").val());
+   		var rule = /^[0-9]*$/;
+   		if(!rule.test($('#isbncode').val()))//如果不是数字
+		{
+			startTimer($("#isbncode").val());
+		}
+		else
+		{
+			if($("#isbncode").val().length>=10)
+			{
+				startTimer($("#isbncode").val());
+			}
+		}   	   
    }
    });
 });  

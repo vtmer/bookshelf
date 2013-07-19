@@ -9,7 +9,7 @@
 				<div class="inpart">
 					<div>
 					<p class="">我要捐书</p>
-					<form action="">
+					<form action="<?php echo site_url('add_book/add');?>" method='POST'>
 					<ul class="sele_book">
 						<!--这是选择书本之后，搜索框上面显示的模板，没一本书对应一个li -->
 						<!-- <li>
@@ -24,7 +24,7 @@
 						</li>	 -->
 					</ul>
 						<div class="sub_search">
-							<input id="isbncode" name="isbncode" type="text" autocomplete="off" placeholder=" 请输入ISBN码或书名" />
+							<input id="isbncode" type="text" autocomplete="off" placeholder=" 请输入ISBN码或书名" />
 							<div id="suggest_box">
 								<!-- 这里是搜索框匹配的模板，每一本书对应一个li -->
 								<ul>
