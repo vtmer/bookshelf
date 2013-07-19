@@ -10,25 +10,30 @@ div.main h3 { height:39px; margin-bottom:20px; background:url('../img/h_bg.png')
 
 
 .sign {...........}
-div.sign { position:relative; overflow:hidden; z-index:10; width:500px; height:255px; padding:20px 0; margin:0px auto; background:#f7f7f7; border:solid 1px #b2a88c; box-shadow:0px 10px 10px -5px rgba(0,0,0,0.6),0px 1px 2px 2px rgba(255,255,255,.6) inset,0px -6px 0px 0px #cdcdcd inset; border-radius:8px;}
+div.sign { position:relative; overflow:hidden; z-index:10; width:502px; height:297px; padding:20px 0; margin:0px auto; background:#f7f7f7; border:solid 1px #b2a88c; box-shadow:0px 10px 10px -5px rgba(0,0,0,0.6),0px 1px 2px 2px rgba(255,255,255,.6) inset,0px -6px 0px 0px #cdcdcd inset; border-radius:8px;}
 
 div.bottom_shadow { position:absolute; z-index:-1; width:498px; height:48px; margin-top:-25px; margin-left:155px;  background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, from(rgba(0,0,0,.15)), to(rgba(0,0,0,0))); background-image:-moz-linear-gradient(top,rgba(0,0,0,.15),rgba(0,0,0,0)); background-image:-o-linear-gradient(top,rgba(0,0,0,.15),rgba(0,0,0,0));}
 
-div.sign img.shujia {display: block; width:467px; height:69px; margin:0 17px 10px;}
-div.sign form { float:left; font-size:14px;}
+div.sign img.shujia {display: block; width:467px; height:69px; margin:0 17px 30px;}
+div.sign form { width: 260px; float:left; font-size:13px; border-right: 1px solid #fff;}
+div.sign form>div { overflow: hidden; border-right: 1px solid #d1d1d1;}
 div.sign form span { margin-left:20px; color:#626262; }
-div.sign form label { display:block; width:220px; margin:15px 0; text-align:right;}
-div.sign form label input { height:24px; width:140px;}
-div.sign form input.confirm { clear:both; float:left; width:65px; height:30px; margin:10px 0 0 75px; background:#9a9a9a; border:none; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center; color:#fff;}
-div.sign form input.confirm:active { background:#e8a126;}
-div.sign form .forget { float:right; text-decoration: underline; color:#626262; font-size:12px;}
+div.sign form label { display:block; width:220px; margin:15px 30px 15px 10px; text-align:right;}
+div.sign form label input {height: 28px; width: 142px; border: 1px solid #d1d1d1; margin-left: 5px; background-color: #f8f8f8; border-radius: 3px;}
+div.sign form label.yanzheng input { width: 65px ;}
+div.sign form label.yanzheng img{ width: 70px;height: 25px; vertical-align: middle;}
+div.sign form input.confirm { clear:both; float:left; width:75px; height:35px; margin:20px 0 0 85px; border:none;font-size:14px; line-height:35px; text-align:center; color:#fff; background: url('../img/button_1.png') no-repeat;}
+
+div.sign form input.confirm:active { background:url('../img/button_10.png') no-repeat;}
+/*div.sign form .forget { float:right; text-decoration: underline; color:#626262; font-size:12px;}*/
 
 /*记住密码的特殊样式*/
-div.sign form .check_label { float:left; width:101px; margin:0; margin-left:40px; font-size:12px; line-height:12px;}
-div.sign form #remember { width:auto; height:auto;}
-div.sign .check_label span { float:right; margin:1px 0 0 4px; -webkit-user-select:none; -mos-user-select:none;}
-
-div.sign a.sign_up { display:block; position:absolute; overflow:hidden; right:0; width:217px; height:157px; background:url("../img/sign_up.png") no-repeat;}
+div.sign form .check_label { width:144px; margin:0; margin-left:45px; font-size:12px; line-height:12px;}
+div.sign form #remember { width:auto; height:auto; vertical-align: middle;}
+div.sign .check_label span { margin:1px 0 0 5px; vertical-align: middle; -webkit-user-select:none; -mos-user-select:none;}
+div.sign a.sign_up p { font-size: 13px;margin: 22px 27px;line-height: 25px;}
+div.sign a.sign_up p span { font-weight: bold; color: #130e7a;}
+div.sign a.sign_up { display:block; position:absolute; overflow:hidden; right:10px; width:217px; height:157px; background:url("../img/sign_up1.png") no-repeat;}
 .sign .sign_up:hover:after{-webkit-animation:flash 2s linear infinite;-moz-animation:flash 2s linear infinite;-ms-animation:flash 2s linear infinite;animation:flash 2s linear infinite}
 .sign .sign_up:after {content:" ";position:absolute;display:block;top:-45px;left:-115px;width:30px;height:247px;background:rgba(255,255,255,.3);-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg)}
 @-webkit-keyframes flash{100%{left:1000px}}

@@ -32,16 +32,19 @@
 </div>
 <div class="main">
 	<div class="sign">
-	<img src="<?php echo base_url('img/shujia.jpg'); ?>" class="shujia" alt="工大书架" />
-		<form action="<?php echo site_url('login/check'); ?>" method="POST" class="ajaxForm"> 
-			<span>已有帐号登录:</span>
-			<label for="user_name">账户：<input type="text" name="username" value='' placeholder="  请输入您的邮箱"/ ></label>
-			<label for="password">密码：<input type="password" name="pwd" value=''/></label>
-			<label for="remember" class="check_label"><input type="checkbox" id="remember" name="auto_login" value="true"/><span unselectable="on">一周内自动登录</span></label>
-			<a href="#" class="forget">忘记密码？</a>
-			<input type="submit" class="confirm" value="登录" />
+	<img src="<?php echo base_url('img/shujia.png'); ?>" class="shujia" alt="工大书架" />
+		<form action="<?php echo site_url('login/check'); ?>" method="POST" class="ajaxForm">
+			<div>
+				<!-- <span>已有帐号登录:</span> -->
+				<label for="user_name">用户名：<input type="text" name="username" value='' placeholder="  请输入您的邮箱"/ ></label>
+				<label for="password">密码：<input type="password" name="pwd" value=''/></label>
+				<!-- <label for="" class="yanzheng">验证码：<input type="text"/> <img src="" /></label> -->
+				<label for="remember" class="check_label"><input type="checkbox" id="remember" name="auto_login" value="true"/><span unselectable="on">一周内自动登录</span></label>
+				<!-- <a href="#" class="forget">忘记密码？</a> -->
+				<input type="submit" class="confirm" value="登录" />			
+			</div> 
 		</form>
-		<a href="<?php echo site_url('register');?>" class="sign_up"></a>
+		<a class="sign_up"><p>本平台仅限于广工在校学生使用，为了保证环境安全和纯净，请输入 <span>学生工作信息管理系统的学号和密码</span> 进行登录。</p></a>
 </div>
 
 	<div class="bottom_shadow"></div>
