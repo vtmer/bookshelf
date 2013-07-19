@@ -40,7 +40,6 @@ class Add_book extends CI_Controller
 			echo "<script>alert('不好意思哦!我们书库暂时还不支持这本书！欢迎反馈哦！');</script>";
 			redirect('add_book','refresh');
 		}*/
-		$user_info = $this->home_model->get_userinfo($this->session->userdata('uid'));
 
 		$ID_arr = $this->input->post();
 		if(!$ID_arr) redirect('add_book');
@@ -55,9 +54,7 @@ class Add_book extends CI_Controller
 			$this->parser->parse('template/footer',$footer);
 		}
 		else
-			print_r($flag);
-		//$this->course_o
-
+			show_404();
 	}
 
 	public function search()
