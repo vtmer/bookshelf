@@ -7,7 +7,8 @@
 			<!-- <img src="<?php echo base_url('img/join_us.jpg'); ?>" alt="加入我们" class="join_us"/> -->
 			<h1>欢迎加入工大书架</h1>
 			<div>
-				<span>用户名：阿大大大大撒地方</span>
+				<span>姓名：阿大大大大撒地方</span>
+				<span>校区：阿大大大大撒地方</span>
 				<span>学院：阿大大大大撒地方</span>
 				<span>年级：阿大大大大撒地方</span>
 				<span>专业：阿大大大大撒地方</span>

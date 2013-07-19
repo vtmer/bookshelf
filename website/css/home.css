@@ -33,7 +33,7 @@ div.needed_book table td:nth-child(6){ width:70px; text-align:center;}
 /*定义表格各列的宽度*/
 
 
-.main .match_box p.tips { float: left; margin:30px 0px -45px 30px; color: #b81313;}
+.main .match_box p.tips { float: left; margin:30px 0px 20px 30px; color: #b81313;}
 .main .match_box table span.hidden_list { color: #130e7a; cursor:pointer; }
 .main .match_box h5 { position:relative; width:740px; height:35px; margin:auto; border:1px solid #cecece; font:13px "微软雅黑"; font-weight:bold; text-align:center; line-height:35px;}
 .main .match_box h5 span { float: left; width: 245px; display:block; border-right: 1px solid #cecece;}
@@ -59,7 +59,7 @@ div.needed_book table td:nth-child(6){ width:70px; text-align:center;}
 .match_book #submit { height:32px; width:78px; border:none; background:url("../img/hover_bg.png") no-repeat 0 -116px; cursor:pointer;}
 .match_book #submit:hover { background-position:-85px -116px;}
 
-div.match_box ul.pages { clear:both; float: right; margin: 20px 30px 20px 0px;}
+div.match_box ul.pages { float: right; margin: 20px 30px 20px 0px;}
 div.match_box ul.pages li{ float:left; margin:0 3px;}
 div.match_box ul.pages li a { float:left; background:url('../img/pages.png') no-repeat;}
 div.match_box ul.pages li.prev a{ width:38px; height:38px;  background-position:0px 0px;} 
