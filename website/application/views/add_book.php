@@ -29,7 +29,7 @@
 							<div id="suggest_box">
 								<!-- 这里是搜索框匹配的模板，每一本书对应一个li -->
 								<ul>
-									<li><a href="#" title="书名"><img src="../img/tip.jpg" alt="#"></a></li>
+									<!-- <li><a href="#" title="书名"><img src="../img/tip.jpg" alt="#"></a></li> -->
 								</ul>
 							</div>		
 						</div>

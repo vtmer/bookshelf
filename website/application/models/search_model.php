@@ -17,16 +17,32 @@ class Search_Model extends CI_Model
   		$query = $this->db->query($sql,array($ISBN));
   		return $query->result();
   	}
-  	public function get_book_by_keywords($keywords,$offset,$length)
+  	public function get_book_by_keywords($keywords,$offset = '',$length = '')
   	{
       $keywords = mysql_real_escape_string($keywords);
-      $this->db->like('name', $keywords); 
-      $query = $this->db->get('allbook',$length, $offset);
-      $result['books'] = $query->result_array();
-      $sql2 = "SELECT count(*) AS num FROM `allbook` WHERE `name` LIKE ('%$keywords%')";
-      $query2 = $this->db->query($sql2);
-      $num = $query2->result_array();
-  		$result['num'] = $num[0]['num'];
-  		return $result;
+      if($offset!=''&&$length!='')
+      {
+        $this->db->select('id , ISBN , name , author , publish ,version , course_name , term')
+                  ->from('allbook')
+                  ->like('name' , $keywords)
+                  ->where('status' , 1);
+        $this->db->like('name', $keywords); 
+        $query = $this->db->get('allbook',$length, $offset);
+        $result['books'] = $query->result_array();
+        $sql2 = "SELECT count(*) AS num FROM `allbook` WHERE `name` LIKE ('%$keywords%')";
+        $query2 = $this->db->query($sql2);
+        $num = $query2->result_array();
+    		$result['num'] = $num[0]['num'];
+      }
+      else
+      {
+        $this->db->select('id , ISBN , name , author , publish ,version , course_name , term')
+                 ->from('allbook')
+                 ->like('name' , $keywords)
+                 ->where('status' , 1);
+        $query = $this->db->get();
+        $result = $query->result_array();
+      }
+   		return $result;
   	}	
  }

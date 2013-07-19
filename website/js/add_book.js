@@ -38,18 +38,33 @@ function _lookup(_inputString)//返回一个无参数的函数
 	}
 }
 function lookup(inputString) { 
-var url=document.URL+"/search";
-if(inputString.length == 0) { 
-// Hide the suggestion box. 
-$('#suggest_box').hide(); 
-} else { 
-$.post(url, {queryString: ""+inputString+""}, function(data){ 
-if(data.length >0) { 
-$('#suggest_box').show(); 
-$('#suggest_box ul').html(data); 
-} 
-}); 
-} 
+	var $url = document.URL+"/search";
+	if(inputString.length == 0) 
+	{ 
+	// Hide the suggestion box. 
+	$('#suggest_box').hide(); 
+	} 
+	else 
+	{ 
+		$.get($url, {keywords: inputString}, function(data){ 
+			(typeof data !== 'object') ? jsonObj = JSON.parse(data) :  jsonObj = data ;
+			var length = jsonObj.length;
+			console.log(jsonObj);
+			if(length >0) { 
+				$('#suggest_box').show();
+				$('#suggest_box ul').html('');
+				for(var i = 0;i<length;i++)
+				{
+					$('#suggest_box ul').append("<li><a href='' title="+jsonObj[i].name+"><img src='http://"+document.domain+"/images/"+jsonObj[i].ISBN+".jpg' alt=''></a></li>"); 
+				}
+			}else
+			{	
+				$('#suggest_box').show();
+				$('#suggest_box ul').html('');
+				$('#suggest_box ul').append("没有找到哦"); 
+			} 
+		}); 
+	} 
 } // lookup
 //绑定输入框的回车事件
 $(document).ready(function()
@@ -58,10 +73,10 @@ $(document).ready(function()
    var curKey = e.which;
    if(curKey == 13)
    {
-       do_jsonp();
-    	$(nowShowing).removeClass("now_step");
-		$(".main .step2").addClass("now_step");
-		nowShowing = $(".main .step2");
+  //      do_jsonp();
+  //   	$(nowShowing).removeClass("now_step");
+		// $(".main .step2").addClass("now_step");
+		// nowShowing = $(".main .step2");
    }else
    {
    	   startTimer($("#isbncode").val());

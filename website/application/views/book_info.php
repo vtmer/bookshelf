@@ -7,7 +7,7 @@
 		<div class="content_box">
 			<div class="box_demo search_results">
 				<div class="book_img">
-				<?php $book_url = base_url('./images/')."/".$book_info[0]->ISBN.".jpg";?>
+				<?php $book_url = base_url('images')."/".$book_info[0]->ISBN.".jpg";?>
 				<img src="<?php echo $book_url;?>" id="image" />
 				</div>
 				<dl>
