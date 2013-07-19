@@ -6,40 +6,48 @@
 		<h3>捐献书籍：</h3>
 		<div class="content_box">
 			<div class="box_demo add_book">
-			<form action="<?php echo site_url('add_book/add'); ?>" method="post">
-				<div class="step1 now_step">
-					<p class="steps">步骤1：输入ISBN码或书名</p>
-					<div class="step_box">
-						<input type="text" autocomplete="off" placeholder="请输入书名或ISBN" id="isbncode" name="isbncode"  />
-						<div class="suggestionsBox" id="suggestions" style="display: none;">
-						<div class="suggestionList" id="autoSuggestionsList"></div>
-						</div> 
+				<div class="inpart">
+					<div>
+					<p class="">我要捐书</p>
+					<ul class="sele_book">
+						<!--这是选择书本之后，搜索框上面显示的模板，没一本书对应一个li -->
+						<li>
+							<div><img src="#" alt="#" /></div>
+							<ul>
+								<li>书 名：<span>阿三大姐夫上课了</span></li>
+								<li>作 者：<span>第三款</span></li>
+								<li>出版社：<span>释迦佛阿斯顿发</span></li>
+								<li>版次：<span>d1123</span></li>
+							</ul>
+							<a href="#">[删除]</a>
+						</li>	
+					</ul>
+					
+					<form action="">
+						<div class="sub_search">
+							<input id="isbncode" name="isbncode" type="text" autocomplete="off" placeholder=" 请输入ISBN码或书名" />
+							<div id="suggest_box">
+								<!-- 这里是搜索框匹配的模板，每一本书对应一个li -->
+								<ul>
+									<li><a href="#" title="书名"><img src="../img/tip.jpg" alt="#"></a></li>
+								</ul>
+							</div>		
+						</div>
 
-						<a href="#" class="next_step" onclick="do_jsonp()">下一步</a>
-						<img src="<?php echo base_url('img/tip.jpg'); ?>" alt="ISBN码位于书籍背面标价处"/>
-						<p class="tips">ISBN码可在书籍背面左图标志处找到！<span>也可直接在输入框输入书名哦!</span></p>
+						<input type="submit" id="submit" value="提交" />
+					</form>
 					</div>
 				</div>
-				<div class="step2">
-					<p class="steps">步骤2：确认信息</p>
-					<div class="step_box">
-						<label for="isbn">书名
-							<input type="text" placeholder="书名不能为空哦！" id="booktitle" name="booktitle" />
-							<span id="isbn" name="isbn" disabled ></span>
-						</label>
-						<label>胶印：
-							<select name="print">
-								<option value="0" selected="selected">否</option>
-								<option value="1" >是</option>
-							</select>
-							<input type="submit" id="submit" value="确定" />
-						</label>
-						<p class="tips">若书籍是学校自己印的（胶印书）<span>请返回上一步直接在输入框输入书名即可！</span></p>
-								<a href="#" class="prev">上一步</a>
-					</div>
-					</form>
+
+				<div class="tip_box">
+					<h5>什么是ISBN码？</h5>
+					<p class="tips">ISBN码可在书籍背面如下标志处找到！
+						<span>若无ISBN码，也可直接输入书名。</span>
+					</p>
+					<img src="<?php echo base_url('img/tip.jpg'); ?>" alt="ISBN码位于书籍背面标价处" />
 				</div>
 			</div>
+
 			<div class="bottom_shadow"></div><!-- 块级区域下方的底层阴影 -->
 		</div><!-- 包裹整块质感效果的div -->
 	</div>

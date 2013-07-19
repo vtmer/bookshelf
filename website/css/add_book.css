@@ -5,67 +5,67 @@ div.search_bar { width:482px; height:94px; margin:auto; background:url('../img/s
 div.search_bar .search_input { width:392px; height:27px; margin:23px 0 0 14px; background:none; border:none;}
 div.search_bar .search_submit { float:right; width:50px; height:50px; margin:11px 11px 0 0 ; background:none; border:none; cursor:pointer;}
 
-
 div.mid_content { position:relative; width:100%; padding-top:88px; background:url('../img/shelf.png') 77px 0 no-repeat; }
-div.mid_content h3 { width:580px; height:39px; margin:auto; margin-bottom:40px; background:url('../img/h_bg.png') no-repeat; font:14px "微软雅黑",Arial, Helvetica, sans-serif; line-height:33px; text-indent:1em; color:#ffffff;}
+div.mid_content h3 { width:580px; height:39px; margin-left:80px; margin-bottom:40px; background:url('../img/h_bg.png') no-repeat; font:14px "微软雅黑",Arial, Helvetica, sans-serif; line-height:33px; text-indent:1em; color:#ffffff;}
 div.content_box { margin-bottom:90px;}
 
-div.mid_content div.box_demo { width:576px; height:320px; padding:0 1px 0 1px;}/*浮雕快在高级浏览器下的预定义*/
-div.bottom_shadow { width:578px; margin-left:191px;}/*块级区域底层阴影,宽度，边距需细修*/
+div.mid_content div.box_demo {}/*浮雕快在高级浏览器下的预定义*/
+div.bottom_shadow { }/*块级区域底层阴影,宽度，边距需细修*/
 
 
 div.add_book {.........}
-div.add_book .steps {  line-height:60px; text-align:center;}
-div.add_book .step1{ float:left; width:288px; background:#c1c0bf; box-shadow:0px 4px 9px -4px rgba(255, 255, 255, 1), -1px -3px 9px -2px rgba(0, 0, 0, .6) inset; border-top-left-radius:5px;}
-div.add_book .step2 { float:left; width:288px; background:#b1b1b1; box-shadow:0px 4px 9px -4px rgba(255, 255, 255, 1), 3px -3px 9px -2px rgba(0, 0, 0, 0.6) inset, -3px 0px 9px -4px rgba(0, 0, 0, 0.6) inset;  border-top-right-radius:5px;}
+div.add_book .inpart { width: 450px;border-right: 1px solid #fff;min-height: 350px;float: left;margin: 10px 0px 0px 30px;}
+div.add_book .inpart p { font-size: 14px;font-weight: bold;line-height: 55px;}
+div.add_book .inpart > div { border-right: 1px solid #d6d4ca;}
+div.add_book .inpart .sele_book>li { display: block; width: 420px;height: 140px;border: 1px solid #c9c7b9;}
+div.add_book .inpart .sele_book>li div { width: 105px; height: 140px; border-right: 1px solid #c9c7b9; float: left;}
+div.add_book .inpart .sele_book>li div img { display: block;margin: 5px;width: 95px;height: 130px;}
+div.add_book .inpart .sele_book>li ul { width: 294px;margin: 10px;display: block;float: right;}
+div.add_book .inpart .sele_book>li a { float: right;margin-right: 10px;margin-top: 20px;color: #130e7a;}
+
+.sub_search input#isbncode { width: 420px; height: 40px;margin-top: 30px; background-color: #d7d7d7;font-size: 14px;padding: 0px 0px;color: #666;}
+.sub_search #suggest_box { width: 418px; border: 1px solid #c9c7b9; border-radius: 5px; background-color: rgb(173, 173, 173);}
+.sub_search #suggest_box ul { margin:5px 0px; overflow: hidden;}
+.sub_search #suggest_box ul li { float: left;width: 86px;height: 115px;border: 1px solid #c9c7b9;margin: 15px 5px;}
+.sub_search #suggest_box ul li:hover { float: left; width: 105px; height: 145px; margin: 0px 5px; position: relative;}
+.sub_search #suggest_box ul li img { display: block; margin: 2px;border: 1px solid #fff; width: 80px; height: 109px;}
+.sub_search #suggest_box ul li:hover img { width: 99px; height: 139px;}
+
+div.add_book .inpart form input#submit { margin: 30px 30px 20px 345px;width: 75px;height: 35px;text-align: center;background: url('../img/button_1.png') no-repeat;border: none;color: #fff;font-size: 15px;font-weight: bold;}
+div.add_book .inpart form input#submit:hover { background: url('../img/button_10.png') no-repeat; cursor: 	pointer;}
+div.add_book .tip_box { width: 220px;height: 300px;margin: 10px 20px;position: absolute;bottom: 70px;right: 40px;}
+div.add_book .tip_box h5 { font-size: 14px; line-height: 55px;}
+div.add_book .tip_box img { margin-top: 30px;}
+.suggestionsBox { position: absolute; left: 30px; margin: 60px 0px 0px 0px; width: 375px; background-color: #212427; -moz-border-radius: 7px; -webkit-border-radius: 7px; border: 2px solid #000; color: #fff; } 
+.suggestionList { margin: 5px 0px 5px 5px;padding: 0px; } 
+.suggestionList li { margin: 0px 0px 3px 0px; padding: 3px; cursor: pointer; } 
+.suggestionList li:hover { background-color: #659CD8; } 
+
+
+
+
+
+
+
+
+
+/*div.add_book .steps {  line-height:60px; text-align:center;}*/
+/*div.add_book .step1{ float:left; width:288px; background:#c1c0bf; box-shadow:0px 4px 9px -4px rgba(255, 255, 255, 1), -1px -3px 9px -2px rgba(0, 0, 0, .6) inset; border-top-left-radius:5px;}*/
+/*div.add_book .step2 { float:left; width:288px; background:#b1b1b1; box-shadow:0px 4px 9px -4px rgba(255, 255, 255, 1), 3px -3px 9px -2px rgba(0, 0, 0, 0.6) inset, -3px 0px 9px -4px rgba(0, 0, 0, 0.6) inset;  border-top-right-radius:5px;}*/
 /*div.add_book .step3 { float:left; width:192px; background:#c3c3c3; box-shadow:0px 4px 9px -4px rgba(255, 255, 255, 1), 0px -3px 9px -2px rgba(0, 0, 0, .6) inset; line-height:60px; text-align:center;}*/
-
-
-
-div.add_book .step_box { position:absolute; top:60px; left:0px; width:100%; height:240px;}
-
-div.add_book .step_box { display:none;}
-div.add_book .step1 .step_box input { float:left; width:380px; height:35px; margin:25px 15px 0 30px; box-shadow:0 2px 5px -2px rgba(255,255,255,1) ,0 3px 4px -2px rgba(0,0,0,.6) inset;  background:#d7d7d7; border:none; text-indent:0.5em;}
-div.add_book div.step1 .step_box img { float:left; margin:30px 20px;}
-.add_book .step1 .tips { overflow:hidden; float:right; width:300px; margin-top:30px; font-size:14px; line-height:160%; text-align:left;}
-.add_book .step1 .tips span { display:block; color:red;}
-.add_book .step2 .tips { overflow:hidden; float:right; width:300px; margin-top:-60px; font-size:14px; line-height:160%; text-align:left;}
-.add_book .step2 .tips span { display:block; color:red;}
-
-div.add_book .step2 label { display:block; margin:20px;}
-div.add_book .step2 #isbn{ width:220px; height:35px; margin:0 15px 0 10px; box-shadow:0 2px 5px -2px rgba(255,255,255,1) ,0 3px 4px -2px rgba(0,0,0,.6) inset;  background:#d7d7d7; border:none; text-indent:0.5em;}
-div.add_book .step2 #submit{ height:26px; border:none; background:#c6c4b6; margin-left:15px; padding:0 10px; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:12px; line-height:24px; text-align:center;}
-
-
-div.add_book div.now_step { background:transparent; box-shadow:none;}
-div.add_book div.now_step .step_box { display:block;}
-
-
-div.add_book a.next_step,div.add_book a.prev { float:right; margin:30px 40px 0 0; height:30px; background:#c6c4b6; padding:0 17px; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center;}
-div.add_book a.next_step:hover,div.add_book a.prev:hover,div.add_book .step2 #submit:hover { background:#e8a126; color:#fff;} 
-div.add_book div.step2 a.prev { padding:0 8px; margin-top:70px;}
-
-
-.suggestionsBox { 
-position: absolute; 
-left: 30px; 
-margin: 60px 0px 0px 0px; 
-width: 375px; 
-background-color: #212427; 
--moz-border-radius: 7px; 
--webkit-border-radius: 7px; 
-border: 2px solid #000; 
-color: #fff; 
-} 
-.suggestionList { 
-margin: 5px 0px 5px 5px;
-padding: 0px; 
-} 
-.suggestionList li { 
-margin: 0px 0px 3px 0px; 
-padding: 3px; 
-cursor: pointer; 
-} 
-.suggestionList li:hover { 
-background-color: #659CD8; 
-} 
+/*div.add_book .step_box { position:absolute; top:60px; left:0px; width:100%; height:240px;}*/
+/*div.add_book .step_box { display:none;}*/
+/*div.add_book .step1 .step_box input { float:left; width:380px; height:35px; margin:25px 15px 0 30px; box-shadow:0 2px 5px -2px rgba(255,255,255,1) ,0 3px 4px -2px rgba(0,0,0,.6) inset;  background:#d7d7d7; border:none; text-indent:0.5em;}*/
+/*div.add_book div.step1 .step_box img { float:left; margin:30px 20px;}*/
+/*.add_book .step1 .tips { overflow:hidden; float:right; width:300px; margin-top:30px; font-size:14px; line-height:160%; text-align:left;}*/
+/*.add_book .step1 .tips span { display:block; color:red;}*/
+/*.add_book .step2 .tips { overflow:hidden; float:right; width:300px; margin-top:-60px; font-size:14px; line-height:160%; text-align:left;}*/
+/*.add_book .step2 .tips span { display:block; color:red;}*/
+/*div.add_book .step2 label { display:block; margin:20px;}*/
+/*div.add_book .step2 #isbn{ width:220px; height:35px; margin:0 15px 0 10px; box-shadow:0 2px 5px -2px rgba(255,255,255,1) ,0 3px 4px -2px rgba(0,0,0,.6) inset;  background:#d7d7d7; border:none; text-indent:0.5em;}*/
+/*div.add_book .step2 #submit{ height:26px; border:none; background:#c6c4b6; margin-left:15px; padding:0 10px; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:12px; line-height:24px; text-align:center;}*/
+/*div.add_book div.now_step { background:transparent; box-shadow:none;}*/
+/*div.add_book div.now_step .step_box { display:block;}*/
+/*div.add_book a.next_step,div.add_book a.prev { float:right; margin:30px 40px 0 0; height:30px; background:#c6c4b6; padding:0 17px; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center;}*/
+/*div.add_book a.next_step:hover,div.add_book a.prev:hover,div.add_book .step2 #submit:hover { background:#e8a126; color:#fff;} */
+/*div.add_book div.step2 a.prev { padding:0 8px; margin-top:70px;}*/

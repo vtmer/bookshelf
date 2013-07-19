@@ -1,25 +1,24 @@
 
-	var nowShowing = $(".main .step1");
-	$(".main .step1 .step_box a.next_step").bind("click",function(){
-		$(nowShowing).removeClass("now_step");
-		$(".main .step2").addClass("now_step");
-		nowShowing = $(".main .step2");
-		return false;
-	});
-	$(".main .step2 .step_box a.prev").bind("click",function(){
-		$(nowShowing).removeClass("now_step");
-		$(".main .step1").addClass("now_step");
-		nowShowing = $(".main .step1");
-		return false;
-	});
-	$(".main .step2 .step_box a.next_step").bind("click",function(){
-		$(nowShowing).removeClass("now_step");
-		$(".main .step3").addClass("now_step");
-		nowShowing = $(".main .step3");
+	// var nowShowing = $(".main .step1");
+	// $(".main .step1 .step_box a.next_step").bind("click",function(){
+	// 	$(nowShowing).removeClass("now_step");
+	// 	$(".main .step2").addClass("now_step");
+	// 	nowShowing = $(".main .step2");
+	// 	return false;
+	// });
+	// $(".main .step2 .step_box a.prev").bind("click",function(){
+	// 	$(nowShowing).removeClass("now_step");
+	// 	$(".main .step1").addClass("now_step");
+	// 	nowShowing = $(".main .step1");
+	// 	return false;
+	// });
+	// $(".main .step2 .step_box a.next_step").bind("click",function(){
+	// 	$(nowShowing).removeClass("now_step");
+	// 	$(".main .step3").addClass("now_step");
+	// 	nowShowing = $(".main .step3");
 		
-		return false;
-	});
-
+	// 	return false;
+	// });
 
 /*var rule = /^[0-9]+$/;
 var keywords = $('#isbncode').val();
@@ -42,12 +41,12 @@ function lookup(inputString) {
 var url=document.URL+"/search";
 if(inputString.length == 0) { 
 // Hide the suggestion box. 
-$('#suggestions').hide(); 
+$('#suggest_box').hide(); 
 } else { 
 $.post(url, {queryString: ""+inputString+""}, function(data){ 
 if(data.length >0) { 
-$('#suggestions').show(); 
-$('#autoSuggestionsList').html(data); 
+$('#suggest_box').show(); 
+$('#suggest_box ul').html(data); 
 } 
 }); 
 } 
