@@ -19,7 +19,7 @@ div.add_book .inpart p { font-size: 14px;font-weight: bold;line-height: 55px;}
 div.add_book .inpart > div { border-right: 1px solid #d6d4ca;}
 div.add_book .inpart .sele_book>li { position: relative;margin-top: 5px; display: block; width: 420px;height: 140px;border: 1px solid #c9c7b9;}
 div.add_book .inpart .sele_book>li div { width: 105px; height: 140px; border-right: 1px solid #c9c7b9; float: left;}
-div.add_book .inpart .sele_book>li div img { display: block;margin: 3px; border: 2px solid #fff; width: 95px;height: 130px;}
+div.add_book .inpart .sele_book>li div img { display: block;margin: 10px; border: 0px solid #fff; width: 85px;height: 120px;}
 div.add_book .inpart .sele_book>li ul { width: 294px;margin: 10px;display: block;float: right;}
 div.add_book .inpart .sele_book>li a { float: right; position: absolute;bottom: 10px;right: 10px; color: #130e7a;}
 div.add_book .inpart .sele_book>li a:hover {font-weight: bold;color: rgb(219, 81, 81);}
