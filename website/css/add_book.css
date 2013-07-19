@@ -25,7 +25,7 @@ div.add_book .inpart .sele_book>li a { float: right;margin-right: 10px;margin-to
 div.add_book .inpart .sele_book>li a:hover {font-weight: bold;color: rgb(219, 81, 81);}
 
 .sub_search input#isbncode { width: 420px; height: 40px;margin-top: 30px; background-color: #d7d7d7;font-size: 14px;padding: 0px 0px;color: #666;border: 1px solid rgb(173, 170, 145);border-radius: 3px}
-.sub_search #suggest_box { display: none; width: 423px; border:1px solid rgb(248, 248, 248); border-radius: 5px; background-color: rgba(174, 221, 230, 0.22);}
+.sub_search #suggest_box { display: none; width: 423px; border:1px solid rgb(231, 231, 231); border-radius: 5px; background-color: rgba(174, 221, 230, 0.22);}
 .sub_search #suggest_box ul { margin:5px 0px; overflow: hidden;}
 .sub_search #suggest_box ul li { float: left;width: 86px;height: 115px;border: 1px solid #c9c7b9; border-radius: 6px; margin: 15px 5px;}
 .sub_search #suggest_box ul li:hover { float: left; width: 105px; height: 145px; margin: 0px 5px; position: relative;}

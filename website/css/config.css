@@ -7,31 +7,32 @@ div.search_bar .search_submit { float:right; width:50px; height:50px; margin:11p
 
 
 div.mid_content { position:relative; width:100%; padding-top:88px; background:url('../img/shelf.png') 77px 0 no-repeat; }
-div.mid_content h3 { width:730px; height:39px; margin:auto; margin-bottom:40px; background:url('../img/h_bg.png') no-repeat; font:14px "微软雅黑",Arial, Helvetica, sans-serif; line-height:33px; text-indent:1em; color:#ffffff;}
+div.mid_content h3 { width:730px; height:39px; margin-left:80px; margin-bottom:40px; background:url('../img/h_bg.png') no-repeat; font:14px "微软雅黑",Arial, Helvetica, sans-serif; line-height:33px; text-indent:1em; color:#ffffff;}
 div.content_box { margin-bottom:90px;}
 
 
 
 div.personal_config {........}
-div.personal_config div.left { float:left; width:65%; border-right:dashed 1px #717171;}
-div.personal_config div.left label { overflow:hidden; display:block; width:300px; margin-bottom:15px; line-height:30px; text-align:right; font-size:14px;}
+div.personal_config div.left { float:left; width:65%; border-right:1px solid #fff;}
+div.personal_config div.left>div { border-right:1px solid #d6d4ca; padding-top: 10px;}
+div.personal_config div.left label { overflow:hidden; clear: both; display:block; width:350px; line-height:40px; text-align:right; font-size:14px;}
 div.personal_config div.left label span.user_name { float:right; width:200px; margin-left:15px; text-align:left;}
-div.personal_config div.left label input { width:200px; height:25px; margin-left:15px; background:none; border:solid 1px #767676; border-radius:4px;}
+div.personal_config div.left label input { width:200px; height:25px; margin-left:15px; padding-left: 5px; background:none; border:solid 1px #7e7e7d;}
 div.personal_config div.left label div.select_button { float:right; width:200px; height:40px; margin:3px 0 0 15px;}
-div.personal_config div.left label input.qu { float:left; width:auto; margin:0; margin-right:5px;}
+div.personal_config div.left label input.qu { float:left; width:auto; margin: 7px 5px 0px 0px; border: none;}
 
-div.personal_config div.left label div.select_button label { float:left; display:inline; width:auto; margin-right:20px;}
+div.personal_config div.left label div.select_button label { clear: none; float:left; display:inline; width:auto; margin-right:20px;}
 
 
-div.personal_config div.right { float:right; width:32%;}
+div.personal_config div.right { float:right; width:30%;}
 div.personal_config div.right ul { margin-top:20px;}
 div.personal_config div.right ul li { line-height:30px; font-size:14px;}
-div.personal_config div.right ul li.gray { color:gray;}
+div.personal_config div.right ul li a { color:#130e7a; text-decoration: underline;}
 div.personal_config ul.pages { position:absolute; bottom:30px; right:140px;}
 
 
-div.personal_config .config_submit { height:30px; border:none; margin-left:99px; background:#c6c4b6; padding:0 17px; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center; cursor:pointer;}
-div.personal_config .config_submit:hover { background:#e8a126; color:#fff;} 
+div.personal_config .config_submit {width: 75px;height: 35px;border: none;margin: 25px 0px 40px 150px; background: url('../img/button_1.png') no-repeat;font-size: 14px;line-height: 35px;text-align: center;cursor: pointer;color: #fff;}
+div.personal_config .config_submit:hover { background:url('../img/button_10.png');} 
 
 
 #div_pwd{padding: 15px 0 0 0;overflow: hidden; width: 300px;height: 0px;}

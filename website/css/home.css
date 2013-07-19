@@ -36,9 +36,8 @@ div.needed_book table td:nth-child(6){ width:70px; text-align:center;}
 .main .match_box p.tips { margin:30px 0px 20px 30px; color: #b81313;}
 .main .match_box table span.hidden_list { color: #130e7a; cursor:pointer; }
 .main .match_box h5 { position:relative; width:740px; height:35px; margin:auto; border:1px solid #cecece; font:13px "微软雅黑"; font-weight:bold; text-align:center; line-height:35px;}
-.main .match_box h5 span:nth-child(1) {float:left; width:245px; border-right: 1px solid #cecece;}
-.main .match_box h5 span:nth-child(2) {float:left; width:245px; border-right: 1px solid #cecece;} 
-.main .match_box h5 span:nth-child(3) {float:left; width:245px;}
+.main .match_box h5 span { float: left; width: 245px; display:block; border-right: 1px solid #cecece;}
+.main .match_box h5 span:nth-child(3) {border: none;}
 .main .match_box h5 span strong { color: #130e7a; cursor: pointer;}
 
 .main .match_box .match_list h5 { border-top:none; font-weight:normal;} 
