@@ -10,7 +10,7 @@ div.mid_content h3 { width:580px; height:39px; margin-left:80px; margin-bottom:4
 div.content_box { margin-bottom:90px;}
 
 div.mid_content div.box_demo {}/*浮雕快在高级浏览器下的预定义*/
-div.bottom_shadow { }/*块级区域底层阴影,宽度，边距需细修*/
+div.bottom_shadow { clear: both;}/*块级区域底层阴影,宽度，边距需细修*/
 
 
 div.add_book {.........}
@@ -33,7 +33,7 @@ div.add_book .inpart .sele_book>li a { float: right;margin-right: 10px;margin-to
 
 div.add_book .inpart form input#submit { margin: 30px 30px 20px 345px;width: 75px;height: 35px;text-align: center;background: url('../img/button_1.png') no-repeat;border: none;color: #fff;font-size: 15px;font-weight: bold;}
 div.add_book .inpart form input#submit:hover { background: url('../img/button_10.png') no-repeat; cursor: 	pointer;}
-div.add_book .tip_box { width: 220px;height: 300px;margin: 10px 20px;position: absolute;bottom: 70px;right: 40px;}
+div.add_book .tip_box { width: 220px;height: 300px;margin: 15px 49px;float: right;}
 div.add_book .tip_box h5 { font-size: 14px; line-height: 55px;}
 div.add_book .tip_box img { margin-top: 30px;}
 .suggestionsBox { position: absolute; left: 30px; margin: 60px 0px 0px 0px; width: 375px; background-color: #212427; -moz-border-radius: 7px; -webkit-border-radius: 7px; border: 2px solid #000; color: #fff; } 
