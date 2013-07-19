@@ -9,9 +9,10 @@
 				<div class="inpart">
 					<div>
 					<p class="">我要捐书</p>
+					<form action="">
 					<ul class="sele_book">
 						<!--这是选择书本之后，搜索框上面显示的模板，没一本书对应一个li -->
-						<li>
+						<!-- <li>
 							<div><img src="#" alt="#" /></div>
 							<ul>
 								<li>书 名：<span>阿三大姐夫上课了</span></li>
@@ -20,10 +21,8 @@
 								<li>版次：<span>d1123</span></li>
 							</ul>
 							<a href="#">[删除]</a>
-						</li>	
+						</li>	 -->
 					</ul>
-					
-					<form action="">
 						<div class="sub_search">
 							<input id="isbncode" name="isbncode" type="text" autocomplete="off" placeholder=" 请输入ISBN码或书名" />
 							<div id="suggest_box">

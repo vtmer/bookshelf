@@ -38,7 +38,7 @@ function _lookup(_inputString)//返回一个无参数的函数
 	}
 }
 function lookup(inputString) { 
-	var $url = document.URL+"/search";
+	var $url = "http://"+document.domain+"/index.php/add_book/search";
 	if(inputString.length == 0) 
 	{ 
 	// Hide the suggestion box. 
@@ -49,14 +49,40 @@ function lookup(inputString) {
 		$.get($url, {keywords: inputString}, function(data){ 
 			(typeof data !== 'object') ? jsonObj = JSON.parse(data) :  jsonObj = data ;
 			var length = jsonObj.length;
-			console.log(jsonObj);
-			if(length >0) { 
+			if(length >0) 
+			{ 
 				$('#suggest_box').show();
 				$('#suggest_box ul').html('');
 				for(var i = 0;i<length;i++)
 				{
 					$('#suggest_box ul').append("<li><a href='' title="+jsonObj[i].name+"><img src='http://"+document.domain+"/images/"+jsonObj[i].ISBN+".jpg' alt=''></a></li>"); 
 				}
+
+				$('#suggest_box ul a').click(function(){
+					var $index = $(this).parent('li').index();
+					var $string = "<li><div><img src='http://"+document.domain+"/images/"+jsonObj[$index].ISBN+".jpg' alt='' /></div>"+
+							"<ul><li>书 名：<span>"+jsonObj[$index].name+"</span></li>"+
+								"<input type='hidden' value='"+jsonObj[$index].ISBN+"' name='"+jsonObj[$index].ISBN+"'>"+
+								"<li>作 者：<span>"+jsonObj[$index].author+"</span></li>"+
+								"<li>出版社：<span>"+jsonObj[$index].publish+"</span></li>"+
+								"<li>版次：<span>"+jsonObj[$index].version+"</span></li>"+
+							"</ul><a href='#' class='del_book'>[删除]</a>"+
+						"</li>";
+						$('.sele_book').append($string);
+						$('#suggest_box').slideUp('fast',function(){
+							$('#suggest_box ul').html('');
+							});
+					$(".del_book").click(function(){
+							console.log($(this).parent('li'));
+							$(this).parent('li').slideUp('fast',function(){
+								$(this).parent('li').replaceWith('');
+							});
+							window.event.returnValue = false;
+						});	
+
+					window.event.returnValue = false;
+				});
+
 			}else
 			{	
 				$('#suggest_box').show();
