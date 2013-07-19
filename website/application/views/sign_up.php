@@ -4,14 +4,18 @@
 		<!--<h3>个人信息设置：</h3>-->
 		<div class="content_box">
 			<div class="box_demo sign_info">
-			<img src="<?php echo base_url('img/join_us.jpg'); ?>" alt="加入我们" class="join_us"/>
+			<!-- <img src="<?php echo base_url('img/join_us.jpg'); ?>" alt="加入我们" class="join_us"/> -->
+			<h1>欢迎加入工大书架</h1>
+			<div>
+				<span>用户名：阿大大大大撒地方</span>
+				<span>学院：阿大大大大撒地方</span>
+				<span>年级：阿大大大大撒地方</span>
+				<span>专业：阿大大大大撒地方</span>
+			</div>
 				<form action="<?php echo site_url('register/check'); ?>" method="post" class="">
-					<input type="hidden" />
-					<label for="mail"><span>邮箱</span>
-						<input type="text" id="mail" name="username"/>
-						<span class="notice">填写常用邮箱以便验证</span>
-					</label>
-					<label for="password"><span>密码</span>
+					<h5>以下为必填信息，我们会安全保密您的信息</h5>
+
+<!-- 					<label for="password"><span>密码</span>
 						<input type="password" id="password" name="pwd"/>
 						<span></span>
 					</label>
@@ -51,7 +55,7 @@
 						<select id="grade" name="grade">
 						</select>
 						<span></span>
-					</label>
+					</label> -->
 					<label for="phone"><span>长号</span>
 						<input type="text" id="phone" name="phone_num"/>
 						<span></span>
@@ -66,7 +70,10 @@
 							<label><input type="radio" value="东区" class="qu" name="dormitory"/>东区</label>
 						</div>
 					</label>
-					<p class="notice">以上内容皆为必填项，为了保障良好的借书环境，请认真阅读填写.</p>
+					<label for="mail"><span>邮箱</span>
+						<input type="text" id="mail" name="username"/>
+						<span class="notice">填写常用邮箱以便验证</span>
+					</label>
 					<label for="captcha"><span>验证码</span>
 						<input type="text" id="captcha" name="captcha"/>
 						<span></span>
@@ -74,11 +81,6 @@
 					<label><img src="<?php echo site_url('captcha');?>" onclick="reloadCode();" id="checkCodeImg" alt="换一张"/><a href="javascript:reloadCode();">  换一张</a></label>
 					<input type="submit" class="config_submit" value="注册" />
 				</form>
-				<?php if(isset($error)): ?>
-				<div class="alert_mail_once">
- 					<strong>抱歉！你所注册的邮箱已被使用，请你使用新的邮箱注册！</strong>
-				</div>
-				<?php endif;?>
 			</div>
 			<div class="bottom_shadow"></div><!-- 块级区域下方的底层阴影 -->
 		</div><!-- 包裹整块质感效果的div -->

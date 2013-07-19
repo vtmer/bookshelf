@@ -36,7 +36,7 @@
 		<form action="<?php echo site_url('login/check'); ?>" method="POST" class="ajaxForm">
 			<div>
 				<!-- <span>已有帐号登录:</span> -->
-				<label for="user_name">学号 ：<input type="text" name="username" value='' placeholder="  请输入您的学号"/ ></label>
+				<label for="user_name">学号：<input type="text" name="username" value='' placeholder="  请输入您的学号"/ ></label>
 				<label for="password">密码：<input type="password" name="pwd" value=''/></label>
 				<!-- <label for="" class="yanzheng">验证码：<input type="text"/> <img src="" /></label> -->
 				<label for="remember" class="check_label"><input type="checkbox" id="remember" name="auto_login" value="true"/><span unselectable="on">一周内自动登录</span></label>
