@@ -56,8 +56,8 @@ div.needed_book table td:nth-child(6){ width:70px; text-align:center;}
 .match_book ul li label input { margin-right:10px;}
 .match_book .book_list_bottom { clear: both; height:32px; margin-right: 35px;margin-bottom: 20px; text-align: right; padding-top: 25px;}
 .match_book .select_all { margin-right: 20px; text-decoration:underline; cursor:pointer;vertical-align: top;}
-.match_book #submit { height:32px; width:78px; border:none; background:url("../img/hover_bg.png") no-repeat 0 -116px; cursor:pointer;}
-.match_book #submit:hover { background-position:-85px -116px;}
+.match_book #submit { height:35px; width:75px; border:none; background:url("../img/button_1.png") no-repeat; cursor:pointer;}
+.match_book #submit:hover { background: url('../img/button_10.png') no-repeat;}
 
 div.match_box ul.pages { float: right; margin: 20px 30px 20px 0px;}
 div.match_box ul.pages li{ float:left; margin:0 3px;}
