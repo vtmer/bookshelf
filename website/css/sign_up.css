@@ -25,6 +25,7 @@ div.sign_info .config_submit:hover { background:url('../img/button_10.png');}
 div.sign_info h1 { font-size: 24px; margin: 0px 0px 30px 45px;}
 div.sign_info div {width: 380px; margin: 0px auto; overflow: hidden; }
 div.sign_info div span {display: block;float: left; width: 190px; line-height: 50px;}
+div.sign_info div span:nth-child(5) {width: 380px;}
 div.sign_info form h5 {margin-bottom: 20px;}
 div.sign_info label>a { color:#130e7a;}
 div.sign_info label>a,
