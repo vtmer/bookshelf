@@ -7,11 +7,11 @@
 			<!-- <img src="<?php echo base_url('img/join_us.jpg'); ?>" alt="加入我们" class="join_us"/> -->
 			<h1>欢迎加入工大书架</h1>
 			<div>
-				<span>姓名：阿大大大大撒地方</span>
-				<span>校区：阿大大大大撒地方</span>
-				<span>学院：阿大大大大撒地方</span>
-				<span>年级：阿大大大大撒地方</span>
-				<span>专业：阿大大大大撒地方</span>
+				<span>姓名：xxx 同学</span>
+				<span>校区：大学城校区</span>
+				<span>学院：自动化学院</span>
+				<span>年级：2012级</span>
+				<span>专业：自动化专业</span>
 			</div>
 				<form action="<?php echo site_url('register/check'); ?>" method="post" class="">
 					<h5>以下为必填信息，我们会安全保密您的信息</h5>
@@ -57,25 +57,28 @@
 						</select>
 						<span></span>
 					</label> -->
-					<label for="phone"><span>长号</span>
+					<label for="phone"><span>长号:</span>
 						<input type="text" id="phone" name="phone_num"/>
 						<span></span>
 					</label>
-					<label for="mini_phone"><span>短号</span>
+					<label for="mini_phone"><span>短号:</span>
 						<input type="text" id="mini_phone" name="subphone_num"/>
 						<span class="notice">若无短号，可不填写</span>
 					</label>
-					<label><span>生活区</span>
+					<label><span>生活区:</span>
 						<div class="select_button">
 							<label><input type="radio" value="西区" checked="checked" class="qu" name="dormitory"/>西区</label>
 							<label><input type="radio" value="东区" class="qu" name="dormitory"/>东区</label>
+
+							<!-- <label for="">龙洞校区</label> -->
+							<!-- <label for="">东风路校区</label> -->
 						</div>
 					</label>
-					<label for="mail"><span>邮箱</span>
-						<input type="text" id="mail" name="username"/>
+					<label for="mail"><span>邮箱:</span>
+						<input type="text" id="mail" name="username" autocomplete="off" />
 						<span class="notice">填写常用邮箱以便验证</span>
 					</label>
-					<label for="captcha"><span>验证码</span>
+					<label for="captcha"><span>验证码:</span>
 						<input type="text" id="captcha" name="captcha"/>
 						<span></span>
 					</label>
