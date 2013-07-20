@@ -7,11 +7,11 @@
 			<!-- <img src="<?php echo base_url('img/join_us.jpg'); ?>" alt="加入我们" class="join_us"/> -->
 			<h1>欢迎加入工大书架</h1>
 			<div>
-				<span>姓名：阿大大大大撒地方</span>
-				<span>校区：阿大大大大撒地方</span>
-				<span>学院：阿大大大大撒地方</span>
-				<span>年级：阿大大大大撒地方</span>
-				<span>专业：阿大大大大撒地方</span>
+				<span>姓名：<?php echo $user['truename'] ;?></span>
+				<span>校区：<?php echo $user['campus'] ;?></span>
+				<span>学院：<?php echo $user['faculty'] ;?></span>
+				<span>年级：<?php echo $user['grade'] ;?></span>
+				<span>专业：<?php echo $user['major'] ;?></span>
 			</div>
 				<form action="<?php echo site_url('register/check'); ?>" method="post" class="">
 					<h5>以下为必填信息，我们会安全保密您的信息</h5>
