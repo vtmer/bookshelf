@@ -9,7 +9,7 @@ div.search_bar .search_submit { float:right; width:50px; height:50px; margin:11p
 div.mid_content { width:100%; padding-top:88px; background:url('../img/shelf.png') 77px 0 no-repeat; }
 div.content_box { margin-bottom:90px;}
 div.mid_content div.match_box { overflow:hidden;}
-div.mid_content div.box_demo h3 { width:200px; height:42px; margin:10px 0 10px -2px; background:url('../img/h3_bg.png') 0px 0px no-repeat; font:14px 微软雅黑; line-height:38px; color:#fff; text-indent:1em;}
+div.mid_content div.box_demo h3 { width:200px; height:42px; margin:0px 0 10px -2px; background:url('../img/h3_bg.png') 0px 0px no-repeat; font:14px 微软雅黑; line-height:38px; color:#fff; text-indent:1em;}
 
 div.needed_book {.........}
 div.needed_book p { clear:both; margin-bottom:20px; text-indent:2em; font-size:14px; color:#565656;}

@@ -57,25 +57,30 @@
 						</select>
 						<span></span>
 					</label> -->
-					<label for="phone"><span>长号</span>
+					<label for="phone"><span>长号:</span>
 						<input type="text" id="phone" name="phone_num"/>
 						<span></span>
 					</label>
-					<label for="mini_phone"><span>短号</span>
+					<label for="mini_phone"><span>短号:</span>
 						<input type="text" id="mini_phone" name="subphone_num"/>
 						<span class="notice">若无短号，可不填写</span>
 					</label>
-					<label><span>生活区</span>
+					<label><span>生活区:</span>
 						<div class="select_button">
+							<?php if($user['campus']=='大学城校区'):?>
 							<label><input type="radio" value="西区" checked="checked" class="qu" name="dormitory"/>西区</label>
 							<label><input type="radio" value="东区" class="qu" name="dormitory"/>东区</label>
+							<?php else :?>
+							<label for="">龙洞校区</label>
+							<label for="">东风路校区</label>
+							<?php endif; ?>
 						</div>
 					</label>
-					<label for="mail"><span>邮箱</span>
-						<input type="text" id="mail" name="username"/>
+					<label for="mail"><span>邮箱:</span>
+						<input type="text" id="mail" name="username" autocomplete="off" />
 						<span class="notice">填写常用邮箱以便验证</span>
 					</label>
-					<label for="captcha"><span>验证码</span>
+					<label for="captcha"><span>验证码:</span>
 						<input type="text" id="captcha" name="captcha"/>
 						<span></span>
 					</label>

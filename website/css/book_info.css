@@ -12,21 +12,29 @@ div.content_box { margin-bottom:90px;}
 div.mid_content table {float:left;}
 
 div.search_results {.........}
-div.search_results dl { float:left; margin-left:15px;}
-div.search_results dl dt { font:24px 微软雅黑; line-height:40px;}
-div.search_results dl dd { font-size:14px; line-height:28px;}
-div.search_results table { margin-left:30px;}
+div.search_results dl { float:left;}
+div.search_results dl dt { font-size: 18px; line-height:18px; margin-left: -10px; margin-bottom: 5px;}
+div.search_results dl dd { font-size:13px; line-height:25px; vertical-align: baseline; }
+div.search_results table { margin-left:30px; margin-top: 40px;}
 div.search_results table th:nth-child(1),
-div.search_results table td:nth-child(1){ width:120px; text-align:center;}
+div.search_results table td:nth-child(1){ width:184px; text-align:center;}
 div.search_results table th:nth-child(2),
-div.search_results table td:nth-child(2){ width:200px; text-align:center;}
+div.search_results table td:nth-child(2){ width:284px; text-align:center;}
 div.search_results table th:nth-child(3),
-div.search_results table td:nth-child(3){ width:180px; text-align:center;}
+div.search_results table td:nth-child(3){ width:149px; text-align:center;}
+div.search_results table th:nth-child(4),
+div.search_results table td:nth-child(4){ width:120px; text-align:center;}
+div.search_results table td:nth-child(4) input { border: none;cursor: pointer;color: #130e7a;}
+
 /*定义表格各列的宽度*/
 
 
-div.search_results div.book_img { float:left; width:134px; height:152px; margin-left:20px; margin-bottom:20px; padding:5px; background:url('../img/book_img.jpg') no-repeat;}
-div.search_results div.book_img img { width:124px; height:142px;}
+div.search_results div.book_img { float:left; margin:0px 30px 0px 35px; border: 1px solid #000; background-color: #fff;}
+div.search_results div.book_img img { width: 144px; height: 185px; }
+div.search_results dd.button { clear: both; overflow: hidden; margin-top: 29px; }
+div.search_results dd.button a {float: left; display: block; font-size: 14px; color: #fff; text-align: center;line-height: 35px; width: 75px; height: 35px; background: url('../img/button_1.png') no-repeat;}
+div.search_results dd.button a:hover { background: url('../img/button_10.png') no-repeat;}
+div.search_results dd.button div {float: right; margin-left: 10px; }
 div.search_results ul.get_book { float:left; margin:30px 20px 0;}
 div.search_results ul.get_book li { height:32px;}
 div.search_results ul.get_book li input {float:left; width:75px; height:28px; border:none; background:#c6c4b6; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center;}
