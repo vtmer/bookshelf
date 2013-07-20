@@ -36,7 +36,6 @@ curl 单线程抓取
             curl_setopt($conn, CURLOPT_POSTFIELDS, $curlPost);
         }
         curl_setopt($conn,CURLOPT_RETURNTRANSFER,1);// 返回结果，而不是输出它
-        ob_start();
      	$res = curl_exec($conn);//获得返回信息
         if($res == false)
         {
