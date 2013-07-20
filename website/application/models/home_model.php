@@ -61,33 +61,38 @@ class Home_Model extends CI_Model
 
     $this->db->select('cb.book_id , cb.book_status  ')//获取所需书本状态
              ->from('circulating_book AS cb')
-             ->join('allbook AS ab' , 'ab.id = cb.book_id')
-             ->join('allbook_mg AS abmg' , 'ab.id = abmg.book_id')
+             ->join('allbook AS ab' , 'ab.id = cb.book_id','left')
+             ->join('allbook_mg AS abmg' , 'ab.id = abmg.book_id','left')
              ->where('cb.to_id' , $uid)
              ->where('abmg.major' , $major)
              ->where('abmg.grade' , $grade)
              ->where('ab.term' , $trans_grade['term']);         
     $query2 = $this->db->get();
-    $result2 = $query2->result_array(); 
-    //var_dump($result2);
+    $result2 = $query2->result_array();
     foreach ($result as $key => $value) 
     {
-      foreach ($result2 as $key2 => $value2) 
+      if(!empty($result2))
       {
-        if($value['id'] == $value2['book_id'])
+        foreach ($result2 as $key2 => $value2) 
         {
-          // echo 'a';
-           $result[$key]['book_status'] = $value2['book_status'];
-           break;
-        }   
-        else
-        {
-          //var_dump($key); 
-          $result[$key]['book_status'] = 0;
+          if($value['id'] == $value2['book_id'])
+          {
+            // echo 'a';
+             $result[$key]['book_status'] = $value2['book_status'];
+             break;
+          }   
+          else
+          {
+            //var_dump($key); 
+            $result[$key]['book_status'] = 0;
+          }
         }
+      }
+      else
+      {
+         $result[$key]['book_status'] = 0;
       }   
     }
-    //var_dump($result);exit;
     return $result;
   }
   public function system_match($grade,$major,$offset,$length)

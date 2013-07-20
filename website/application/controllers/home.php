@@ -38,7 +38,7 @@ class Home extends CI_Controller
 	}
 	public function ajaxPage($page = 1)
 	{
-		$per_page = 1;//每页显示的条数
+		$per_page = 10;//每页显示的条数
 	    $offset = ($page - 1)*$per_page;
 	    $data = $this->home_model->system_match($this->session->userdata('grade'),$this->session->userdata('major'),$offset,$per_page);
 		//分页
@@ -48,6 +48,7 @@ class Home extends CI_Controller
 		$pager_config['per_page'] = $per_page; //设置每页显示的条数
 		$this->pagination->initialize($pager_config); 
 		$data['page'] = $this->pagination->create_links();
+		//var_dump($data);exit;
 		echo json_encode($data);
 		exit();
 	}

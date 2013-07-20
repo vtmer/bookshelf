@@ -75,7 +75,7 @@
 						<span><a href='".site_url('book_owner')."/".$user['uid']."'>".$user['truename'].'</a></span>
 						<span>'.$user['dormitory'].'</span>
 						<span>'.count($user['book']).'本 <strong class="chakan"> [查看]</strong></span>
-						</h5>`';						
+						</h5>';						
 				?>				
 						<div class="match_book">
 							<form action="<?php echo site_url('home/check_step');?>" method='post' >

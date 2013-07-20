@@ -39,15 +39,15 @@ class Login extends CI_Controller
 	//登陆验证
     public function check()
 	{  
-		$username = $this->input->post('username');
+		$student_id = $this->input->post('username');
 		$pwd = $this->input->post('pwd');
-		$result = $this->catch_msg->is_login($username,$pwd);
+		$result = $this->catch_msg->is_login($student_id,$pwd);
 		if($result['status'])
 		{
-			$row = $this->user_model->get($username);
+			$row = $this->user_model->get($student_id);
 			if($row==null)//如果是第一次登录
 			{
-				$this->session->set_userdata('student_id',$username);
+				$this->session->set_userdata('student_id',$student_id);
 				$url = site_url('register');
 	            $msg = array('type'=>'redirect','url'=>$url);
 	            echo json_encode($msg);
