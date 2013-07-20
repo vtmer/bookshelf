@@ -62,10 +62,10 @@
 					<span>拥有你需要的教材数</span>
 				</h5>
 				<?php
-				if(empty($system_match['data']))
+				if(empty($system_match['data'][0]['book']))
 				{
 					echo 
-					"<div class='match_list'>暂时没找到哦！</div>";
+					"<div class='match_list'><h5>暂时没找到哦！</h5></div>";
 				}else 
 				foreach ($system_match['data'] as $user) 
 					{
@@ -75,7 +75,7 @@
 						<span><a href='".site_url('book_owner')."/".$user['uid']."'>".$user['truename'].'</a></span>
 						<span>'.$user['dormitory'].'</span>
 						<span>'.count($user['book']).'本 <strong class="chakan"> [查看]</strong></span>
-						</h5>';						
+						</h5>`';						
 				?>				
 						<div class="match_book">
 							<form action="<?php echo site_url('home/check_step');?>" method='post' >
