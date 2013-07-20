@@ -18,7 +18,7 @@
 .popbox .mainlist{padding:10px;}
 .popbox .mainlist span{margin:5px 5px 5px 5px;font-family:"宋体";font-size:14px;font-weight:400;color:#000;}
 .popbox .mainlist div{margin:5px 5px 30px 5px;}
-.popbox .ok-btn{height:30px; border:none; margin-left:99px; background:#c6c4b6; padding:0 17px; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center; cursor:pointer;}
+.popbox .ok-btn{height:30px; border:none; background:#c6c4b6; padding:0 17px; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center; cursor:pointer;}
 .popbox .ok-btn:hover { background:#e8a126; color:#fff;} 
 #screen{width:100%;height:100%;position:absolute;top:0;left:0;display:none;z-index:100;background-color:#000;opacity:0.5;filter:alpha(opacity=50);-moz-opacity:0.5;}
 /*popboxcss end*/
@@ -77,8 +77,9 @@ function ajaxSubmit(frm, fn) {
         type: frm.method,
         data: dataPara,
         beforeSend:function(XMLHttpRequest){
-        			var url = 'http://'+document.domain+"/img/loading.gif";
-        			$("#popContent").html("<img src="+url+" alt='loading...'/>");
+        			var url = "/img/loading.gif";
+        			$(".mainlist").html("<img src="+url+" alt='loading...'/>");
+        			$(".mainlist").css('text-align','center');
 		            $("#pop_title").html("正在登录");
 		          	var h = $(document).height();
 					$('#screen').css({ 'height': h });	
@@ -119,7 +120,7 @@ $(document).ready(function(){
                 }
 	        	if(jsonobj.type=='alert')
 	        	{
-		            $("#popContent").html(jsonobj.content);
+		            $(".mainlist").html("<div><span id='popContent'>"+jsonobj.content+"</span></div><span><input class='ok-btn' type='button' value='确定'></span>");
 		            $("#pop_title").html(jsonobj.title);
 		          	var h = $(document).height();
 					$('#screen').css({ 'height': h });	
