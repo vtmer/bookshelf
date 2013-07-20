@@ -28,33 +28,10 @@ class User_model extends CI_Model
 		return ($query->num_rows() == 1) ? TRUE : FALSE;
 	}
 	//注册时向数据库添加数据
-	public function add($username,$password,$truename,$student_id,$campus,$faculty,$major,$grade,$phone_num,$subphone_num,$dormitory,$activationkey,$status,$points)
+	public function add($data)
 	{
-		$query = $this->db->get_where('user',array('username' => $username,));
-
-		if($query->num_rows() == 1)		  
-		{
-			return FALSE;
-		}
-		else
-		{
-			$this->db->insert('user',array(
-					'username' => $username,
-					'password' => md5($password),
-					'truename' => $truename,
-					'student_id' => $student_id,
-					'campus' => $campus,
-					'faculty' => $faculty,
-					'major' => $major,
-					'grade' => $grade,
-					'phone_number' => $phone_num,
-					'subphone_number' => $subphone_num,
-					'dormitory' => $dormitory,
-					'activationkey' => $activationkey,
-					'status' => $status,
-					'points' => $points));
-			return TRUE;
-		}	
+		$this->db->insert('user',$data);
+		return mysql_insert_id();
 	}
 
 	//注册后进行邮箱验证
@@ -144,9 +121,9 @@ class User_model extends CI_Model
 		{
 			return FALSE;
 		} 
-		//更新信息为已读
-		$this->db->where('id',$message_id);
-		$this->db->update('message',array('status' => "1"));
+		// //更新信息为已读
+		// $this->db->where('id',$message_id);
+		// $this->db->update('message',array('status' => "1"));
 		$book_num = count($books);
 		//获取信息发送者的积分
 		$query_user_from = $this->db->get_where('user',array('id' => $msgRelation['from']));

@@ -1,0 +1,24 @@
+/*css document*/
+div.main {..........}
+div.main { overflow:hidden; width:960px; margin:auto;}
+
+div.mid_content { width:100%; padding-top:88px; background:url('../img/shelf.png') 77px 0 no-repeat; }
+div.mid_content h3 { width:730px; height:39px; margin:auto; margin-bottom:40px; background:url('../img/h_bg.png') no-repeat; font:14px "微软雅黑",Arial, Helvetica, sans-serif; line-height:33px; text-indent:1em; color:#ffffff;}
+
+
+/*div.mid_content p.step_04 { margin-left:120px; margin-bottom:12px; font:18px "微软雅黑",Arial, Helvetica, sans-serif; color:#b89461; font-weight:bold; text-indent:0.5em; letter-spacing:2px; line-height:30px;}
+div.mid_content p.step_04 span { float:left; width:30px; height:30px; margin:0 5px; box-shadow:0 -2px 4px -2px rgba(0,0,0,.6); background:#b89461; border-radius:15px; font:24px Arial, Helvetica, sans-serif; line-height:32px; text-indent:8px; color:#fff;}
+div.mid_content p.dots { margin-left:120px; height:15px;}
+div.mid_content p.dots span { float:left; width:6px; height:6px; margin:0 17px; box-shadow:0 -2px 4px -2px rgba(0,0,0,.6); background:#b89461; border-radius:3px;}/* 页面里面各种点点点在高级浏览器下的效果*/
+
+
+div.content_box { margin-bottom:20px;width: 800px;margin: auto;}
+div.mid_content div.box_demo { width:645px; padding:40px; }/*浮雕快在高级浏览器下的预定义*/
+div.mid_content div.juan_v {text-align: center;}
+div.mid_content div.juan_v div {text-align: left;margin: 20px auto; width: 260px; background: url('../img/green_hook.png') left center no-repeat;overflow: hidden;}
+div.mid_content div.juan_v span { color:#3ad531; margin: 0px 0px 0px 70px;}
+div.mid_content div.juan_v p { color: #3ad531;margin: 25px 0px 5px 70px; font:16px "微软雅黑",Arial, Helvetica, sans-serif; font-weight:bold;}
+div.mid_content div.juan_v a {display: block; text-decoration:underline; color: #130e7a;margin-bottom: 20px;}
+
+
+

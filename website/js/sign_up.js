@@ -322,18 +322,18 @@ $(function(){
 	$("input#mail").bind("blur", function(){
 		check_func.email(this.value);
 		});
-	$("input#password").bind("blur",function(){
-		check_func.password(this.value);
-	});
-	$("input#password_confirm").bind("blur",function(){
-		check_func.password($("input#password")[0].value, this.value);
-	});
-	$("input#name").bind("blur", function(){
-		check_func.name(this.value);
-	});
-	$("input#stu_id").bind("blur", function(){
-		check_func.stu_id(this.value);
-	})
+	// $("input#password").bind("blur",function(){
+	// 	check_func.password(this.value);
+	// });
+	// $("input#password_confirm").bind("blur",function(){
+	// 	check_func.password($("input#password")[0].value, this.value);
+	// });
+	// $("input#name").bind("blur", function(){
+	// 	check_func.name(this.value);
+	// });
+	// $("input#stu_id").bind("blur", function(){
+	// 	check_func.stu_id(this.value);
+	//})
 	$("input#phone").bind("blur", function(){
 		check_func.phone(this.value);
 	});
@@ -344,10 +344,10 @@ $(function(){
 	$("input[type=submit]").bind("click", function(){
 		var check_control = true;
 		check_control = check_func.email($("input#mail")[0].value);
-		check_control = check_func.password($("input#password")[0].value, $("input#password_confirm")[0].value);
+		// check_control = check_func.password($("input#password")[0].value, $("input#password_confirm")[0].value);
 		check_control = check_func.phone($("input#phone")[0].value);
-		check_control = check_func.name($("input#name")[0].value);
-		check_control = check_func.stu_id($("input#stu_id")[0].value);
+		// check_control = check_func.name($("input#name")[0].value);
+		// check_control = check_func.stu_id($("input#stu_id")[0].value);
 		check_control = check_func.captcha($("input#captcha")[0].value);
 		if(!check_control) return false;
 	});	
