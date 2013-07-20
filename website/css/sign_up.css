@@ -30,3 +30,9 @@ div.sign_info form h5 {margin-bottom: 20px;}
 div.sign_info label>a { color:#130e7a;}
 div.sign_info label>a,
 div.sign_info label img { margin-right: 19px;vertical-align: middle;}
+
+
+/*emailauto样式*/
+	#myemail { border-radius: 3px; background-color: #eeece1; color: #666; border:1px solid #333;}
+	#myemail .newemail {text-align:left; color:#6B6B6B; overflow:hidden;}
+	#myemail li.newemail span {color:#D33022;}
