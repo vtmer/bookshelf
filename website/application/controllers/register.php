@@ -7,17 +7,35 @@ class Register extends CI_Controller
 		parent::__construct();
 		$this->load->model('user_model');
 		$this->load->library('email');
+		$this->load->library('catch_msg');
+		$this->load->library('session');
 	}	
 
 	public function index()
 	{
 
-		if($this->session->userdata('is_logged_in'))
-			redirect(site_url('home'));
+		// if($this->session->userdata('is_logged_in'))
+		// 	redirect(site_url('home'));
+		$user_info = $this->catch_msg->get_info();
+		//if($user_info=='') redirect(site_url('login'));
+		//var_dump($user_info);
+		//将信息存储到session
+		$array = array(
+				'campus'=>$user_info[0],
+				'faculty'=>$user_info[1],
+				'major'=>$user_info[2],
+				'grade'=>substr($user_info[3],0,4),
+				'truename'=>$user_info[5]
+			);
+		$this->session->set_userdata($array);
+
+		$key = array('campus','faculty','major','grade','class','truename');
+		$data['user'] = array_combine($key,$user_info);
+		 //var_dump($data['user']);
 		$header = array('title'=>'加入工大书架','css_file'=>'sign_up.css'); 
 		$footer = array('js_file' => 'sign_up.js');
 		$this->parser->parse('template/header',$header);
-		$this->load->view('sign_up');	
+		$this->load->view('sign_up',$data);	
 		$this->parser->parse('template/footer',$footer);
 	}
 
@@ -26,11 +44,11 @@ class Register extends CI_Controller
 	{
 		//设置验证规则
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('username','Username','required|max_length[50]|valid_email');
-		$this->form_validation->set_rules('pwd','Password1','required|min_length[6]|max_length[16]|alpha_numeric');
-		$this->form_validation->set_rules('pwd_confirm','Password2','required|matches[pwd]');
-		$this->form_validation->set_rules('truename','name','required');
-		$this->form_validation->set_rules('student_id','student_id','exact_length[10]');
+		 $this->form_validation->set_rules('username','Username','required|max_length[50]|valid_email');//这个为邮箱
+		// $this->form_validation->set_rules('pwd','Password1','required|min_length[6]|max_length[16]|alpha_numeric');
+		// $this->form_validation->set_rules('pwd_confirm','Password2','required|matches[pwd]');
+		// $this->form_validation->set_rules('truename','name','required');
+		// $this->form_validation->set_rules('student_id','student_id','exact_length[10]');
 		$this->form_validation->set_rules('phone_num','Phone','required|numeric|max_length[12]');
 		$this->form_validation->set_rules('captcha','Captcha','required');
 		//设置错误信息
@@ -58,24 +76,26 @@ class Register extends CI_Controller
 				echo json_encode($msg);
 				exit();	
 			}
-			$password = str_replace(" ","",$this->input->post('pwd'));
-			$truename = str_replace(" ","",$this->input->post('truename'));
-			$student_id = str_replace(" ","",$this->input->post('student_id'));
-			//利用session保存的信息（学院、专业、年级）；
-			$campus = $this->input->post('campus');
-			$faculty = $this->input->post('college');
-			$major = $this->input->post('major');
-			$grade = $this->input->post('grade'); 
+			// $password = str_replace(" ","",$this->input->post('pwd'));
+			// $truename = str_replace(" ","",$this->input->post('truename'));
+			// $student_id = str_replace(" ","",$this->input->post('student_id'));
+
+			$student_id = $this->session->userdata('student_id');
+			$campus = $this->session->userdata('campus');
+			$faculty = $this->session->userdata('faculty');
+			$major = $this->session->userdata('major');
+			$grade = $this->session->userdata('grade');
+			$truename = $this->session->userdata('truename'); 
 			$phone_num = str_replace(" ","",$this->input->post('phone_num'));
 			$subphone_num = str_replace(" ","",$this->input->post('subphone_num'));
 			
-			if($campus == '龙洞')
+			if($campus == '龙洞校区')
 			{
-				$dormitory = '龙洞';
+				$dormitory = '龙洞生活区';
 		   	}
-			else if($campus == '东风路')
+			else if($campus == '东风路校区')
 		   	{
-				$dormitory = '东风路';
+				$dormitory = '东风路生活区';
 	        }
 	        else
 	        {
@@ -86,25 +106,52 @@ class Register extends CI_Controller
 			$activationKey = mt_rand() . mt_rand() . mt_rand() . mt_rand() . mt_rand();//生成随机激活码	
 			$points = 30; //初始积分为30
 		
-		if($this->user_model->add($username,$password,$truename,$student_id,$campus,$faculty,$major,$grade,$phone_num,$subphone_num,$dormitory,$activationKey,$status,$points))
+		//if($this->user_model->add($username,$password,$truename,$student_id,$campus,$faculty,$major,$grade,$phone_num,$subphone_num,$dormitory,$activationKey,$status,$points))
+			$user_data = array(
+				'username' => $username,
+				'student_id' => $student_id,
+				'truename' => $truename,
+				'campus' => $campus,
+				'faculty' => $faculty,
+				'major' => $major,
+				'grade' => $grade,
+				'phone_number' => $phone_num,
+				'subphone_number' => $subphone_num,
+				'activationKey' => $activationKey,
+				'dormitory' => $dormitory,
+				'status' => 0,
+				'points' => 30,				
+				'register_time' => null
+				);
+			if($uid = $this->user_model->add($user_data))
 			{
 				//将数据插入数据库
 				//将用户信息保存至session，邮箱验证后直接可登陆
-				$row = $this->user_model->get($username);
-				$uid = $row->id;
-				$points = $row->points;
-				$major = $row->major;
-				$grade = $row->grade;
-				$data = array(
-					'username'=>$username,
-					'truename'=>$truename,
-					'points' => $points,
-					'uid' => $uid,
-					'major' => $major,
-					'grade' => $grade,
-					'is_logged_in' => FALSE,
-				);
-				$this->session->set_userdata($data);
+				//清除不必要的session
+				$this->session->unset_userdata('s_id');
+				$this->session->unset_userdata('campus');
+				$this->session->unset_userdata('faculty');
+				$this->session->unset_userdata('username');
+
+				$this->session->set_userdata('points',30);
+				$this->session->set_userdata('uid',$uid);
+				$this->session->set_userdata('is_logged_in',true);
+				var_dump($this->session->all_userdata());exit;
+				// $row = $this->user_model->get($username);
+				// $uid = $row->id;
+				// $points = $row->points;
+				// $major = $row->major;
+				// $grade = $row->grade;
+				// $data = array(
+				// 	'username'=>$username,
+				// 	'truename'=>$truename,
+				// 	'points' => $points,
+				// 	'uid' => $uid,
+				// 	'major' => $major,
+				// 	'grade' => $grade,
+				// 	'is_logged_in' => FALSE,
+				// );
+				// $this->session->set_userdata($data);
 			}
 			else
 			{

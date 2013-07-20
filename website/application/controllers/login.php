@@ -47,6 +47,7 @@ class Login extends CI_Controller
 			$row = $this->user_model->get($username);
 			if($row==null)//如果是第一次登录
 			{
+				$this->session->set_userdata('student_id',$username);
 				$url = site_url('register');
 	            $msg = array('type'=>'redirect','url'=>$url);
 	            echo json_encode($msg);

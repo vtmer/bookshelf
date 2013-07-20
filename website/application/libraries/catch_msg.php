@@ -1,20 +1,19 @@
-<?php
-if (!defined('BASEPATH')) exit('No direct script access allowed'); 
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 class catch_msg
 {
+
 /*
-curl 多线程抓取
+curl 单线程抓取
 */
  /** 
      * curl 单线程 
      *  
-     * @param string $url 并行网址 
+     * @param string $url 网址 
      * @param int $timeout 超时时间
      * @param string $curlPost post数据
      * @param string $sessionid 会话sessionid
      * @return array 
      */
-    private $session_id = '';
 
     private function Curl_http($url,$timeout,$curlPost='',$sessionid='')
     {
@@ -84,7 +83,7 @@ curl 多线程抓取
         $previouspage = substr($sub4,$location5+7,23);
 
         $location6 = strpos($html,'ASP.NET_SessionId=');
-        $this->session_id = substr($html, $location6+18,24);
+        $session_id = substr($html, $location6+18,24);
         unset($html);//释放资源
         $postdata = array(
                     'ctl00$log_username='.urlencode($username),
@@ -98,7 +97,7 @@ curl 多线程抓取
                 );
         $post_data = implode('&',$postdata);
         //以上是抓取表单数据
-        $data2 = $this->Curl_http('http://eswis.gdut.edu.cn/default.aspx',10,$post_data,$this->session_id);//验证登录
+        $data2 = $this->Curl_http('http://eswis.gdut.edu.cn/default.aspx',10,$post_data,$session_id);//验证登录
         $html2 = $data2['return'];
         $msg_pos = strpos($html2,'ctl00_msg_logon');//抓取错误信息
         $msg1 = substr($html2,$msg_pos+32, 50);
@@ -111,22 +110,30 @@ curl 多线程抓取
         }
         else
         {
-            return array('status'=>true,'s_id'=>$this->session_id);
+            //初始化CI资源
+            $CI =& get_instance();
+            $CI->load->library('session');
+            $CI->session->set_userdata('s_id', $session_id);
+            return array('status'=>true,'s_id'=>$session_id);
         } 
     }
 
     public function get_info()//获取信息
     {
-        if($this->session_id=='') return '';
+        //初始化CI资源
+        $CI =& get_instance();
+        $CI->load->library('session');
+        if(!$CI->session->userdata('s_id')) return '';
+        $session_id = $CI->session->userdata('s_id');
         //个人信息页面   
-        $data3 = $this->Curl_http('http://eswis.gdut.edu.cn/default.aspx?fid=7',10,'',$this->session_id);
+        $data3 = $this->Curl_http('http://eswis.gdut.edu.cn/default.aspx?fid=7',10,'',$session_id);
         $html3 = $data3['return'];
 
         $location3 = strpos($html3,'信息汇总');//获取信息汇总链接
         $url3 = '/'.substr($html3, $location3-42,40);
         unset($html3);//释放资源
 
-        $data4 = $this->Curl_http('http://eswis.gdut.edu.cn'.$url3,10,'',$this->session_id); //信息汇总页面
+        $data4 = $this->Curl_http('http://eswis.gdut.edu.cn'.$url3,10,'',$session_id); //信息汇总页面
         $html4 = $data4['return'];
 
         $pos = strpos($html4,'<table id="ctl00_cph_right_table_userinf_stu" class=');//获取表格
