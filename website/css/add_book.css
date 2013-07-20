@@ -14,9 +14,9 @@ div.bottom_shadow { clear: both;}/*块级区域底层阴影,宽度，边距需�
 
 
 div.add_book {.........}
-div.add_book .inpart { width: 450px;border-right: 1px solid #fff;min-height: 350px;float: left;margin: 10px 0px 0px 30px;}
+div.add_book .inpart { width: 450px;border-right: 1px solid #fff;float: left;margin-left:30px;}
 div.add_book .inpart p { font-size: 14px;font-weight: bold;line-height: 55px;}
-div.add_book .inpart > div { border-right: 1px solid #d6d4ca;}
+div.add_book .inpart > div {min-height: 350px; border-right: 1px solid #d6d4ca;}
 div.add_book .inpart .sele_book>li { position: relative;margin-top: 5px; display: block; width: 420px;height: 140px;border: 1px solid #c9c7b9;}
 div.add_book .inpart .sele_book>li div { width: 105px; height: 140px; border-right: 1px solid #c9c7b9; float: left;}
 div.add_book .inpart .sele_book>li div img { display: block;margin: 10px; border: 0px solid #fff; width: 85px;height: 120px;}
