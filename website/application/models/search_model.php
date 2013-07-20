@@ -18,17 +18,18 @@ class Search_Model extends CI_Model
   		$query = $this->db->query($sql);
   		return $query->result();
   	}
-  	public function get_book_by_keywords($keywords,$offset = '',$length = '')
+  	public function get_book_by_keywords($keywords,$offset = -1,$length = -1)
   	{
       $keywords = mysql_real_escape_string($keywords);
-      if($offset!=''&&$length!='')
+      if($offset>=0&&$length>=0)
       {
-        $this->db->select('id , ISBN , name , author , publish ,version , course_name , term')
+        $this->db->select('id , ISBN , name , author , publish ,version , course_name , term , course_category')
                   ->from('allbook')
                   ->like('name' , $keywords)
-                  ->where('status' , 1);
+                  ->where('status' , 1)
+                  ->limit($length,$offset);
         $this->db->like('name', $keywords); 
-        $query = $this->db->get('allbook',$length, $offset);
+        $query = $this->db->get();
         $result['books'] = $query->result_array();
         $sql2 = "SELECT count(*) AS num FROM `allbook` WHERE `name` LIKE ('%$keywords%')";
         $query2 = $this->db->query($sql2);

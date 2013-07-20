@@ -14,15 +14,11 @@ class Search extends CI_Controller
 		{
 			$page = 1;
 		}
-
-		$header = array('title'=>'搜索书籍','css_file'=>'search.css');
-	    $footer = array('js_file'=>'search.js');
 	    $per_page = 10;//每页显示的条数
 	    $offset = ($page - 1)*$per_page;
 		if($keywords = $this->input->get('keywords'))
 		{
-			$data = $this->search_model->get_book_by_keywords($keywords,$offset, $per_page);
-			//var_dump($data);
+			$data = $this->search_model->get_book_by_keywords($keywords , $offset, $per_page);
 			//分页		
 			$pager_config = $this->config->item('pager_config');
 			$pager_config['page_query_string'] = TRUE;
@@ -32,6 +28,8 @@ class Search extends CI_Controller
 			$pager_config['per_page'] = $per_page; //设置每页显示的条数
 			$this->pagination->initialize($pager_config); 
 			//END
+			$header = array('title'=>'搜索书籍','css_file'=>'search.css');
+	    	$footer = array('js_file'=>'search.js');
 			$this->parser->parse('template/header',$header);	
 			$this->load->view('search',$data);
 			$this->parser->parse('template/footer',$footer);
