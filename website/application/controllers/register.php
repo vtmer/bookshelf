@@ -14,16 +14,15 @@ class Register extends CI_Controller
 	public function index()
 	{
 
-		// if($this->session->userdata('is_logged_in'))
-		// 	redirect(site_url('home'));
+		if(!$this->session->userdata('s_id'))
+			redirect(site_url('login'));
 		$user_info = $this->catch_msg->get_info();
 		//if($user_info=='') redirect(site_url('login'));
-		//var_dump($user_info);
 		//将信息存储到session
 		$array = array(
-				'campus'=>$user_info[0],
+				'campus'=>substr($user_info[0], 0, stripos($user_info[0],'校区',0)),
 				'faculty'=>$user_info[1],
-				'major'=>$user_info[2],
+				'major'=>substr($user_info[2], 0, stripos($user_info[2],'专业',0)),
 				'grade'=>substr($user_info[3],0,4),
 				'truename'=>$user_info[5]
 			);
@@ -31,7 +30,7 @@ class Register extends CI_Controller
 
 		$key = array('campus','faculty','major','grade','class','truename');
 		$data['user'] = array_combine($key,$user_info);
-		 //var_dump($data['user']);
+
 		$header = array('title'=>'加入工大书架','css_file'=>'sign_up.css'); 
 		$footer = array('js_file' => 'sign_up.js');
 		$this->parser->parse('template/header',$header);
@@ -89,24 +88,21 @@ class Register extends CI_Controller
 			$phone_num = str_replace(" ","",$this->input->post('phone_num'));
 			$subphone_num = str_replace(" ","",$this->input->post('subphone_num'));
 			
-			if($campus == '龙洞校区')
+			if($campus == '龙洞')
 			{
-				$dormitory = '龙洞生活区';
+				$dormitory = '龙洞';
 		   	}
-			else if($campus == '东风路校区')
+			else if($campus == '东风路')
 		   	{
-				$dormitory = '东风路生活区';
+				$dormitory = '东风路';
 	        }
 	        else
 	        {
 	        	$dormitory = $this->input->post('dormitory');
 	        }
 
-			$status = 0;//注册标识码
 			$activationKey = mt_rand() . mt_rand() . mt_rand() . mt_rand() . mt_rand();//生成随机激活码	
-			$points = 30; //初始积分为30
 		
-		//if($this->user_model->add($username,$password,$truename,$student_id,$campus,$faculty,$major,$grade,$phone_num,$subphone_num,$dormitory,$activationKey,$status,$points))
 			$user_data = array(
 				'username' => $username,
 				'student_id' => $student_id,
@@ -131,61 +127,64 @@ class Register extends CI_Controller
 				$this->session->unset_userdata('s_id');
 				$this->session->unset_userdata('campus');
 				$this->session->unset_userdata('faculty');
-				$this->session->unset_userdata('username');
 
+				$this->session->set_userdata('username',$username);
 				$this->session->set_userdata('points',30);
 				$this->session->set_userdata('uid',$uid);
 				$this->session->set_userdata('is_logged_in',true);
-				var_dump($this->session->all_userdata());exit;
-				// $row = $this->user_model->get($username);
-				// $uid = $row->id;
-				// $points = $row->points;
-				// $major = $row->major;
-				// $grade = $row->grade;
-				// $data = array(
-				// 	'username'=>$username,
-				// 	'truename'=>$truename,
-				// 	'points' => $points,
-				// 	'uid' => $uid,
-				// 	'major' => $major,
-				// 	'grade' => $grade,
-				// 	'is_logged_in' => FALSE,
-				// );
-				// $this->session->set_userdata($data);
+				//var_dump($this->session->all_userdata());exit;
+
+				//发送站内信
+				$content = "<p>致 ".$this->session->userdata('truename').":</p>
+				<p>&nbsp&nbsp您好，欢迎加入 工大书架 ，这是一个致力于让广工的同学们快捷放心的借到教材书的平台。<p/>
+				<p>&nbsp&nbsp在这里，你可以轻松查看自己下学期所需要的的教材，然后系统会主动向您推送适合的借书人。<p/>
+				<p>当然，你还可以直接搜索教材名称，找到自己想要的教材，然后进行借书。<p/>
+				<p>&nbsp&nbsp同时，为了让更多的同学可以借到想要的书，请您将自己手头多余或者不需要的教材进行网上捐书，<p/>
+				<p>您所捐的书将为我们广工学子们共同所有，在一届一届中交接下去，你更可以在书籍中夹入自己的心语、对学习的建议，<p/>
+				<p>让更多的师弟师妹能够感受到我们广工师兄师姐的关怀和我们广工人之间的团结互助。<p/>
+				<p>而且，如果你觉得 工大书架 的确可以帮助到学生解决问题，请将它进行推广，只有更多的人加入进来，我们借书的渠道<p/>
+				<p>和数量才会更加宽广，同学们借书才会更加轻松和保障。或者，如果您对我们有什么建议，请在网页下方点击留言，联系我们。<p/>
+				<p>&nbsp&nbsp感谢您对本书架的支持，希望您可以愉快地借到所需要的教材！<p/>
+				<p>&nbsp&nbsp谢谢!<p/>
+				 <br/>                                                    
+				<p>&nbsp&nbsp--数字中心&维生数工作室<p/>
+				";
+				$uid = $this->session->userdata('uid');
+				$this->user_model->send_sys_msg($uid,$content);
 			}
 			else
 			{
 				//如何提示错误
-				$msg = array('type'=>'alert','title'=>'错误信息','content'=>"系统错误，请重试！");
-				echo json_encode($msg);
-				exit();				
+				echo '系统错误！注册失败';
+				exit;				
 			}
-
-		$message = "感谢你的注册！接下来请点击验证链接,便能完成注册:\n <a href='".site_url()."/verify/index/".$uid."/".$activationKey."'>验证链接</a>\n";//邮件正文 
-		$message .="若不是你本人的操作，对您造成的不便，我们深表歉意！\n @维生数-工大书架"; 
 	
 		/*邮箱验证模块*/
+		$link['link'] = site_url()."/verify/index/".$uid."/".$activationKey;//验证链接
+		$message = $this->load->view('template/email_content', $link, true);//装载邮件模板
 
-		$this->config->load('email',TRUE);
-		$email_config = $this->config->item('email');
+		$this->load->library('email');
+		$this->config->load('email');
 		$this->email->from('gdutbookshelf@163.com','维生数工作室');
 		$this->email->to($username);
-		$this->email->subject('欢迎注册工大书架');
+		$this->email->subject('工大书架——邮箱地址验证');
 		$this->email->message($message);
-		$this->email->initialize($email_config);
 		if($this->email->send())
 		{
 			//注册成功
-			$url = site_url('register/success');
-			$msg = array('type'=>'redirect','url'=>$url);
-			echo json_encode($msg);
-			exit();	
+			redirect(site_url('register/success'));
+			// echo "success";exit;
+			// $url = site_url('');
+			// $msg = array('type'=>'redirect','url'=>$url);
+			// echo json_encode($msg);
+			// exit();	
 		}
 		else
-		{
-			$msg = array('type'=>'alert','title'=>'错误信息','content'=>"注册失败！");
-			echo json_encode($msg);
-			exit();	
+		{	
+			echo "邮件发送错误！请检查邮件地址是否正确";exit;
+			// $msg = array('type'=>'alert','title'=>'错误信息','content'=>"注册失败！");
+			// echo json_encode($msg);
+			// exit();	
 		}
 	}
 	public function success()

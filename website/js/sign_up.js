@@ -350,6 +350,16 @@ $(function(){
 		// check_control = check_func.stu_id($("input#stu_id")[0].value);
 		check_control = check_func.captcha($("input#captcha")[0].value);
 		if(!check_control) return false;
+		//等待提交
+		var url = "/img/loading.gif";
+		$(".mainlist").html("<img src="+url+" alt='loading...'/>");
+		$(".mainlist").css('text-align','center');
+        $("#pop_title").html("正在提交");
+      	var h = $(document).height();
+		$('#screen').css({ 'height': h });	
+		$('#screen').show();
+		$('.popbox').center();
+		$('.popbox').fadeIn();            
 	});	
 });
 function reloadCode()
