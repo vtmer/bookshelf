@@ -1,5 +1,5 @@
 <?php
-
+ob_start();
 class Register extends CI_Controller
 {
 	public function __construct()
@@ -13,12 +13,11 @@ class Register extends CI_Controller
 
 	public function index()
 	{
-
 		if(!$this->session->userdata('s_id'))
-			redirect(site_url('login'));
+            redirect(site_url('login'));
 		$user_info = $this->catch_msg->get_info();
-		//if($user_info=='') redirect(site_url('login'));
-		//将信息存储到session
+		if($user_info=='') redirect(site_url('login'));
+        //将信息存储到session
 		$array = array(
 				'campus'=>substr($user_info[0], 0, stripos($user_info[0],'校区',0)),
 				'faculty'=>$user_info[1],
@@ -36,11 +35,13 @@ class Register extends CI_Controller
 		$this->parser->parse('template/header',$header);
 		$this->load->view('sign_up',$data);	
 		$this->parser->parse('template/footer',$footer);
+        ob_end_flush();
 	}
 
 	//注册时验证函数
 	public function check()
 	{
+        ob_start();
 		//设置验证规则
 		$this->load->library('form_validation');
 		 $this->form_validation->set_rules('username','Username','required|max_length[50]|valid_email');//这个为邮箱
@@ -119,20 +120,23 @@ class Register extends CI_Controller
 				'points' => 30,				
 				'register_time' => null
 				);
-			if($uid = $this->user_model->add($user_data))
+        if($uid = $this->user_model->add($user_data))
 			{
 				//将数据插入数据库
 				//将用户信息保存至session，邮箱验证后直接可登陆
 				//清除不必要的session
-				$this->session->unset_userdata('s_id');
-				$this->session->unset_userdata('campus');
-				$this->session->unset_userdata('faculty');
+	            $this->session->unset_userdata('s_id');
+	            $this->session->unset_userdata('campus');
+	            $this->session->unset_userdata('faculty');
 
-				$this->session->set_userdata('username',$username);
-				$this->session->set_userdata('points',30);
-				$this->session->set_userdata('uid',$uid);
-				$this->session->set_userdata('is_logged_in',true);
-				//var_dump($this->session->all_userdata());exit;
+	            $array = array(
+	            	'username'=>$username,
+	                'points'=>30,
+	                'uid'=>$uid,
+	                'is_logged_in'=>true
+	            );
+	            $this->session->set_userdata($array);
+	            //print_r($this->session->all_userdata());exit;
 
 				//发送站内信
 				$content = "<p>致 ".$this->session->userdata('truename').":</p>
@@ -150,17 +154,17 @@ class Register extends CI_Controller
 				<p>&nbsp&nbsp--数字中心&维生数工作室<p/>
 				";
 				$uid = $this->session->userdata('uid');
-				$this->user_model->send_sys_msg($uid,$content);
+            $this->user_model->send_sys_msg($uid,$content);
 			}
 			else
 			{
 				//如何提示错误
-				echo '系统错误！注册失败';
-				exit;				
+                echo '系统错误！注册失败';
+                exit;				
 			}
 	
 		/*邮箱验证模块*/
-		$link['link'] = site_url()."/verify/index/".$uid."/".$activationKey;//验证链接
+		$link['link'] = site_url()."verify/index/".$uid."/".$activationKey;//验证链接
 		$message = $this->load->view('template/email_content', $link, true);//装载邮件模板
 
 		$this->load->library('email');
@@ -169,10 +173,10 @@ class Register extends CI_Controller
 		$this->email->to($username);
 		$this->email->subject('工大书架——邮箱地址验证');
 		$this->email->message($message);
-		if($this->email->send())
+        if($this->email->send())
 		{
 			//注册成功
-			redirect(site_url('register/success'));
+            redirect(site_url('register/success'));
 			// echo "success";exit;
 			// $url = site_url('');
 			// $msg = array('type'=>'redirect','url'=>$url);
@@ -186,11 +190,13 @@ class Register extends CI_Controller
 			// echo json_encode($msg);
 			// exit();	
 		}
+ ob_end_flush();
 	}
 	public function success()
 	{
-		if(!($this->session->userdata('username'))) 
-			show_404();
+        if(!($this->session->userdata('username'))) 
+        show_404();
+        //print_r($this->session->all_userdata());
 		$address = $this->session->userdata('username');
 		if(substr($address,strripos($address,'@')+1)=="gmail.com")
 		{
@@ -201,7 +207,7 @@ class Register extends CI_Controller
 			$data['url'] = "http://mail.".substr($address,strripos($address,'@')+1);
 		}
 		$this->load->view('sign_up_success',$data);
-		$this->parser->parse('template/footer',array('js_file' => 'sign_up_success.js'));
+		$this->parser->parse('template/footer',array('js_file' => 'sign_up_success.js'));       
 	} 
 
 	public function ajax_check()

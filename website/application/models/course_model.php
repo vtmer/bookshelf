@@ -63,8 +63,8 @@ class Course_model extends CI_Model
 		{
 			$data = array(
 					'from_id' => $uid,
-					'book_id' =>$value,
-					'create_time' =>date('YY-MM-DD')
+					'book_id' => $value,
+					'create_time' =>null
 				);
 			$this->db->insert('circulating_book',$data);
 		}
