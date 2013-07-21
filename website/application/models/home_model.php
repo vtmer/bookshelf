@@ -308,7 +308,7 @@ class Home_Model extends CI_Model
     	$sql = "DELETE FROM `circulating_book` WHERE `id`=$id";
       $this->db->query($sql);
       $query = mysql_affected_rows();
-      $sql2 = "UPDATE `user` SET `points` = `points` - 8 ,`donate_book` = `donate_book` - 1 WHERE `id` = ".$this->session->userdata['uid'];
+      $sql2 = "UPDATE `user` SET `points` = `points` - 5 ,`donate_book` = `donate_book` - 1 WHERE `id` = ".$this->session->userdata['uid'];
       $this->db->query($sql2);
       $query2 = mysql_affected_rows();
       return 2==$query+$query2 ? true:false;
