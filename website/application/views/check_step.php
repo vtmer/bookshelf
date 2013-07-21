@@ -1,7 +1,7 @@
 
 <div class="main">
 	<div class="mid_content">
-	<form action="">
+	<form action="<?php echo site_url('home/receipt');?>" method ='POST'>
 			<h3>借书流程</h3>
 <!-- <p class="step_01"><span>1</span>搜索选择自己要借的书</p>
 		<p class="dots"><span></span></p>
@@ -15,7 +15,6 @@
 				<h5>书源人联系方式：</h5>
 				<?php echo 
 				"<p><span>书源人:".$user[0]['truename']."</span>
-
 					<span>生活区：".$user[0]['dormitory']."</span>
 					<span>长号：".$user[0]['phone_number']."</span>
 					<span>短号：".$user[0]['subphone_number']."</span>
@@ -59,7 +58,7 @@
 							<td>".$value['author']."</td>
 							<td>".$value['publish']."</td>
 							<td>".$value['version']."</td>
-							<td><label><input type='checkbox' value='' name='' /><span></span></label></td>
+							<td><label><input type='checkbox' value='".$value['cb_id']."' name='".$value['cb_id']."' /><span></span></label></td>
 							</tr>";
 						}
 						?>

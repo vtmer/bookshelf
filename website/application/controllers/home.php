@@ -83,10 +83,11 @@ class Home extends CI_Controller
 	
 	public function check_step()
 	{
-		var_dump($this->input->post());
+		//var_dump($this->input->post());
 		$bookArray = $this->input->post();
-		$num =count($bookArray)-1;
+		$num = count($bookArray)-1;
 		if($num<=0)  header('location:/index.php/home');
+		//var_dump($this->session->all_userdata());
 		if(($this->session->userdata['points']))
 		{
 			if(($this->session->userdata['points']-$num*10) < 0)
@@ -98,7 +99,8 @@ class Home extends CI_Controller
 		}
 		$data['user'] = $this->home_model->get_userinfo($bookArray['user']);		
 		$data['books'] = $this->home_model->get_bookborrow($bookArray);
-		$this->session->set_userdata('borrow','');
+		$this->session->set_userdata('borrow_time','');
+		$this->session->set_userdata('borrow_from' , $data['user'][0]['id']);
 
 		$header = array('title'=>'借书页面','css_file'=>'check_step.css');
 		$footer = array('js_file'=>'check_step.js');
@@ -112,11 +114,12 @@ class Home extends CI_Controller
 		if($this->session->userdata('borrow') < time()-120)//忽略2分钟内的重复动作
 		{
 			$info = array(
-				'from_id'=>$this->input->post('from_id'),
+				'from_id'=>$this->session->userdata('borrow_from'),
 				'to_id'=>$this->session->userdata('uid'),
 				'book'=>$this->input->post(NULL,TRUE)
 						);
-			$this->session->set_userdata('borrow',time());
+			//var_dump($info);
+			$this->session->set_userdata('borrow_time',time());
 			$this->home_model->update_info($info);
 			$this->user_model->show_user_point($this->session->userdata('uid'));
 			echo "<script type='text/javascript'>setTimeout(\"window.location.href='".site_url('home')."'\",10000);</script>";
@@ -137,7 +140,7 @@ class Home extends CI_Controller
 	{
 		if(!isset($this->session->userdata['is_logged_in']))
 		{
-			header('location:/index.php/guide');
+			header('location:/index.php/login');
 		} 
 		if($this->input->post())
 		{
@@ -149,45 +152,11 @@ class Home extends CI_Controller
 				echo json_encode($msg);
 				exit();           
 			}
-			//密码
-			if($this->input->post('pwd')!=$this->input->post('pwd2'))
-			{
-				$msg = array('type'=>'alert','title'=>'错误信息','content'=>'两次密码不一致，请重试！');
-				echo json_encode($msg);
-				exit(); 
-			}
-			if($this->input->post('pwd_old')!=NULL)
-			{	
-				 if(!preg_match('/^[\w~!@#$%^&*]{6,18}$/',$this->input->post('pwd')))
-				 {
-					$msg = array('type'=>'alert','title'=>'错误信息','content'=>'密码格式错误，长度大于6且小18，且不包含以下字符:~!@#$%^&*');
-					echo json_encode($msg);
-					exit(); 
-				}
-			}
 			//END
 			$flag = $this->home_model->update_config($this->input->post());
 			if($flag==1)
 			{
 				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'修改成功！');
-				echo json_encode($msg);
-				exit();
-			}
-			else if($flag==2)
-			{
-				$url = site_url('login/logout');
-				$msg = array('type'=>'redirect','title'=>'提示信息','content'=>'修改密码成功！请重新登录！','url'=>$url);
-				echo json_encode($msg);
-				exit();
-			}
-			else if($flag==3)
-			{
-				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'与原密码一致，请重试！');
-				echo json_encode($msg);
-				exit();
-			}else if($flag == 4)
-			{
-				$msg = array('type'=>'alert','title'=>'错误信息','content'=>'密码错误，请重试！');
 				echo json_encode($msg);
 				exit();
 			}

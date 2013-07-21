@@ -261,7 +261,7 @@ class Home_Model extends CI_Model
           }           		 
        	}
    		}	
-          var_dump($match);    
+          //var_dump($match);    
     return $match;
   	}
 
@@ -274,13 +274,10 @@ class Home_Model extends CI_Model
   	public function update_info(array $info)
   	{
     	$sql = "UPDATE `circulating_book` SET `to_id`=?,`circulate_number`=`circulate_number`+1,`book_right`=1,`change_time`=NOW() ,`book_status`=1
-          WHERE `book_id`=?";
+          WHERE `cb_id`=?";
     	foreach($info['book'] as $key=>$value)
     	{
-      		if(is_numeric($key))
-      		{
         		$query = $this->db->query($sql,array($info['to_id'],$value));
-      		}
     	}
     	//发送站内信息
     	$books = array();
@@ -334,31 +331,16 @@ class Home_Model extends CI_Model
   	public function update_config($data)
   	{
   		$id = $this->session->userdata('uid');
-    	$sql = "UPDATE `user` SET `phone_number`=?,`subphone_number`=?,`dormitory`=?,`password`=? WHERE `id`=$id ";
-    	$sql2 = "UPDATE `user` SET `phone_number`=?,`subphone_number`=?,`dormitory`=? WHERE `id`=$id ";
-
-    	if($data['pwd']!=NULL)
-    	{
-          $query = $this->db->get_where('user', array('id' => $id,'password'=>md5($data['pwd_old'])));
-          if(count($query->result())==0)
-          {
-            return 4;//密码错误
-          }
-      		$this->db->query($sql,array($data['phone_number'],$data['subphone_number'],$data['dormitory'],md5($data['pwd'])));
-      		if($this->db->affected_rows())
-      		{
-        		return 2;//修改密码成功
-      		}	
-      		else return 3;//与原密码一致
-    	}	
-    	else
-    	{
-      		$this->db->query($sql2,array($data['phone_number'],$data['subphone_number'],$data['dormitory']));
-       		if($this->db->affected_rows())
-       		{
-          		return 1;//修改信息成功
-       		}
-       		else return 0;//修改信息与原来的一致
-    	}
+    	//$sql = "UPDATE `user` SET `phone_number`=?,`subphone_number`=?,`dormitory`=? WHERE `id`=$id ";
+      $data_arr = array(
+               'phone_number' => $data['phone_number'],
+               'subphone_number' => $data['subphone_number'],
+               'dormitory' => $data['dormitory'],
+               'username' => $data['mail']
+            );
+      $this->db->where('id', $id);
+      $this->db->update('user', $data_arr);
+      //var_dump(mysql_affected_rows());exit;
+      return mysql_affected_rows(); 
   	}	
 }
