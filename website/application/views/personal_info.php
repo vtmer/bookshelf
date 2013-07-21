@@ -2,6 +2,8 @@
 <div class="main">
 	
 	<?php include "template/search_bar.php"; ?>
+<script language="javascript" src="<?php echo base_url('js/mailauto.js');?>"></script>
+
 
 	<div class="mid_content">
 		<h3>个人信息设置：</h3>
@@ -19,9 +21,10 @@
 					<label for="password_once">确认密码：<input type="password" name="pwd2" id="password_once"/></label>
 					<input type="button" class="config_submit" value="取消" id="cancle_pwd"/>
 					</div> -->
-					<label for="college">学院：<span class="user_name" ><?php echo $user[0]['faculty'];?></label>
-					<label for="major">专业：<span class="user_name"   ><?php echo $user[0]['major'];?></label>
-					<label for="grade">年级：<span class="user_name"  ><?php echo $user[0]['grade'];?></label>
+					<label for="college">学院：<span class="user_name" ><?php echo $user[0]['faculty'];?></span></label>
+					<label for="major">专业：<span class="user_name"   ><?php echo $user[0]['major'];?></span></label>
+					<label for="grade">年级：<span class="user_name"  ><?php echo $user[0]['grade'];?></span></label>
+					<label for="mail">邮箱：<input type="text" id="mail" name="mail" autocomplete="off" value="<?php echo $user[0]['username'];?>"/></label>
 					<label for="phone">长号：<input type="text" id="phone" name="phone_number" value="<?php echo $user[0]['phone_number'];?>"/></label>
 					<label for="mini_phone">短号：<input type="text" id="mini_phone" name="subphone_number" value="<?php echo $user[0]['subphone_number'];?>"/></label>
 					<label>宿舍区：
@@ -39,8 +42,7 @@
 							<?php endif;?>
 						</div>
 					</label>
-					<!-- 邮箱的修改&验证还没有 -->
-					<label for="mail">邮箱地址：<input type="text" class="mail" name="mail" value="<?php echo $user[0]['username'];?>"/></label>
+
 					<input type="submit" class="config_submit" value="保存" />
 				</div>
 				</div>
