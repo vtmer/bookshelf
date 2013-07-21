@@ -83,7 +83,7 @@ class Home extends CI_Controller
 	
 	public function check_step()
 	{
-		//var_dump($this->input->post());
+		// var_dump($this->input->post());
 		$bookArray = $this->input->post();
 		$num = count($bookArray)-1;
 		if($num<=0)  header('location:/index.php/home');
@@ -118,7 +118,12 @@ class Home extends CI_Controller
 				'to_id'=>$this->session->userdata('uid'),
 				'book'=>$this->input->post(NULL,TRUE)
 						);
-			//var_dump($info);
+			if(empty($info['book']))
+			{
+				echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
+				echo "<script type='text/javascript'>alert('请至少选择一本书！');location='".site_url('home/check_step')."';</script>";
+				exit();
+			}
 			$this->session->set_userdata('borrow_time',time());
 			$this->home_model->update_info($info);
 			$this->user_model->show_user_point($this->session->userdata('uid'));
