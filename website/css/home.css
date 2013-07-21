@@ -16,7 +16,6 @@ div.needed_book p { clear:both; margin-bottom:20px; text-indent:2em; font-size:1
 div.needed_book p span { font-weight: bold;margin-right: 60px;}
 div.needed_book p a { color:#418FDF;}
 div.needed_book p a:hover { color:#000; text-decoration:underline;}
-div.needed_book table { margin-bottom:30px;}
 div.needed_book table th:nth-child(1),
 div.needed_book table td:nth-child(1){ width:180px; text-align:center;}
 div.needed_book table th:nth-child(2),
@@ -51,13 +50,15 @@ div.needed_book table td:nth-child(6){ width:70px; text-align:center;}
 .match_book ul li label { position:relative; padding-left:25px; cursor:pointer;}
 .match_book ul li label input[type=checkbox] {visibility:hidden;}
 .match_book ul li label input[type=checkbox] + span {display:inline-block; position:absolute; top:0px; left:23px; width:16px; height:16px; border: 1px solid #bababa;}
-.match_book ul li label input[type=checkbox]:checked + span { background:url("../img/hover_bg.png") no-repeat -28px -152px;}
+.match_book ul li label input[type=checkbox]:checked + span { background:url("../img/minihook.png") no-repeat;}
 .match_book ul li { color: #130e7a; width: 245px; float: left; height: 31px; text-align: left; margin-top: 20px;}
 .match_book ul li label input { margin-right:10px;}
 .match_book .book_list_bottom { clear: both; height:32px; margin-right: 35px;margin-bottom: 20px; text-align: right; padding-top: 25px;}
-.match_book .select_all { margin-right: 20px; text-decoration:underline; cursor:pointer;vertical-align: top;}
-.match_book #submit { height:35px; width:75px; border:none; background:url("../img/button_1.png") no-repeat; cursor:pointer;}
-.match_book #submit:hover { background: url('../img/button_10.png') no-repeat;}
+.match_book .select_all { margin-right: 20px; text-decoration:underline; cursor:pointer;vertical-align:middle;}
+.match_book #submit { color: #fff; text-align: center; line-height: 35px; font-size: 14px; height:35px; width:75px; border:none; background:url("../img/button_bg.png") 0 0 no-repeat; cursor:pointer;}
+.match_book #submit:hover { background-position: -75px 0;}
+.match_book #submit:active { background-position: -150px 0;}
+
 
 div.match_box ul.pages { float: right; margin: 20px 30px 20px 0px;}
 div.match_box ul.pages li{ float:left; margin:0 3px;}

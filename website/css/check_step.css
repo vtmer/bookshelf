@@ -3,44 +3,64 @@ div.main {..........}
 div.main { overflow:hidden; width:960px; margin:auto;}
 
 div.mid_content { width:100%; padding-top:88px; background:url('../img/shelf.png') 77px 0 no-repeat; }
-div.mid_content h3 { width:730px; height:39px; margin:auto; margin-bottom:40px; background:url('../img/h_bg.png') no-repeat; font:14px "微软雅黑",Arial, Helvetica, sans-serif; line-height:33px; text-indent:1em; color:#ffffff;}
+div.mid_content h3 { width:730px; height:39px; margin-left: 80px; margin-bottom:40px; background:url('../img/h_bg.png') no-repeat; font:14px "微软雅黑",Arial, Helvetica, sans-serif; line-height:33px; text-indent:1em; color:#ffffff;}
 
-div.mid_content p.step_01 { margin-left:120px; margin-bottom:12px; font:18px "微软雅黑",Arial, Helvetica, sans-serif; color:#4e4949; font-weight:bold; text-indent:0.5em; letter-spacing:2px; line-height:30px;}
-div.mid_content p.step_02 { margin-left:120px; margin-bottom:20px; font:18px "微软雅黑",Arial, Helvetica, sans-serif; color:#d92c2c; font-weight:bold; text-indent:0.5em; letter-spacing:2px; line-height:40px;}
-div.mid_content p.step_03 { margin-left:120px; margin-bottom:12px; font:18px "微软雅黑",Arial, Helvetica, sans-serif; color:#b89461; font-weight:bold; text-indent:0.5em; letter-spacing:2px; line-height:30px;}
-div.mid_content p.step_01 span { float:left; width:30px; height:30px; margin:0 5px; box-shadow:0 -2px 4px -2px rgba(0,0,0,.6); background:#9a9a9a; border-radius:15px; font:24px Arial, Helvetica, sans-serif; line-height:32px; text-indent:8px; color:#fff;}
-div.mid_content p.step_02 span { float:left; width:40px; height:40px; box-shadow:0 -2px 4px -2px rgba(0,0,0,.6); background:#e23636; border-radius:20px; font:28px Arial, Helvetica, sans-serif; line-height:40px; text-indent:12px; color:#fff;}
-div.mid_content p.step_03 span { float:left; width:30px; height:30px; margin:0 5px; box-shadow:0 -2px 4px -2px rgba(0,0,0,.6); background:#b89461; border-radius:15px; font:24px Arial, Helvetica, sans-serif; line-height:32px; text-indent:8px; color:#fff;}
-div.mid_content p.dots { margin-left:120px; height:15px;}
-div.mid_content p.dots span { float:left; width:6px; height:6px; margin:0 17px; box-shadow:0 -2px 4px -2px rgba(0,0,0,.6); background:#9a9a9a; border-radius:3px;}/* 页面里面各种点点点在高级浏览器下的效果*/
+/*div.mid_content p.step_01 { margin-left:120px; margin-bottom:12px; font:18px "微软雅黑",Arial, Helvetica, sans-serif; color:#4e4949; font-weight:bold; text-indent:0.5em; letter-spacing:2px; line-height:30px;}*/
+/*div.mid_content p.step_02 { margin-left:120px; margin-bottom:20px; font:18px "微软雅黑",Arial, Helvetica, sans-serif; color:#d92c2c; font-weight:bold; text-indent:0.5em; letter-spacing:2px; line-height:40px;}*/
+/*div.mid_content p.step_03 { margin-left:120px; margin-bottom:12px; font:18px "微软雅黑",Arial, Helvetica, sans-serif; color:#b89461; font-weight:bold; text-indent:0.5em; letter-spacing:2px; line-height:30px;}*/
+/*div.mid_content p.step_01 span { float:left; width:30px; height:30px; margin:0 5px; box-shadow:0 -2px 4px -2px rgba(0,0,0,.6); background:#9a9a9a; border-radius:15px; font:24px Arial, Helvetica, sans-serif; line-height:32px; text-indent:8px; color:#fff;}*/
+/*div.mid_content p.step_02 span { float:left; width:40px; height:40px; box-shadow:0 -2px 4px -2px rgba(0,0,0,.6); background:#e23636; border-radius:20px; font:28px Arial, Helvetica, sans-serif; line-height:40px; text-indent:12px; color:#fff;}*/
+/*div.mid_content p.step_03 span { float:left; width:30px; height:30px; margin:0 5px; box-shadow:0 -2px 4px -2px rgba(0,0,0,.6); background:#b89461; border-radius:15px; font:24px Arial, Helvetica, sans-serif; line-height:32px; text-indent:8px; color:#fff;}*/
+/*div.mid_content p.dots { margin-left:120px; height:15px;}*/
+/*div.mid_content p.dots span { float:left; width:6px; height:6px; margin:0 17px; box-shadow:0 -2px 4px -2px rgba(0,0,0,.6); background:#9a9a9a; border-radius:3px;}/* 页面里面各种点点点在高级浏览器下的效果*/
+div.mid_content div.content_box { margin-bottom:50px;}
 
 
-div.content_box { margin-bottom:20px;}
+div.check_step {float: left;border-right: 1px solid #fff;margin-left: 40px;width: 315px;}
+div.check_step div { border-right: 1px solid #c9c7b9;height: 240px; overflow: hidden;}
+div.check_step div h5 { margin:10px 0px; color:#4d4d4d;}
+/*div.check_step h4 { clear:both; margin:10px 30px; font:14px "微软雅黑",Arial, Helvetica, sans-serif; font-weight:bold; color:#4d4d4d;}*/
+div.check_step div p {margin-right: 10px; margin-bottom: 50px; overflow: hidden;	}
+div.check_step div p span { width: 150px;float: left;line-height: 40px;}
+div.check_step div p span:nth-child(5) { width: 300px;}
+div.check_step div span.tips {clear: both; height:20px; width:200px; color:#130e7a;}
+div.explain { overflow: hidden; }
+div.explain h5 { margin:10px 30px; color: #130e7a;cursor: pointer; }
+div.explain h5 span { margin-left: 20px;}
+div.explain p { color: #666; margin-left: 25px; line-height: 35px;}
+div.explain p span { float: left; margin-top: 10px; width: 15px;height: 15px; background: url('../img/pages.png') -93px -30px no-repeat;}
+div.explain h6 { width: 130px; margin: 50px auto 20px;}
+div.explain input[value="是"] { margin-left: 120px;}
+div.explain input[value="否"] { margin-left: 30px;}
+div.explain input {float: left;line-height: 35px; cursor: pointer;width: 75px;height: 35px; text-align: center;background: url('../img/button_bg.png') 0 0 no-repeat;border: none;color: #fff;font-size: 15px;font-weight: bold;}
+div.explain input:hover { background-position: -75px 0;}
+div.explain input:active { background-position: -150px 0;}
 
 
 div.search_results {.........}
-div.search_results h2 { margin-left:40px; margin-bottom:40px; font:18px "微软雅黑",Arial, Helvetica, sans-serif; font-weight:bold; color:#4d4d4d;}
-div.search_results h4 { clear:both; margin:10px 30px; font:14px "微软雅黑",Arial, Helvetica, sans-serif; font-weight:bold; color:#4d4d4d;}
-div.search_results p { clear:both; margin:20px 100px;  font-size:14px;}
-div.search_results p span { margin-right:30px;}
-div.search_results span.tips { float:left; height:20px; width:200px; margin-left:3px; margin-bottom:10px; border-bottom:solid 1px #c0c0c0; white-space:nowrap; text-indent:333px; color:#646464;}
-
+div.mid_content div.search_results h3 { background: url('../img/h3_bg.png') 0 0 no-repeat; margin-left: -2px;}
 div.search_results table th:nth-child(1),
-div.search_results table td:nth-child(1){ width:120px; text-align:center;}
+div.search_results table td:nth-child(1){ width:200px; text-align:center;}
 div.search_results table th:nth-child(2),
-div.search_results table td:nth-child(2){ width:135px; text-align:center;}
+div.search_results table td:nth-child(2){ width:125px; text-align:center;}
 div.search_results table th:nth-child(3),
-div.search_results table td:nth-child(3){ width:80px; text-align:center;}
+div.search_results table td:nth-child(3){ width:130px; text-align:center;}
 div.search_results table th:nth-child(4),
-div.search_results table td:nth-child(4){ width:140px; text-align:center;}
+div.search_results table td:nth-child(4){ width:160px; text-align:center;}
 div.search_results table th:nth-child(5),
-div.search_results table td:nth-child(5){ width:120px; text-align:center;}
+div.search_results table td:nth-child(5){ width:60px; text-align:center;}
 div.search_results table th:nth-child(6),
-div.search_results table td:nth-child(6){ width:65px; text-align:center;}
+div.search_results table td:nth-child(6){ width:60px; text-align:center;}
 /*定义表格各列的宽度*/
+div.search_results table td label { position: relative; cursor: pointer;}
+div.search_results table td input { ......}
+div.search_results table td input[type=checkbox] {visibility:hidden;}
+div.search_results table td input[type=checkbox] + span {display:inline-block; position:absolute; top:0px; left:0px; width:16px; height:16px; border: 1px solid #bababa;}
+div.search_results table td input[type=checkbox]:checked + span { background:url("../img/minihook.png") no-repeat;}
 
+/*
 div.mid_content div.receipt { width:500px; height:100px; margin:auto; }
 div.mid_content div.receipt .receipt_succ {float:left; width:180px; height:55px; margin-bottom:10px; border:none; background:url('../img/receipt.jpg') -3px 0 no-repeat; cursor:pointer;}
 div.mid_content div.receipt .receipt_unsucc {float:left; width:180px; height:55px; border:none; background:url('../img/receipt.jpg') -180px 0 no-repeat; cursor:pointer;}
 div.mid_content div.receipt span { float:left; margin:0 10px; font:36px "微软雅黑",Arial, Helvetica, sans-serif; font-weight:bold; color:#707070;}
-div.mid_content div.receipt p { clear:both; text-align:center; font-size:14px; color:#707070;}
+div.mid_content div.receipt p { clear:both; text-align:center; font-size:14px; color:#707070;}*/

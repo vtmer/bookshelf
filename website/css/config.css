@@ -17,7 +17,7 @@ div.personal_config div.left { float:left; width:65%; border-right:1px solid #ff
 div.personal_config div.left>div { border-right:1px solid #d6d4ca; padding-top: 10px;}
 div.personal_config div.left label { overflow:hidden; clear: both; display:block; width:350px; line-height:40px; text-align:right; font-size:14px;}
 div.personal_config div.left label span.user_name { float:right; width:200px; margin-left:15px; text-align:left;}
-div.personal_config div.left label input { width:200px; height:25px; margin-left:15px; padding-left: 5px; background:none; border:solid 1px #7e7e7d;}
+div.personal_config div.left label input { width:200px; height:25px; margin-left:15px; background:none; border:solid 1px #7e7e7d;}
 div.personal_config div.left label div.select_button { float:right; width:200px; height:40px; margin:3px 0 0 15px;}
 div.personal_config div.left label input.qu { float:left; width:auto; margin: 7px 5px 0px 0px; border: none;}
 
@@ -31,14 +31,18 @@ div.personal_config div.right ul li a { color:#130e7a; text-decoration: underlin
 div.personal_config ul.pages { position:absolute; bottom:30px; right:140px;}
 
 
-div.personal_config .config_submit {width: 75px;height: 35px;border: none;margin: 25px 0px 40px 150px; background: url('../img/button_1.png') no-repeat;font-size: 14px;line-height: 35px;text-align: center;cursor: pointer;color: #fff;}
-div.personal_config .config_submit:hover { background:url('../img/button_10.png');} 
+div.personal_config .config_submit {width: 75px;height: 35px;border: none;margin: 25px 0px 40px 150px; background: url('../img/button_bg.png') 0 0 no-repeat;font-size: 14px;line-height: 35px;text-align: center;cursor: pointer;color: #fff;}
+div.personal_config .config_submit:hover { background-position: -75px 0;} 
+div.personal_config .config_submit:active { background-position: -150px 0;} 
 
 
 #div_pwd{padding: 15px 0 0 0;overflow: hidden; width: 300px;height: 0px;}
 
 
 /*emailauto样式*/
-	#myemail { border-radius: 3px; background-color: #eeece1; color: #666; border:1px solid #333;}
-	#myemail .newemail {text-align:left; color:#6B6B6B; overflow:hidden;}
+
+	#myemail { overflow:hidden; border-radius: 3px; background-color: #fff; color: #666; border:1px solid #333;}
+	#myemail .newemail { height: 25px; line-height: 25px; border-bottom: 1px solid #eeece1; text-align:left; color:#6B6B6B;}
 	#myemail li.newemail span {color:#D33022;}
+	/*hover状态在js里改*/
+

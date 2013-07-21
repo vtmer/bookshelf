@@ -32,8 +32,9 @@ div.add_book .inpart .sele_book>li a:hover {font-weight: bold;color: rgb(219, 81
 .sub_search #suggest_box ul li img { display: block; margin: 2px;border: 1px solid #fff; border-radius: 4px; width: 80px; height: 109px;}
 .sub_search #suggest_box ul li:hover img { width: 99px; height: 139px; box-shadow: 2px 2px rgba(52, 195, 223, 0.29),-2px -2px rgba(185, 112, 226, 0.22)}
 
-div.add_book .inpart form input#submit { margin: 30px 30px 20px 345px;width: 75px;height: 35px;text-align: center;background: url('../img/button_1.png') no-repeat;border: none;color: #fff;font-size: 15px;font-weight: bold;}
-div.add_book .inpart form input#submit:hover { background: url('../img/button_10.png') no-repeat; cursor: 	pointer;}
+div.add_book .inpart form input#submit { margin: 30px 30px 20px 345px;width: 75px;height: 35px;text-align: center;background: url('../img/button_bg.png') 0 0 no-repeat;border: none;color: #fff;font-size: 15px;font-weight: bold;}
+div.add_book .inpart form input#submit:hover {background-position: -75px 0; cursor: pointer;}
+div.add_book .inpart form input#submit:active {background-position: -150px 0; cursor: pointer;}
 div.add_book .tip_box { width: 220px;height: 300px;margin: 15px 49px;float: right;}
 div.add_book .tip_box h5 { font-size: 14px; line-height: 55px;}
 div.add_book .tip_box img { margin-top: 30px;}

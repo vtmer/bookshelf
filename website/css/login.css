@@ -22,9 +22,9 @@ div.sign form label { display:block; width:220px; margin:15px 30px 15px 10px; te
 div.sign form label input {height: 28px; width: 142px; border: 1px solid #d1d1d1; margin-left: 5px; background-color: #f8f8f8; border-radius: 3px;}
 div.sign form label.yanzheng input { width: 65px ;}
 div.sign form label.yanzheng img{ width: 70px;height: 25px; vertical-align: middle;}
-div.sign form input.confirm { clear:both; float:left; width:75px; height:35px; margin:20px 0 0 85px; border:none;font-size:14px; line-height:35px; text-align:center; color:#fff; background: url('../img/button_1.png') no-repeat;}
-
-div.sign form input.confirm:active { background:url('../img/button_10.png') no-repeat;}
+div.sign form input.confirm { clear:both; float:left; width:75px; height:35px; margin:20px 0 0 85px; border:none;font-size:14px; line-height:35px; text-align:center; color:#fff; background: url('../img/button_bg.png') 0 0 no-repeat;}
+div.sign form input.confirm:hover {background-position: -75px 0;}
+div.sign form input.confirm:active {background-position: -150px 0;}
 /*div.sign form .forget { float:right; text-decoration: underline; color:#626262; font-size:12px;}*/
 
 /*记住密码的特殊样式*/
