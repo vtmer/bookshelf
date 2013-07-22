@@ -1,9 +1,9 @@
 ﻿/*css document*/
 body { background:#cfcaa5 url('../img/bg_01.jpg') repeat-x; font-size:13px;font-family: '微软雅黑'; color:#333333;}
 
-#float_head { width:100%; height:44px; background:rgba(0,0,0,0.63);}
+#float_head { width:100%; height:52px; background:rgba(0,0,0,0.63);}
 #float_head .header { position: relative; width:890px; margin:auto; padding:0px 35px; color:#fff;}
-#float_head a#gdutonline {float:left; width:120px; height:44px; background:url('../img/gdutonline.png') no-repeat;}
+#float_head a#logo {float:left; width:120px; height:44px; background:url('../img/logo_min.png') no-repeat;}
 #float_head .header span.score { float:right;  line-height:44px;}
 #float_head .header a#message { float:right; margin-right:20px; color:#fff; text-decoration:none; line-height:44px;}
 #float_head .user_info {position:absolute; left:660px; z-index:100; width:70px; margin-top:6px; margin-right:20px; background:#4f4f4f; border-radius:5px; font:13px "宋体"; line-height:32px; text-align:center;}

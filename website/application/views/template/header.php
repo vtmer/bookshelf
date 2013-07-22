@@ -13,7 +13,7 @@
 <body>
 <div id="float_head">
 	<div class="header">
-		<a href="<?php echo site_url('home');?>" id="gdutonline"></a>
+		<a href="<?php echo site_url('home');?>" id="logo"></a>
 		<?php if($this->session->userdata('is_logged_in')!==FALSE) :?>
 		<span class="score">积分:<?php echo $this->user_model->show_user_point($this->session->userdata('uid')); ?></span>
 		<a href="<?php echo site_url('message'); ?>" id="message">收到短信息(<span><?php echo $this->user_model->show_message_num($this->session->userdata['uid']); ?>)</span></a>
