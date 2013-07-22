@@ -274,7 +274,7 @@ class Home_Model extends CI_Model
   	public function update_info(array $info)
   	{
     	$sql = "UPDATE `circulating_book` SET `to_id`=?,`circulate_number`=`circulate_number`+1,`book_right`=1,`change_time`=NOW() ,`book_status`=1
-          WHERE `cb_id`=?";
+          WHERE `id`=?";
     	foreach($info['book'] as $key=>$value)
     	{
         if(is_numeric($key))
