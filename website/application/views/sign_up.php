@@ -57,6 +57,10 @@
 						</select>
 						<span></span>
 					</label> -->
+					<label for="mail"><span>邮箱:</span>
+						<input type="text" id="mail" name="username" autocomplete="off" />
+						<span class="notice">填写常用邮箱以便验证</span>
+					</label>
 					<label for="phone"><span>长号:</span>
 						<input type="text" id="phone" name="phone_num"/>
 						<span></span>
@@ -76,10 +80,6 @@
 							<?php endif; ?>
 						</div>
 					</label>
-					<label for="mail"><span>邮箱:</span>
-						<input type="text" id="mail" name="username" autocomplete="off" />
-						<span class="notice">填写常用邮箱以便验证</span>
-					</label>
 					<label for="captcha"><span>验证码:</span>
 						<input type="text" id="captcha" name="captcha"/>
 						<span></span>
@@ -92,6 +92,7 @@
 		</div><!-- 包裹整块质感效果的div -->
 	</div>
 </div><!--end of main-->
+<script language="javascript" src="<?php echo base_url('js/mailauto.js');?>"></script>
 <script type="text/javascript">
 /*
 $(document).ready(function(){

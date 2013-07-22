@@ -34,6 +34,8 @@ div.sign_info label img { margin-right: 19px;vertical-align: middle;}
 
 
 /*emailauto样式*/
-	#myemail { border-radius: 3px; background-color: #eeece1; color: #666; border:1px solid #333;}
-	#myemail .newemail {text-align:left; color:#6B6B6B; overflow:hidden;}
+
+	#myemail { overflow:hidden; border-radius: 3px; background-color: #fff; color: #666; border:1px solid #333;}
+	#myemail .newemail { height: 25px; line-height: 25px; border-bottom: 1px solid #eeece1; text-align:left; color:#6B6B6B;}
 	#myemail li.newemail span {color:#D33022;}
+	/*hover状态在js里改*/
