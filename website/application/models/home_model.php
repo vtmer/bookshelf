@@ -277,6 +277,7 @@ class Home_Model extends CI_Model
           WHERE `cb_id`=?";
     	foreach($info['book'] as $key=>$value)
     	{
+        if(is_numeric($key))
         		$query = $this->db->query($sql,array($info['to_id'],$value));
     	}
     	//发送站内信息

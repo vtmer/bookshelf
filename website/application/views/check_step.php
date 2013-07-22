@@ -28,8 +28,8 @@
 					<p><span></span>如果预约成功，请在下表中勾选预约到的书籍，然后点击“是”</p>
 					<p><span></span>如果预约失败（或没有即时得到捐书者回复），请点击“否”</p>
 					<h6>是否预约到您的书</h6>
-					<input type="submit" value="是" />
-					<input type="submit" value="否" />
+					<input type="submit" value="是" name='succ'/>
+					<input type="submit" value="否" name='fail'/>
 				</div>
 			</div>
 			<div class="bottom_shadow"></div><!-- 块级区域下方的底层阴影 -->

@@ -81,64 +81,99 @@ class Home extends CI_Controller
 		$this->parser->parse('template/footer',$footer);
 	}
 	
-	public function check_step()
+	public function check_step($result = '')
 	{
-		// var_dump($this->input->post());
-		$bookArray = $this->input->post();
-		$num = count($bookArray)-1;
-		if($num<=0)  header('location:/index.php/home');
-		//var_dump($this->session->all_userdata());
-		if(($this->session->userdata['points']))
+		if($result !='')
 		{
-			if(($this->session->userdata['points']-$num*10) < 0)
-			{
-				echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
-				echo "<script type='text/javascript'>alert('亲，你积分不够咯！');location='".site_url('home')."';</script>";
-				exit();
+			if($result=='success')
+			{				
+				$data['type'] = 'borrow_succ';
+				$header = array('title'=>'预约成功','css_file'=>'add_succ.css');
+				$footer = array('js_file'=>'add_succ.js');
+				$this->parser->parse('template/header',$header);
+				$this->load->view('template/all_result',$data);
+				$this->parser->parse('template/footer',$footer);
 			}
+			else if($result=='fail')
+			{
+				$data['type'] = 'borrow_fail';
+				$header = array('title'=>'预约失败','css_file'=>'add_succ.css');
+				$footer = array('js_file'=>'add_succ.js');
+				$this->parser->parse('template/header',$header);
+				$this->load->view('template/all_result',$data);
+				$this->parser->parse('template/footer',$footer);
+			}
+			else
+				show_404();
 		}
-		$data['user'] = $this->home_model->get_userinfo($bookArray['user']);		
-		$data['books'] = $this->home_model->get_bookborrow($bookArray);
-		$this->session->set_userdata('borrow_time','');
-		$this->session->set_userdata('borrow_from' , $data['user'][0]['id']);
+		else
+		{
+			// var_dump($this->input->post());
+			$bookArray = $this->input->post();
+			$num = count($bookArray)-1;
+			if($num<=0)  header('location:/index.php/home');
+			//var_dump($this->session->all_userdata());
+			if(($this->session->userdata['points']))
+			{
+				if(($this->session->userdata['points']-$num*10) < 0)
+				{
+					echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
+					echo "<script type='text/javascript'>alert('亲，你积分不够咯！');location='".site_url('home')."';</script>";
+					exit();
+				}
+			}
+			$data['user'] = $this->home_model->get_userinfo($bookArray['user']);		
+			$data['books'] = $this->home_model->get_bookborrow($bookArray);
+			$this->session->set_userdata('borrow_time','');
+			$this->session->set_userdata('borrow_from' , $data['user'][0]['id']);
 
-		$header = array('title'=>'借书页面','css_file'=>'check_step.css');
-		$footer = array('js_file'=>'check_step.js');
-		$this->parser->parse('template/header',$header);
-		$this->load->view('check_step',$data);
-		$this->parser->parse('template/footer',$footer);
+			$header = array('title'=>'借书页面','css_file'=>'check_step.css');
+			$footer = array('js_file'=>'check_step.js');
+			$this->parser->parse('template/header',$header);
+			$this->load->view('check_step',$data);
+			$this->parser->parse('template/footer',$footer);
+		}
 	}
 
 	public function receipt()
 	{
-		if($this->session->userdata('borrow') < time()-120)//忽略2分钟内的重复动作
+		if(!$this->input->post()) redirect(site_url('home'));
+		if($this->input->post('fail'))
+		{
+			//预约失败
+			//失败发站内信
+			redirect(site_url('home/check_step').'/fail');
+		}
+		if($this->session->userdata('borrow_time') < time()-120)//忽略2分钟内的重复动作
 		{
 			$info = array(
 				'from_id'=>$this->session->userdata('borrow_from'),
 				'to_id'=>$this->session->userdata('uid'),
 				'book'=>$this->input->post(NULL,TRUE)
 						);
-			if(empty($info['book']))
+			if((count($info['book'])-1)==0)
 			{
 				echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
-				echo "<script type='text/javascript'>alert('请至少选择一本书！');location='".site_url('home/check_step')."';</script>";
+				echo '<script type="text/javascript">alert("请至少选择一本书！");window.history.back(-1);</script>';
 				exit();
 			}
 			$this->session->set_userdata('borrow_time',time());
 			$this->home_model->update_info($info);
 			$this->user_model->show_user_point($this->session->userdata('uid'));
-			echo "<script type='text/javascript'>setTimeout(\"window.location.href='".site_url('home')."'\",10000);</script>";
+			redirect(site_url('home/check_step').'/success');
 		}
-		else if($this->session->userdata('borrow'))
+		else if($this->session->userdata('borrow_time'))
 		{
-			echo "<script type='text/javascript'>setTimeout(\"window.location.href='".site_url('home')."'\",10000);</script>";
+			echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
+			echo '<script type="text/javascript">alert("请不要重复提交！");window.location.href="/index.php/home";</script>';
+			//echo "<script type='text/javascript'>setTimeout(\"window.location.href='".site_url('home')."'\",5000);</script>";
 		}
 		
-		$header = array('title'=>'确认借书','css_file'=>'receipt.css');
-		$footer = array('js_file'=>'receipt.js');
-		$this->parser->parse('template/header',$header);
-		$this->load->view('receipt');
-		$this->parser->parse('template/footer',$footer);
+		// $header = array('title'=>'确认借书','css_file'=>'receipt.css');
+		// $footer = array('js_file'=>'receipt.js');
+		// $this->parser->parse('template/header',$header);
+		// $this->load->view('receipt');
+		// $this->parser->parse('template/footer',$footer);
 	}
 
 	public function personal_config()

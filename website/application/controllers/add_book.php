@@ -22,39 +22,38 @@ class Add_book extends CI_Controller
 	
 	public function add()
 	{
-		//$title = $_POST['booktitle'];
-		/*$keywords = $_POST['isbncode'];
-		$print = $_POST['print'];
-		//echo "<script>alert(".$title.$isbn.$print.");</script>";
-
-		if($this->course_model->addbook($keywords,$print))
-		{
-			echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
-			echo "<script>alert('恭喜你!你已经成功捐出书本!');</script>";
-			redirect('add_book','refresh');		
-		}
-		else
-		{
-			//redirect('add_book');
-			echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
-			echo "<script>alert('不好意思哦!我们书库暂时还不支持这本书！欢迎反馈哦！');</script>";
-			redirect('add_book','refresh');
-		}*/
 
 		$ID_arr = $this->input->post();
 		if(!$ID_arr) redirect('add_book');
 		$flag = $this->course_model->addbook($ID_arr);
-		$data['points'] = count($ID_arr)*5;
+		$points = count($ID_arr)*5;
 		if($flag)
 		{
-			$header = array('title'=>'捐书成功','css_file'=>'add_succ.css');
-			$footer = array('js_file'=>'add_succ.js');
-			$this->parser->parse('template/header',$header);
-			$this->load->view('add_succ',$data);
-			$this->parser->parse('template/footer',$footer);
+			redirect(site_url('add_book/success')."/$points");
 		}
 		else
-			show_404();
+			redirect(site_url('add_book/fail'));
+	}
+
+	public function success($points='')
+	{
+		$data['type'] = 'add_succ';
+		$data['points'] = $points;
+		$header = array('title'=>'捐书成功','css_file'=>'add_succ.css');
+		$footer = array('js_file'=>'add_succ.js');
+		$this->parser->parse('template/header',$header);
+		$this->load->view('template/all_result',$data);
+		$this->parser->parse('template/footer',$footer);
+	}
+
+	public function fail()
+	{
+		$data['type'] = 'add_fail';
+		$header = array('title'=>'捐书失败','css_file'=>'add_succ.css');
+		$footer = array('js_file'=>'add_succ.js');
+		$this->parser->parse('template/header',$header);
+		$this->load->view('template/all_result',$data);
+		$this->parser->parse('template/footer',$footer);
 	}
 
 	public function search()
