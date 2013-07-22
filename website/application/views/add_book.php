@@ -10,6 +10,16 @@
 					<div>
 					<p class="">我要捐书</p>
 					<form action="<?php echo site_url('add_book/add');?>" method='POST'>
+
+						<div class="sub_search">
+							<input id="isbncode" type="text" autocomplete="off" placeholder=" 请输入ISBN码或书名" />
+							<div id="suggest_box">
+								<!-- 这里是搜索框匹配的模板，每一本书对应一个li -->
+								<ul>
+									<!-- <li><a href="#" title="书名"><img src="../img/tip.jpg" alt="#"></a></li> -->
+								</ul>
+							</div>		
+						</div>
 					<ul class="sele_book">
 						<!--这是选择书本之后，搜索框上面显示的模板，没一本书对应一个li -->
 						<!-- <li>
@@ -23,16 +33,6 @@
 							<a href="#">[删除]</a>
 						</li>	 -->
 					</ul>
-						<div class="sub_search">
-							<input id="isbncode" type="text" autocomplete="off" placeholder=" 请输入ISBN码或书名" />
-							<div id="suggest_box">
-								<!-- 这里是搜索框匹配的模板，每一本书对应一个li -->
-								<ul>
-									<!-- <li><a href="#" title="书名"><img src="../img/tip.jpg" alt="#"></a></li> -->
-								</ul>
-							</div>		
-						</div>
-
 						<input type="submit" id="submit" value="提交" />
 					</form>
 					</div>

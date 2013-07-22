@@ -68,10 +68,11 @@ function lookup(inputString) {
 								"<li>版次：<span>"+jsonObj[$index].version+"</span></li>"+
 							"</ul><a href='#' class='del_book'>[删除]</a>"+
 						"</li>";
-						$('.sele_book').append($string);
-						//$('.sele_book').slideDown();
+						$('.sele_book').prepend($string);
+						// $('.sele_book').slideDown();
 						$('#suggest_box').slideUp('fast',function(){
 							$('#suggest_box ul').html('');
+							$('#isbncode').attr('value','');
 							});
 					$(".del_book").click(function(){
 							console.log($(this).parent('li'));

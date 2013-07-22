@@ -12,8 +12,8 @@ div.mid_content p.dots { margin-left:120px; height:15px;}
 div.mid_content p.dots span { float:left; width:6px; height:6px; margin:0 17px; box-shadow:0 -2px 4px -2px rgba(0,0,0,.6); background:#b89461; border-radius:3px;}/* 页面里面各种点点点在高级浏览器下的效果*/
 
 
-div.content_box { margin-bottom:20px;width: 800px;margin: auto;}
-div.mid_content div.box_demo { width:645px; padding:40px; }/*浮雕快在高级浏览器下的预定义*/
+div.content_box {}
+div.mid_content div.box_demo {}/*浮雕快在高级浏览器下的预定义*/
 div.mid_content div.juan_v {text-align: center;}
 div.mid_content div.juan_v div {text-align: left;margin: 20px auto; width: 260px; background: url('../img/green_hook.png') left center no-repeat;overflow: hidden;}
 div.mid_content div.juan_v span { color:#3ad531; margin: 0px 0px 0px 70px;}

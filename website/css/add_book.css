@@ -15,7 +15,7 @@ div.bottom_shadow { clear: both;}/*块级区域底层阴影,宽度，边距需�
 
 div.add_book {.........}
 div.add_book .inpart { width: 450px;border-right: 1px solid #fff;float: left;margin-left:30px;}
-div.add_book .inpart p { font-size: 14px;font-weight: bold;line-height: 55px;}
+div.add_book .inpart p { font-size: 14px;font-weight: bold;line-height: 70px;}
 div.add_book .inpart > div {min-height: 350px; border-right: 1px solid #d6d4ca;}
 div.add_book .inpart .sele_book>li { position: relative;margin-top: 5px; display: block; width: 420px;height: 140px;border: 1px solid #c9c7b9;}
 div.add_book .inpart .sele_book>li div { width: 105px; height: 140px; border-right: 1px solid #c9c7b9; float: left;}
@@ -24,7 +24,8 @@ div.add_book .inpart .sele_book>li ul { width: 294px;margin: 10px;display: block
 div.add_book .inpart .sele_book>li a { float: right; position: absolute;bottom: 10px;right: 10px; color: #130e7a;}
 div.add_book .inpart .sele_book>li a:hover {font-weight: bold;color: rgb(219, 81, 81);}
 
-.sub_search input#isbncode { width: 420px; height: 40px;margin-top: 30px; background-color: #d7d7d7;font-size: 14px;padding: 0px 0px;color: #666;border: 1px solid rgb(173, 170, 145);border-radius: 3px}
+.sub_search { margin-bottom: 20px;}
+.sub_search input#isbncode { width: 420px; height: 40px; background-color: #d7d7d7;font-size: 14px;padding: 0px 0px;color: #666;border: 1px solid rgb(173, 170, 145);border-radius: 3px}
 .sub_search #suggest_box { display: none; width: 423px; border:1px solid rgb(231, 231, 231); border-radius: 5px; background-color: rgba(174, 221, 230, 0.22);}
 .sub_search #suggest_box ul { margin:5px 0px; overflow: hidden;}
 .sub_search #suggest_box ul li { float: left;width: 86px;height: 115px;border: 1px solid #c9c7b9; border-radius: 6px; margin: 15px 5px;}

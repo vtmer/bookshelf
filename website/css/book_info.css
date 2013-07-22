@@ -32,10 +32,10 @@ div.search_results table td:nth-child(4) input { border: none;cursor: pointer;co
 div.search_results div.book_img { float:left; margin:0px 30px 0px 35px; border: 1px solid #000; background-color: #fff;}
 div.search_results div.book_img img { width: 144px; height: 185px; }
 div.search_results dd.button { clear: both; overflow: hidden; margin-top: 29px; }
-div.search_results dd.button a {float: left; display: block; font-size: 14px; color: #fff; text-align: center;line-height: 35px; width: 75px; height: 35px; background: url('../img/button_bg.png') 0 0 no-repeat;}
-div.search_results dd.button a:hover { background-position: -75px 0;}
-div.search_results dd.button a:active { background-position: -150px 0;}
-div.search_results dd.button div {float: right; margin-left: 10px; }
+div.search_results dd.button input { border:none; float: left; display: block; font-size: 14px; color: #fff; text-align: center;line-height: 35px; width: 75px; height: 35px; background: url('../img/button_bg.png') 0 0 no-repeat;}
+div.search_results dd.button input:hover { background-position: -75px 0;}
+div.search_results dd.button input:active { background-position: -150px 0;}
+div.search_results dd.button div {float: right; }
 div.search_results ul.get_book { float:left; margin:30px 20px 0;}
 div.search_results ul.get_book li { height:32px;}
 div.search_results ul.get_book li input {float:left; width:75px; height:28px; border:none; background:#c6c4b6; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center;}
