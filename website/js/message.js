@@ -18,11 +18,13 @@ $(".main .message .message_box .msg_title").bind("click",function(){
 			});
 	}
 })
-// $(".main .message .message_box span.hide").bind("click",function(){
-// 	$(this).parent().slideUp();
-// 	$(this).parent().prev().removeClass("click_h5");
-// 	$("html,body").animate({scrollTop:$(".mid_content").offset().top},500);
-// })
+
+$(".main .message .message_box span.hide").bind("click",function(){
+	$(this).parent().parent().slideUp();
+	$(this).parent().parent().prev().removeClass("click_h5");
+	// $("html,body").animate({scrollTop:$(".mid_content").offset().top},500);
+})
+
 $(".main .message .message_box input.confirm").bind("click",function(){
 	$(this).parent().slideUp();
 	$(this).parent().prev().removeClass("click_h5");

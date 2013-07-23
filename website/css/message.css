@@ -12,23 +12,36 @@ div.content_box { margin-bottom:90px;}
 
 .main .message h5 { position:relative; width:740px; height:35px; margin:auto; border:1px solid #cecece; font:13px "微软雅黑"; font-weight:bold; text-align:center; line-height:35px;}
 .main .message h5 span:nth-child(1) {float:left; width:120px; border-right: 1px solid #cecece;}
-.main .message ul { float:right; margin:40px 60px 0 0; list-style:none;}
-.main .message ul li { float:left; margin:0 5px;}.main .message h5 span:nth-child(2) {float:left; width:390px; border-right: 1px solid #cecece;} 
+.main .message ul { margin-bottom: 10px; margin-left: 2em; overflow: hidden;}
+.main .message ul li {margin:10px 3px;}
+.main .message h5 span:nth-child(2) {float:left; width:390px; border-right: 1px solid #cecece;} 
 .main .message h5 span:nth-child(3) {float:left; width:120px; border-right: 1px solid #cecece;}
 .main .message h5 span:nth-child(4) {float:left; width:106px;}
+
+.main .message .message_box form { padding: 30px; overflow: hidden;}
 .main .message .message_box h5 { border-top:none; font-weight:normal; height: 50px; line-height: 50px;} 
 .main .message .message_box h5:hover { background-color: rgb(247, 247, 243);} 
 .main .message .message_box h5.unread { font-weight:bold;}
 .main .message .message_box h5.click_h5 { font-weight:bold;} 
 .main .message .message_box span.msg_title { color: #130e7a; cursor: pointer;} 
 .main .message .message_box a.del_message { color: #130e7a;}
-.main .message .message_content { display:none; overflow:hidden; margin:auto;width: 740px; padding:10px 0px; border: 1px solid #cecece;border-top: none;}
-.main .message .message_content p { font:14px "宋体"; margin:0 22px 10px; text-indent:2em; line-height:25px;}
-.main .message .message_content .ok_submit{  bottom:30px; left:40px; width:75px; height:30px; margin-left:550px; background:#c6c4b6; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center;}
-.main .message .message_content .ok_submit:hover{ background:#e8a126; color:#fff;} 
+.main .message .message_content { display:none; position: relative;background-color: rgb(226, 226, 226); overflow:hidden; margin:auto;width: 740px; border: 1px solid #cecece;border-top: none;}
+.main .message .message_content p { font-size: 14px; text-indent:2em; line-height:35px;}
+/*.main .message .message_content .ok_submit { position: absolute; bottom: 20px; right: 40px; border: none; width:75px; height:35px; background:url('../img/button_bg.png') 0 0 no-repeat; font-size:14px; line-height:35px; text-align:center; color: #fff;}
+.main .message .message_content .ok_submit:hover { background-position: -75px 0;} 
+.main .message .message_content .ok_submit:active { background-position: -150px 0;}*/
+.main .message .message_content input[type="button"],
+.main .message .message_content input[type="submit"] { float: right; border: none; width:75px; height:35px; background:url('../img/button_bg.png') 0 0 no-repeat; font-size:14px; line-height:35px; text-align:center; color: #fff; cursor: pointer;}
+.main .message .message_content input[type="button"]:hover,
+.main .message .message_content input[type="submit"]:hover { background-position: -75px 0;} 
+.main .message .message_content input[type="button"]:active,
+.main .message .message_content input[type="submit"]:active { background-position: -150px 0;} 
 .main a.home_page { clear:both; float:left; width:80px; height:32px; margin:80px 0 0 50px; background:#e0e0e0; border:solid 1px #c3c3c3; border-radius:3px; line-height:32px; text-align:center; color:#000; text-decoration:none;}
-/*.main .message .message_content span { float:right; width:22px; height:22px; margin:5px 20px 0 0; background:url('../img/hide.png') no-repeat; cursor:pointer;}*/
-
+.main .message .message_content span.hide { float:right; width:22px; height:22px; margin:10px 0px 0 10px; background:url('../img/hide.png') no-repeat; cursor:pointer;}
+.main .message .message_content ul.b_list {}
+.main .message .message_content ul.b_list li { float: left;padding-left: 15px;width: 188px;background: url('../img/pages.png') -95px -29px no-repeat;}
+.main .message .message_content ul.fail_reason { }
+.main .message .message_content ul.fail_reason li { }
 
 div.message a.home_page { position:absolute; bottom:30px; left:40px; width:75px; height:30px; margin:0; background:#c6c4b6; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center;}
 div.message a.home_page:hover { background:#e8a126; color:#fff;} 
