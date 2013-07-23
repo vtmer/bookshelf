@@ -90,9 +90,9 @@
 						<strong>xx同学：</strong>
 						<p>很遗憾，<strong>xx专业xx级xx同学</strong>无法成功借阅您的书籍，原因是？</p>
 						<ul class="fail_reason">
-							<li><label for=""><input type="radio" value="" />没联系上我呢，我可以重新借书他/她</label></li>
-							<li><label for=""><input type="radio" value="" />还需要使用，不想借出</label></li>
-							<li><label for=""><input type="radio" value="" />书本遗失/已借给他人</label></li>
+							<li><label for=""><input type="radio" value="1" name='reason'/>没联系上我呢，我可以重新借书他/她</label></li>
+							<li><label for=""><input type="radio" value="2" name='reason'/>还需要使用，不想借出</label></li>
+							<li><label for=""><input type="radio" value="3" name='reason'/>书本遗失/已借给他人</label></li>
 						</ul>
 						<span class="hide"></span>
 						<input type="submit" value="确认" />
@@ -102,7 +102,7 @@
 
 
 				<!-- <a href="<?php echo site_url('home');?>" class="home_page">返回</a> -->
-				<?php echo $this->pagination->create_links();?><!-- 输出分页模块 -->
+				<!--<?php echo $this->pagination->create_links();?>--><!-- 输出分页模块 -->
 
 			</div>
 
