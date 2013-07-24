@@ -1,0 +1,7 @@
+.qa h1 { font-size: 36px; text-align: center; margin-bottom: 40px;}
+.qabox { margin: 10px 70px;}
+.qaq { }
+.qaa { margin: 10px 0px;border: 1px solid #dadada;padding: 20px 25px;}
+.qaa p,.firstqa p { margin-bottom: 20px; line-height: 30px;}
+.firstqa { text-align: center;}
+.firstqa a { display: block; background: url('../img/button_bg.png') 0 -70px no-repeat; width: 75px; height: 35px;margin: 0px auto; text-align: center; line-height: 35px; font-size: 14px; color: #fff;}
