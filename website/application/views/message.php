@@ -25,15 +25,24 @@
 								echo $row['content'];
 								if($row['status']=='2')
 								{
-									echo '<p>你或对方已经点击<strong>"完成"</strong>按钮，恭喜你成功完成借/捐书流程。</p>
-										<span class="hide"></span>';
-								}
-								else
-								{
 									echo '<p>若已于<strong>线下</strong>成功借到/出书籍，请点击<strong>"完成"</strong>按钮，完成借/捐书流程。</p>
 										<span class="hide"></span>
 										<input type="submit" value="完成" />';
 								}
+								else if($row['status']=='3')
+								{
+									echo '<p>你或对方已经点击<strong>"完成"</strong>按钮，恭喜你成功完成借/捐书流程。</p>
+										<span class="hide"></span>';
+								}
+								else if($row['status']=='4')
+								{
+									echo '<span class="hide"></span><input type="submit" value="确认" />';
+								}
+								else if($row['status']=='5')
+								{
+									echo '<p>你已经提交过了，感谢您的支持！</p><span class="hide"></span>';
+								}
+								
 						?>
 						</form>
 					</div>
@@ -43,7 +52,7 @@
 				<!-- 模板1 即欢迎信，在controller/register.php 已有 -->
 
 				<!-- 模板2 即预约成功后，发给捐书人的信息-->
-				<div class="message_box">
+				<!-- <div class="message_box">
 				<h5 class='unread'><span class='readed'>未读</span><span class="msg_title">something</span><span>2012/12/12</span>
 					<a href="" class="del_message">[删除]</a>
 				</h5>
@@ -65,9 +74,9 @@
 						</form>
 					</div>
 				</div>
-
+ -->
 				<!-- 模板3 预约成功 给借书人-->
-				<div class="message_box">
+				<!-- <div class="message_box">
 				<h5 class='unread'><span class='readed'>未读</span><span class="msg_title">something</span><span>2012/12/12</span>
 					<a href="" class="del_message">[删除]</a>
 				</h5>
@@ -88,10 +97,10 @@
 						<input type="button" value="完成" />
 						</form>
 					</div>
-				</div>
+				</div> -->
 
 				<!-- 模板4 预约失败，给捐书人的 -->
-				<div class="message_box">
+				<!-- <div class="message_box">
 				<h5 class='unread'><span class='readed'>未读</span><span class="msg_title">something</span><span>2012/12/12</span>
 					<a href="" class="del_message">[删除]</a>
 				</h5>
@@ -109,7 +118,7 @@
 						<input type="submit" value="确认" />
 						</form>
 					</div>
-				</div>
+				</div> -->
 
 
 				<!-- <a href="<?php echo site_url('home');?>" class="home_page">返回</a> -->

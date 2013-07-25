@@ -142,13 +142,21 @@ class Home extends CI_Controller
 		{
 			//预约失败
 			//失败发站内信
+			$info = array(
+				'from_id'=>$this->session->userdata('borrow_from'),
+				'to_id'=>$this->session->userdata('uid'),
+				'status'=>'fail'
+						);
+			$this->home_model->appoint_info($info);
 			redirect(site_url('home/check_step').'/fail');
 		}
+		else
 		if($this->session->userdata('borrow_time') < time()-180)//忽略3分钟内的重复动作
 		{
 			$info = array(
 				'from_id'=>$this->session->userdata('borrow_from'),
 				'to_id'=>$this->session->userdata('uid'),
+				'status'=>'success',
 				'book'=>$this->input->post(NULL,TRUE)
 						);
 			if((count($info['book'])-1)==0)
@@ -158,7 +166,7 @@ class Home extends CI_Controller
 				exit();
 			}
 			$this->session->set_userdata('borrow_time',time());
-			$this->home_model->update_info($info);
+			$this->home_model->appoint_info($info);
 			$this->user_model->show_user_point($this->session->userdata('uid'));
 			redirect(site_url('home/check_step').'/success');
 		}

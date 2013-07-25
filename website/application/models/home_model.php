@@ -240,10 +240,8 @@ class Home_Model extends CI_Model
     }
 		$query = $this->db->query($sql,array($user_id,$user_id));
 		$data['books'] = $query->result_array();
-    //var_dump($data['books']);
     $query2 = $this->db->query("SELECT FOUND_ROWS() AS num "); 
     $rowNum['pageNum'] = $query2->result_array();
-    //var_dump($rowNum);exit;
     return array_merge($data,$rowNum);
 	}
 	
@@ -273,83 +271,131 @@ class Home_Model extends CI_Model
 	}
 	
 
-  	public function update_info(array $info)
+  	public function appoint_info($info)
   	{
       //更新书本的状态，为预约中
       //var_dump($info);exit;
-      $this->db->trans_start();
-      $books = array();
-    	$sql = "UPDATE `circulating_book` SET `to_id`=? , `book_status`=1 WHERE `id`=?";
-      $sql2 = "SELECT name FROM `allbook` WHERE `id`=?";
-      //array_shift($info['book']);
-    	foreach($info['book'] as $key=>$value)
-    	{
-        if(is_numeric($key))
-        {
-            $query = $this->db->query($sql,array($info['to_id'],$value));
-            $query2 = $this->db->query($sql2,array($key));
-            $result = $query2->result_array();
-            array_push($books ,array('book_name'=>$result[0]['name'],'cb_id'=>$value,'book_id'=>$key));
-        }
-        		
-    	}
-    	//预约成功发送站内信息
-    	$from = $info['to_id'];
-    	$to = $info['from_id'];
-    	$from_user = $this->get_userinfo($from);
+      // $this->db->trans_start();
+      $from = $info['to_id'];
+      $to = $info['from_id'];
+      $from_user = $this->get_userinfo($from);
       $to_user = $this->get_userinfo($to);
       $data['from_user'] = $from_user;
       $data['to_user'] = $to_user;
-      $data['book'] = $books;
-       //发给捐书人
-      $data['type'] = '1';
-      $content = $this->load->view('template/msg_content',$data,TRUE);
-      $arr = array(
-            'from' => $from,
-            'to' =>$to,
-            'title' =>substr($from_user[0]['truename'],0,3).'同学向你预约了书本',
-            'content' =>$content,
-            'create_time' => date("Y/m/d")
-        );
-      $this->db->insert('message',$arr);
-      //发给借书人
-      $data['type'] = '2';
-      $content = $this->load->view('template/msg_content',$data,TRUE);
-      $arr = array(
-            'from' => $to,
-            'to' =>$from,
-            'title' =>'你向'.substr($to_user[0]['truename'],0,3).'同学预约了书本',
-            'content' =>$content,
-            'create_time' => date("Y/m/d")
-        );
-      $this->db->insert('message',$arr);
-
-      $this->db->trans_complete(); 
-      if ($this->db->trans_status() === FALSE)
+      if($info['status']=='fail')
       {
-         $this->db->trans_off();
-        return mysql_error();
+        //预约失败
+        $data['type'] = '3';
+        $content = $this->load->view('template/msg_content',$data,TRUE);
+        //echo $content;exit;
+         $arr = array(
+              'from' => $from,
+              'to' =>$to,
+              'title' =>'我们需要收集你的书本状态信息',
+              'content' =>$content,
+              'status'=>'4',
+              'create_time' => date("Y/m/d")
+          );
+        $this->db->insert('message',$arr);
       }
-      $this->db->trans_off();
-      return true;
+      else if($info['status']=='success')
+      {
+        $books = array();
+      	$sql = "UPDATE `circulating_book` SET `to_id`=? , `book_status`=1 WHERE `id`=?";
+        $sql2 = "SELECT name FROM `allbook` WHERE `id`=?";
+        //array_shift($info['book']);
+      	foreach($info['book'] as $key=>$value)
+      	{
+          if(is_numeric($key))
+          {
+              $query = $this->db->query($sql,array($info['to_id'],$value));
+              $query2 = $this->db->query($sql2,array($key));
+              $result = $query2->result_array();
+              array_push($books ,array('book_name'=>$result[0]['name'],'cb_id'=>$value,'book_id'=>$key));
+          }
+          		
+      	}
+      	//预约成功发送站内信息
+        $data['book'] = $books;
+         //发给捐书人
+        $data['type'] = '1';
+        $content_lend = $this->load->view('template/msg_content',$data,TRUE);
+        $arr = array(
+              'from' => $from,
+              'to' =>$to,
+              'title' =>substr($from_user[0]['truename'],0,3).'同学向你预约了书本',
+              'content' =>$content_lend,
+              'status'=>'2',
+              'create_time' => date("Y/m/d")
+          );
+        $this->db->insert('message',$arr);
+        //发给借书人
+        $data['type'] = '2';
+        $content_borr = $this->load->view('template/msg_content',$data,TRUE);
+        $arr = array(
+              'from' => $to,
+              'to' =>$from,
+              'title' =>'你向'.substr($to_user[0]['truename'],0,3).'同学预约了书本',
+              'content' =>$content_borr,
+              'status'=>'2',
+              'create_time' => date("Y/m/d")
+          );
+        $this->db->insert('message',$arr);
+      }
+      // $this->db->trans_complete(); 
+      // if ($this->db->trans_status() == FALSE)
+      // {
+      //   $this->db->trans_off();
+      //   return mysql_error();
+      //   exit;
+      // }
+      // $this->db->trans_off();
+
+    //发送邮件
+    //给捐书人
+     $msg = '<p>此信是由工大书架系统发出，系统不接受回信，请勿直接回复。<p>
+            <p>如有任何疑问，请联系我们:<a href="http://weibo.com/vtmer">我们的微博</a><p>
+            <p>工大书架--@维生数工作室<p>';
+    $this->load->library('email');
+    $this->config->load('email');
+    $this->email->from('gdutbookshelf@163.com','工大书架');
+    $this->email->to($to_user[0]['username']);
+    $this->email->subject('工大书架——预约成功提醒');
+    $this->email->message($content_lend.$msg);
+    if($this->email->send())
+    {
+
+    }
+    //给借书人
+    $this->load->library('email');
+    $this->config->load('email');
+    $this->email->from('gdutbookshelf@163.com','工大书架');
+    $this->email->to($from_user[0]['username']);
+    $this->email->subject('工大书架——预约成功提醒');
+    $this->email->message($content_borr.$msg);
+    if($this->email->send())
+    {
+
+    }
+    return true;
   	} 	 
 
   	public function pull_off($id)
   	{
-      $this->db->trans_start();
+      // $this->db->trans_start();
     	$sql = "DELETE FROM `circulating_book` WHERE `id`=$id";
       $this->db->query($sql);
       $query = mysql_affected_rows();
       $sql2 = "UPDATE `user` SET `points` = `points` - 5 ,`donate_book` = `donate_book` - 1 WHERE `id` = ".$this->session->userdata['uid'];
       $this->db->query($sql2);
       $query2 = mysql_affected_rows();
-      $this->db->trans_complete();
-      if ($this->db->trans_status() === FALSE)
-      {
-         $this->db->trans_off();
-        return mysql_error();
-      }
-      $this->db->trans_off();
+      // $this->db->trans_complete();
+      // if ($this->db->trans_status() == FALSE)
+      // {
+      //    $this->db->trans_off();
+      //   return mysql_error();
+      // }
+      // $this->db->trans_off();
       return 2==$query+$query2 ? true:false;
     }
   

@@ -35,18 +35,39 @@ class Message extends CI_Controller
 	{
 		if($this->input->post())
 		{
-			$bookArray = $this->input->post();
-			if($this->user_model->confirm($bookArray))
+			if($this->input->post('reason'))
 			{
-				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'恭喜你完成借/捐书流程！');
-				echo json_encode($msg);
-				exit();
+				$reason = $this->input->post('reason');
+				$msg_id = $this->input->post('message_id');
+				if($reason=='1')
+				{
+					//没联系上我呢，我可以重新借书他/她
+				}
+				else if($reason=='2')
+				{
+					//还需要使用，不想借出
+				}
+				else if($reason=='3')
+				{
+					//书本遗失/已借给他人
+				}
+				var_dump($this->input->post());exit;
 			}
 			else
 			{
-				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'你已经确认过了！');
-				echo json_encode($msg);
-				exit();
+				$bookArray = $this->input->post();
+				if($this->user_model->confirm($bookArray))
+				{
+					$msg = array('type'=>'alert','title'=>'提示信息','content'=>'恭喜你完成借/捐书流程！');
+					echo json_encode($msg);
+					exit();
+				}
+				else
+				{
+					$msg = array('type'=>'alert','title'=>'提示信息','content'=>'你已经确认过了！');
+					echo json_encode($msg);
+					exit();
+				}
 			}
 		}
 		else

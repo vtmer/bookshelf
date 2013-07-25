@@ -114,10 +114,10 @@ class User_model extends CI_Model
 		}
 		array_shift($bookArray);
 
-		$this->db->trans_start();
+		//$this->db->trans_start();
 		//更新信息为已确认
 		$this->db->where('id',$message_id);
-		$this->db->update('message',array('status' => "2"));
+		$this->db->update('message',array('status' => "3"));
 		//获取该条信息的发送者和接收者
 		$this->db->select('from , to ')
 				->from('message')
@@ -142,7 +142,7 @@ class User_model extends CI_Model
 					//捐书人点击确认
 					// echo '捐书人点击确认value>msg_id';exit;
 					$this->db->where('id',(int)($message_id) + 1);
-					$this->db->update('message',array('status' => "2"));
+					$this->db->update('message',array('status' => "3"));
 					$add_id = $to_id;
 					$min_id = $from_id;
 				}
@@ -151,7 +151,7 @@ class User_model extends CI_Model
 					//借书点击确认
 					// echo '借书人点击确value<msg_id';exit;
 					$this->db->where('id',(int)($message_id)-1);
-					$this->db->update('message',array('status' => "2"));
+					$this->db->update('message',array('status' => "3"));
 					$add_id = $from_id;
 					$min_id = $to_id;
 				}
@@ -204,14 +204,14 @@ class User_model extends CI_Model
 				);
 			$this->db->insert('borrow_log',$arr);
 		}
-		$this->db->trans_complete();
-		if ($this->db->trans_status() === FALSE)
-		{
-		    // 生成一条错误信息... 或者使用 log_message() 函数来记录你的错误信息
-		    $this->db->trans_off();
-		  	return mysql_error();
-		}
-		$this->db->trans_off();
+		// $this->db->trans_complete();
+		// if ($this->db->trans_status() === FALSE)
+		// {
+		//     // 生成一条错误信息... 或者使用 log_message() 函数来记录你的错误信息
+		//     $this->db->trans_off();
+		//   	return mysql_error();
+		// }
+		// $this->db->trans_off();
 		return TRUE;
 	}
 
