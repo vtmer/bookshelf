@@ -10,7 +10,7 @@
 
 				<?php foreach($messages as $row):?>
 				<div class="message_box">
-				<?php if($row['status']=='0') echo "<h5 class='unread'><span class='readed'>未读";
+				<?php if((int)($row['status'])%10==0) echo "<h5 class='unread'><span class='readed'>未读";
 					else echo "<h5><span class='readed'>已读";?></span><span class="msg_title">
 					<?php echo $row['title'];?></span><span><?php echo $row['create_time'];?></span>
 
@@ -23,22 +23,22 @@
 
 						<?php 
 								echo $row['content'];
-								if($row['status']=='2')
+								if($row['status']=='20'||$row['status']=='21')
 								{
 									echo '<p>若已于<strong>线下</strong>成功借到/出书籍，请点击<strong>"完成"</strong>按钮，完成借/捐书流程。</p>
 										<span class="hide"></span>
 										<input type="submit" value="完成" />';
 								}
-								else if($row['status']=='3')
+								else if($row['status']=='22')
 								{
 									echo '<p>你或对方已经点击<strong>"完成"</strong>按钮，恭喜你成功完成借/捐书流程。</p>
 										<span class="hide"></span>';
 								}
-								else if($row['status']=='4')
+								else if($row['status']=='30'||$row['status']=='31')
 								{
 									echo '<span class="hide"></span><input type="submit" value="确认" />';
 								}
-								else if($row['status']=='5')
+								else if($row['status']=='32')
 								{
 									echo '<p>你已经提交过了，感谢您的支持！</p><span class="hide"></span>';
 								}

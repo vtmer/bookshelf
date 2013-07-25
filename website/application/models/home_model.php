@@ -293,7 +293,7 @@ class Home_Model extends CI_Model
               'to' =>$to,
               'title' =>'我们需要收集你的书本状态信息',
               'content' =>$content,
-              'status'=>'4',
+              'status'=>'30',
               'create_time' => date("Y/m/d")
           );
         $this->db->insert('message',$arr);
@@ -325,7 +325,7 @@ class Home_Model extends CI_Model
               'to' =>$to,
               'title' =>substr($from_user[0]['truename'],0,3).'同学向你预约了书本',
               'content' =>$content_lend,
-              'status'=>'2',
+              'status'=>'20',
               'create_time' => date("Y/m/d")
           );
         $this->db->insert('message',$arr);
@@ -337,7 +337,7 @@ class Home_Model extends CI_Model
               'to' =>$from,
               'title' =>'你向'.substr($to_user[0]['truename'],0,3).'同学预约了书本',
               'content' =>$content_borr,
-              'status'=>'2',
+              'status'=>'20',
               'create_time' => date("Y/m/d")
           );
         $this->db->insert('message',$arr);

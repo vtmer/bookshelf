@@ -117,7 +117,7 @@ class User_model extends CI_Model
 		//$this->db->trans_start();
 		//更新信息为已确认
 		$this->db->where('id',$message_id);
-		$this->db->update('message',array('status' => "3"));
+		$this->db->update('message',array('status' => "22"));
 		//获取该条信息的发送者和接收者
 		$this->db->select('from , to ')
 				->from('message')
@@ -142,7 +142,7 @@ class User_model extends CI_Model
 					//捐书人点击确认
 					// echo '捐书人点击确认value>msg_id';exit;
 					$this->db->where('id',(int)($message_id) + 1);
-					$this->db->update('message',array('status' => "3"));
+					$this->db->update('message',array('status' => "22"));
 					$add_id = $to_id;
 					$min_id = $from_id;
 				}
@@ -151,7 +151,7 @@ class User_model extends CI_Model
 					//借书点击确认
 					// echo '借书人点击确value<msg_id';exit;
 					$this->db->where('id',(int)($message_id)-1);
-					$this->db->update('message',array('status' => "3"));
+					$this->db->update('message',array('status' => "22"));
 					$add_id = $from_id;
 					$min_id = $to_id;
 				}
@@ -217,7 +217,7 @@ class User_model extends CI_Model
 
 	public function show_message_num($uid)
 	{
-		$query = $this->db->get_where('message',array('to' => $uid,'status' => '0'));
+		$query = $this->db->get_where('message',array('to' => $uid,'status %10=' => 0));
 		return $query->num_rows();
 	}
 
@@ -239,16 +239,21 @@ class User_model extends CI_Model
 			'to'=>$uid,
 			'title'=>'欢迎加入工大书架',
 			'content'=>$content,
-			'status'=>0,
+			'status'=>10,
 			'create_time'=>date('Y-m-d')
 			);
 		$this->db->insert('message', $data);
 		return mysql_affected_rows();
 	}
 	public function msg_readed($msg_id)
-	{
+	{	
+		$this->db->select('status');
+		$query = $this->db->get_where('message',array('id'=>$msg_id));
+		$result = $query->result_array();
+		$status = $result[0]['status'];
+		if($status%10!=0) return false;
 		$this->db->where('id',$msg_id);
-		$this->db->update('message',array('status' => "1"));
+		$this->db->update('message',array('status' => (int)($status)+1));
 		return mysql_affected_rows();
 	}
 	public function del_msg($msg_id)
