@@ -38,7 +38,7 @@ class Message extends CI_Controller
 			$bookArray = $this->input->post();
 			if($this->user_model->confirm($bookArray))
 			{
-				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'已确认！');
+				$msg = array('type'=>'alert','title'=>'提示信息','content'=>'恭喜你完成借/捐书流程！');
 				echo json_encode($msg);
 				exit();
 			}

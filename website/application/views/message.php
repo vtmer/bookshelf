@@ -8,22 +8,33 @@
 			<div class="box_demo message">
 				<h5><span>状态</span><span>标题</span><span>时间</span><span>操作</span></h5>
 
-				<?php
-				 foreach($messages as $row):?>
+				<?php foreach($messages as $row):?>
 				<div class="message_box">
-				<?php if($row['status']=='0') echo "<h5 class='unread'><span class='readed'>未读";else echo "<h5><span class='readed'>已读";?></span><span class="msg_title"><?php echo $row['title'];?></span><span><?php echo $row['create_time'];?></span>
+				<?php if($row['status']=='0') echo "<h5 class='unread'><span class='readed'>未读";
+					else echo "<h5><span class='readed'>已读";?></span><span class="msg_title">
+					<?php echo $row['title'];?></span><span><?php echo $row['create_time'];?></span>
 
 					<a href="<?php echo site_url('message/del_msg')."/".$row['id'];?>" class="del_message">[删除]</a>
 
 					</h5>
 					<div class="message_content">
-						<form action='<?php echo site_url('message/confirm');?>' method='post' class='ajaxForm'>
+						<form action="<?php echo site_url('message/confirm');?>" method='post' class='ajaxForm'>
 						<input type="hidden" name="message_id" value="<?php echo $row['id'];?>" />
-						<?php echo $row['content'];?>
-						<!-- <input type='submit' value='确认' class='ok_submit'/></form> -->
-						<!-- <span class="hide"></span> -->
-						<!--<input type="image" src="<?php echo base_url('img/cancle.png'); ?>"/>
-						<input type="image" src="<?php echo base_url('img/confirm.png'); ?>" class="confirm"/>-->
+
+						<?php 
+								echo $row['content'];
+								if($row['status']=='2')
+								{
+									echo '<p>你或对方已经点击<strong>"完成"</strong>按钮，恭喜你成功完成借/捐书流程。</p>
+										<span class="hide"></span>';
+								}
+								else
+								{
+									echo '<p>若已于<strong>线下</strong>成功借到/出书籍，请点击<strong>"完成"</strong>按钮，完成借/捐书流程。</p>
+										<span class="hide"></span>
+										<input type="submit" value="完成" />';
+								}
+						?>
 						</form>
 					</div>
 				</div>

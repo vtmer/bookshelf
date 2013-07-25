@@ -58,7 +58,7 @@
 							<td>".$value['author']."</td>
 							<td>".$value['publish']."</td>
 							<td>".$value['version']."</td>
-							<td><label><input type='checkbox' value='".$value['cb_id']."' name='".$value['cb_id']."' /><span></span></label></td>
+							<td><label><input type='checkbox' value='".$value['cb_id']."' name='".$value['book_id']."' /><span></span></label></td>
 							</tr>";
 						}
 						?>

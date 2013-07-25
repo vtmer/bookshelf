@@ -104,60 +104,114 @@ class User_model extends CI_Model
 	public function confirm($bookArray)
 	{
 		$message_id = $bookArray['message_id'];
-		$books = array();
-		$bookArray = array_values($bookArray);//重设键值，改为索引数组
-		for($i=1;$i<count($bookArray);$i++)
+		$b_id_arr = array();
+		foreach ($bookArray as $key => $value) 
 		{
-			$books[$i-1] = $bookArray[$i]; 
+			if(is_numeric($key))
+			{
+				array_push($b_id_arr, $key);
+			}
 		}
+		array_shift($bookArray);
+
+		$this->db->trans_start();
+		//更新信息为已确认
+		$this->db->where('id',$message_id);
+		$this->db->update('message',array('status' => "2"));
 		//获取该条信息的发送者和接收者
-		$sql = "SELECT `from`,`to` FROM  `message` WHERE `id`='$message_id'";
-		$query = mysql_query($sql);
-		$msgRelation = mysql_fetch_assoc($query);
-		//获取信息状态
-		$query = mysql_query("SELECT `status` FROM `message` WHERE `id`='$message_id'");
-		$status = mysql_result($query,0);
-		if($status==1) //如果信息已确认
+		$this->db->select('from , to ')
+				->from('message')
+				->where('id',$message_id);
+		$query = $this->db->get();
+		$result = $query->result_array();
+
+		$from_id = $result[0]['from'];
+		$to_id = $result[0]['to'];
+
+		$this->db->select('id')
+				 ->from('message')
+				 ->where('to',$from_id);
+		$query2 = $this->db->get();
+		$result2 = $query2->result_array();
+		foreach ($result2 as $key => $value) 
 		{
-			return FALSE;
-		} 
-		// //更新信息为已读
-		// $this->db->where('id',$message_id);
-		// $this->db->update('message',array('status' => "1"));
-		$book_num = count($books);
-		//获取信息发送者的积分
-		$query_user_from = $this->db->get_where('user',array('id' => $msgRelation['from']));
+			if(abs((int)($value['id'])-(int)($message_id))==1)
+			{
+				if($value['id'] > $message_id)
+				{
+					//捐书人点击确认
+					// echo '捐书人点击确认value>msg_id';exit;
+					$this->db->where('id',(int)($message_id) + 1);
+					$this->db->update('message',array('status' => "2"));
+					$add_id = $to_id;
+					$min_id = $from_id;
+				}
+				else
+				{
+					//借书点击确认
+					// echo '借书人点击确value<msg_id';exit;
+					$this->db->where('id',(int)($message_id)-1);
+					$this->db->update('message',array('status' => "2"));
+					$add_id = $from_id;
+					$min_id = $to_id;
+				}
+			}
+		}
+		$book_num = count($bookArray);
+		//获取信息扣分者的积分
+		$query_user_from = $this->db->get_where('user',array('id' => $min_id));
 		if($query_user_from->num_rows() == 1)
 		{
 			$row_from = $query_user_from->row();
 			$from_point = $row_from->points - 10 * $book_num;
 			$borrow_book = $row_from->borrow_book + $book_num;
 		}		
-		//获取信息接收者的积分
-		$query_user_to = $this->db->get_where('user',array('id' => $msgRelation['to']));
+		//获取信息加分者的积分
+		$query_user_to = $this->db->get_where('user',array('id' => $add_id));
 		if($query_user_to->num_rows() == 1)
 		{
 			$row_to = $query_user_to->row();
-			$to_point = $row_to->points + 5 * $book_num;
+			$to_point = $row_to->points + 8 * $book_num;
 			$lend_book = $row_to->lend_book + $book_num;
 		}
-		//更新信息发送者的积分（积分减少10）
-		$this->db->where('id',$msgRelation['from']);
+		//更新信息发送者的积分（积分减少10/本）
+		$this->db->where('id',$min_id);
 		$this->db->update('user',array('points' => $from_point,'borrow_book' => $borrow_book));		
-		//更新信息接收者的积分（积分增加5）
-		$this->db->where('id',$msgRelation['to']);
+		//更新信息接收者的积分（积分增加8/本）
+		$this->db->where('id',$add_id);
 		$this->db->update('user',array('points' => $to_point,'lend_book' => $lend_book));
 		//更新所有书本状态
-		$sql = "SELECT * FROM  `circulating_book` WHERE `book_id`='$books[0]'";
-		$query = mysql_query($sql);
-		$bookDetail = mysql_fetch_assoc($query);
-		foreach ($books as $key => $value) 
-		{		
-			$sql = "UPDATE `circulating_book` SET `book_status` = '2',`book_right`='1',
-								`circulate_number` = ".(int)($bookDetail['circulate_number']+1).",
-								`from_id`='".$msgRelation['from']."',`to_id`='".$msgRelation['to']."',`change_time`=NOW() WHERE `book_id`='$value'";
+		foreach ($bookArray as $key => $value) 
+		{
+			$sql = "UPDATE `circulating_book` 
+					SET `book_status` = '2',
+						`book_right`='1',
+						`circulate_number` =`circulate_number`+1,
+						`from_id`= $from_id,
+						`to_id`= $to_id,
+						`change_time`= date('Y-m-d') 
+					WHERE `id`=$value";
 			mysql_query($sql);
-		}	
+		}
+		foreach ($b_id_arr as $key => $value) 
+		{
+			//添加捐书记录给捐书人
+			$arr = array(
+					'book_id'=>$value,
+					'from_id'=>$from_id,
+					'to_id'=>$to_id,
+					'time'=>date('Y-m-d') 
+				);
+			$this->db->insert('borrow_log',$arr);
+		}
+		$this->db->trans_complete();
+		if ($this->db->trans_status() === FALSE)
+		{
+		    // 生成一条错误信息... 或者使用 log_message() 函数来记录你的错误信息
+		    $this->db->trans_off();
+		  	return mysql_error();
+		}
+		$this->db->trans_off();
 		return TRUE;
 	}
 

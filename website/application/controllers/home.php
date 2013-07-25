@@ -108,7 +108,7 @@ class Home extends CI_Controller
 		}
 		else
 		{
-			// var_dump($this->input->post());
+			if($this->session->userdata('is_logged_in')==false) redirect(site_url('login'));
 			$bookArray = $this->input->post();
 			$num = count($bookArray)-1;
 			if($num<=0)  header('location:/index.php/home');
@@ -144,7 +144,7 @@ class Home extends CI_Controller
 			//失败发站内信
 			redirect(site_url('home/check_step').'/fail');
 		}
-		if($this->session->userdata('borrow_time') < time()-120)//忽略2分钟内的重复动作
+		if($this->session->userdata('borrow_time') < time()-180)//忽略3分钟内的重复动作
 		{
 			$info = array(
 				'from_id'=>$this->session->userdata('borrow_from'),
@@ -165,7 +165,7 @@ class Home extends CI_Controller
 		else if($this->session->userdata('borrow_time'))
 		{
 			echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
-			echo '<script type="text/javascript">alert("请不要重复提交！");window.location.href="/index.php/home";</script>';
+			echo '<script type="text/javascript">alert("您已经提交过了！");window.location.href="/index.php/home";</script>';
 			//echo "<script type='text/javascript'>setTimeout(\"window.location.href='".site_url('home')."'\",5000);</script>";
 		}
 		
