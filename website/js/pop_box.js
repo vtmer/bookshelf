@@ -26,7 +26,7 @@ function getFormJson(frm) {
 }
 //调用
 
-$(document).ready(function(){
+/*$(document).ready(function(){
     $(".ajaxForm").bind('submit', function(){//回调函数
         ajaxSubmit(this, function(data){  
         //document.write(data);  	
@@ -70,7 +70,7 @@ $(document).ready(function(){
 	});
 		return false;
 	});
-});
+});*/
 
 jQuery.fn.center = function(loaded) {
 	var obj = this;

@@ -47,3 +47,47 @@ $(".del_message").click(function(){
 	}
 	window.event.returnValue = false;
 });
+
+    $(".ajaxForm").bind('submit', function(){//回调函数
+        ajaxSubmit(this, function(data){  
+        //document.write(data);  	
+                        if (typeof data !== 'object') {
+	        	    jsonobj = JSON.parse(data);
+                        } else {
+                            jsonobj = data;
+                        }
+	        	if(jsonobj.type=='alert')
+	        	{
+		            $("#popContent").html(jsonobj.content);
+		            $("#pop_title").html(jsonobj.title);
+		          	var h = $(document).height();
+					$('#screen').css({ 'height': h });	
+					$('#screen').show();
+					$('.popbox').center();
+					$('.popbox').fadeIn();
+
+				}else
+				if(jsonobj.type=='redirect')
+				{
+					if(typeof jsonobj.content!='undefined')
+					{
+						$("#popContent").html(jsonobj.content);
+			            $("#pop_title").html(jsonobj.title);
+			          	var h = $(document).height();
+						$('#screen').css({ 'height': h });	
+						$('#screen').show();
+						$('.popbox').center();
+						$('.popbox').fadeIn();
+					}
+					setTimeout("window.location.href='"+jsonobj.url+"'",1000);
+				}
+             });
+        return false;
+    });
+    //关闭按钮
+    $('.close-btn,.ok-btn ').click(function(){
+		$('.popbox').fadeOut(function(){ $('#screen').hide(); 
+		 window.top.location.reload();
+	});
+		return false;
+	});
