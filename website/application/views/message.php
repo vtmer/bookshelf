@@ -18,7 +18,7 @@
 
 					</h5>
 					<div class="message_content">
-						<form action="<?php echo site_url('message/confirm');?>" method='post' class=''>
+						<form action="<?php echo site_url('message/confirm');?>" method='post' class='ajaxForm'>
 						<input type="hidden" name="message_id" value="<?php echo $row['id'];?>" />
 
 						<?php 
