@@ -15,11 +15,12 @@ function update(dat)
 {
 	var	data = dat['log'];
 	var length = data.length;
+	$(".my_history table tr:gt(0)").empty();
 	for(var i=0;i<length;i++)//更新表格
 	{
-		$(".my_history tr:eq("+(i+1)+") td:nth-child(1)").html(data[i].name);
-		$(".my_history tr:eq("+(i+1)+") td:nth-child(2)").html(data[i].truename.substr(0,1)+"同学");
-		$(".my_history tr:eq("+(i+1)+") td:nth-child(3)").html(data[i].time);
+		$(".my_history tr:eq("+(i+1)+")").append("<td>"+data[i].name+"</td>");
+		$(".my_history tr:eq("+(i+1)+")").append("<td>"+data[i].truename.substr(0,1)+"同学</td>");
+		$(".my_history tr:eq("+(i+1)+")").append("<td>"+data[i].time+"</td>");
 	}
 	//替换分页
 	var	page = dat['page'];
