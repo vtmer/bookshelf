@@ -140,7 +140,7 @@ class User_model extends CI_Model
 				if($value['id'] > $message_id)
 				{
 					//捐书人点击确认
-					// echo '捐书人点击确认value>msg_id';exit;
+					  // echo '捐书人点击确认value>msg_id';//exit;
 					$this->db->where('id',(int)($message_id) + 1);
 					$this->db->update('message',array('status' => "22"));
 					$add_id = $to_id;
@@ -187,9 +187,9 @@ class User_model extends CI_Model
 					SET `book_status` = '2',
 						`book_right`='1',
 						`circulate_number` =`circulate_number`+1,
-						`from_id`= $from_id,
-						`to_id`= $to_id,
-						`change_time`= date('Y-m-d') 
+						`from_id`= $add_id,
+						`to_id`= $min_id,
+						`change_time`= NOW() 
 					WHERE `id`=$value";
 			mysql_query($sql);
 		}
@@ -198,8 +198,8 @@ class User_model extends CI_Model
 			//添加捐书记录给捐书人
 			$arr = array(
 					'book_id'=>$value,
-					'from_id'=>$from_id,
-					'to_id'=>$to_id,
+					'from_id'=>$add_id,
+					'to_id'=>$min_id,
 					'time'=>date('Y-m-d') 
 				);
 			$this->db->insert('borrow_log',$arr);
