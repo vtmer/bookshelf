@@ -225,23 +225,25 @@ class Home_Model extends CI_Model
 		}
 	}
 
-	public function get_userbook($user_id,$offset = '',$length = '')
+	public function get_userbook($user_id,$offset = -1,$length = -1)
 	{
-    if($offset!=''&&$length!='')
+    if($offset != -1&&$length!= -1)
     {
-		  $sql = "SELECT ab.`id` AS book_id,cb.`id` AS cb_id,`name`,`course_name`,`author`,`course_category`,`publish`,`version`,`book_right`,`book_status` 
-            FROM `circulating_book` AS cb INNER JOIN `allbook` AS ab WHERE cb.`from_id`=? AND ab.`id`=cb.`book_id` LIMIT $offset,$length";
+		  $sql = "SELECT SQL_CALC_FOUND_ROWS ab.`id` AS book_id,cb.`id` AS cb_id,`name`,`course_name`,`author`,`course_category`,`publish`,`version`,`book_right`,`book_status` 
+            FROM `circulating_book` AS cb LEFT JOIN `allbook` AS ab ON ab.`id`=cb.`book_id` WHERE `cb`.`book_status` != 2 AND cb.`from_id`=? OR cb.`to_id`=? LIMIT $offset,$length";
     }
     else
     {
       //没有限制条数
-      $sql = "SELECT ab.`id` AS book_id,cb.`id` AS cb_id,`name`,`course_name`,`author`,`course_category`,`publish`,`version`,`book_right`,`book_status` 
-            FROM `circulating_book` AS cb INNER JOIN `allbook` AS ab WHERE cb.`from_id`=? AND ab.`id`=cb.`book_id` ";
+      $sql = "SELECT SQL_CALC_FOUND_ROWS ab.`id` AS book_id,cb.`id` AS cb_id,`name`,`course_name`,`author`,`course_category`,`publish`,`version`,`book_right`,`book_status` 
+            FROM `circulating_book` AS cb LEFT JOIN `allbook` AS ab ON ab.`id`=cb.`book_id` WHERE `cb`.`book_status` != 2 AND cb.`from_id`=? OR cb.`to_id`=? ";
     }
-		$query = $this->db->query($sql,array($user_id));
+		$query = $this->db->query($sql,array($user_id,$user_id));
 		$data['books'] = $query->result_array();
-    $query2 = $this->db->query("SELECT count(*) AS num FROM `circulating_book` WHERE from_id='$user_id'"); 
+    //var_dump($data['books']);
+    $query2 = $this->db->query("SELECT FOUND_ROWS() AS num "); 
     $rowNum['pageNum'] = $query2->result_array();
+    //var_dump($rowNum);exit;
     return array_merge($data,$rowNum);
 	}
 	

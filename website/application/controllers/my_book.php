@@ -15,7 +15,7 @@ class My_book extends CI_Controller
 		} 
 		$per_page = 10;//每页显示的条数
 	    $offset = ($page - 1)*$per_page;
-		$data = $this->home_model->get_userbook($this->session->userdata('uid'),$offset,$per_page);
+		$data = $this->home_model->get_userbook($this->session->userdata('uid'));
 		$borrow_log = $this->home_model->borrow_log($offset,$per_page);
 		$data['log'] = $borrow_log['log'];
 		$data['log_total'] =  $borrow_log['total'];
