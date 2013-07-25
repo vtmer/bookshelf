@@ -353,7 +353,7 @@ class Home_Model extends CI_Model
 
     //发送邮件
     //给捐书人
-     $msg = '<p><strong>注意：请在收到书后回到工大书架确认借书成功</strong></p>
+     $msg = '<p><strong>注意：请在收到/借出书后回到工大书架确认借书成功</strong></p>
             <p>此信是由工大书架系统发出，系统不接受回信，请勿直接回复。<p>
             <p>如有任何疑问，请联系我们:<a href="http://weibo.com/vtmer">我们的微博</a><p>
             <p>工大书架--@维生数工作室<p>';
