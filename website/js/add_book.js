@@ -55,12 +55,12 @@ function lookup(inputString) {
 				$('#suggest_box ul').html('');
 				for(var i = 0;i<length;i++)
 				{
-					$('#suggest_box ul').append("<li><a href='' title="+jsonObj[i].name+"><img src='http://"+document.domain+"/images/"+jsonObj[i].ISBN+".jpg' alt=''></a></li>"); 
+					$('#suggest_box ul').append("<li><a href='' title="+jsonObj[i].name+"><img src='/images/"+jsonObj[i].ISBN+".jpg' alt='' onerror=\"this.onerror=null; this.src=\'/img/loading.gif\'\"/></a></li>"); 
 				}
 
 				$('#suggest_box ul a').click(function(){
 					var $index = $(this).parent('li').index();
-					var $string = "<li><div><img src='http://"+document.domain+"/images/"+jsonObj[$index].ISBN+".jpg' alt='' /></div>"+
+					var $string = "<li><div><img src='/images/"+jsonObj[$index].ISBN+".jpg' alt='' onerror=\"this.onerror=null; this.src=\'/img/loading.gif\'\"/></div>"+
 							"<ul><li>书 名：<span>"+jsonObj[$index].name+"</span></li>"+
 								"<input type='hidden' value='"+jsonObj[$index].id+"' name='"+jsonObj[$index].id+"'>"+
 								"<li>作 者：<span>"+jsonObj[$index].author+"</span></li>"+
