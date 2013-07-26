@@ -1,7 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 class catch_msg
 {
-
 /*
 curl 单线程抓取
 */
@@ -109,21 +108,12 @@ curl 单线程抓取
         }
         else
         {
-            //初始化CI资源
-            $CI =& get_instance();
-            $CI->load->library('session');
-            $CI->session->set_userdata('s_id', $session_id);
             return array('status'=>true,'s_id'=>$session_id);
         } 
     }
 
-    public function get_info()//获取信息
+    public function get_info($session_id)//获取信息
     {
-        //初始化CI资源
-        $CI =& get_instance();
-        $CI->load->library('session');
-        if(!$CI->session->userdata('s_id')) return '';
-        $session_id = $CI->session->userdata('s_id');
         //个人信息页面   
         $data3 = $this->Curl_http('http://eswis.gdut.edu.cn/default.aspx?fid=7',10,'',$session_id);
         $html3 = $data3['return'];

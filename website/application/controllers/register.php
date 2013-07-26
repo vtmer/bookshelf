@@ -5,21 +5,22 @@ class Register extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('user_model');
 		$this->load->library('email');
 		$this->load->library('catch_msg');
-		$this->load->library('session');
 	}	
 
 	public function index()
 	{
 		if(!$this->session->userdata('s_id'))
             redirect('login');
+        $s_id = $this->session->userdata('s_id');
         $user_info = '';
         if(!$this->session->userdata('campus'))
         {
-        	$user_info = $this->catch_msg->get_info();
-        	if(count($user_info)==2) redirect('login');
+        	$user_info = $this->catch_msg->get_info($s_id);
+            if(count($user_info)==2) redirect('login');
+           
+            //var_dump($user_info);exit;
 	        //将信息存储到session
 			$array = array(
 					'campus'=>substr($user_info[0], 0, stripos($user_info[0],'校区',0)),

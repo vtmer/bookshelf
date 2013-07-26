@@ -48,8 +48,9 @@ class Login extends CI_Controller
 			if($row==null)//如果是第一次登录
 			{
 				$this->session->set_userdata('student_id',$student_id);
+				$this->session->set_userdata('s_id',$result['s_id']);
 				$url = site_url('register');
-	            $msg = array('type'=>'redirect','url'=>$url);
+	            $msg = array('type'=>'redirect','url'=>$url,'content'=>'正在获取用户数据,请稍后');
 	            echo json_encode($msg);
 	            exit;//跳转到信息填写
 			}
