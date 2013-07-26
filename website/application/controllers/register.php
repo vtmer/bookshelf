@@ -14,28 +14,39 @@ class Register extends CI_Controller
 	public function index()
 	{
 		if(!$this->session->userdata('s_id'))
-            redirect(site_url('login'));
-		$user_info = $this->catch_msg->get_info();
-		if($user_info=='') redirect(site_url('login'));
-        //将信息存储到session
-		$array = array(
-				'campus'=>substr($user_info[0], 0, stripos($user_info[0],'校区',0)),
-				'faculty'=>$user_info[1],
-				'major'=>substr($user_info[2], 0, stripos($user_info[2],'专业',0)),
-				'grade'=>substr($user_info[3],0,4),
-				'truename'=>$user_info[5]
-			);
-		$this->session->set_userdata($array);
-
-		$key = array('campus','faculty','major','grade','class','truename');
-		$data['user'] = array_combine($key,$user_info);
-
+            redirect('login');
+        $user_info = '';
+        if(!$this->session->userdata('campus'))
+        {
+        	$user_info = $this->catch_msg->get_info();
+        	if(count($user_info)==2) redirect('login');
+	        //将信息存储到session
+			$array = array(
+					'campus'=>substr($user_info[0], 0, stripos($user_info[0],'校区',0)),
+					'faculty'=>$user_info[1],
+					'major'=>substr($user_info[2], 0, stripos($user_info[2],'专业',0)),
+					'grade'=>substr($user_info[3],0,4),
+					'truename'=>$user_info[5]
+				);
+			$this->session->set_userdata($array);
+		}
+		else
+		{
+			$array = array(
+					'campus'=>$this->session->userdata('campus'),
+					'faculty'=>$this->session->userdata('faculty'),
+					'major'=>$this->session->userdata('major'),
+					'grade'=>$this->session->userdata('grade'),
+					'truename'=>$this->session->userdata('truename')
+				);
+		}
+		$data['user'] = $array;
 		$header = array('title'=>'加入工大书架','css_file'=>'sign_up.css'); 
 		$footer = array('js_file' => 'sign_up.js');
 		$this->parser->parse('template/header',$header);
 		$this->load->view('sign_up',$data);	
 		$this->parser->parse('template/footer',$footer);
-        ob_end_flush();
+
 	}
 
 	//注册时验证函数

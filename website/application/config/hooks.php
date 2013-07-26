@@ -10,6 +10,12 @@
 |
 */
 
+$hook['post_controller_constructor'] = array(
+                                'class'    => 'UserAuth',
+                                'function' => 'auth',
+                                'filename' => 'UserAuth.php',
+                                'filepath' => 'hooks'
+                                );
 
 
 /* End of file hooks.php */
