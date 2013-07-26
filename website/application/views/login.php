@@ -153,8 +153,11 @@ $(document).ready(function(){
 				}
 				else if(jsonobj.type=='redirect')
 				{
-					$(".mainlist").html("<div><span id='popContent'>"+jsonobj.content+"</span></div><span></span>");
-					$("#pop_title").html(jsonobj.title);
+					if(typeof jsonobj.content == 'object')
+					{
+						$(".mainlist").html("<div><span id='popContent'>"+jsonobj.content+"</span></div><span></span>");
+					}
+					$("#pop_title").html('登录成功');
 		          	var h = $(document).height();
 					$('#screen').css({ 'height': h });	
 					$('#screen').show();
