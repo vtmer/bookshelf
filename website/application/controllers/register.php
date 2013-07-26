@@ -136,9 +136,9 @@ class Register extends CI_Controller
 				//将数据插入数据库
 				//将用户信息保存至session，邮箱验证后直接可登陆
 				//清除不必要的session
-	            $this->session->unset_userdata('s_id');
-	            $this->session->unset_userdata('campus');
-	            $this->session->unset_userdata('faculty');
+            //$this->session->unset_userdata('s_id');
+            //$this->session->unset_userdata('campus');
+            // $this->session->unset_userdata('faculty');
 
 	            $array = array(
 	            	'username'=>$username,

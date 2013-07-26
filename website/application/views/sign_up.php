@@ -71,11 +71,12 @@
 					</label>
 					<label><span>生活区:</span>
 						<div class="select_button">
-							<?php if($user['campus']=='大学城校区'):?>
+							<?php if($user['campus']=='大学城'):?>
 							<label><input type="radio" value="西区" checked="checked" class="qu" name="dormitory"/>西区</label>
 							<label><input type="radio" value="东区" class="qu" name="dormitory"/>东区</label>
-							<?php else :?>
+							<?php elseif($user['campus']=='龙洞') :?>
 							<label for="">龙洞校区</label>
+							<?php else:?>
 							<label for="">东风路校区</label>
 							<?php endif; ?>
 						</div>
