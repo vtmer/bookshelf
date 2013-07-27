@@ -54,4 +54,14 @@
 	</div>
 </div><!--end of main--> 
 
+<script type="text/javascript">
+	$(".qaq").bind("click",function () {
+		$(".qaq span").html("[查看]");
+		// $(".qaq").css("font-weight","blod");
+		$(".qaa").slideUp();
+		// $(this).next().slideDown();
+		$(this).next().is(':visible')?$(this).next().slideUp() : $(this).next().slideDown();
+		// $(this).children("span").html("[收起]");
 
+	})
+</script>

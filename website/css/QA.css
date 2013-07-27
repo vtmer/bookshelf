@@ -1,7 +1,9 @@
-.qa h1 { font-size: 36px; text-align: center; margin-bottom: 40px;}
-.qabox { margin: 10px 70px;}
-.qaq { }
-.qaa { margin: 10px 0px;border: 1px solid #dadada;padding: 20px 25px;}
-.qaa p,.firstqa p { margin-bottom: 20px; line-height: 30px;}
-.firstqa { text-align: center;}
-.firstqa a { display: block; background: url('../img/button_bg.png') 0 -70px no-repeat; width: 75px; height: 35px;margin: 0px auto; text-align: center; line-height: 35px; font-size: 14px; color: #fff;}
+.main { width: 960px; margin: auto;}
+.main .mid_content .qa { min-height: 600px;}
+.main .mid_content .qa h1 { font-size: 36px; text-align: center; margin-bottom: 40px;}
+.main .mid_content .qabox { margin: 10px 70px;}
+.main .mid_content .qaq { cursor: pointer;}
+.main .mid_content .qaa { display: none; margin: 10px 0px;border: 1px solid #dadada;padding: 20px 25px;}
+.main .mid_content .qaa p,.firstqa p { margin-bottom: 20px; line-height: 30px;}
+.main .mid_content .firstqa { text-align: center; margin-top: 120px;}
+.main .mid_content .firstqa a { display: block; background: url('../img/button_bg.png') 0 -70px no-repeat; width: 75px; height: 35px;margin: 0px auto; text-align: center; line-height: 35px; font-size: 14px; color: #fff;.main .mid_content}
