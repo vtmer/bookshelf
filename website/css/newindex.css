@@ -1,0 +1,81 @@
+
+/*body { background:#cfcaa5 url('../img/bg.jpg') repeat-x;}*/
+div#home_page { position:relative; margin:50px auto 30px; width:400px; height:125px; background:url('../img/default.png') no-repeat;}
+div#home_page a { float:left; width:400px; height:125px; text-indent:-999px;}
+
+div.search_bar .search_input {width: 392px;height: 27px;margin: 23px 0 0 14px;background: none;border: none;}
+div.search_bar .search_submit {float: right;width: 50px;height: 50px;margin: 11px 11px 0 0;background: none;border: none;cursor: pointer;}
+div.search_bar {width: 482px;height: 94px;margin: auto;background: url('../img/search.jpg') no-repeat;}
+div.main {...........}
+div.main { width:807px; margin:auto; }
+div.main h3 { height:39px; margin-bottom:20px; background:url('../img/h_bg.png') no-repeat; font:14px "微软雅黑",Arial, Helvetica, sans-serif; line-height:33px; text-indent:1em; color:#ffffff;}
+
+.index {...........}
+div.index { margin: 40px 0px 70px;}
+div.index ul {overflow:hidden; margin-left: 16px;}
+div.index ul li { float:left; width:148px; margin:0px 20px;}
+.index ul li:hover p { color:#eca721;}
+div.index ul li p { clear:both; font:14px "微软雅黑",Arial, Helvetica, sans-serif; font-weight:bold; text-align:center; color:#42362d;}
+
+/*学院logo的样式*/
+/*.daxuecheng span.college,span.daxuecheng {  background:url('../img/college_logo.png') no-repeat;}*/
+/*.longdong span.college,span.longdong{background:url('../img/college_logo_longdong.png') no-repeat;}*/
+/*.dongfenglu span.college,span.dongfenglu{ background:url('../img/college_logo_dongfeng.png') no-repeat;}*/
+/*.index .longdong,.index .dongfenglu { display:none; width:500px; margin:100px auto 0;}*/
+/*.index ul li span { display:block; width:95px; height:105px; margin:0 auto 10px; cursor:pointer;}*/
+.index ul li span { display: block; width: 145px; height: 145px; cursor: pointer; background: url('../img/part_logo.png') no-repeat;}
+.main a.part_1 span { background-position:0px 2px;}
+.main a.part_2 span { background-position:-205px 2px;}
+.main a.part_3 span { background-position:-405px 2px;}
+.main a.part_4 span { background-position:-605px 2px;}
+.main a.part_1:hover span { background-position:0px -145px;}
+.main a.part_2:hover span { background-position:-205px -145px;}
+.main a.part_3:hover span { background-position:-405px -145px;}
+.main a.part_4:hover span { background-position:-605px -145px;}
+/*.main span.logo_05 { background-position:-396px 0px;}*/
+/*.main span.logo_06 { background-position:0px -119px;}*/
+/*.main span.logo_07 { background-position:-100px -119px;}*/
+/*.main span.logo_08 { background-position:-200px -119px;}*/
+/*.main span.logo_09 { background-position:-300px -119px;}*/
+/*.main span.logo_10 { background-position:-400px -119px;}*/
+/*.main span.logo_11 { background-position:0px 0px;}*/
+/*.main span.logo_12 { background-position:-100px 0px;}*/
+/*.main span.logo_13 { background-position:-200px 0px;}*/
+/*.main span.logo_14 { background-position:0px 0px;}*/
+/*.main span.logo_15 { background-position:-100px 0px;}*/
+/*.main span.logo_16 { background-position:-200px 0}*/
+/*学院logo的样式*/
+
+/*div.selected_logo { position:relative; width:400px; margin:auto;}*/
+/*div.selected_logo input { width:400px;}*/
+/*div.selected_logo input[disabled],div.selected_logo input:disabled { color:#42362d;}*/
+/*div.selected_logo span { margin-bottom:0px; cursor:auto;}*/
+/*第二，三部中间显示的logo和内容*/
+
+
+/*span.step_back { position:absolute; top:180px; left:-110px; width:59px; height:58px; background:url("../img/step_back.png") no-repeat; cursor:pointer;}*/
+/*.second_step {...........}*/
+/*div.second_step { clear:both; position:relative; margin:0 10px 65px;}*/
+/*div.second_step ul { z-index:10; width:700px; height:180px; margin:70px auto; padding:10px; background:#eeece1; border-bottom:solid 0px rgba(0,0,0,.3); box-shadow:0px 10px 10px -5px rgba(0,0,0,0.6),0px 2px 2px 2px rgba(255,255,255,.6) inset,0px -4px 5px 0px rgba(0,0,0,.2) inset,0px -2px 3px 0px rgba(0,0,0,.8) inset; border-radius:8px;}*/
+/*div.second_step ul li { float:left; height:40px; margin-right:20px; padding:0 10px; font:14px 宋体,Arial, Helvetica, sans-serif; line-height:40px; cursor:pointer;}*/
+/*div.second_step ul li:hover { background:#f4c676; border-radius:5px;}*/
+/*div.second_step .bottom_shadow { position:absolute; bottom:-25px; z-index:-1; width:718px; height:48px; margin-left:-9px;  background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, from(rgba(0,0,0,.15)), to(rgba(0,0,0,0)));}*/
+
+/*.third_step {..........}*/
+/*div.third_step { clear:both; position:relative; margin:0 10px 65px;}*/
+/*div.third_step ul { z-index:10; width:400px; height:160px; margin:70px auto; padding:10px; background:#eeece1; border-bottom:solid 0px rgba(0,0,0,.3); box-shadow:0px 10px 10px -5px rgba(0,0,0,0.6),0px 2px 2px 2px rgba(255,255,255,.6) inset,0px -4px 5px 0px rgba(0,0,0,.2) inset,0px -2px 3px 0px rgba(0,0,0,.8) inset; border-radius:8px;}*/
+/*div.third_step ul li { float:left; height:40px; margin-right:20px; padding:0 10px; font:14px 宋体,Arial, Helvetica, sans-serif; line-height:40px; cursor:pointer;}*/
+/*div.third_step ul li:hover { background:#f4c676; border-radius:5px;}*/
+/*div.third_step .bottom_shadow { position:absolute; bottom:-25px; z-index:-1; width:418px; height:48px; margin-left:-9px;  background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, from(rgba(0,0,0,.15)), to(rgba(0,0,0,0)));}*/
+
+/*登录、注册的样式*/
+div.shelf_bg { position:relative; clear:both; width:100%; height:83px;background:url('../img/shelf.png') no-repeat;}
+/*div.shelf_bg a { position:absolute; width:90px; height:69px;}*/
+.shelf_bg a { overflow:hidden; position:absolute; width:91px; height:70px;  top:-4px; right:50px; background:url('../img/about.png') no-repeat; text-indent:-9999px;}
+.shelf_bg a:hover { background-position:-91px 0;}
+/*.shelf_bg .sign { overflow:hidden; position:absolute; top:5px; right:-20px; height:50px; width:24px;  background:url('../img/sign_in.png') -2px -70px no-repeat; text-indent:-9999px;}*/
+/*.shelf_bg .sign:hover { background-position:-36px -70px;}*/
+/*登录、注册的样式*/
+
+form input { clear:both; background:transparent; border:none; font:14px "微软雅黑",Arial, Helvetica, sans-serif; font-weight:bold; text-align:center; color:#42362d;}
+div.second_step ,div.selected_logo,div.third_step,input#campus_select { display:none;}
