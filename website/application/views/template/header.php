@@ -12,23 +12,14 @@
 </head>
 <body>
 <div id="float_head">
-	<div class="header">
-		<a href="<?php echo site_url('home');?>" id="logo"></a>
-		<?php if($this->session->userdata('is_logged_in')!==FALSE) :?>
-		<span class="score">积分:<?php echo $this->user_model->show_user_point($this->session->userdata('uid')); ?></span>
-		<a href="<?php echo site_url('message'); ?>" id="message">收到短信息(<span><?php echo $this->user_model->show_message_num($this->session->userdata['uid']); ?>)</span></a>
-		<div class="user_info">
-		<span class="user_name"><?php echo $this->session->userdata('truename');?></span>
-			<a href="<?php echo site_url('home/personal_config');?>">个人设置</a>
-			<a href="<?php echo site_url('my_book');?>">我的书架</a>
-			<a href="<?php echo site_url('login/logout'); ?>">退出</a>
-		</div>
-		<a href="<?php echo site_url('add_book')?>" id="add_book">捐书</a>
-		<?php else: ?>		
-		<!-- <a href="<?php echo site_url('login');?>"  id="login" >登录</a>
-		<a href="<?php echo site_url('register'); ?>"  id="register">注册</a> -->
-		<?php endif;?>
-	</div>
+	<div class="header"><ul>
+		<li id="logo"><a href="<?php echo site_url('home');?>" title="工大书架"></a></li>
+		<li><a href="<?php echo site_url('login/logout'); ?>" id="logout">[退出]</a></li>
+		<li><span class="score">积分:<?php echo $this->user_model->show_user_point($this->session->userdata('uid')); ?></span></li>
+		<li><a href="<?php echo site_url('message'); ?>" id="message" title="您有<?php echo $this->user_model->show_message_num($this->session->userdata['uid']); ?>条信息"><sub>(<?php echo $this->user_model->show_message_num($this->session->userdata['uid']); ?>)</sub></a></li>
+		<!-- 如果有信息，把background-color 设为 #eb5056 -->
+		<li><a href="<?php echo site_url('home/personal_config');?>" id="p_config" title="个人设置"> </a></li>
+	</ul></div>
 </div>
 <div class="home_page">
 	<a href="<?php echo base_url('index.php/home');?>" title="前往首页"></a>
