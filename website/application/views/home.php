@@ -56,6 +56,7 @@
 		<div class="content_box">
 			<div class="box_demo match_box">
 				<h3>这些人有你想要的书：</h3>
+				<div>
 				<h5>
 					<span>姓名</span>
 					<span>所在生活区</span>
@@ -93,6 +94,7 @@
 						</div>
 					</div>
 				<?php }?>
+			</div>
 
 				<p class="tips">注意：每次只可以查看一名捐书者信息</p>
 				<?php echo $this->pagination->create_links();?><!-- 输出分页模块 -->

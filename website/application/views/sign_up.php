@@ -86,7 +86,7 @@
 						<span></span>
 					</label>
 					<label><img src="<?php echo site_url('captcha');?>" onclick="reloadCode();" id="checkCodeImg" alt="换一张"/><a href="javascript:reloadCode();">  换一张</a></label>
-					<input type="submit" class="config_submit" value="注册" />
+					<input type="submit" class="config_submit" value="下一步" />
 				</form>
 			</div>
 			<div class="bottom_shadow"></div><!-- 块级区域下方的底层阴影 -->
