@@ -13,7 +13,7 @@
 <body>
 <div id="float_head">
 	<div class="header"><ul>
-		<li id="logo"><a href="<?php echo site_url('home');?>" title="工大书架"></a></li>
+		<li id="logo"><a href="<?php echo site_url('guide');?>" title="工大书架"></a></li>
 		<li><a href="<?php echo site_url('login/logout'); ?>" id="logout">[退出]</a></li>
 		<li><span class="score">积分:<?php echo $this->user_model->show_user_point($this->session->userdata('uid')); ?></span></li>
 		<li><a href="<?php echo site_url('message'); ?>" id="message" title="您有<?php echo $this->user_model->show_message_num($this->session->userdata['uid']); ?>条信息"><sub>(<?php echo $this->user_model->show_message_num($this->session->userdata['uid']); ?>)</sub></a></li>
@@ -22,6 +22,6 @@
 	</ul></div>
 </div>
 <div class="home_page">
-	<a href="<?php echo base_url('index.php/home');?>" title="前往首页"></a>
+	<a href="<?php echo site_url('guide');?>" title="前往首页"></a>
 </div>
 <?php include "pop_box.php";?><!--弹出层-->

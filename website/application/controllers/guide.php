@@ -9,9 +9,11 @@ class Guide extends CI_Controller
 
 	public function index()
 	{
-		if($this->session->userdata('is_logged_in')==true)
-			redirect(site_url('home'));
+		$header = array('title'=>'工大书架','css_file'=>'guide.css'); 
+		$footer = array('js_file'=>'guide.js');
+		$this->parser->parse('template/header',$header);
 		$this->load->view('guide');
+		$this->parser->parse('template/footer',$footer);
 	}
 
 	public function choose()

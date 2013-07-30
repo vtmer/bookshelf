@@ -26,13 +26,13 @@ class Login extends CI_Controller
                 	    'is_logged_in' => TRUE,
                 	);
 	            $this->session->set_userdata($data);
-	            header("Location:".site_url('home'));
+	            header("Location:".site_url('guide'));
 			}
 			$this->load->view('login');
 		} 
 		else 
 		{
-            redirect('home');
+            redirect('guide');
         }
     }
     
@@ -75,7 +75,7 @@ class Login extends CI_Controller
                 $user_id = md5($uid).$uid;//按照md5(uid)+uid加密
                 setcookie('uid',$user_id,time()+3600*24*7);//持续一周
             }
-	        $url = site_url('home');
+	        $url = site_url('guide');
             $msg = array('type'=>'redirect','url'=>$url);
             echo json_encode($msg);
             exit;		
