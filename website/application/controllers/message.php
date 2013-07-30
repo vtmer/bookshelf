@@ -10,7 +10,7 @@ class Message extends CI_Controller
 
 	public function index($page = 1)
 	{
-		var_dump($this->session->all_userdata());
+		//var_dump($this->session->all_userdata());
 		$uid = $this->session->userdata['uid'];
 		$status = '0';
 		$data['messages'] = $this->user_model->select_message($uid,$status);
