@@ -14,9 +14,9 @@
 				<div id="border"><div></div></div>
 				<div class="feed_back">
 					<p>我们诚意聆听您的声音</p>
-					<form action="">
-						<label for="youmail">您的邮箱：<input type="text" id="youmail"/></label>
-						<label for="title">标题：<input type="text" id="title" /></label>
+					<form action="<?php echo site_url('about/submit');?>" method='post'>
+						<label for="youmail">您的邮箱：<input type="text" id="youmail" name='email'/></label>
+						<label for="title">标题：<input type="text" id="title" name='title'/></label>
 						<label for="fb_content">内容：<textarea name="fb_content" id="fb_content" cols="30" rows="10"></textarea></label>
 						<input type="submit" id="submit" value="提 交"/>
 					</form>
