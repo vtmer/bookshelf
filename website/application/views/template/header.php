@@ -14,11 +14,15 @@
 <div id="float_head">
 	<div class="header"><ul>
 		<li id="logo"><a href="<?php echo site_url('guide');?>" title="工大书架"></a></li>
+		<?php if($this->session->userdata('is_logged_in')): ?>
 		<li><a href="<?php echo site_url('login/logout'); ?>" id="logout">[退出]</a></li>
 		<li><span class="score">积分:<?php echo $this->user_model->show_user_point($this->session->userdata('uid')); ?></span></li>
 		<li><a href="<?php echo site_url('message'); ?>" id="message" title="您有<?php echo $this->user_model->show_message_num($this->session->userdata['uid']); ?>条信息"><sub>(<?php echo $this->user_model->show_message_num($this->session->userdata['uid']); ?>)</sub></a></li>
 		<!-- 如果有信息，把background-color 设为 #eb5056 -->
 		<li><a href="<?php echo site_url('home/personal_config');?>" id="p_config" title="个人设置"> </a></li>
+		<?php else: ?>
+				<li><a href="<?php echo site_url('login'); ?>" id="logout">[登录]</a></li>
+		<?php endif;?>
 	</ul></div>
 </div>
 <div class="home_page">
