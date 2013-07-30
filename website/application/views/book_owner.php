@@ -24,7 +24,13 @@
 							<th>出版社</th>
 							<th>版次</th>
 						</tr>
-						<?php foreach ($books as $value) 
+						<?php 
+						if(empty($books))
+						{
+							echo '<tr><td colspan=\'6\'>暂没记录！</td></tr>';
+						}
+						else
+						foreach ($books as $value) 
 						{
 							echo 
 							"<tr>
