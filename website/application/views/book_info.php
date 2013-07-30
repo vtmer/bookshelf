@@ -70,7 +70,7 @@
 						{
 							echo
 							"<tr>
-							<td><a href='".site_url('book_owner').'/'.$value['id']."'>".$value['truename']."</a></td>
+							<td><a href='".site_url('book_owner').'/'.$value['id']."'>".substr($value['truename'],0,3)."同学</a></td>
 							<td>".$value['major']."</td>
 							<td>".$value['dormitory']."</td>
 							<td>

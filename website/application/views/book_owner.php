@@ -8,7 +8,7 @@
 		<div class="content_box">
 			<div class="box_demo book_owner">
 				<ul class="owner_info">
-					<li><?php echo $user[0]['truename'];?></li>
+					<li><?php echo substr($user[0]['truename'],0,3).'同学';?></li>
 					<li>专业：<span><?php echo $user[0]['major'];?></span></li>
 					<li>年级：<span><?php echo $user[0]['grade']."级";?></span></li>
 					<li>拥有书本数：<span><?php echo $user[0]['booknum'];?></span></li>

@@ -3,8 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>邮箱验证成功</title>
-<link href="<?php echo base_url('css/reset.css'); ?>" type="text/css" rel="stylesheet" char/>
+<link href="<?php echo base_url('css/reset.css'); ?>" type="text/css" rel="stylesheet" />
 <link href="<?php echo base_url('css/header.css'); ?>" type="text/css" rel="stylesheet" />
+<link href="<?php echo base_url('css/footer.css'); ?>" type="text/css" rel="stylesheet" />
 <link href="<?php echo base_url('css/receipt.css'); ?>" type="text/css" rel="stylesheet" />
 <script language="javascript" src="<?php echo base_url('js/jquery-1.7.2.js'); ?>"></script>
 <script language="javascript" src="<?php echo base_url('js/pop_box.js');?>"></script>
@@ -12,12 +13,12 @@
 <body>
 <div id="float_head">
 	<div class="header">
-		<a href="<?php echo site_url('home');?>" id="gdutonline"></a>
+		<a href="<?php echo site_url('guide');?>" id="gdutonline"></a>
 	</div>
 </div>
 <?php include("./application/views/template/pop_box.php");?>
 <div class="home_page">
-	<a href="<?php echo site_url('home');?>" title="前往首页"></a>
+	<a href="<?php echo site_url('guide');?>" title="前往首页"></a>
 </div>
 	<!--<div class="search_bar">
 		<input type="text" class="search_input" placeholder="请输入要查找的书目" />
