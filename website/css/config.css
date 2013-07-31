@@ -21,6 +21,9 @@ div.personal_config div.left label input { width:200px; height:25px; margin-left
 div.personal_config div.left label div.select_button { float:right; width:200px; height:40px; margin:3px 0 0 15px;}
 div.personal_config div.left label input.qu { float:left; width:auto; margin: 7px 5px 0px 0px; border: none;}
 
+div.personal_config div.left label#major { width: 400px; text-align: left; margin-left: 93px;}
+div.personal_config div.left label#major span { float: none;}
+
 div.personal_config div.left label div.select_button label { clear: none; float:left; display:inline; width:auto; margin-right:20px;}
 
 
@@ -31,12 +34,12 @@ div.personal_config div.right ul li a { color:#130e7a; text-decoration: underlin
 div.personal_config ul.pages { position:absolute; bottom:30px; right:140px;}
 
 
-div.personal_config .config_submit {width: 75px;height: 35px;border: none;margin: 25px 0px 40px 150px; background: url('../img/button_bg.png') 0 0 no-repeat;font-size: 14px;line-height: 35px;text-align: center;cursor: pointer;color: #fff;}
+div.personal_config .config_submit {width: 75px;height: 35px;border: none;margin: :;px 0px 0px 150px; background: url('../img/button_bg.png') 0 0 no-repeat;font-size: 14px;line-height: 35px;text-align: center;cursor: pointer;color: #fff;}
 div.personal_config .config_submit:hover { background-position: -75px 0;} 
 div.personal_config .config_submit:active { background-position: -150px 0;} 
 
 
-#div_pwd{padding: 15px 0 0 0;overflow: hidden; width: 300px;height: 0px;}
+#div_pwd{padding: 15px 0 0 0;overflow: hidden; width: 350px;height: 0px;}
 
 
 /*emailauto样式*/
