@@ -19,9 +19,9 @@
 		<li><span class="score">积分:<?php echo $this->user_model->show_user_point($this->session->userdata('uid')); ?></span></li>
 		<?php $msg_num =  $this->user_model->show_message_num($this->session->userdata['uid']);
 		if($msg_num==0):?>
-			<li id="message" ><a href="<?php echo site_url('message'); ?>" title="您有<?php echo $msg_num; ?>条信息"><sub>(<?php echo $msg_num; ?>)</sub></a></li>
+			<li><a href="<?php echo site_url('message'); ?>" id="message" title="您有<?php echo $msg_num; ?>条信息"><sub>(<?php echo $msg_num; ?>)</sub></a></li>
 		<?php else :?><!-- 如果有信息，给id="message" 加上class"have_msg"-->
-			<li id="message" class='have_msg'><a href="<?php echo site_url('message'); ?>" title="您有<?php echo $msg_num; ?>条信息"><sub>(<?php echo $msg_num; ?>)</sub></a></li>
+			<li><a href="<?php echo site_url('message'); ?>"  id="message" class='have_msg'title="您有<?php echo $msg_num; ?>条信息"><sub>(<?php echo $msg_num; ?>)</sub></a></li>
 	    <?php endif;?>
 			<li><a href="<?php echo site_url('home/personal_config');?>" id="p_config" title="个人设置"> </a></li>
 		<?php else: ?>

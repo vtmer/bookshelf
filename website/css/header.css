@@ -7,10 +7,10 @@ body { background:#cfcaa5 url('../img/bg_01.jpg') repeat-x; font-size:13px;font-
 #float_head .header ul li#logo { float: left;}
 #float_head .header ul li#logo a {display: block; width: 120px; height: 50px; background: url('../img/logo_min.png') 0 0 no-repeat; }
 #float_head .header ul li a#logout { font-size: 14px; color: #e9b322; line-height: 50px;}
-#float_head .header ul li#message a { color: #fff; text-align: right; display: block; width: 59px; height: 50px; background: url('../img/button_bg.png') -75px -73px no-repeat;}
-#float_head .header ul li.have_msg { background-color: #eb5056;}/*有信息时的样式*/
+#float_head .header ul li a#message { color: #fff; text-align: right; display: block; width: 59px; height: 50px; background: url('../img/button_bg.png') -75px -73px no-repeat;}
+#float_head .header ul li a#message.have_msg {background-color: #eb5056;}/*有信息时的样式*/
 #float_head .header ul li a#p_config { display: block; width: 59px; height: 50px; background: url('../img/button_bg.png') -150px -73px no-repeat;}
-#float_head .header ul li#message a:hover,#float_head .header ul li a#p_config:hover { background-color: #e9b322;}
+#float_head .header ul li a#message:hover,#float_head .header ul li a#p_config:hover { background-color: #e9b322;}
 /*#float_head a#logo {float:left; width:120px; height:44px; background:url('../img/logo_min.png') no-repeat;}*/
 /*#float_head .header span.score { float:right;  line-height:44px;}*/
 /*#float_head .header a#message,#float_head .header a#logout { float:right; margin-right:20px; color:#fff; text-decoration:none; line-height:44px;}*/
