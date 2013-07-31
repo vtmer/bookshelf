@@ -22,7 +22,7 @@
 					<input type="button" class="config_submit" value="取消" id="cancle_pwd"/>
 					</div> -->
 					<label for="college">学院：<span class="user_name" ><?php echo $user[0]['faculty'];?></span></label>
-					<label for="major">专业：<span class="user_name"   ><?php echo $user[0]['major'];?></span></label>
+					<label for="major" id="major">专业：<span class="user_name"   ><?php echo $user[0]['major'];?></span></label>
 					<label for="grade">年级：<span class="user_name"  ><?php echo $user[0]['grade'];?></span></label>
 					<label for="mail">邮箱：<input type="text" id="mail" name="mail" autocomplete="off" value="<?php echo $user[0]['username'];?>"/></label>
 					<label for="phone">长号：<input type="text" id="phone" name="phone_number" value="<?php echo $user[0]['phone_number'];?>"/></label>
