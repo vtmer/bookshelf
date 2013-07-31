@@ -32,7 +32,7 @@ div.sign form .check_label { width:144px; margin:0; margin-left:45px; font-size:
 div.sign form #remember { width:auto; height:auto; vertical-align: middle;}
 div.sign .check_label span { margin:1px 0 0 5px; vertical-align: middle; -webkit-user-select:none; -mos-user-select:none;}
 div.sign a.sign_up p { font-size: 13px;margin: 22px 27px;line-height: 25px;}
-div.sign a.sign_up p span { font-weight: bold; color: rgb(223, 27, 27);}
+div.sign a.sign_up p span { font-weight: bold; color: #130e7a;}
 div.sign a.sign_up { display:block; position:absolute; overflow:hidden; right:10px; width:217px; height:157px; background:url("../img/sign_up1.png") no-repeat;}
 .sign .sign_up:hover:after{-webkit-animation:flash 2s linear infinite;-moz-animation:flash 2s linear infinite;-ms-animation:flash 2s linear infinite;animation:flash 2s linear infinite}
 .sign .sign_up:after {content:" ";position:absolute;display:block;top:-45px;left:-115px;width:30px;height:247px;background:rgba(255,255,255,.3);-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg)}

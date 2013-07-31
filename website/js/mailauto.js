@@ -111,7 +111,7 @@ $(document).ready(function(){
           $(".newemail").eq(nowid).focus();    
         }
         break;  
-        //Tab键
+        //enter
         case 13 :
         var newhtml = $(".newemail").eq(nowid).html();
         newhtml = newhtml.replace(/<.*?>/g,"");
