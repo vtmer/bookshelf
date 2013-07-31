@@ -11,7 +11,7 @@ div.main { width:807px; margin:auto; }
 div.main h3 { height:39px; margin-bottom:20px; background:url('../img/h_bg.png') no-repeat; font:14px "微软雅黑",Arial, Helvetica, sans-serif; line-height:33px; text-indent:1em; color:#ffffff;}
 
 .index {...........}
-div.index { margin: 40px 0px 70px;}
+div.index { margin: 90px 0px 90px;}
 div.index ul {overflow:hidden; margin-left: 16px;}
 div.index ul li { float:left; width:148px; margin:0px 20px;}
 .index ul li:hover p { color:#eca721;}
@@ -24,11 +24,11 @@ div.index ul li p { clear:both; font:14px "微软雅黑",Arial, Helvetica, sans-
 /*.index .longdong,.index .dongfenglu { display:none; width:500px; margin:100px auto 0;}*/
 /*.index ul li span { display:block; width:95px; height:105px; margin:0 auto 10px; cursor:pointer;}*/
 .index ul li span { display: block; width: 145px; height: 145px; cursor: pointer; background: url('../img/part_logo.png') no-repeat;}
-.main a.part_1 span { background-position:0px 2px;}
+.main a.part_1 span { background-position:-3px 2px;}
 .main a.part_2 span { background-position:-205px 2px;}
 .main a.part_3 span { background-position:-405px 2px;}
 .main a.part_4 span { background-position:-605px 2px;}
-.main a.part_1:hover span { background-position:0px -145px;}
+.main a.part_1:hover span { background-position:-3px -145px;}
 .main a.part_2:hover span { background-position:-205px -145px;}
 .main a.part_3:hover span { background-position:-405px -145px;}
 .main a.part_4:hover span { background-position:-605px -145px;}

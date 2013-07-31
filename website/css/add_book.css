@@ -16,7 +16,7 @@ div.bottom_shadow { clear: both;}/*块级区域底层阴影,宽度，边距需�
 div.add_book {.........}
 div.add_book .inpart { width: 450px;border-right: 1px solid #fff;float: left;margin-left:30px;}
 div.add_book .inpart p { font-size: 14px;font-weight: bold;line-height: 70px;}
-div.add_book .inpart > div {min-height: 350px; border-right: 1px solid #d6d4ca;}
+div.add_book .inpart > div {min-height: 300px; border-right: 1px solid #d6d4ca;}
 div.add_book .inpart .sele_book>li { position: relative;margin-top: 5px; display: block; width: 420px;height: 140px;border: 1px solid #c9c7b9;}
 div.add_book .inpart .sele_book>li div { width: 105px; height: 140px; border-right: 1px solid #c9c7b9; float: left;}
 div.add_book .inpart .sele_book>li div img { display: block;margin: 10px; border: 0px solid #fff; width: 85px;height: 120px;}
@@ -36,7 +36,7 @@ div.add_book .inpart .sele_book>li a:hover {font-weight: bold;color: rgb(219, 81
 div.add_book .inpart form input#submit { margin: 30px 30px 20px 345px;width: 75px;height: 35px;text-align: center;background: url('../img/button_bg.png') 0 0 no-repeat;border: none;color: #fff;font-size: 15px;font-weight: bold;}
 div.add_book .inpart form input#submit:hover {background-position: -75px 0; cursor: pointer;}
 div.add_book .inpart form input#submit:active {background-position: -150px 0; cursor: pointer;}
-div.add_book .tip_box { width: 220px;height: 300px;margin: 15px 49px;float: right;}
+div.add_book .tip_box { width: 220px;margin: 15px 49px;float: right;}
 div.add_book .tip_box h5 { font-size: 14px; line-height: 55px;}
 div.add_book .tip_box img { margin-top: 30px;}
 .suggestionsBox { position: absolute; left: 30px; margin: 60px 0px 0px 0px; width: 375px; background-color: #212427; -moz-border-radius: 7px; -webkit-border-radius: 7px; border: 2px solid #000; color: #fff; } 
