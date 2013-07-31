@@ -1,3 +1,4 @@
+<script language="javascript" src="<?php echo base_url('js/mailauto.js');?>"></script>
 
 <div class="main">
 	<div class="mid_content">
@@ -23,8 +24,8 @@
 					<label for="password_confirm"><span>确认密码</span>
 						<input type="password" id="password_confirm" name="pwd_confirm"/>
 						<span></span>
-					</label>
-					<label for="name"><span>真实姓名</span>
+					</label> -->
+<!-- 					<label for="name"><span>真实姓名</span>
 						<input type="text" id="name" name="truename"/>
 						<span></span>
 					</label>
@@ -93,7 +94,7 @@
 		</div><!-- 包裹整块质感效果的div -->
 	</div>
 </div><!--end of main-->
-<script language="javascript" src="<?php echo base_url('js/mailauto.js');?>"></script>
+
 <script type="text/javascript">
 /*
 $(document).ready(function(){

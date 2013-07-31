@@ -72,16 +72,15 @@ var check_func = {
 	email : function(value){
 		var $notice = $("input#mail + span");
 		if(!value){
-			$notice.addClass("notice alert").text("邮箱不能为空");
+			$notice.addClass("notice alert").text("请填写您的邮箱");
 			return false;
 		}
-		var mailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,4}$/;
+		var mailReg = /^([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+(\.[a-zA-Z]{2,3})+$/;
 		if(!mailReg.test(value)){
 			$notice.addClass("notice alert").text("邮箱格式错误");
 			return false;
 		}
-		else if(mailReg.test(value)) 
-			{
+		else if(mailReg.test(value)){
 				$.get(document.URL+"/ajax_check",{mail:$("#mail").attr("value"),t:Math.random()},function(data){
 					if(data==1) 
 						{
@@ -157,9 +156,23 @@ var check_func = {
 			$notice.addClass("notice alert").text("请填写您的手机号码");
 			return false;
 		}
-		var phoneReg = /^((1[0-9]{1}[0-9]{1}))+\d{8}$/;
+		var phoneReg = /^((1[358]{1}[0-9]{1}))+\d{8}$/;
 		if(!phoneReg.test(value)){
 			$notice.addClass("notice alert").text("手机号码格式错误");
+			return false;
+		}
+		else $notice.removeClass("notice alert").text(" ");
+		return true;
+	},
+	mini_phone : function(value){
+		var $notice = $("input#mini_phone + span");
+		if(!value){
+			$notice.removeClass("alert").text("若无短号，可不填写");
+			return true;
+		}
+		var mini_phoneReg = /^\d{4,8}$/;
+		if(!mini_phoneReg.test(value)){
+			$notice.addClass("notice alert").text("手机短号格式错误");
 			return false;
 		}
 		else $notice.removeClass("notice alert").text(" ");
@@ -337,6 +350,10 @@ $(function(){
 	$("input#phone").bind("blur", function(){
 		check_func.phone(this.value);
 	});
+	$("input#mini_phone").bind("blur",function(){
+		check_func.mini_phone(this.value);
+	});
+
 	$("input#captcha").bind("blur", function(){
 		check_func.captcha(this.value);
 	});

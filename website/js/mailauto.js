@@ -9,7 +9,7 @@ $(document).ready(function(){
   //文本框获得焦点，插入Email提示层
   $("#mail").focus(function(){
     $("#myemail").remove();
-    $(this).after("<ul id='myemail' style='width:"+$(this).width()+"px; height:auto; position:absolute; left:"+$(this).get(0).offsetLeft+"px; top:"+($(this).get(0).offsetTop+$(this).height()+2)+"px;z-index:100; '></ul>");
+    $(this).parent().after("<ul id='myemail' style='width:"+$(this).width()+"px; height:auto; position:absolute; left:"+$(this).get(0).offsetLeft+"px; top:"+($(this).get(0).offsetTop+$(this).height()+2)+"px;z-index:100; '></ul>");
     if($("#myemail").html()){
       $("#myemail").css("display","block");
       $(".newemail").css("width",$("#myemail").width());
@@ -113,6 +113,13 @@ $(document).ready(function(){
         break;  
         //enter
         case 13 :
+        var newhtml = $(".newemail").eq(nowid).html();
+        newhtml = newhtml.replace(/<.*?>/g,"");
+        $("#mail").val(newhtml); 
+        $("#myemail").remove();
+        break;
+        //tab
+        case 9 :
         var newhtml = $(".newemail").eq(nowid).html();
         newhtml = newhtml.replace(/<.*?>/g,"");
         $("#mail").val(newhtml); 
