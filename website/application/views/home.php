@@ -73,7 +73,7 @@
 					echo 
 					"<div class='match_list'>
 						<h5>
-						<span><a href='".site_url('book_owner')."/".$user['uid']."'>".$user['truename'].'</a></span>
+						<span><a href='".site_url('book_owner')."/".$user['uid']."'>".substr($user['truename'],0,3).'</a></span>
 						<span>'.$user['dormitory'].'</span>
 						<span>'.count($user['book']).'本 <strong class="chakan"> [查看]</strong></span>
 						</h5>';						

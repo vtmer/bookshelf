@@ -29,11 +29,13 @@ class About extends CI_Controller
 			$this->email->message('<strong>'.$title.'</strong><br/>'.$content);
 	        if($this->email->send())
 	        {
-	        	echo '发送成功!感谢您的支持。';
+	        	echo true;
+	        	exit;
 	        }
 	        else
 	       	{
-	       		echo '发送失败！请重试！';
+	       		echo false;
+	       		exit;
 	       	}
 		}
 		else
