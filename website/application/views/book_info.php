@@ -8,7 +8,7 @@
 			<div class="box_demo search_results">
 				<div class="book_img">
 				<?php $book_url = base_url('images')."/".$book_info[0]->ISBN.".jpg";?>
-				<img src="<?php echo $book_url;?>" id="image" />
+				<img src="<?php echo $book_url;?>" id="image" onerror="this.onerror=null; this.src='/img/loading.gif'"/>
 				</div>
 				<dl>
 					<input type="hidden" id="isbncode" value="<?php echo $book_info[0]->ISBN; ?>" />
