@@ -43,3 +43,7 @@ div.mid_content table tr:first-child th:first-child{ border-top-left-radius:5px;
 div.mid_content table tr:last-child td:last-child{ border-bottom-right-radius:5px;}
 div.mid_content table tr:last-child td:first-child{ border-bottom-left-radius:5px;}/*表格在高级浏览器下的预定义*/
 div.mid_content td a { text-decoration:none; color:#130e7a;}/*表格内a默认样式的修改*/
+
+div.search_bar .search_input {width: 391px;height: 27px;margin: 27px 0 0 16px; padding-left: 3px; background: none;border: none;}
+div.search_bar .search_submit {float: right;width: 50px;height: 50px;margin: 14px 16px 0 0;background: none;border: none;cursor: pointer;}
+div.search_bar {width: 490px;height: 85px;margin: 0px auto 15px; background: url('../img/search.png') no-repeat;}
