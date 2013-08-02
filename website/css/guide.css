@@ -3,15 +3,15 @@
 div#home_page { position:relative; margin:50px auto 30px; width:400px; height:125px; background:url('../img/default.png') no-repeat;}
 div#home_page a { float:left; width:400px; height:125px; text-indent:-999px;}
 
-div.search_bar .search_input {width: 392px;height: 27px;margin: 23px 0 0 14px;background: none;border: none;}
-div.search_bar .search_submit {float: right;width: 50px;height: 50px;margin: 11px 11px 0 0;background: none;border: none;cursor: pointer;}
-div.search_bar {width: 482px;height: 94px;margin: auto;background: url('../img/search.jpg') no-repeat;}
+div.search_bar .search_input {width: 391px;height: 27px;margin: 27px 0 0 16px; padding-left: 3px; background: none;border: none;}
+div.search_bar .search_submit {float: right;width: 50px;height: 50px;margin: 14px 16px 0 0;background: none;border: none;cursor: pointer;}
+div.search_bar {width: 490px;height: 85px;margin: auto;background: url('../img/search.png') no-repeat;}
 div.main {...........}
 div.main { width:807px; margin:auto; }
 div.main h3 { height:39px; margin-bottom:20px; background:url('../img/h_bg.png') no-repeat; font:14px "微软雅黑",Arial, Helvetica, sans-serif; line-height:33px; text-indent:1em; color:#ffffff;}
 
 .index {...........}
-div.index { margin: 90px 0px 90px;}
+div.index { margin: 70px 0px;}
 div.index ul {overflow:hidden; margin-left: 16px;}
 div.index ul li { float:left; width:148px; margin:0px 20px;}
 .index ul li:hover p { color:#eca721;}
@@ -23,15 +23,15 @@ div.index ul li p { clear:both; font:14px "微软雅黑",Arial, Helvetica, sans-
 /*.dongfenglu span.college,span.dongfenglu{ background:url('../img/college_logo_dongfeng.png') no-repeat;}*/
 /*.index .longdong,.index .dongfenglu { display:none; width:500px; margin:100px auto 0;}*/
 /*.index ul li span { display:block; width:95px; height:105px; margin:0 auto 10px; cursor:pointer;}*/
-.index ul li span { display: block; width: 145px; height: 145px; cursor: pointer; background: url('../img/part_logo.png') no-repeat;}
-.main a.part_1 span { background-position:-3px 2px;}
-.main a.part_2 span { background-position:-205px 2px;}
-.main a.part_3 span { background-position:-405px 2px;}
-.main a.part_4 span { background-position:-605px 2px;}
-.main a.part_1:hover span { background-position:-3px -145px;}
-.main a.part_2:hover span { background-position:-205px -145px;}
-.main a.part_3:hover span { background-position:-405px -145px;}
-.main a.part_4:hover span { background-position:-605px -145px;}
+.index ul li span { display: block; width: 145px; height: 145px; margin-bottom: 15px; cursor: pointer; background: url('../img/part_logo.png') no-repeat;}
+.main a.part_1 span { background-position:0px 0px;}
+.main a.part_2 span { background-position:-145px 0px;}
+.main a.part_3 span { background-position:-290px 0px;}
+.main a.part_4 span { background-position:-435px 0px;}
+.main a.part_1:hover span { background-position:0px -145px;}
+.main a.part_2:hover span { background-position:-145px -145px;}
+.main a.part_3:hover span { background-position:-290px -145px;}
+.main a.part_4:hover span { background-position:-435px -145px;}
 /*.main span.logo_05 { background-position:-396px 0px;}*/
 /*.main span.logo_06 { background-position:0px -119px;}*/
 /*.main span.logo_07 { background-position:-100px -119px;}*/
