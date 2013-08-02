@@ -9,23 +9,16 @@
 				<h3>搜索结果：</h3>
 				<table>
 					<tbody>
-						<tr><?php 
-						if ($books!=null) 
-							{
-								echo "
-								<th>书名</th>
-								<th>课程名称</th>
-								<th>作者</th>
-								<th>发放对象</th>
-								<th>出版社</th>
-								<th>版次</th>";
-							}
-						else
-						{
-							echo "<th>哎呀，没有找到呀!</th>";
-						}
-						?>
+						<tr>
+							<th>书名</th>
+							<th>课程名称</th>
+							<th>作者</th>
+							<th>发放对象</th>
+							<th>出版社</th>
+							<th>版次</th>
 						</tr>
+
+					<?php if ($books==null) {echo "<tr><td colspan='6'>哎呀，没有找到呀!</td></tr>";	}?>
 
 						<?php foreach ($books as $value) 
 						{
