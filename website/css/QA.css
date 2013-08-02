@@ -1,4 +1,4 @@
-.main { width: 960px; margin: auto;}
+.main { width: 960px; margin: auto; margin-top: 60px;}
 .main .mid_content .qa { min-height: 600px;}
 .main .mid_content .qa h1 { font-size: 36px; text-align: center; margin-bottom: 40px;}
 .main .mid_content .qabox { margin: 10px 70px 30px;}

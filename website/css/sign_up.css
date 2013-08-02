@@ -9,7 +9,7 @@ div.sign_info { width:65%; font-size: 14px;}
 div.sign_info .join_us { margin:0 0 20px 35px;}
 div.sign_info form { width:80%; margin:0 auto; clear: both;margin:30px 0px 30px 210px;}
 div.sign_info label { display:block; width:245px; height:30px; margin-bottom:15px; font:14px "微软雅黑",Arial, Helvetica, sans-serif; line-height:30px; text-align:right;}
-div.sign_info label input,div.sign_info label select { width:165px; height:28px; margin-left:15px; background:transparent; border:solid 1px #767676; border-radius:4px;}
+div.sign_info label input,div.sign_info label select { width:165px; height:28px; margin-left:15px; background:transparent; border:solid 1px #767676; border-radius:2px;}
 div.sign_info label div.select_button { float:right; width:167px; margin:0px 0 0 20px;}
 div.sign_info label .qu { float:left; width:auto; border:none; margin:0; margin-right:5px;}
 div.sign_info label input.quarters { float:left; width:60px; margin:0; font-size:14px; text-align:center; }

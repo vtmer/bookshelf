@@ -17,7 +17,7 @@
 						</tr>
 
 						<?php if (empty($books)): ?>
-								<tr><td colspan='4' style='text-align:center'>暂没记录</td></tr>
+								<tr><td colspan='4'>暂没记录</td></tr>
 						<?php endif; ?>
 						<?php foreach ($books as $book): ?>
 						<tr>

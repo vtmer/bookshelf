@@ -31,7 +31,7 @@ div.sign form input.confirm:active {background-position: -225px -70px;}
 div.sign form .check_label { width:144px; margin-left:77px;}
 div.sign form #remember { width:auto; height:auto; vertical-align: middle;}
 div.sign .check_label span { margin:1px 0 0 5px; vertical-align: middle; -webkit-user-select:none; -mos-user-select:none;}
-div.sign div.sign_up p { font-size: 13px;margin: 20px 26px 30px;line-height: 25px;}
+div.sign div.sign_up p { font-size: 13px;margin: 20px 20px 30px;line-height: 25px;}
 div.sign div.sign_up p span { font-weight: bold; color: #130e7a;}
 div.sign div.sign_up a { color: #130e7a; text-decoration: underline; margin-left: 26px;}
 div.sign div.sign_up { display:block; position:absolute; overflow:hidden; right:0px; width:40%;}

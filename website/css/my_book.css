@@ -1,9 +1,6 @@
 /*css document*/
 div.main {..........}
 div.main { overflow:hidden; width:960px; margin:auto;}
-div.search_bar { width:482px; height:94px; margin:auto; background:url('../img/search.jpg') no-repeat;}
-div.search_bar .search_input { width:392px; height:27px; margin:23px 0 0 14px; background:none; border:none;}
-div.search_bar .search_submit { float:right; width:50px; height:50px; margin:11px 11px 0 0 ; background:none; border:none; cursor:pointer;}
 
 
 div.mid_content { position:relative; width:100%; padding-top:88px; background:url('../img/shelf.png') 77px 0 no-repeat; }
@@ -43,11 +40,11 @@ div.my_history table th:nth-child(2),
 div.my_history table td:nth-child(2){ width:217px; text-align:center;}
 div.my_history table th:nth-child(3),
 div.my_history table td:nth-child(3){ width:217px; text-align:center;}
-div.my_history table tr td[colspan="3"] {text-align: center;color: #130e7a;}
 div.my_book h5 { height: 30px;line-height: 30px;border-top: 1px solid #cecece;border-bottom: 1px solid #cecece;margin: 70px 30px 20px 30px;font-size: 13px;font-weight: bold;color: #130e7a;cursor: pointer;}
 div.my_book h5 span { margin-left: 30px;}
 div.my_book h5 span.s_h { float: right;margin-right: 60px;}
 
+div.my_book table tr td[colspan="4"],div.my_history table tr td[colspan="3"] {text-align: center;color: #130e7a;}
 
 /*div.my_book a.back_up { position:absolute; bottom:30px; left:140px; width:75px; height:30px; background:#c6c4b6; box-shadow:0 -2px 4px -1px rgba(0,0,0,.6); border-radius:5px; font-size:14px; line-height:28px; text-align:center;}*/
 /*div.my_book a.back_up:hover { background:rgb(247, 247, 243); font-weight: bold;} */

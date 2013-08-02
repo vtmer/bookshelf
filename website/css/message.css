@@ -1,9 +1,6 @@
 /*css document*/
 div.main {..........}
 div.main { overflow:hidden; width:960px; margin:auto;}
-div.search_bar { width:482px; height:94px; margin:auto; background:url('../img/search.jpg') no-repeat;}
-div.search_bar .search_input { width:392px; height:27px; margin:23px 0 0 14px; background:none; border:none;}
-div.search_bar .search_submit { float:right; width:50px; height:50px; margin:11px 11px 0 0 ; background:none; border:none; cursor:pointer;}
 
 div.mid_content { width:100%; padding-top:88px; background:url('../img/shelf.png') 77px 0 no-repeat; }
 div.mid_content h3 { width:725px; height:39px; margin-left: 80px; margin-bottom:40px; background:url('../img/h_bg.png') no-repeat; font:14px "微软雅黑",Arial, Helvetica, sans-serif; line-height:33px; text-indent:1em; color:#ffffff;}

@@ -3,6 +3,7 @@
 	
 	<?php include "template/search_bar.php"; ?>
 <script language="javascript" src="<?php echo base_url('js/mailauto.js');?>"></script>
+<script language="javascript" src="<?php echo base_url('js/sign_up.js');?>"></script>
 
 
 	<div class="mid_content">
@@ -16,17 +17,17 @@
 		
 <!-- 					<input type="button" class="config_submit" value="修改密码" id="config_pwd"/>
 					<div id="div_pwd" class="div_pwd">
-						<label for="pwd_old">旧密码：<input type="password" name="pwd_old" id="pwd_old"/></label>
-					<label for="password">新密码：<input type="password" name="pwd" id="password" /></label>
-					<label for="password_once">确认密码：<input type="password" name="pwd2" id="password_once"/></label>
+						<label for="pwd_old">旧密码：<input type="password" name="pwd_old" id="pwd_old"/><span></span></label>
+					<label for="password">新密码：<input type="password" name="pwd" id="password" /><span></span></label>
+					<label for="password_once">确认密码：<input type="password" name="pwd2" id="password_once"/><span></span></label>
 					<input type="button" class="config_submit" value="取消" id="cancle_pwd"/>
 					</div> -->
 					<label for="college">学院：<span class="user_name" ><?php echo $user[0]['faculty'];?></span></label>
 					<label for="major" id="major">专业：<span class="user_name"   ><?php echo $user[0]['major'];?></span></label>
 					<label for="grade">年级：<span class="user_name"  ><?php echo $user[0]['grade'];?></span></label>
-					<label for="mail">邮箱：<input type="text" id="mail" name="mail" autocomplete="off" value="<?php echo $user[0]['username'];?>"/></label>
-					<label for="phone">长号：<input type="text" id="phone" name="phone_number" value="<?php echo $user[0]['phone_number'];?>"/></label>
-					<label for="mini_phone">短号：<input type="text" id="mini_phone" name="subphone_number" value="<?php echo $user[0]['subphone_number'];?>"/></label>
+					<label for="mail">邮箱：<input type="text" id="mail" name="mail" autocomplete="off" value="<?php echo $user[0]['username'];?>"/><span></span></label>
+					<label for="phone">长号：<input type="text" id="phone" name="phone_number" value="<?php echo $user[0]['phone_number'];?>"/><span></span></label>
+					<label for="mini_phone">短号：<input type="text" id="mini_phone" name="subphone_number" value="<?php echo $user[0]['subphone_number'];?>"/><span></span></label>
 					<label>宿舍区：
 						<div class="select_button">
 							<?php if($user[0]['dormitory']=='西区'):?>
@@ -57,7 +58,7 @@
 						<li>借入：<?php echo $book_num[1][0];?>本</li>
 						<li>借出：<?php echo $book_num[2][0];?>本</li>
 						<li>积分：<?php echo $this->user_model->show_user_point($this->session->userdata('points')); ?></li>
-						<li><a href="#" title="Q&A">查看积分规则</a></li>
+						<li><a href="<?php echo site_url('QA');?>" title="Q&A">查看积分规则</a></li>
 						<!-- <li>分享度：<?php echo $user['share'];?>%</li> -->
 					</ul>
 				</div>

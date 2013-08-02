@@ -1,9 +1,6 @@
 /*css document*/
 div.main {..........}
 div.main { overflow:hidden; width:960px; margin:auto;}
-div.search_bar { width:482px; height:94px; margin:auto; background:url('../img/search.jpg') no-repeat;}
-div.search_bar .search_input { width:392px; height:27px; margin:23px 0 0 14px; background:none; border:none;}
-div.search_bar .search_submit { float:right; width:50px; height:50px; margin:11px 11px 0 0 ; background:none; border:none; cursor:pointer;}
 
 
 div.mid_content { width:100%; padding-top:88px; background:url('../img/shelf.png') 77px 0 no-repeat; }
@@ -30,16 +27,3 @@ div.book_owner table td:nth-child(5){ width:120px; text-align:center;}
 div.book_owner table th:nth-child(6),
 div.book_owner table td:nth-child(6){ width:65px; text-align:center;}
 /*定义表格各列的宽度*/
-
-
-
-div.book_owner ul.pages { clear:both; float:right; margin:10px 40px;}
-div.book_owner ul.pages li{ float:left; margin:0 3px;}
-div.book_owner ul.pages li a { float:left; background:url('../img/pages.png') no-repeat;}
-div.book_owner ul.pages li.prev a{ width:38px; height:38px;  background-position:0px 0px;} 
-div.book_owner ul.pages li.prev a:hover { background-position:0px -40px;}
-div.book_owner ul.pages li.next a{ width:38px; height:38px;  background-position:-45px 0px;}
-div.book_owner ul.pages li.next a:hover {  background-position:-45px -40px;}
-div.book_owner ul.pages li.page a{ margin-top:10px; width:15px; height:15px; background-position:-92px -12px; line-height:38px; text-indent:5px; color:#85847d;} 
-div.book_owner ul.pages li.page a:hover,div.book_owner ul.pages li.on_select a { background-position:-93px -34px;}
-.book_owner .pages .on_select a{ font-weight:bold;}
