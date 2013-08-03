@@ -40,10 +40,9 @@ class Login extends CI_Controller
     public function check()
 	{  
 		$student_id = $this->input->post('username');
-		// $pwd = $this->input->post('pwd');
-		// $result = $this->catch_msg->is_login($student_id,$pwd);
-		// if($result['status'])
-		if(true)
+		$pwd = $this->input->post('pwd');
+		$result = $this->catch_msg->is_login($student_id,$pwd);
+		if($result['status'])
 		{
 			$row = $this->user_model->get($student_id);
 			if($row==null)//如果是第一次登录
