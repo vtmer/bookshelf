@@ -205,10 +205,10 @@ class Register extends CI_Controller
 	}
 	public function success()
 	{
-        if(!($this->session->userdata('username'))) 
-        show_404();
+        // if(!($this->session->userdata('username'))) 
+        // show_404();
         //print_r($this->session->all_userdata());
-		$address = $this->session->userdata('username');
+		/*$address = $this->session->userdata('username');
 		if(substr($address,strripos($address,'@')+1)=="gmail.com")
 		{
 			$data['url'] = "https://mail.google.com";
@@ -218,7 +218,14 @@ class Register extends CI_Controller
 			$data['url'] = "http://mail.".substr($address,strripos($address,'@')+1);
 		}
 		$this->load->view('sign_up_success',$data);
-		$this->parser->parse('template/footer',array('js_file' => 'sign_up_success.js'));       
+		$this->parser->parse('template/footer',array('js_file' => 'sign_up_success.js'));  */  
+		//显示QA
+		$data['first_login'] = true;
+		$header = array('title'=>'工大书架-Q&A','css_file'=>'qa.css'); 
+		$footer = array('js_file'=>'qa.js');
+		$this->parser->parse('template/header',$header);
+		$this->load->view('qa',$data);
+		$this->parser->parse('template/footer',$footer);   
 	} 
 
 	public function ajax_check()

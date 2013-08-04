@@ -42,26 +42,29 @@
 						</p>
 					</div>
 				</div>
-				
+				<?php if($first_login==true):?>
 				<div class="firstqa">
 					<p>初次使用书架，请耐心阅读以上细则，能帮助您更快速了解书架</p>
-					<p>15 秒</p>
-					<a href="">下一步</a>
+					<p id='time'>15 秒</p>
+					<script type="text/javascript">
+					function count(sec)
+					{
+						$('#time').html(sec+" 秒");
+						sec-=1;
+						var id = setTimeout("count("+sec+")",1000);
+						if(sec<0)
+						{
+							clearTimeout(id);
+							$('#time').remove();
+						}
+					}
+					$(document).ready(count(15));
+					</script>
+					<a href="<?php echo site_url('guide');?>" id='next'>下一步</a>
 				</div>
+			<?php endif;?>
 			</div>
 			<div class="bottom_shadow"></div>
 		</div><!-- end of content_box 包裹整块质感效果的div -->
 	</div>
 </div><!--end of main--> 
-
-<script type="text/javascript">
-	$(".qaq").bind("click",function () {
-		$(".qaq span").html("[查看]");
-		// $(".qaq").css("font-weight","blod");
-		$(".qaa").slideUp();
-		// $(this).next().slideDown();
-		$(this).next().is(':visible')?$(this).next().slideUp() : $(this).next().slideDown();
-		// $(this).children("span").html("[收起]");
-
-	})
-</script>
