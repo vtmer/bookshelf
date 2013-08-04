@@ -7,10 +7,14 @@ class About extends CI_Controller
 	}
 	public function index()
 	{
+		$this->db->select('username')->from('user')->where('id',$this->session->userdata('uid'));
+		$query = $this->db->get();
+		$result = $query->result_array();
+		$data['email'] = $result[0]['username'];
 		$header = array('title'=>'关于工大书架','css_file'=>'about.css'); 
 		$footer = array('js_file'=>'about.js');
 		$this->parser->parse('template/header',$header);
-		$this->load->view('about');
+		$this->load->view('about',$data);
 		$this->parser->parse('template/footer',$footer);
 	}
 	public function submit()
