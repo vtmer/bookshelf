@@ -160,13 +160,14 @@ class Home_Model extends CI_Model
              ->where('cb.book_id',$book_id)
              ->limit($length,$offset);
     $query = $this->db->get();*/
+    $uid = $this->session->userdata('uid');
     $sql = "SELECT SQL_CALC_FOUND_ROWS `user`.`id`, `user`.`truename`, `user`.`major`, `user`.`dormitory` 
             FROM (`allbook` AS ab) 
             LEFT JOIN `circulating_book` AS cb ON `ab`.`id` = `cb`.`book_id` 
             LEFT JOIN `user` ON `user`.`id` = `cb`.`from_id` 
-            WHERE `cb`.`book_status` = 0 AND `cb`.`book_id` = ?
+            WHERE `cb`.`book_status` = 0 AND `cb`.`book_id` = ? AND `user`.`id`!=?
             LIMIT ?,?";
-    $query = $this->db->query($sql , array($book_id,$offset,$length));
+    $query = $this->db->query($sql , array($book_id,$uid,$offset,$length));
     $result = $query->result_array();
     $res_num = $this->db->query('SELECT FOUND_ROWS() AS total;');//获取总数
     $res_num = $res_num->result_array();

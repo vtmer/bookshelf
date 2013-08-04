@@ -124,7 +124,7 @@ class Home extends CI_Controller
 			}
 			$data['user'] = $this->home_model->get_userinfo($bookArray['user']);		
 			$data['books'] = $this->home_model->get_bookborrow($bookArray);
-			$this->session->set_userdata('borrow_time','');
+			//$this->session->set_userdata('borrow_time','');
 			$this->session->set_userdata('borrow_from' , $data['user'][0]['id']);
 
 			$header = array('title'=>'借书页面','css_file'=>'check_step.css');
