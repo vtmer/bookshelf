@@ -19,7 +19,7 @@
 						<label for="pwd_old">旧密码：<input type="password" name="pwd_old" id="pwd_old"/><span></span></label>
 					<label for="password">新密码：<input type="password" name="pwd" id="password" /><span></span></label>
 					<label for="password_once">确认密码：<input type="password" name="pwd2" id="password_once"/><span></span></label>
-					<input type="button" class="config_submit" value="取消" id="cancle_pwd"/>
+					<input type="button" class="config_submit" value="取 消" id="cancle_pwd"/>
 					</div> -->
 					<label for="college">学院：<span class="user_name" ><?php echo $user[0]['faculty'];?></span></label>
 					<label for="major" id="major">专业：<span class="user_name"   ><?php echo $user[0]['major'];?></span></label>

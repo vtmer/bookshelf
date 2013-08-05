@@ -12,7 +12,7 @@
 
 			<div class="box_demo">
 				<div class="check_step"><div>
-				<h5>书源人联系方式：</h5>
+				<h5>书源人联系方式</h5>
 				<?php echo 
 				"<p><span>书源人:".substr($user[0]['truename'],0,3)."同学</span>
 					<span>生活区：".$user[0]['dormitory']."</span>

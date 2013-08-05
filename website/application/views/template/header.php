@@ -32,4 +32,7 @@
 <div class="home_page">
 	<a href="<?php echo site_url('guide');?>" title="前往首页"></a>
 </div>
+
+<a href="#" id="top"></a>
+
 <?php include "pop_box.php";?><!--弹出层-->

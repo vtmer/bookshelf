@@ -67,7 +67,7 @@ document.getElementById('home_page').getElementsByTagName('a')[0].innerText= " "
 		<span id="popContent"></span>
 		</div>
 		<span>
-		<input class="ok-btn" type='button' value='确定'/>
+		<input class="ok-btn" type='button' value='确 定'/>
 		</span>
 	</div>
 </div><!--popbox end-->
@@ -123,7 +123,7 @@ $(document).ready(function(){
                 }
 	        	if(jsonobj.type=='alert')
 	        	{
-		            $(".mainlist").html("<div><span id='popContent'>"+jsonobj.content+"</span></div><span><input class='ok-btn' type='button' value='确定'></span>");
+		            $(".mainlist").html("<div><span id='popContent'>"+jsonobj.content+"</span></div><span><input class='ok-btn' type='button' value='确 定'></span>");
 		            $("#pop_title").html(jsonobj.title);
 		          	var h = $(document).height();
 					$('#screen').css({ 'height': h });	

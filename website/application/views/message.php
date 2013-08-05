@@ -29,7 +29,7 @@
 								{
 									echo '<p>若已于<strong>线下</strong>成功借到/出书籍，请点击<strong>"完成"</strong>按钮，完成借/捐书流程。</p>
 										<span class="hide"></span>
-										<input type="submit" value="完成" />';
+										<input type="submit" value="完 成" />';
 								}
 								else if($row['status']=='22')
 								{
@@ -38,7 +38,7 @@
 								}
 								else if($row['status']=='30'||$row['status']=='31')
 								{
-									echo '<span class="hide"></span><input type="submit" value="确认" />';
+									echo '<span class="hide"></span><input type="submit" value="确 认" />';
 								}
 								else if($row['status']=='32')
 								{
@@ -77,7 +77,7 @@
 						</ul>
 						<p>若已于<strong>线下</strong>成功借出书籍，请点击<strong>"完成"</strong>按钮，完成借书流程。</p>
 						<span class="hide"></span>
-						<input type="button" value="完成" />
+						<input type="button" value="完 成" />
 						</form>
 					</div>
 				</div>
@@ -101,7 +101,7 @@
 						</ul>
 						<p>若您已于<strong>线下</strong>成功拿到书籍，请点击<strong>"完成"</strong>按钮，完成借书流程。</p>
 						<span class="hide"></span>
-						<input type="button" value="完成" />
+						<input type="button" value="完 成" />
 						</form>
 					</div>
 				</div> -->
@@ -122,7 +122,7 @@
 							<li><label for=""><input type="radio" value="3" name='reason'/>书本遗失/已借给他人</label></li>
 						</ul>
 						<span class="hide"></span>
-						<input type="submit" value="确认" />
+						<input type="submit" value="确 认" />
 						</form>
 					</div>
 				</div> -->

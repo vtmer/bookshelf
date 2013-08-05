@@ -77,7 +77,7 @@
 							<form action='".site_url('home/check_step')."' method='post'>
 							<input type='hidden' name='user' value='".$value['id']."' />
 							<input type='hidden' name='book' value='".$book_info[0]->id."' />
-							<input type='submit' value='借阅' /></form>
+							<input type='submit' value='借 阅' /></form>
 							</td>
 						</tr>";
 						}?>
@@ -89,7 +89,7 @@
 						// echo "<form action='".site_url('home/check_step')."' method='post'>";
 						// echo "<input type='hidden' name='user' value='".$value['id']."''>";
 						// echo "<input type='hidden' name='book' value='".$book_info[0]->id."''>";
-						// echo '<li><input type="submit" value="借阅" /></li>';
+						// echo '<li><input type="submit" value="借 阅" /></li>';
 						// echo '</form>';
 					// }?>
 				</ul> -->

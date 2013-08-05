@@ -27,7 +27,7 @@
 						<?php 
 						if(empty($books))
 						{
-							echo '<tr><td colspan=\'6\'>暂没记录！</td></tr>';
+							echo '<tr><td colspan="6">暂没记录！</td></tr>';
 						}
 						else
 						foreach ($books as $value) 

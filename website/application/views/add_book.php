@@ -33,7 +33,7 @@
 							<a href="#">[删除]</a>
 						</li>	 -->
 					</ul>
-						<input type="submit" id="submit" value="提交" />
+						<input type="submit" id="submit" value="提 交" />
 					</form>
 					</div>
 				</div>

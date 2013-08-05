@@ -89,7 +89,7 @@
 								}	
 								?>
 								</ul>
-								<p class="book_list_bottom"><span class="select_all">全选</span><input type="submit" id="submit" value="借阅"/></p>
+								<p class="book_list_bottom"><span class="select_all">全选</span><input type="submit" id="submit" value="借 阅"/></p>
 							</form>
 						</div>
 					</div>

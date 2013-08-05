@@ -47,3 +47,5 @@ div.mid_content td a { text-decoration:none; color:#130e7a;}/*表格内a默认�
 div.search_bar .search_input {width: 391px;height: 27px;margin: 27px 0 0 16px; padding-left: 3px; background: none;border: none;}
 div.search_bar .search_submit {float: right;width: 50px;height: 50px;margin: 14px 16px 0 0;background: none;border: none;cursor: pointer;}
 div.search_bar {width: 490px;height: 85px;margin: 0px auto 15px; background: url('../img/search.png') no-repeat;}
+
+a#top { position: fixed; left: 50%; margin-left: 400px; bottom: 100px; display: block; width: 54px; height: 53px; background: url('../img/button_bg.png') 0px -105px no-repeat;}
