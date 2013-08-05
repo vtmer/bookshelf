@@ -39,10 +39,10 @@ function _lookup(_inputString)//返回一个无参数的函数
 }
 function lookup(inputString) { 
 	var $url = "http://"+document.domain+"/index.php/add_book/search";
-	if(inputString.length == 0) 
+	if(inputString.length == 0|!inputString) 
 	{ 
 	// Hide the suggestion box. 
-	$('#suggest_box').hide(); 
+	$('#suggest_box').slideUp(); 
 	} 
 	else 
 	{ 
@@ -97,29 +97,24 @@ function lookup(inputString) {
 //绑定输入框的回车事件
 $(document).ready(function()
 {
-   $("#isbncode").keyup(function(e){
-   var curKey = e.which;
-   if(curKey == 13)
-   {
-  //      do_jsonp();
-  //   	$(nowShowing).removeClass("now_step");
-		// $(".main .step2").addClass("now_step");
-		// nowShowing = $(".main .step2");
-   }else
-   {
-   		var rule = /^[0-9]*$/;
-   		if(!rule.test($('#isbncode').val()))//如果不是数字
-		{
+   	$("#isbncode").keyup(function(e){
+	   	var curKey = e.which;
+	   	var rule = /^[0-9]*$/;
+	   	if (curKey == 13){
+	  	    // do_jsonp();
+	  		// $(nowShowing).removeClass("now_step");
+			// $(".main .step2").addClass("now_step");
+			// nowShowing = $(".main .step2");
+	   	} else if (!rule.test($('#isbncode').val())){//如果不是数字
 			startTimer($("#isbncode").val());
+
+		} else if ($("#isbncode").val().length>=10){
+			startTimer($("#isbncode").val());
+
+		} else if (!$("#isbncode").val()){
+			startTimer($("#isbncode").val());
+
 		}
-		else
-		{
-			if($("#isbncode").val().length>=10)
-			{
-				startTimer($("#isbncode").val());
-			}
-		}   	   
-   }
    });
 });  
 
