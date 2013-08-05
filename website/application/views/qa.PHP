@@ -56,11 +56,13 @@
 						{
 							clearTimeout(id);
 							$('#time').remove();
+							$('#next').removeClass('unable');
+							$('#next').attr("href","<?php echo site_url('guide');?>");
 						}
 					}
-					$(document).ready(count(15));
+					$(document).ready(count(3));
 					</script>
-					<a href="<?php echo site_url('guide');?>" id='next'>下一步</a>
+					<a id='next' class="unable">下一步</a>
 				</div>
 			<?php endif;?>
 			</div>

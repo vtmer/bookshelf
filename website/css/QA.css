@@ -6,4 +6,7 @@
 .main .mid_content .qaa { display: none; margin: 10px 0px;border: 1px solid #dadada;padding: 20px 25px;}
 .main .mid_content .qaa p,.firstqa p { margin-bottom: 20px; line-height: 30px;}
 .main .mid_content .firstqa { text-align: center; margin-top: 120px;}
-.main .mid_content .firstqa a { display: block; background: url('../img/button_bg.png') 0 -70px no-repeat; width: 75px; height: 35px;margin: 0px auto; text-align: center; line-height: 35px; font-size: 14px; color: #fff;.main .mid_content}
+.main .mid_content .firstqa a { display: block; background: url('../img/button_bg.png') 0 0px no-repeat; width: 75px; height: 35px;margin: 0px auto; text-align: center; line-height: 35px; font-size: 14px; color: #fff;}
+.main .mid_content .firstqa a:hover { background-position: -75px 0px;}
+.main .mid_content .firstqa a:active { background-position: -150px 0px;}
+.main .mid_content .firstqa a.unable { background-position: 0 -70px;}/*不可点击样式*/
