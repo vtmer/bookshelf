@@ -3,7 +3,6 @@
 	
 	<?php include "template/search_bar.php"; ?>
 <script language="javascript" src="<?php echo base_url('js/mailauto.js');?>"></script>
-<script language="javascript" src="<?php echo base_url('js/sign_up.js');?>"></script>
 
 
 	<div class="mid_content">
@@ -44,7 +43,7 @@
 						</div>
 					</label>
 
-					<input type="submit" class="config_submit" value="保存" />
+					<input type="submit" class="config_submit" value="保 存" />
 				</div>
 				</div>
 				</form>
