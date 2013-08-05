@@ -8,6 +8,8 @@
 			<div class="box_demo message">
 				<h5><span>状态</span><span>标题</span><span>时间</span><span>操作</span></h5>
 
+				<div class="message_box"></div>
+
 				<?php foreach($messages as $row):?>
 				<div class="message_box">
 				<?php if((int)($row['status'])%10==0) echo "<h5 class='unread'><span class='readed'>未读";
@@ -48,6 +50,11 @@
 					</div>
 				</div>
 				<?php endforeach;?>
+
+				<!-- 模板0 即没有信息的时候 -->
+				<div class="message_box">
+					<h5>暂时米有您的信息哦！！！</h5>
+				</div>
 
 				<!-- 模板1 即欢迎信，在controller/register.php 已有 -->
 
