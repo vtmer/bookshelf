@@ -7,9 +7,17 @@ div.main {overflow: hidden;width: 960px;margin: auto; margin-top: 60px;}
 .mid_content div#border div { width: 650px; height: 0px; border-top: 1px solid #fff;}
 .mid_content .feed_back p { text-align: center; font-size: 16px;}
 .mid_content .feed_back form { margin: 40px 70px 0px 50px;}
-.mid_content .feed_back form label {display: block; text-align: right; width: 680px; margin-top: 36px; vertical-align: top;}
+.mid_content .feed_back form label {display: block; position: relative; text-align: right; width: 680px; margin-top: 36px; vertical-align: top;}
 .mid_content .feed_back label input { padding-left: 3px; margin-left: 5px; width: 600px; height: 25px; border-radius: 2px; border: 1px solid #767676; background-color: #eeece1;}
 .mid_content .feed_back label textarea { margin-left: 5px; width: 600px; height: 190px; padding:3px; border-radius: 2px; border: 1px solid #767676; background-color: #eeece1;}
 .mid_content .feed_back input#submit { margin-top: 17px; text-align: center; font-size: 14px; color: #fff; line-height: 35px; float: right; width: 73px; height: 35px; border: none; background: url('../img/button_bg.png') 0 0 no-repeat;}
 .mid_content .feed_back input#submit:hover { background-position: -75px 0;}
 .mid_content .feed_back input#submit:active { background-position: -150px 0;}
+.mid_content .feed_back input#submit.unabled,
+.mid_content .feed_back input#submit.unabled:hover,
+.mid_content .feed_back input#submit.unabled:active { background-position: 0 -70px;}
+
+
+div.feed_back span.notice { position:absolute; left:74px; bottom: -25px; color:#a4a4a4;}
+/*div.feed_back span.notice::before { position:absolute; top:9px; left:-15px; border:solid 6px #a4a4a4; border-left-color:transparent; border-bottom-color:transparent; border-top-color:transparent;}*/
+div.feed_back span.alert{ color:#ed0d0d;}

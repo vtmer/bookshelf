@@ -12,12 +12,12 @@
 	       			<p>再次感谢您对本书架的支持！</p>					
 				</div>
 				<div id="border"><div></div></div>
-				<div class="feed_back">
+				<div class="feed_back">	
 					<p>我们诚意聆听您的声音</p>
 					<form action="<?php echo site_url('about/submit');?>" method='post' class='ajaxForm'>
-						<label for="youmail">您的邮箱：<input type="text" id="youmail" name='email' value="<?php echo $email;?>"/></label>
-						<label for="title">标题：<input type="text" id="title" name='title'/></label>
-						<label for="fb_content">内容：<textarea name="fb_content" id="fb_content" cols="30" rows="10"></textarea></label>
+						<label for="mail">您的邮箱：<input type="text" id="mail" name='email' value="<?php echo $email;?>"/><span></span></label>
+						<label for="fb_title">标题：<input type="text" id="fb_title" name='fb_title'/><span></span></label>
+						<label for="fb_content">内容：<textarea name="fb_content" id="fb_content" cols="30" rows="10"></textarea><span></span></label>
 						<input type="submit" id="submit" value="提 交"/>
 					</form>
 				</div>
