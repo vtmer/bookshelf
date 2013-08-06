@@ -5,7 +5,6 @@ class Add_book extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('home_model');
 		$this->load->model('search_model');
 	}
 
@@ -25,14 +24,43 @@ class Add_book extends CI_Controller
 
 		$ID_arr = $this->input->post();
 		if(!$ID_arr) redirect('add_book');
-		$flag = $this->course_model->addbook($ID_arr);
-		$points = count($ID_arr)*5;
-		if($flag)
+		//验证捐书规则
+		$flag = $this->course_model->check_rule($ID_arr);
+		if($flag == 0)//非本专业的书
 		{
-			redirect(site_url('add_book/success')."/$points");
+			$msg = array('type'=>'alert','title'=>'提示信息','content'=>'对不起，部分书籍非您本专业课程所用书，请选择适当的书籍进行捐赠！');
+			echo json_encode($msg);
+			exit;
 		}
-		else
-			redirect(site_url('add_book/fail'));
+		else if($flag == 1)//非本年级的书
+		{
+			$msg = array('type'=>'alert','title'=>'提示信息','content'=>'对不起，您还没上这门课喔，请选择其他书籍进行捐赠');
+			echo json_encode($msg);
+			exit;
+		}
+		else if($flag==2)//重复捐书
+		{
+			$url = site_url('my_book');
+			$msg = array('type'=>'alert','title'=>'提示信息','content'=>"对不起，部分书籍您已经捐过了，到<a href='$url'><strong>我的书架</strong></a>看看吧");
+			echo json_encode($msg);
+			exit;
+		}
+		else if($flag==3)//通过
+		{
+			$flag = $this->course_model->addbook($ID_arr);
+			$points = count($ID_arr)*5;
+			if($flag)
+			{
+				$url = site_url('add_book/success')."/$points";
+			}
+			else
+			$url = site_url('add_book/fail');
+
+			$msg = array('type'=>'redirect','url'=>$url);
+			echo json_encode($msg);
+			exit;
+		}
+		show_404();
 	}
 
 	public function success($points='')

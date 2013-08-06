@@ -9,7 +9,7 @@
 				<div class="inpart">
 					<div>
 					<p class="">我要捐书</p>
-					<form action="<?php echo site_url('add_book/add');?>" method='POST'>
+					<form action="<?php echo site_url('add_book/add');?>" method='POST' class='ajaxForm'>
 
 						<div class="sub_search">
 							<input id="isbncode" type="text" autocomplete="off" placeholder=" 请输入ISBN码或书名" />

@@ -56,8 +56,8 @@ class Course_model extends CI_Model
 
 
 		$uid = $this->session->userdata('uid');
-		//运行事务
-		$this->db->trans_start();
+		//运行事务，有问题造成表锁死
+		// $this->db->trans_start();
 		//插入循环书库表
 		foreach ($ID_arr as $key => $value) 
 		{
@@ -82,16 +82,120 @@ class Course_model extends CI_Model
 			);
 		$this->db->update('user', $data , array('id'=>$uid));
 
-		$this->db->trans_complete();//完成
+		/*$this->db->trans_complete();//完成
 
 		if ($this->db->trans_status() === FALSE)
 		{
 			 // 生成一条错误信息... 或者使用 log_message() 函数来记录你的错误信息
+			$this->db->trans_off();
 			return FALSE;		   
 		}
+		$this->db->trans_off();*/
 		return TRUE;
 	}
 
+	public function check_rule($ID_arr)
+	{
+		$uid = $this->session->userdata('uid');
+		$grade = $this->session->userdata('grade');
+		$major = $this->session->userdata('major');
+		//var_dump($this->session->all_userdata());
+		//找出改专业和该年级及以下的书本id
+		$this->db->select('ab.id , ab.name ,abmg.grade, ab.term')
+				->from('allbook as ab')
+				->join('allbook_mg as abmg','abmg.book_id = ab.id')
+				->where('abmg.major',$major);
+		$query = $this->db->get();
+		$allbook = $query->result_array();
+		//var_dump($allbook);
+		$flag = array();
+		foreach ($ID_arr as $num=>$book_id) 
+		{
+			$flag[$num] = 0;
+			foreach ($allbook as $key => $value) 
+			{
+				if($book_id==$value['id'])//本专业
+				{
+					$flag[$num] = 1;
+					//年级转换为数字
+					$term = 1;
+					$data = getdate();
+					$year =$data['year'];
+					$month = $data['mon'];
+					if($month < 9&&$month > 2)
+					{
+						$year-= 1;
+						$term = 2;
+					}
+					switch ($value['grade']) {
+						case '大一':
+							$value['grade'] = $year;
+							break;
+						case '大二':
+							$value['grade'] = $year - 1;
+							break;
+						case '大三':
+							$value['grade'] = $year - 2;
+							break;
+						case '大四':
+							$value['grade'] = $year - 3;
+							break;
+						default:
+							#code...
+							break;
+					};
+					if($value['grade'] == $grade)
+					{
+						if($term==2&&$value['term']==1)
+						{
+							$flag[$num] = 2;
+							//检查重复性
+							$this->db->select('count(*) as num')
+									->from('circulating_book')
+									->where('book_id',$value['id'])
+									->where('from_id',$uid);
+							$query = $this->db->get();
+							$result = $query->row();
+							if($result->num==0)
+							{
+								$flag[$num] = 3;
+							}
+							break;//下一本
+						}
+					}
+					else if($value['grade'] > $grade)
+					{
+						$flag[$num] = 2;
+						//检查重复性
+							$this->db->select('count(*) as num')
+									->from('circulating_book')
+									->where('book_id',$value['id'])
+									->where('from_id',$uid);
+							$query = $this->db->get();
+							$result = $query->row();
+							if($result->num==0)
+							{
+								$flag[$num] = 3;
+							}
+						break;//下一本
+					}
+				}
+			}
+		}
+		foreach ($flag as $key => $value) 
+		{
+			if($value!=3)
+			{
+				if($value==0)
+					return 0;
+				if($value==1)
+					return 1;
+				if($value==2)
+					return 2;
+			}
+		}
+		return 3;
+	}
 
 }
 /*----end of course_model ----*/

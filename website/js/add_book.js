@@ -75,9 +75,9 @@ function lookup(inputString) {
 							$('#isbncode').attr('value','');
 							});
 					$(".del_book").click(function(){
-							console.log($(this).parent('li'));
+							$li = $(this).parent('li');
 							$(this).parent('li').slideUp('fast',function(){
-								$(this).parent('li').replaceWith('');
+								$li.remove();
 							});
 							window.event.returnValue = false;
 						});	
@@ -131,24 +131,56 @@ $(".next_step").bind("click",function(){
 
 
 
-function do_jsonp() 
+/*function do_jsonp() 
+{
+	var rule = /^[0-9]*$/;
+	if(!rule.test($('#isbncode').val()))//如果不是数字
 	{
-		var rule = /^[0-9]*$/;
-		if(!rule.test($('#isbncode').val()))//如果不是数字
-		{
-			return false;
-		}
-		var id = $('#isbncode').val();
-		$.getJSON("https://api.douban.com/v2/book/isbn/"+id+"?callback=?",
-			function(data) {
-				$('#booktitle').attr("value",data.title);
-				$('#isbn').html("ISBN:"+data.isbn13);
-				$('#isbn').attr("value",data.isbn13);
-				$('#author').val(data.author);
-				$('#publish').val(data.publisher);
-				var title = data.title;
-				});
-		if(id !== '')
-		{$('#booktitle').attr('disabled',"true");}
-
+		return false;
 	}
+	var id = $('#isbncode').val();
+	$.getJSON("https://api.douban.com/v2/book/isbn/"+id+"?callback=?",
+		function(data) {
+			$('#booktitle').attr("value",data.title);
+			$('#isbn').html("ISBN:"+data.isbn13);
+			$('#isbn').attr("value",data.isbn13);
+			$('#author').val(data.author);
+			$('#publish').val(data.publisher);
+			var title = data.title;
+			});
+	if(id !== '')
+	{$('#booktitle').attr('disabled',"true");}
+
+}*/
+
+  $(".ajaxForm").bind('submit', function(){//回调函数
+  			ajaxSubmit(this, function(data){
+  			  if (typeof data !== 'object') {
+	        	    jsonobj = JSON.parse(data);
+                        } else {
+                            jsonobj = data;
+                        }
+	        	if(jsonobj.type=='alert')
+	        	{
+		            $("#popContent").html(jsonobj.content);
+		            $("#pop_title").html(jsonobj.title);
+		          	var h = $(document).height();
+					$('#screen').css({ 'height': h });	
+					$('#screen').show();
+					$('.popbox').center();
+					$('.popbox').fadeIn();
+
+				}else
+				if(jsonobj.type=='redirect')
+				{
+					window.location.href=jsonobj.url;
+				}
+			});
+        return false;
+    });
+  	//关闭按钮
+    $('.close-btn,.ok-btn ').click(function(){
+		$('.popbox').fadeOut(function(){ $('#screen').hide(); 
+	});
+		return false;
+	});

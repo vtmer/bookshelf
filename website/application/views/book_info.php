@@ -19,7 +19,7 @@
 					<dd>发放对象：<span><?php echo $book_info[0]->course_category;?></span></dd>
 					<dd class="button">
 						<!-- <a href="#">我要捐</a> -->
-						<form action="<?php echo site_url('add_book/add');?>" method='post'>
+						<form action="<?php echo site_url('add_book/add');?>" method='post' class='ajaxForm'>
 							<input type='hidden' value="<?php echo $book_info[0]->id;?>" name='book_id'/>
 						<input type='submit' value='我要捐'/>
 						</form>
