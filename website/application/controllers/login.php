@@ -55,17 +55,13 @@ class Login extends CI_Controller
 	            exit;//跳转到信息填写
 			}
 			$uid = $row->id;
-			$points = $row->points; 
-			$truename = $row->truename;
-			$major = $row->major;
-			$grade = $row->grade;
         	//储存用户信息至session
         	$data = array(
-				'points' => $points,
-				'truename' => $truename,
+				'points' => $row->points,
+				'truename' => $row->truename,
         	    'uid' => $uid,
-				'major' => $major,
-				'grade' => $grade,
+				'major' => $row->major,
+				'grade' => $row->grade,
         	    'is_logged_in' => TRUE,
         	);
             $this->session->set_userdata($data);

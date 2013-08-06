@@ -6,7 +6,7 @@
 		<div class="content_box">
 			<div class="box_demo needed_book">
 				<h3>您本学期需要借的教材有：</h3>
-				<p><span>专业：<?php echo $this->session->userdata['major'].'专业  '.$this->session->userdata['grade'].'级  ';
+				<p><span>专业：<?php echo $this->user_model->major_name().'专业  '.$this->session->userdata['grade'].'级  ';
 					if($this->session->userdata['is_logged_in']==NULL)
 					{
 						echo "[<a href='".site_url('guide')."' alt='修改'>修改</a>]";

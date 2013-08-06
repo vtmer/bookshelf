@@ -200,8 +200,11 @@ class Home_Model extends CI_Model
   }
   	public function get_userinfo($from_id)
 	{
-    $this->db->select('id,username,truename,faculty,major,grade,dormitory,phone_number,subphone_number,points');
-    $query = $this->db->get_where('user', array('id' => $from_id));
+    $this->db->select('u.id,u.username,u.truename,u.faculty,m.name AS major,u.grade,u.dormitory,u.phone_number,u.subphone_number,u.points')
+              ->from('user AS u')
+              ->join('major AS m', 'u.major = m.id')
+              ->where('u.id', $from_id);
+    $query = $this->db->get();
 		return $query->result_array();
 	}
 

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 07 月 17 日 11:51
+-- 生成日期: 2013 年 08 月 06 日 09:16
 -- 服务器版本: 5.5.20
 -- PHP 版本: 5.3.10
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `password` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `allbook` (
   PRIMARY KEY (`id`),
   KEY `ISBN` (`ISBN`,`name`),
   KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1213 ;
 
 -- --------------------------------------------------------
 
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `allbook_mg` (
   `major` varchar(100) NOT NULL,
   `book_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2283 ;
 
 -- --------------------------------------------------------
 
@@ -82,9 +82,9 @@ CREATE TABLE IF NOT EXISTS `borrow_log` (
   `book_id` int(11) NOT NULL COMMENT '书本ID',
   `from_id` int(11) NOT NULL COMMENT '借出人的ID',
   `to_id` int(11) NOT NULL COMMENT '要借书的人ID',
-  `time` date NOT NULL,
+  `time` date NOT NULL COMMENT '自动存入时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -106,7 +106,20 @@ CREATE TABLE IF NOT EXISTS `circulating_book` (
   KEY `to_id` (`to_id`),
   KEY `from_id` (`from_id`),
   KEY `book_id` (`book_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `major`
+--
+
+CREATE TABLE IF NOT EXISTS `major` (
+  `id` varchar(64) NOT NULL,
+  `parent_id` varchar(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -123,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0=>未读;1=>已读',
   `create_time` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 -- --------------------------------------------------------
 
@@ -155,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `activationkey` (`activationkey`),
   KEY `student_id` (`student_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=35 ;
 
 --
 -- 限制导出的表
@@ -166,8 +179,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 ALTER TABLE `circulating_book`
   ADD CONSTRAINT `circulating_book_ibfk_1` FOREIGN KEY (`from_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `circulating_book_ibfk_2` FOREIGN KEY (`to_id`) REFERENCES `user` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
-  ADD CONSTRAINT `circulating_book_ibfk_3` FOREIGN KEY (`book_id`) REFERENCES `allbook` (`id`);
+  ADD CONSTRAINT `circulating_book_ibfk_2` FOREIGN KEY (`to_id`) REFERENCES `user` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -30,6 +30,36 @@ class User_model extends CI_Model
 	//注册时向数据库添加数据
 	public function add($data)
 	{
+		$faculty = $data['faculty'];
+		$major = $data['major'];
+		$this->db->select('a.id, a.name')
+				->from('major AS a')
+				->join('major AS b' ,'a.parent_id = b.id')
+				->where('b.name',$faculty);
+		$query = $this->db->get();
+		$majors = $query->result_array();//获取改学院的所有专业
+		$sim = 0;
+		$m_name = '';
+		foreach ($majors as $key => $value) 
+		{
+			//匹配专业
+			if($major==$value['name'])
+			{
+				$data['major'] = $value['id'];//替换为专业ID
+			}
+			else
+			{
+				//模糊匹配，计算相似度
+				similar_text($major,$value['name'],$max);
+				if($max > $sim)
+				{
+					$data['major'] = $value['id'];//替换为专业ID
+					$m_name = $value['name'];
+					$sim = $max;	
+				}
+			}
+		}
+		$this->session->set_userdata('major',$m_name);
 		$this->db->insert('user',$data);
 		return mysql_insert_id();
 	}
@@ -54,9 +84,10 @@ class User_model extends CI_Model
 	}
 
 	//根据学号获取该用户信息
-	public function get($username)
+	public function get($student_id)
 	{
-		$query = $this->db->get_where('user',array('student_id' => $username));
+		$this->db->select('points, truename, grade, major, id');
+		$query = $this->db->get_where('user',array('student_id' => $student_id));
 		if($query->num_rows() == 1)
 		{
 			$row = $query->row();
@@ -66,6 +97,13 @@ class User_model extends CI_Model
 		{
 			return ;
 		}
+	}
+	public function major_name()
+	{
+		$this->db->select('name');
+		$query = $this->db->get_where('major',array('id'=>$this->session->userdata('major')));
+		$result = $query->row();
+		return $result->name;
 	}
 
 	//根据email激活用户帐号
