@@ -10,13 +10,15 @@ div.main h3 { height:39px; margin-bottom:20px; background:url('../img/h_bg.png')
 
 
 .sign {...........}
-div.sign { position:relative; overflow:hidden; z-index:10; width:502px; height: 338px; margin:0px auto; background:url('../img/login_bg.jpg') repeat-x; border:solid 1px #b2a88c; box-shadow:0px 10px 10px -5px rgba(0,0,0,0.6),0px 1px 2px 2px rgba(255,255,255,.6) inset,0px -6px 0px 0px #cdcdcd inset; border-radius:8px;}
+.sign { width: 504px; height: 340px;margin: auto; z-index:10; overflow: hidden; }
+div.sign ul { width: 1010px;overflow: hidden; display: block;position: relative;}
+div.sign ul li {float: left; position:relative; overflow:hidden; width:502px; height: 338px; background:url('../img/login_bg.jpg') repeat-x; border:solid 1px #b2a88c; box-shadow:0px 10px 10px -5px rgba(0,0,0,0.6),0px 1px 2px 2px rgba(255,255,255,.6) inset,0px -6px 0px 0px #cdcdcd inset; border-radius:8px;}
 
 div.bottom_shadow { position:absolute; z-index:-1; width:502px; height:48px; margin-top:-25px; margin-left:153px;  background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, from(rgba(0,0,0,.15)), to(rgba(0,0,0,0))); background-image:-moz-linear-gradient(top,rgba(0,0,0,.15),rgba(0,0,0,0)); background-image:-o-linear-gradient(top,rgba(0,0,0,.15),rgba(0,0,0,0));}
 
 div.sign img.shujia {display: block; width:467px; height:69px; margin:10px auto 30px;}
 div.sign form { width: 60%; float:left; font-size:13px; border-right: 1px solid #fff;}
-div.sign form>div { overflow: hidden; border-right: 1px solid #d1d1d1; padding-top: 16px;}
+div.sign form>div { overflow: hidden; height: 184px; border-right: 1px solid #d1d1d1; padding-top: 16px;}
 div.sign form span { margin-left:20px; color:#333; }
 div.sign form label { display:block; margin-bottom: 20px; margin-left: 38px;}
 div.sign form label input {height: 26px; width: 180px; padding-left: 4px; border: 1px solid #d0d0d0; margin-left: 5px; background-color: #f8f8f8; border-radius: 3px;}
@@ -25,12 +27,12 @@ div.sign form label.yanzheng img{ width: 70px;height: 25px; vertical-align: midd
 div.sign form input.confirm { clear:both; float:left; width:110px; height:35px; margin-left: 80px; border:none;font-size:14px; line-height:35px; text-align:center; color:#fff; background: url('../img/button_bg.png') -225px 0 no-repeat;}
 div.sign form input.confirm:hover {background-position: -225px -35px;}
 div.sign form input.confirm:active {background-position: -225px -70px;}
-/*div.sign form .forget { float:right; text-decoration: underline; color:#626262; font-size:12px;}*/
+div.sign form .forget { text-decoration: underline; color:#626262; font-size:12px; vertical-align: middle;}
 
 /*记住密码的特殊样式*/
-div.sign form .check_label { width:144px; margin-left:77px;}
+div.sign form .check_label { margin-left:77px;}
 div.sign form #remember { width:auto; height:auto; vertical-align: middle;}
-div.sign .check_label span { margin:1px 0 0 5px; vertical-align: middle; -webkit-user-select:none; -mos-user-select:none;}
+div.sign .check_label span { margin:0 6px; vertical-align: middle; -webkit-user-select:none; -mos-user-select:none;}
 div.sign div.sign_up p { font-size: 13px;margin: 20px 20px 30px;line-height: 25px;}
 div.sign div.sign_up p span { font-weight: bold; color: #130e7a;}
 div.sign div.sign_up a { color: #130e7a; text-decoration: underline; margin-left: 26px;}
@@ -54,17 +56,11 @@ div.shelf_bg { clear:both; width:100%; height:65px; margin-top:50px; background:
           border-radius: 4px;
 }
 .alert,
-.alert h4 {
-  color: #c09853;
-}
+.alert h4 {  color: #c09853;}
 
-.alert h4 {
-  margin: 0;
-}
+.alert h4 {  margin: 0;}
 
-.alert .close {
-  position: relative;
-  top: -2px;
-  right: -21px;
-  line-height: 20px;
-}
+.alert .close {  position: relative;  top: -2px;  right: -21px;  line-height: 20px;}
+
+li.verifier {.....}
+li.verifier.sign form>div { padding-top: 36px; height: 164px;}
