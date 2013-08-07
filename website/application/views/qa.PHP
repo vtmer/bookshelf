@@ -60,7 +60,7 @@
 							$('#next').attr("href","<?php echo site_url('guide');?>");
 						}
 					}
-					$(document).ready(count(3));
+					$(document).ready(count(15));
 					</script>
 					<a id='next' class="unable">下一步</a>
 				</div>

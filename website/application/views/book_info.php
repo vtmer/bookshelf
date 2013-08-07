@@ -62,7 +62,7 @@
 						{
 							echo "
 							<tr>
-							<th colspan='4'>暂时没找到哦！</th>
+							<td colspan='4'>暂时没找到哦！</td>
 							</tr>";
 						}
 						$n = 0;
