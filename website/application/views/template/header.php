@@ -33,6 +33,24 @@
 	<a href="<?php echo site_url('guide');?>" title="前往首页"></a>
 </div>
 
-<a href="#" id="top"></a>
+<a href="#" id="back-to-top"></a>
+<script language="javascript" type="text/javascript">
+	$(document).ready(function() {
+	    // 滚动窗口来判断按钮显示或隐藏
+	    $(window).scroll(function() {
+	        if ($(this).scrollTop() > 150) {
+	            $('#back-to-top').fadeIn(200);
+	        } else {
+	            $('#back-to-top').fadeOut(200);
+	        }
+	    });
+	 
+	    // jQuery实现动画滚动
+	    $('#back-to-top').click(function(event) {
+	        event.preventDefault();
+	        $('html, body').animate({scrollTop: 0}, 500);
+	    })
+	});
+</script>
 
 <?php include "pop_box.php";?><!--弹出层-->
