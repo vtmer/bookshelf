@@ -99,7 +99,7 @@ class Manage_model extends CI_Model
     	$result = $query->result_array();
     	return $result;
     }
-    public function major_mgct()
+    public function major_info()
     {
     	$this->db->select('a.name AS faculty , b.name AS major, b.id')
     			->from('major AS a')
@@ -124,13 +124,17 @@ class Manage_model extends CI_Model
 			{
 				if($v['faculty']==$value['faculty'])
 				{
-
 					array_push($dat_arr[$k]['major'], array('name'=>$value['major'],'id'=>$value['id']));
 					break;
 				 }
 			}
 		}
     	return $dat_arr;
+    }
+    public function update_major($id,$name)
+    {	
+    	$this->db->update('major',array('name'=>$name),array("id"=>$id));
+    	return mysql_affected_rows();
     }
 }
 /*---END OF manage_model 

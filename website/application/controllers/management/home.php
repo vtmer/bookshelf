@@ -113,9 +113,20 @@
 	}
 	private function _div9()
 	{
-		$data['major'] = $this->manage_model->major_mgct();
-		
+		$data['major'] = $this->manage_model->major_info();
 		echo $this->load->view('management/template/div9',$data,true);
+		return;
+	}
+	public function div9_update()
+	{
+		if(!$this->input->post()) show_404();
+		$id = $this->input->post('id');
+		$name = $this->input->post('name');
+		$flag = $this->manage_model->update_major($id, $name);
+		if($flag > 0) 
+			echo 'true' ;
+		else
+			 echo 'false';
 		return;
 	}
 }

@@ -20,21 +20,40 @@
         <div class="tab-pane" id="tab<?php echo $key;?>">  
         <?php endif;?>  
         <?php foreach($value['major'] as $k=>$v):?>
-          <input class="input-xlarge" id="<?php echo $v['id'];?>" type="text" placeholder="<?php echo $v['name'];?>" name='major' disabled value="">
-          <a class="btn" id="edit" href="#" style="margin: 0px 20px 10px 10px;">编辑</a>
+          <input class="input-xlarge" id="<?php echo $v['id'];?>" type="text" placeholder="<?php echo $v['name'];?>" name='major' disabled value="<?php echo $v['name'];?>">
+          <a class="btn" id="edit" data-toggle="popover" data-placement="top" data-content="更新成功！" title="" data-original-title="" data-trigger="manual" href="#" style="margin: 0px 20px 10px 10px;">编辑</a>
           <?php endforeach;?>
       </div>
         <?php endforeach;?>
     </div>
   </div>
   <script type="text/javascript">
-  $(".btn").click(function(){
-      $(this).prev(".input-xlarge").removeAttr("disabled");
-      $(this).prev(".input-xlarge").attr("value",$(this).prev().attr("placeholder"));
-      $(this).prev(".input-xlarge").focus();
-      $(this).prev(".input-xlarge").change(function(){
-        $(this).text("更新");
-      });
+  $(".btn").bind("click",function(){      
+    if($(this).html()=='编辑'){
+      $a = $(this);
+      $(".btn").html("编辑");
+      $(".input-xlarge").attr("disabled",'');
+      $a.prev(".input-xlarge").removeAttr("disabled");
+      $a.prev(".input-xlarge").focus();
+
+        $a.prev(".input-xlarge").keyup(function(){
+          $a.html("更新");      
+        });
+      }
+      if($a.html()=='更新'){
+        $id = $a.prev(".input-xlarge").attr("id");
+        $name = $a.prev(".input-xlarge").attr("value");
+        $.post("./home/div9_update",{id:$id,name:$name},function(data){
+              if(data=='true'){
+                $a.popover('show');
+                setTimeout("$a.popover('hide');",800);
+              }else{
+                $a.attr("data-content",'更新失败');
+                $a.popover('show');
+                setTimeout("$a.popover('hide');",800);
+              }
+        });
+      }
        return false;
     });
   </script>

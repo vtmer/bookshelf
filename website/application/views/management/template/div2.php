@@ -22,6 +22,7 @@
         <?php echo $page;?><!--输出分页-->
       </div>
 </div>
+<?php if($page!=''):?>
  <script type="text/javascript">
         $(".ajax_page").bind('click', function(){
         var url = $(this).attr("href");
@@ -62,3 +63,4 @@
           });
         }
 </script>
+<?php endif;?>
