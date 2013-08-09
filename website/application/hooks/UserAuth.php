@@ -20,7 +20,7 @@ class UserAuth
 		{
 
 		}
-		else if(preg_match("/manage*/i", uri_string()))
+		else if(preg_match("/management.*/i", uri_string()))
 		{
 			if(!$this->CI->session->userdata('admin'))
 	 		{
