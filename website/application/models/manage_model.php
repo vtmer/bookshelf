@@ -101,7 +101,7 @@ class Manage_model extends CI_Model
     }
     public function major_info()
     {
-    	$this->db->select('a.name AS faculty , b.name AS major, b.id')
+    	$this->db->select('a.name AS faculty , b.name AS major, b.id , b.parent_id ')
     			->from('major AS a')
     			->join('major AS b', 'a.id=b.parent_id');
     	$query = $this->db->get();
@@ -124,7 +124,7 @@ class Manage_model extends CI_Model
 			{
 				if($v['faculty']==$value['faculty'])
 				{
-					array_push($dat_arr[$k]['major'], array('name'=>$value['major'],'id'=>$value['id']));
+					array_push($dat_arr[$k]['major'], array('name'=>$value['major'],'id'=>$value['id'],'parent_id'=>$value['parent_id']));
 					break;
 				 }
 			}
@@ -135,6 +135,38 @@ class Manage_model extends CI_Model
     {	
     	$this->db->update('major',array('name'=>$name),array("id"=>$id));
     	return mysql_affected_rows();
+    }
+    public function major_book($major,$grade,$offset,$length)
+    {
+        /*$this->db->select('ab.name, ab.ISBN, ab.author, ab.publish , ab.version, ab.term')
+                ->from('allbook AS ab')
+                ->join('allbook_mg AS abmg' , 'ab.id=abmg.book_id')
+                ->where('abmg.major',$major)
+                ->where('abmg.grade',$grade)
+                ->limit($length,$offset);
+        $query = $this->db->get();*/
+        $sql = " SELECT SQL_CALC_FOUND_ROWS `ab`.`name`, `ab`.`ISBN`, `ab`.`author`, `ab`.`publish`, `ab`.`version`, `ab`.`term` 
+                FROM (`allbook` AS ab) 
+                LEFT JOIN `allbook_mg` AS abmg ON `ab`.`id`=`abmg`.`book_id` 
+                WHERE `abmg`.`major` = ? AND `abmg`.`grade` = ? LIMIT ?,?";
+        $query = $this->db->query($sql,array($major,$grade,$offset,$length));
+        $result = $query->result_array();
+        $res_num = $this->db->query('SELECT FOUND_ROWS() AS total');//获取总数
+        $res_num = $res_num->row();
+        return array('data'=>$result,'total'=>$res_num->total);
+    }
+    public function update_book($info)
+    {
+        $arr = array(
+                'name'=>$info['name'],
+                'author'=>$info['author'],
+                'publish'=>$info['publish'],
+                'version'=>$info['version'],
+                'term'=>$info['term']
+            );
+        $this->db->where('ISBN', $info['ISBN']);
+        $this->db->update('allbook',$arr);
+        return mysql_affected_rows();
     }
 }
 /*---END OF manage_model 

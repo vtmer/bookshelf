@@ -15,10 +15,11 @@
 		$id = $this->input->get('id');
 		switch($id)
 		{
-			case '1' :$this->_div1();break;
-			case '2' :$this->_div2();break;
-			case '3' :$this->_div3();break;
-			case '9' :$this->_div9();break;
+			case '1' :$this->_div1();break;//概况
+			case '2' :$this->_div2();break;//已录书目
+			case '3' :$this->_div3();break;//注册用户
+			case '5' :$this->_div5();break;//增、删、改（书籍）
+			case '9' :$this->_div9();break;//学院&专业管理
 		}
 	}
 	private function _page_config()
@@ -111,6 +112,80 @@
 		echo $this->load->view('management/template/div3',$data,true);
 		return;
 	}
+
+	private function _div5()
+	{
+		$this->db->select('name,id')->from('major')->where('parent_id','');
+		$query = $this->db->get();
+		$data['faculty'] = $query->result_array();
+		echo $this->load->view('management/template/div5',$data,true);
+	}
+	public function div5_major()
+	{
+		if($this->input->get('id')!=5||!$this->input->get('parent_id')) show_404();
+		$parent_id = $this->input->get('parent_id');
+		$this->db->select('name,id')->from('major')->where('parent_id',$parent_id);
+		$query = $this->db->get();
+		$result = $query->result_array();
+		echo json_encode($result);
+	}
+	public function div5_book()
+	{
+		if($this->input->get('id')!=5||!$this->input->get('major')||!$this->input->get('grade')) show_404();
+		if(!$this->input->get('page'))
+			$page = 1;
+		else
+			$page = $this->input->get('page');
+		$per_page = 5;
+		$offset = ($page-1)*$per_page;
+		$major = $this->input->get('major');
+		$grade = $this->input->get('grade');
+		switch($grade)
+		{
+			case 1: $grade = '大一';break;
+			case 2: $grade = '大二';break;
+			case 3: $grade = '大三';break;
+			case 4: $grade = '大四';break;
+		}
+		$result = $this->manage_model->major_book($major,$grade,$offset,$per_page);
+		$data['book'] = $result['data'];
+
+		$config = $this->_page_config();
+		$config['base_url'] = site_url("management/home/div5_book?id=5&major=$major&grade=$grade");
+		$config['total_rows'] = $result['total'];
+		$config['per_page'] = $per_page;
+		$config['page_query_string'] = TRUE;
+		$config['query_string_segment'] ='page';  
+
+		$this->pagination->initialize($config); 
+
+		$data['page'] = $this->pagination->create_links();
+		echo $this->load->view("management/template/div5_table",$data,true);
+		return;
+	}
+	public function div5_update()
+	{
+		if(!$this->input->post()) show_404();
+		$flag = $this->manage_model->update_book($this->input->post());
+		if($flag > 0)  
+			echo 'true';
+		else 
+			echo 'false';
+		return; 
+	}
+	public function div5_del()
+	{
+		if(!$this->input->post()) show_404();
+		$ISBN = $this->input->post('ISBN');
+		$this->db->delete('allbook', array('ISBN' => $ISBN)); 
+		if(mysql_affected_rows()>0)
+			echo 'true';
+		else
+			echo 'false';
+		return ;
+	}
+
+
 	private function _div9()
 	{
 		$data['major'] = $this->manage_model->major_info();
