@@ -3,6 +3,7 @@
 .main .mid_content .qa h1 { font-size: 36px; text-align: center; margin-bottom: 40px;}
 .main .mid_content .qabox { margin: 10px 70px 30px;}
 .main .mid_content .qaq { cursor: pointer;}
+.main .mid_content .qaq span { color: #130e7a;}
 .main .mid_content .qaa { display: none; margin: 10px 0px;border: 1px solid #dadada;padding: 20px 25px;}
 .main .mid_content .qaa p,.firstqa p { margin-bottom: 20px; line-height: 30px;}
 .main .mid_content .firstqa { text-align: center; margin-top: 120px;}

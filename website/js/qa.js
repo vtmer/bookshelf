@@ -9,3 +9,18 @@ $(".qaq").bind("click",function () {
 $(document).ready(function(){
 	$('#next').unbind("click");//取消‘下一步‘点击事件
 });
+
+function count(sec)
+{
+	$('#time').html(sec+" 秒");
+	sec-=1;
+	var id = setTimeout("count("+sec+")",1000);
+	if(sec<0)
+	{
+		clearTimeout(id);
+		$('#time').remove();
+		$('#next').removeClass('unable');
+		$('#next').attr("href","<?php echo site_url('guide');?>");
+	}
+}
+$(document).ready(count(15));

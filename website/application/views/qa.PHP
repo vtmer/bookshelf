@@ -46,22 +46,6 @@
 				<div class="firstqa">
 					<p>初次使用书架，请耐心阅读以上细则，能帮助您更快速了解书架</p>
 					<p id='time'>15 秒</p>
-					<script type="text/javascript">
-					function count(sec)
-					{
-						$('#time').html(sec+" 秒");
-						sec-=1;
-						var id = setTimeout("count("+sec+")",1000);
-						if(sec<0)
-						{
-							clearTimeout(id);
-							$('#time').remove();
-							$('#next').removeClass('unable');
-							$('#next').attr("href","<?php echo site_url('guide');?>");
-						}
-					}
-					$(document).ready(count(15));
-					</script>
 					<a id='next' class="unable">下一步</a>
 				</div>
 			<?php endif;?>
