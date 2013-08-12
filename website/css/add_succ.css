@@ -10,12 +10,12 @@ div.content_box { margin-bottom: 40px;}
 div.mid_content div.box_demo { text-align: center;}/*浮雕快在高级浏览器下的预定义*/
 
 
-div.juan_v div.box_demo div {text-align: left;margin: 20px auto; width: 260px; background: url('../img/green_hook.png') left center no-repeat;overflow: hidden;}
+div.juan_v div.box_demo div {text-align: left;margin: 20px auto; width: 260px; background: url('../img/button_bg.png') -75px -140px no-repeat;overflow: hidden;}
 div.juan_v div.box_demo span { color:#3ad531; margin: 0px 0px 0px 70px;}
 div.juan_v div.box_demo p { color: #3ad531;margin: 25px 0px 5px 70px; font:16px "微软雅黑",Arial, Helvetica, sans-serif; font-weight:bold;}
 div.juan_v div.box_demo a {display: block; text-decoration:underline; color: #130e7a;margin-bottom: 20px;}
 
-div.yue_v div.box_demo div {text-align: left;margin: 20px auto; width: 200px; background: url('../img/green_hook.png') left center no-repeat;overflow: hidden;}
+div.yue_v div.box_demo div {text-align: left;margin: 20px auto; width: 200px; background: url('../img/button_bg.png') -75px -140px no-repeat;overflow: hidden;}
 div.yue_v div.box_demo strong { font-size: 16px; font-weight: bold; color:#333;}
 div.yue_v div.box_demo p { color: #3ad531;margin: 35px 0px 5px 70px; font:16px "微软雅黑",Arial, Helvetica, sans-serif; font-weight:bold;}
 div.yue_v div.box_demo a {display: block; text-decoration:underline; color: #130e7a;margin: 20px 0px;}

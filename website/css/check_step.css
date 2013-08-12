@@ -48,7 +48,7 @@ div.search_results table td label { position: relative; cursor: pointer;}
 div.search_results table td input { ......}
 div.search_results table td input[type=checkbox] {visibility:hidden;}
 div.search_results table td input[type=checkbox] + span {display:inline-block; position:absolute; top:0px; left:0px; width:16px; height:16px; border: 1px solid #bababa;}
-div.search_results table td input[type=checkbox]:checked + span { background:url("../img/minihook.png") no-repeat;}
+div.search_results table td input[type=checkbox]:checked + span { background:url("../img/button_bg.png") 0 -195px no-repeat;}
 
 
 /*重新预约页面 样式*/

@@ -47,7 +47,7 @@ div.mid_content div.box_demo.match_box h3 {background-position: 0px -43px;}
 .match_book ul li label { position:relative; padding-left:25px; cursor:pointer;}
 .match_book ul li label input[type=checkbox] {visibility:hidden;}
 .match_book ul li label input[type=checkbox] + span {display:inline-block; position:absolute; top:0px; left:23px; width:16px; height:16px; border: 1px solid #bababa;}
-.match_book ul li label input[type=checkbox]:checked + span { background:url("../img/minihook.png") no-repeat;}
+.match_book ul li label input[type=checkbox]:checked + span { background:url("../img/button_bg.png") 0px -195px no-repeat;}
 .match_book ul li { color: #130e7a; width: 245px; float: left; height: 31px; text-align: left; margin-top: 20px;}
 .match_book ul li label input { margin-right:10px;}
 .match_book .book_list_bottom { clear: both; height:32px; margin-right: 35px;margin-bottom: 20px; text-align: right; padding-top: 25px;}
