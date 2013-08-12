@@ -150,7 +150,7 @@ class Register extends CI_Controller
 	            //print_r($this->session->all_userdata());exit;
 
 				//发送站内信
-				$content = "<strong>致 ".$this->session->userdata('truename').":</strong>
+				$content = "<strong>致 ".$this->session->userdata('truename')."同学:</strong>
 				<p>您好，欢迎加入 <strong>工大书架</strong> ，这是一个致力于让广工的同学们快捷放心的借到教材书的平台。</p>
 				<p>在这里，你可以轻松查看/自下学期所需要的的教材，然后系统会主动向您推送适合的借书人。</p>
 				<p>当然，你还可以直接搜索教材名称，找到自己想要的教材，然后进行借书。</p>
