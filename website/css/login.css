@@ -1,5 +1,5 @@
 /*css document*/
-body { background:#cfcaa5 url('../img/bg.jpg') repeat-x;}
+body { background:#cfcaa5 url('../img/bg.jpg') repeat-x; font-family: "微软雅黑";}
 div#home_page {  margin:50px auto 30px; width:400px; height:125px; background:url('../img/default.png') no-repeat;}
 div#home_page a { float:left; width:400px; height:125px;}
 
