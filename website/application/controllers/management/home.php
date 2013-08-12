@@ -19,6 +19,7 @@
 			case '2' :$this->_div2();break;//已录书目
 			case '3' :$this->_div3();break;//注册用户
 			case '5' :$this->_div5();break;//增、删、改（书籍）
+			case '6' :$this->_div6();break;//图书自检
 			case '9' :$this->_div9();break;//学院&专业管理
 		}
 	}
@@ -184,7 +185,37 @@
 			echo 'false';
 		return ;
 	}
-
+	private function _div6()
+	{
+		$data['check_majorBook'] = $this->manage_model->check_majorBook();
+		echo $this->load->view('management/template/div6',$data,true);
+	}
+	public function div6_check()
+	{
+		if($this->input->get('id')!=6) show_404();
+		$this->load->helper('file');
+		$this->db->select('ISBN,id')->from('allbook');
+		$query = $this->db->get();
+		$result = $query->result_array();
+		$isbn_arr = array();
+		foreach ($result as $key => $value) {
+			$string = read_file('./images/'.$value['ISBN'].'.jpg');
+			if($string==false)
+			{
+				if($value['ISBN']!='')
+				array_push($isbn_arr, $value['ISBN']);
+			}
+		}
+		$data = $this->manage_model->div6_book($isbn_arr);
+		echo json_encode($data);
+		return;
+	}
+	public function div6_book()
+	{
+		if($this->input->get('isbn_arr')) show_404();
+		$isbn_arr = $this->input->get('isbn_arr');
+		print_r($isbn_arr);
+	}
 
 	private function _div9()
 	{

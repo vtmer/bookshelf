@@ -34,22 +34,19 @@ function ajax_base(id)
 		data: "id="+id,
 		dataType: "html",
 		beforeSend:function (XMLHttpRequest) {   	
-			 $(".span9 .row-fluid[id!='div"+id+"']").hide('fast',function(){$("#div0").show();});
-			},
+			 $(".span9 .row-fluid[id!='div"+id+"']").hide();
+			 $("#div0").show();
+		},
 		success: function(data){
-				     //alert( "Data Saved: " + data );
-				     update(data, id);
-				   },
+			$("#div"+id).replaceWith(data);
+		},
+	   complete: function(XMLHttpRequest, textStatus){
+	   	 $("#div0").slideUp('fast');
+	   	 $("#div"+id).fadeIn();
+		},
 		error:function(XMLHttpRequest, textStatus, errorThrown) {
-				    // 通常 textStatus 和 errorThrown 之中
-				    // 只有一个会包含信息
-				    this; // 调用本次AJAX请求时传递的options参数
-				}
+		    if(XMLHttpRequest.status=='404')
+		    	alert('请求失败！请重试！');
+		}
 	});
-}
-function update(data, id)
-{
-	$("#div0").hide('fast',function(){	$("#div"+id).replaceWith(data);$("#div"+id).show('slow');});
-	console.log(data);
-
 }

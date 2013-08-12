@@ -168,6 +168,27 @@ class Manage_model extends CI_Model
         $this->db->update('allbook',$arr);
         return mysql_affected_rows();
     }
+    public function check_majorBook()
+    {
+        $this->db->select('a.name AS faculty, b.name AS major,count(*) AS num')
+                ->from('major AS a')
+                ->join('major AS b', 'b.parent_id = a.id')
+                ->join('allbook_mg AS abmg', 'abmg.major = b.id')
+                ->group_by('b.name')
+                ->having('num <',15);
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
+    public function div6_book($isbn_arr)
+    {
+        $this->db->select('ISBN, name , publish, author')
+                ->from('allbook')
+                ->where_in('ISBN',$isbn_arr);
+        $query  = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
 }
 /*---END OF manage_model 
 location: models/manage_model--*/

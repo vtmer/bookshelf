@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <!-- Le styles -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
@@ -35,7 +34,6 @@
       <script src="/js/html5shiv.js"></script>
     <![endif]-->
   <body>
-
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
@@ -58,7 +56,6 @@
         </div>
       </div>
     </div>
-
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span3">
@@ -74,7 +71,6 @@
               <li><a href="#">批量添加书本</a></li>
               <li class="nav-header">学院&专业管理</li>
               <li><a href="#">学院&专业管理</a></li>
- 
               <li class="nav-header">网站维护</li>
               <li><a href="#">管理员账户</a></li>
               <li><a href="#">用户信息更新</a></li>
@@ -93,243 +89,20 @@
               <img src='/img/manager_loading.gif' id='loading'/>
              </div>
            </div>
-
            <div class='row-fluid' id='div1' style="display:none">
            <!--  概况 -->
            </div>
-           
           <div class='row-fluid' id='div2' style="display:none">
             <!-- 已录书目 -->
           </div>
-
           <div class='row-fluid' id='div3' style="display:none">
             <!-- 注册用户 -->
           </div>
-
           <div class='row-fluid' id='div5' style="display:none">
-            <div class="page-header">
-            <h1>书籍管理 <small>增、删、改</small></h1>
-            </div>
-            <div id="select">
-
-            <ul class="nav nav-pills">
-              <div style="float:left;margin-top:7px">请选择学院：</div> 
-              <li class="dropdown">
-                <a class="dropdown-toggle" id="faculty" role="button" data-toggle="dropdown" href="#">全部 <b class="caret"></b></a>
-                <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">计算机</a></li>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">龙洞</a></li>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">东风路</a></li>
-                </ul>
-              </li>
-              <div style="float:left;margin-top:7px">请选择专业：</div> 
-              <li class="dropdown">
-                <a class="dropdown-toggle" id="major" role="button" data-toggle="dropdown" href="#">全部 <b class="caret"></b></a>
-                <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">计算机科学与技术</a></li>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">软件工程</a></li>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">网络工程</a></li>
-                </ul>
-              </li>
-              <div style="float:left;margin-top:7px">请选择年级：</div> 
-              <li class="dropdown">
-                <a class="dropdown-toggle" id="grade" role="button" data-toggle="dropdown" href="#">全部 <b class="caret"></b></a>
-                <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">大一</a></li>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">大二</a></li>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">大三</a></li>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">大四</a></li>
-                </ul>
-              </li>
-              <div style="float:left;margin-top:3px"><a class="btn" href="#" id="ok">确定</a></div> 
-            </ul>
+            <!-- 书籍管理 增删改 -->
           </div>
-          <table class="table table-hover">
-                <thead><th>#</th><th>书名</th><th>ISBN</th><th>作者</th><th>出版社</th><th>版次</th><th>学期</th><th>操作</th></thead>
-                <tr><td>1</td><td>《离散数学》</td><td>张三年</td><td>丽萨吧</td><td>丽萨吧</td><td>丽萨吧</td><td>丽萨吧</td><td><div class="btn-group">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                          操作
-                          <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                          <!-- dropdown menu links -->
-                          <li><a href="#">编辑</a></li>
-                          <li><a href="#">删除</a></li>
-                        </ul>
-                      </div></td></tr>
-                <tr><td>2</td><td>《离散数学》</td><td>张三年</td><td>丽萨吧</td><td>丽萨吧</td><td>丽萨吧</td><td>丽萨吧</td><td><div class="btn-group">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                          操作
-                          <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                          <!-- dropdown menu links -->
-                          <li><a href="#">编辑</a></li>
-                          <li><a href="#">删除</a></li>
-                        </ul>
-                      </div></td></tr>
-                <tr><td>3</td><td>《离散数学》</td><td>张三年</td><td>丽萨吧</td><td>丽萨吧</td><td>丽萨吧</td><td>丽萨吧</td><td><div class="btn-group">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                          操作
-                          <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                          <!-- dropdown menu links -->
-                          <li><a href="#">编辑</a></li>
-                          <li><a href="#">删除</a></li>
-                        </ul>
-                      </div></td></tr>
-                <tr><td>4</td><td>《离散数学》</td><td>张三年</td><td>丽萨吧</td><td>丽萨吧</td><td>丽萨吧</td><td>丽萨吧</td><td><div class="btn-group">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                          操作
-                          <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                          <!-- dropdown menu links -->
-                          <li><a href="#">编辑</a></li>
-                          <li><a href="#">删除</a></li>
-                        </ul>
-                        </div></td></tr>
-                <tr><td>5</td><td>《离散数学》</td><td>张三年</td><td>丽萨吧</td><td>丽萨吧</td><td>丽萨吧</td><td>丽萨吧</td><td><div class="btn-group">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                          操作
-                          <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                          <!-- dropdown menu links -->
-                          <li><a href="#">编辑</a></li>
-                          <li><a href="#">删除</a></li>
-                        </ul>
-                      </div></td></tr>
-          </table>
-          <div class="pagination" style="float:right">
-            <ul>
-              <li><a href="#">Prev</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
-              <li><a href="#">Next</a></li>
-            </ul>
-          </div>
-           <div class="span10">
-            <!--Body content-->
-            <p><h4>添加书本</h4></p>
-            <div class="span4">
-            <div class="control-group">
-              <div class="controls">
-              </div>
-            </div>
-            <div class="control-group">
-              <div class="controls">
-                <div class="control-group">
-                  <div class="controls pull-right">
-                  </div>
-                </div>
-                <input type="text" id="isbn1" placeholder="请输入ISBN..." name="isbn1"></br>
-                <input type="text" id="title1" placeholder="书名..." name="title1">
-                <div class="control-group">
-                  <div class="controls">
-                    <input type="text" id="author1" placeholder="作者..." name="author1">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="control-group">
-              <div class="controls">
-                <input type="text" id="publish1" placeholder="出版社..." name="publish1">
-                <div class="control-group">
-                  <div class="control-group">
-                    <div class="controls">
-                      <input type="text" id="version1" placeholder="版次..." name="version1">
-                    </div>
-                  </div>
-                  <div class="controls">
-                    <input type="text" id="course_name1" placeholder="课程名称..." name="course_name1">
-                  </div>
-                </div>
-                <div class="control-group">
-                  <div class="controls">
-                    <div class="control-group">
-                      <div class="controls">
-                      </div>
-                    </div>
-                    <input type="text" id="course_category1" placeholder="课程种类（如班级课程、公选课程）..." name="course_category1">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="control-group">
-              <div class="controls">
-                <select id="term1" name="term1">
-                  <option value="1">
-                    第一学期
-                  </option>
-                  <option value="2">
-                    第二学期
-                  </option>
-                </select>
-                <div class="control-group">
-                  <div class="controls">
-                    <select id="print1" name="print1">
-                      <option value="0">
-                        不是胶印
-                      </option>
-                      <option value="1">
-                        胶印
-                      </option>
-                      <option value="">
-                      </option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-              <a href="#" onclick="do_jsonp('isbn1','title1','author1','publish1');return false;" class="btn btn-info pull-left">获取图书信息</a>
-              <a href="#"  class="btn btn-info pull-right">添加</a>
-          </div>
-          </div>
-
-          </div>
-
           <div class='row-fluid' id='div6' style="display:none">
-            <div class="page-header">
-            <h1>图书自检</h1>
-            </div>
-            <h4>书本数目少于10本的专业将会在这显示：</h4>
-            <div>
-               <table class="table table-hover">
-                <thead><th>#</th><th>学院</th><th>专业</th><th>书本数目</th></thead>
-                <tr><td>1</td><td>《离散数学asfasfasfasfasf》</td><td>张三年</td><td>丽萨吧</td></tr>
-                <tr><td>1</td><td>《离散数学》</td><td>张三年</td><td>丽萨吧</td></tr>
-                <tr><td>1</td><td>《离散数学》</td><td>张三年</td><td>丽萨吧</td></tr>
-                <tr><td>1</td><td>《离散数学》</td><td>张三年</td><td>丽萨吧</td></tr>
-                <tr><td>1</td><td>《离散数学》</td><td>张三年</td><td>丽萨吧</td></tr>
-                </table>
-            </div>
-            <h4>书籍封面自检<a href="#"  style="float:right">开始检查</a></h4>
-            <div class="alert alert-block">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <h4>注意：</h4>
-              检查封面图片可能会耗费网站过多流量，请不要频繁检查。
-            </div>
-            <p>共有1234本，正在检查第12本，请稍后。</p>
-            <div class="progress progress-striped active">
-              <div class="bar" style="width: 40%;"></div>
-            </div>
-            
-            <div>
-               <table class="table table-hover">
-                <thead><th>#</th><th>书名</th><th>ISBN</th><th>出版社</th><th>作者</th></thead>
-                <tr><td>2</td><td>《离散数学asfasfasfasfasf》</td><td>张三年</td><td>丽萨吧</td></tr>
-                <tr><td>2</td><td>《离散数学》</td><td>张三年</td><td>丽萨吧</td></tr>
-                <tr><td>2</td><td>《离散数学》</td><td>张三年</td><td>丽萨吧</td></tr>
-                <tr><td>2</td><td>《离散数学》</td><td>张三年</td><td>丽萨吧</td></tr>
-                <tr><td>2</td><td>《离散数学》</td><td>张三年</td><td>丽萨吧</td></tr>
-                </table>
-            </div>
-            <span class="label label-important">提醒：</span><p>以上书本的封面无法显示，请管理员检查；若需要添加封面图片，请打包后联系网站管理者。</p>
+            <!-- 图书自检 -->
           </div>
 
           <div class='row-fluid' id='div7' style="display:none">
