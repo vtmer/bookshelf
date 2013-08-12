@@ -23,12 +23,18 @@ div.add_book .inpart .sele_book>li a:hover {font-weight: bold;color: rgb(219, 81
 
 .sub_search { margin-bottom: 30px;}
 .sub_search input#isbncode { width: 417px; height: 40px; background-color: #d7d7d7;font-size: 14px;padding-left: 3px; color: #666;border: 1px solid rgb(173, 170, 145);border-radius: 3px}
-.sub_search #suggest_box { display: none; width: 420px; border:1px solid #c9c7b9; border-radius: 5px; background-color: rgb(226, 226, 226);}
+
+.sub_search #suggest_box { display: none; width: 420px; border:1px solid #c9c7b9; border-radius: 5px; background-color: #e4fae5;}
 .sub_search #suggest_box ul { margin:5px 0px; overflow: hidden;}
 .sub_search #suggest_box ul li { float: left;width: 86px;height: 115px;border: 1px solid #c9c7b9; border-radius: 6px; margin: 15px 5px;}
 .sub_search #suggest_box ul li:hover { float: left; width: 105px; height: 145px; margin: 0px 5px; position: relative;}
 .sub_search #suggest_box ul li img { display: block; margin: 2px;border: 1px solid #fff; border-radius: 4px; width: 80px; height: 109px;}
 .sub_search #suggest_box ul li:hover img { width: 99px; height: 139px; box-shadow: 2px 2px rgba(52, 195, 223, 0.29),-2px -2px rgba(185, 112, 226, 0.22)}
+
+.sub_search #suggest_box ul li.rule,
+.sub_search #suggest_box ul li.rule:hover { clear: both; width: 100%; height: 40px; font-size: 16px; margin: 0 10px; line-height: 40px; border: 0; padding: 0; border-radius: 0px; }
+
+.sub_search #suggest_box div { text-align: center; padding: 0 10px; height: 30px; line-height: 30px;}
 
 div.add_book .inpart form input#submit { margin: 50px 37px 20px 350px;width: 75px;height: 35px;text-align: center;background: url('../img/button_bg.png') 0 0 no-repeat;border: none;color: #fff;font-size: 15px;font-weight: bold;}
 div.add_book .inpart form input#submit:hover {background-position: -75px 0; cursor: pointer;}

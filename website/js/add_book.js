@@ -20,10 +20,6 @@
 	// 	return false;
 	// });
 
-/*var rule = /^[0-9]+$/;
-var keywords = $('#isbncode').val();
-if (rule.test(keywords)) 
-{*/
 var timer = null;//初始化一个定时器 
 var delay = 300;//设定延迟
 function startTimer(inputString)
@@ -39,22 +35,24 @@ function _lookup(_inputString)//返回一个无参数的函数
 }
 function lookup(inputString) { 
 	var $url = "http://"+document.domain+"/index.php/add_book/search";
-	if(inputString.length == 0|!inputString) 
-	{ 
-	// Hide the suggestion box. 
-	$('#suggest_box').slideUp(); 
-	} 
-	else 
-	{ 
+	var rule = /^[0-9]*$/;
+	
+	//如果为空
+	if(inputString.length == 0|!inputString){ 
+		// Hide the suggestion box. 
+		$('#suggest_box').slideUp();
+		$('#suggest_box').html("<ul><ul>");
+
+	//非空、不全是数字
+	}else if (!rule.test(inputString)){
+   		$("#suggest_box").html('<ul></ul><div>找不到你想要的书？试试输入ISBN码吧。</div>');
 		$.get($url, {keywords: inputString}, function(data){ 
 			(typeof data !== 'object') ? jsonObj = JSON.parse(data) :  jsonObj = data ;
 			var length = jsonObj.length;
-			if(length >0) 
-			{ 
+			if(length >0) { 
 				$('#suggest_box').show();
 				$('#suggest_box ul').html('');
-				for(var i = 0;i<length;i++)
-				{
+				for(var i = 0;i<length;i++)	{
 					$('#suggest_box ul').append("<li><a href='' title="+jsonObj[i].name+"><img src='/images/"+jsonObj[i].ISBN+".jpg' alt='' onerror=\"this.onerror=null; this.src=\'/img/loading.gif\'\"/></a></li>"); 
 				}
 
@@ -84,37 +82,72 @@ function lookup(inputString) {
 
 					window.event.returnValue = false;
 				});
-
-			}else
-			{	
+			}else {	
 				$('#suggest_box').show();
-				$('#suggest_box ul').html('');
-				$('#suggest_box ul').append("没有找到哦"); 
+   				$("#suggest_box").html('<ul></ul><div>找不到你想要的书？试试输入ISBN码吧。</div>');
 			} 
 		}); 
-	} 
+
+	//非空、全是数字、位数不小于10
+	} else if (inputString.length>=10){
+   		$("#suggest_box").html('<ul></ul>');
+		$.get($url, {keywords: inputString}, function(data){ 
+			(typeof data !== 'object') ? jsonObj = JSON.parse(data) :  jsonObj = data ;
+			var length = jsonObj.length;
+			if(length >0) { 
+				$('#suggest_box').show();
+				$('#suggest_box ul').html('');
+				for(var i = 0;i<length;i++)	{
+					$('#suggest_box ul').append("<li class='rule'><a href='' title="+jsonObj[i].name+">《"+jsonObj[i].name+"》</a></li>"); 
+					// $('#suggest_box ul').append("<li><a href='' title="+jsonObj[i].name+"><img src='/images/"+jsonObj[i].ISBN+".jpg' alt='' onerror=\"this.onerror=null; this.src=\'/img/loading.gif\'\"/></a></li>"); 
+				}
+
+				$('#suggest_box ul a').click(function(){
+					var $index = $(this).parent('li').index();
+					var $string = "<li><div><img src='/images/"+jsonObj[$index].ISBN+".jpg' alt='' onerror=\"this.onerror=null; this.src=\'/img/loading.gif\'\"/></div>"+
+							"<ul><li>书 名：<span>"+jsonObj[$index].name+"</span></li>"+
+								"<input type='hidden' value='"+jsonObj[$index].id+"' name='"+jsonObj[$index].id+"'>"+
+								"<li>作 者：<span>"+jsonObj[$index].author+"</span></li>"+
+								"<li>出版社：<span>"+jsonObj[$index].publish+"</span></li>"+
+								"<li>版次：<span>"+jsonObj[$index].version+"</span></li>"+
+							"</ul><a href='#' class='del_book'>[删除]</a>"+
+						"</li>";
+						$('.sele_book').prepend($string);
+						// $('.sele_book').slideDown();
+						$('#suggest_box').slideUp('fast',function(){
+							$('#suggest_box ul').html('');
+							$('#isbncode').attr('value','');
+							});
+					$(".del_book").click(function(){
+							$li = $(this).parent('li');
+							$(this).parent('li').slideUp('fast',function(){
+								$li.remove();
+							});
+							window.event.returnValue = false;
+						});	
+
+					window.event.returnValue = false;
+				});
+			}else {	
+				$('#suggest_box').show();
+   				$("#suggest_box").html('<ul></ul><div>没有找到这本书哦！</div>');
+			} 
+		}); 
+
+	//非空、全是数字、位数小于10 
+	} else {
+   		$("#suggest_box").slideDown().html('<ul></ul><div>ISBN码的话，输入不少于10位，才会进行搜索哦！</div>');
+
+	}
+
+
 } // lookup
 //绑定输入框的回车事件
 $(document).ready(function()
 {
    	$("#isbncode").keyup(function(e){
 	   	var curKey = e.which;
-	   	var rule = /^[0-9]*$/;
-	   	if (curKey == 13){
-	  	    // do_jsonp();
-	  		// $(nowShowing).removeClass("now_step");
-			// $(".main .step2").addClass("now_step");
-			// nowShowing = $(".main .step2");
-	   	} else if (!rule.test($('#isbncode').val())){//如果不是数字
-			startTimer($("#isbncode").val());
-
-		} else if ($("#isbncode").val().length>=10){
-			startTimer($("#isbncode").val());
-
-		} else if (!$("#isbncode").val()){
-			startTimer($("#isbncode").val());
-
-		}
+		startTimer($("#isbncode").val());
    });
 });  
 

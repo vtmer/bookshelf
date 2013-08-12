@@ -12,7 +12,7 @@
 					<form action="<?php echo site_url('add_book/add');?>" method='POST' class='ajaxForm'>
 
 						<div class="sub_search">
-							<input id="isbncode" type="text" autocomplete="off" placeholder=" 请输入ISBN码或书名" />
+							<input id="isbncode" type="text" autocomplete="off" placeholder=" 请输入书名或ISBN码" />
 							<div id="suggest_box">
 								<!-- 这里是搜索框匹配的模板，每一本书对应一个li -->
 								<ul>
