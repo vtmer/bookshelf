@@ -5,11 +5,11 @@ div.main { width:960px; margin:auto;}
 
 div.mid_content { width:100%; padding-top:88px; background:url('../img/shelf.png') 77px 0 no-repeat; }
 div.content_box { margin-bottom:90px;}
-div.mid_content div.match_box { overflow:hidden;}
+div.mid_content div.match_box { overflow:hidden; padding-bottom: 60px;}
 div.mid_content div.box_demo h3 { width:200px; height:42px; margin:0px 0 30px -2px; background:url('../img/h3_bg.png') 0px 0px no-repeat; font:14px 微软雅黑; line-height:38px; color:#fff; text-indent:1em;}
 
 div.needed_book {.........}
-div.needed_book p { clear:both; margin-bottom:25px; text-indent:2em; font-size:14px; color:#565656;}
+div.needed_book p { clear:both; margin-bottom:25px; text-indent:2em; font-size:13px; color: #666;}
 div.needed_book p span { font-weight: bold;margin-right: 55px; margin-left: 5px;}
 div.needed_book p a { color:#418FDF;}
 div.needed_book p a:hover { color:#000; text-decoration:underline;}
@@ -29,7 +29,7 @@ div.needed_book table td:nth-child(6){ width:70px; text-align:center;}
 /*定义表格各列的宽度*/
 
 
-.main .match_box p.tips { float: left; margin:30px 0px 20px 30px; color: #b81313;}
+div.mid_content div.box_demo.match_box h3 {background-position: 0px -43px;}
 .main .match_box table span.hidden_list { color: #130e7a; cursor:pointer; }
 .main .match_box h5 { position:relative; width:740px; height:35px; margin:auto; border:1px solid #cecece; font:13px "微软雅黑"; font-weight:bold; text-align:center; line-height:35px;}
 .main .match_box h5 span { float: left; width: 245px; display:block; border-right: 1px solid #cecece;}

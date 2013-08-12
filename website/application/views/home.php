@@ -96,7 +96,7 @@
 				<?php }?>
 			</div>
 
-				<p class="tips">注意：每次只可以查看一名捐书者信息</p>
+				<p class="tips"> </p>
 				<?php echo $this->pagination->create_links();?><!-- 输出分页模块 -->
 
 			</div>
