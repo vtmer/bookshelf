@@ -48,4 +48,4 @@ div.search_bar .search_input {width: 391px;height: 27px;margin: 27px 0 0 16px; p
 div.search_bar .search_submit {float: right;width: 50px;height: 50px;margin: 14px 16px 0 0;background: none;border: none;cursor: pointer;}
 div.search_bar {width: 490px;height: 85px;margin: 0px auto 15px; background: url('../img/search.png') no-repeat;}
 
-a#back-to-top { z-index: 1000; position: fixed; left: 50%; margin-left: 400px; bottom: 100px; display: none; width: 54px; height: 53px; background: url('../img/button_bg.png') 0px -105px no-repeat;}
+a#back-to-top { z-index: 1000; position: fixed; left: 50%; margin-left: 480px; bottom: 100px; display: none; width: 54px; height: 53px; background: url('../img/button_bg.png') 0px -105px no-repeat;}
