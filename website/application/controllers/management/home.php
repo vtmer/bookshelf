@@ -21,6 +21,7 @@
 			case '5' :$this->_div5();break;//增、删、改（书籍）
 			case '6' :$this->_div6();break;//图书自检
 			case '9' :$this->_div9();break;//学院&专业管理
+			case '11': $this->_div11();break;//管理员账户
 		}
 	}
 	private function _page_config()
@@ -234,5 +235,30 @@
 		else
 			 echo 'false';
 		return;
+	}
+	private function _div11()
+	{
+		echo $this->load->view('management/template/div11',true);
+	}
+	public function update_user()
+	{
+		if($this->input->post('id')!=11) show_404();
+		$old_pwd = $this->input->post('old_pwd');
+		$new_pwd = $this->input->post('new_pwd');
+		$rep_pwd = $this->input->post('rep_pwd');
+		if($new_pwd!=$rep_pwd)
+		{
+			echo 'error';
+			return ;
+		}
+		$uid = $this->session->userdata('uid');
+		$this->db->where('id',$uid);
+		$this->db->where('password',md5($old_pwd));
+		$this->db->update('admin',array('password'=>md5($new_pwd)));
+		if(mysql_affected_rows()>0)
+		echo 'true';
+		else
+		echo 'pwd_error';
+		return ;
 	}
 }
