@@ -25,7 +25,7 @@
     </div>
     <div class="control-group">
       <div class="controls">
-         <button type="submit" class="btn" id="chang_pwd">修改密码</button>
+         <button type="submit" class="btn" id="change_pwd">修改密码</button>
       </div>
     </div>
   </form>            

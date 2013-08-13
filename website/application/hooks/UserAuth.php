@@ -16,18 +16,17 @@ class UserAuth
 		{
 
 		}
-		else if(preg_match("/admin.*/i", uri_string()))
-		{
-
-		}
 		else if(preg_match("/management.*/i", uri_string()))
 		{
-			if(!$this->CI->session->userdata('admin'))
-	 		{
-	 			//后台管理员登录
-	 			//redirect('admin');
-				return;
-	 		}
+			if(preg_match("/management\/home.*/i", uri_string()))
+			{
+				if($this->CI->session->userdata('authority')!='admin')
+		 		{
+		 			//后台管理员登录
+		 			redirect('management/login');
+					return;
+		 		}
+			}
 		}
 		else if ( !preg_match("/login.*/i", uri_string()) )//排除登录页、注册页
 		 {
