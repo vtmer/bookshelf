@@ -1,67 +1,57 @@
 
 var check_func = {
-	email : function(value){
+	email : function (value) {
 		var $notice = $("input#mail + span");
-		if(!value){
+		if (!value) {
 			$notice.addClass("notice alert").text("请填写您的邮箱");
 			return false;
 		}
 		var mailReg = /^([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+(\.[a-zA-Z]{2,3})+$/;
-		if(!mailReg.test(value)){
+		if (!mailReg.test(value)) {
 			$notice.addClass("notice alert").text("邮箱格式错误");
 			return false;
-		}
-		else if(mailReg.test(value)){
-				$.get(document.URL+"/ajax_check",{mail:$("#mail").attr("value"),t:Math.random()},function(data){
-					if(data==1) 
-						{
-							$notice.removeClass("notice alert").text(" ");
-						} 
-						else
-						{
-							$notice.addClass("notice alert").text("邮箱已注册，请重试！");
-						}
-				});
-				if($notice.text()==" ") 
-				{
-					return true;
-				}
-				else
-				{
-					return false;
-				} 
-			}
-	},
-	password : function(value1,value2){
-		var $notice1 = $("input#password + span"),$notice2 = $("input#password_confirm + span");
-		if(!value1){
-			$notice1.addClass("notice alert").text("密码不能为空");
-			return false;
-		}
-		else if(value1.length < 6){
-			$notice1.addClass("notice alert").text("密码长度不能小于6");
-			return false;
-		}
-		else{
-			$notice1.removeClass("notice alert").text(" ");
-			if(arguments[1] && value1 != value2){
-				$notice2.addClass("notice alert").text("两次密码输入不同");
+		} else if (mailReg.test(value)) {
+			$.get(document.URL+"/ajax_check",{mail:$("#mail").attr("value"),t:Math.random()},function (data) {
+				if(data==1) {
+						$notice.removeClass("notice alert").text(" ");
+					} else {
+						$notice.addClass("notice alert").text("邮箱已注册，请重试！");
+					}
+			});
+			if($notice.text()==" ") {
+				return true;
+			} else {
 				return false;
-			}
-			else {
-			$notice2.removeClass("notice alert").text(" ");
-			return true;
-			}
+			} 
 		}
 	},
-	phone : function(value){
+	// password : function (value1,value2) {
+	// 	var $notice1 = $("input#password + span"),$notice2 = $("input#password_confirm + span");
+	// 	if (!value1) {
+	// 		$notice1.addClass("notice alert").text("密码不能为空");
+	// 		return false;
+	// 	} else if (value1.length < 6) {
+	// 		$notice1.addClass("notice alert").text("密码长度不能小于6");
+	// 		return false;
+	// 	} else {
+	// 		$notice1.removeClass("notice alert").text(" ");
+	// 		if (arguments[1] && value1 != value2) {
+	// 			$notice2.addClass("notice alert").text("两次密码输入不同");
+	// 			return false;
+	// 		} else {
+	// 			$notice2.removeClass("notice alert").text(" ");
+	// 			return true;
+	// 		}
+	// 	}
+	// },
+	phone : function (value) {
 		var $notice = $("input#phone + span");
-		if(!value){
+		if (!value) {
 			$notice.addClass("notice alert").text("请填写您的手机号码");
 			return false;
 		}
 		var phoneReg = /^((1[358]{1}[0-9]{1}))+\d{8}$/;
-		if(!phoneReg.test(value)){
+		if (!phoneReg.test(value)) {
 			$notice.addClass("notice alert").text("手机号码格式错误");
 			return false;
 		}
@@ -88,27 +78,19 @@ var check_func = {
 		if(!value){
 			$notice.addClass("notice alert").text("请输入验证码！");
 			return false;
-		}
-		else
-		{	
+		} else {	
 			$.get(document.URL+"/ajax_check",{captcha:$("#captcha").attr("value"),t:Math.random()},function(data){	
-				if(data==0)
-				{ 	
+				if(data==0)	{ 	
 					$notice.addClass("notice alert").text("验证码错误，请重试！");
-				}
-				else
-				{
+				} else {
 					$notice.removeClass("notice alert").text(" ");
 				}
-				});
-			if($notice.text()==" ") 
-				{
-					return true;
-				}
-				else
-				{
-					return false;
-				} 
+			});
+			if($notice.text()==" ") {
+				return true;
+			} else {
+				return false;
+			} 
 		}
 	}
 }
