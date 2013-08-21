@@ -1,10 +1,9 @@
-//还需要将ul、li的样式分离出去
-//
 var nowid;
 var totalid;
 var can1press = false;
 var emailafter;
 var emailbefor;
+
 $(document).ready(function(){
   //文本框获得焦点，插入Email提示层
   $("#mail").focus(function(){
@@ -13,7 +12,7 @@ $(document).ready(function(){
     if($("#myemail").html()){
       $("#myemail").css("display","block");
       $(".newemail").css("width",$("#myemail").width());
-       can1press = true;
+      can1press = true;
     }else{
       $("#myemail").css("display","none");
       can1press = false;
@@ -23,7 +22,7 @@ $(document).ready(function(){
     var press = $("#mail").val();
     if (press!="" || press!=null){
         var emailtxt = "";   
-        var emailvar = new Array("@163.com","@126.com","@yahoo.com","@qq.com","@sina.com","@gmail.com","@hotmail.com","@foxmail.com");
+        var emailvar = new Array("@qq.com","@sina.com","@163.com","@gmail.com","@hotmail.com","@yahoo.com","@126.com","@foxmail.com");
         totalid = emailvar.length;
         var emailmy = "<li class='newemail'><span>" + press + "</span></li>";
         if(!(isEmail(press))){
@@ -35,8 +34,11 @@ $(document).ready(function(){
             emailafter = "@" + press.split("@")[1];
             for(var i=0; i<emailvar.length; i++) {
                 var theemail = emailvar[i];
-                if(theemail.indexOf(emailafter) == 0) {
-                  emailtxt = emailtxt + "<li class='newemail'><span>" + emailbefor + "</span>" + emailvar[i] + "</li>"
+                if(theemail.indexOf(emailafter) == 0 && theemail != emailafter) {
+                  emailtxt = emailtxt + "<li class='newemail'><span>" + emailbefor + "</span>" + emailvar[i] + "</li>";
+
+                } else if (theemail.indexOf(emailafter) == 0 && theemail == emailafter) {
+                  emailtxt = "";
                 }
             }
         }
@@ -56,7 +58,7 @@ $(document).ready(function(){
         $("#myemail").css("display","none");    
     }    
   })
-//文本框失焦时删除层
+  //文本框失焦时删除层
   $(document).click(function(){ 
     if(can1press){
       $("#myemail").remove();
