@@ -186,10 +186,6 @@ class Home extends CI_Controller
 
 	public function personal_config()
 	{
-		if(!isset($this->session->userdata['is_logged_in']))
-		{
-			header('location:/index.php/login');
-		} 
 		if($this->input->post())
 		{
 			//表单验证

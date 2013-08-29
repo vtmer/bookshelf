@@ -10,19 +10,8 @@ var check_func = {
 		if (!mailReg.test(value)) {
 			$notice.addClass("notice alert").text("邮箱格式错误");
 			return false;
-		} else if (mailReg.test(value)) {
-			$.get(document.URL+"/ajax_check",{mail:$("#mail").attr("value"),t:Math.random()},function (data) {
-				if(data==1) {
-						$notice.removeClass("notice alert").text(" ");
-					} else {
-						$notice.addClass("notice alert").text("邮箱已注册，请重试！");
-					}
-			});
-			if($notice.text()==" ") {
-				return true;
-			} else {
-				return false;
-			} 
+		} else {
+			return true;
 		}
 	},
 	// password : function (value1,value2) {
@@ -61,16 +50,17 @@ var check_func = {
 	mini_phone : function(value){
 		var $notice = $("input#mini_phone + span");
 		if(!value){
-			$notice.removeClass("alert").text("若无短号，可不填写");
+			$notice.addClass("notice alert").text("若无短号，可不填写");
 			return true;
 		}
 		var mini_phoneReg = /^\d{4,8}$/;
 		if(!mini_phoneReg.test(value)){
 			$notice.addClass("notice alert").text("手机短号格式错误");
 			return false;
+		}else{ 
+			$notice.removeClass("notice alert").text(" ");
+			return true;
 		}
-		else $notice.removeClass("notice alert").text(" ");
-		return true;
 	},
 	captcha : function(value)
 	{
@@ -125,47 +115,59 @@ $(function(){
 	$("input[type=submit]").bind("click", function(){
 		var check_control = true;
 		check_control = check_func.email($("input#mail")[0].value);
+		if(!check_control) return false; 
 		// check_control = check_func.password($("input#password")[0].value, $("input#password_confirm")[0].value);
 		check_control = check_func.phone($("input#phone")[0].value);
+		if(!check_control) return false;
 		// check_control = check_func.name($("input#name")[0].value);
 		// check_control = check_func.stu_id($("input#stu_id")[0].value);
-		check_control = check_func.captcha($("input#captcha")[0].value);
-		if(!check_control) return false;
-		//等待提交
-		var url = "/img/loading.gif";
-		$(".mainlist").html("<img src="+url+" alt='loading...'/>");
-		$(".mainlist").css('text-align','center');
-        $("#pop_title").html("正在提交");
-      	var h = $(document).height();
-		$('#screen').css({ 'height': h });	
-		$('#screen').show();
-		$('.popbox').center();
-		$('.popbox').fadeIn();            
+		// check_control = check_func.captcha($("input#captcha")[0].value);
+		check_control = check_func.mini_phone($("input#mini_phone")[0].value);
+		if(!check_control) return false;          
 	});	
 });
-function reloadCode()
-{
-	$("#checkCodeImg").attr("src","http://"+document.domain+"/index.php/captcha?t="+Math.random());
-}
+$(document).ready(function(){
+    $(".ajaxForm").bind('submit', function(){//回调函数
+        ajaxSubmit(this, function(data){  
+        //document.write(data);  	
+                        if (typeof data !== 'object') {
+	        	    jsonobj = JSON.parse(data);
+                        } else {
+                            jsonobj = data;
+                        }
+	        	if(jsonobj.type=='alert')
+	        	{
+		            $("#popContent").html(jsonobj.content);
+		            $("#pop_title").html(jsonobj.title);
+		          	var h = $(document).height();
+					$('#screen').css({ 'height': h });	
+					$('#screen').show();
+					$('.popbox').center();
+					$('.popbox').fadeIn();
 
-function show(){
-	if($("#div_pwd").height()<175) $("#div_pwd").height($("#div_pwd").height()+10); 
-	else clearTimeout($timer);
-}
-$("#config_pwd").click(function(){
-if($("#div_pwd").height()<175)
-$timer = setInterval('show()',1);
+				}else
+				if(jsonobj.type=='redirect')
+				{
+					if(typeof jsonobj.content!='undefined')
+					{
+						$("#popContent").html(jsonobj.content);
+			            $("#pop_title").html(jsonobj.title);
+			          	var h = $(document).height();
+						$('#screen').css({ 'height': h });	
+						$('#screen').show();
+						$('.popbox').center();
+						$('.popbox').fadeIn();
+					}
+					setTimeout("window.location.href='"+jsonobj.url+"'",1000);
+				}
+             });
+        return false;
+    });
+    //关闭按钮
+    $('.close-btn,.ok-btn ').click(function(){
+		$('.popbox').fadeOut(function(){ $('#screen').hide(); 
+		// window.top.location.reload();
+	});
+		return false;
+	});
 });
-function close()
-{
-	if($("#div_pwd").height()>0) $("#div_pwd").height($("#div_pwd").height()-10); 
-	else clearTimeout($timer2);
-}
-$("#cancle_pwd").click(function(){
-if($("#div_pwd").height()>0)
-$timer2 = setInterval('close()',1);
-$("#password").val("");
-$("#password_once").val("");
-$("#pwd_old").val("");
-});
-
