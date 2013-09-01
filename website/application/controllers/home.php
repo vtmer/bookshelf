@@ -111,16 +111,12 @@ class Home extends CI_Controller
 			if($this->session->userdata('is_logged_in')==false) redirect(site_url('login'));
 			$bookArray = $this->input->post();
 			$num = count($bookArray)-1;
-			if($num<=0)  header('location:/index.php/home');
-			//var_dump($this->session->all_userdata());
-			if(($this->session->userdata['points']))
+			if($num<=0)  redirect('home');
+			if(($this->session->userdata('points')-$num*10) < 0)
 			{
-				if(($this->session->userdata['points']-$num*10) < 0)
-				{
-					echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
-					echo "<script type='text/javascript'>alert('亲，你积分不够咯！');location='".site_url('home')."';</script>";
-					exit();
-				}
+				echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
+				echo "<script type='text/javascript'>alert('亲，你积分不够咯！');location='".site_url('home')."';</script>";
+				exit();
 			}
 			$data['user'] = $this->home_model->get_userinfo($bookArray['user']);		
 			$data['books'] = $this->home_model->get_bookborrow($bookArray);
