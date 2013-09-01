@@ -24,7 +24,7 @@ function count(sec)
 		clearTimeout(id);
 		$('#time').remove();
 		$('#next').removeClass('unable');
-		$('#next').attr("href","<?php echo site_url('guide');?>");
+		$('#next').attr("href","../guide");
 	}
 }
 $(document).ready(count(15));

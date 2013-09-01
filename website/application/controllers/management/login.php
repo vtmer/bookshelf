@@ -39,7 +39,7 @@
 				'uid'=>''
 				);
 		$this->session->unset_userdata($arr);
-		ob_end_flush();
 		redirect('management/login');
+		ob_end_flush();
 	}
  }
