@@ -38,13 +38,13 @@
 |
 */
 
-$route['default_controller'] = "guide";
-$route['guide'] = 'guide';
-$route['verify'] = "verify";
-$route['register'] = "register";
-$route['home']="home";
-$route['search']="search";
-$route['login'] = "login";
+$route['default_controller'] = "login";
+// $route['guide'] = 'guide';
+// $route['verify'] = "verify";
+// $route['register'] = "register";
+// $route['home']="home";
+// $route['search']="search";
+// $route['login'] = "login";
 $route['management'] = "management/login";
 $route['book_owner/(:num)'] = "Book_owner/index/$1";
 $route['404_override'] = '';
