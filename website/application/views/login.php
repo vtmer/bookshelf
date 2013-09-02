@@ -51,7 +51,7 @@
 			</div>
 			<div class="poins"></div>
 		</li>
-		<li class="verifier">
+<!-- 		<li class="verifier">
 		 <img src="<?php echo base_url('img/shujia.png'); ?>" class="shujia" alt="工大书架" />
 			<form action="<?php echo site_url('login/check'); ?>" method="POST" class="ajaxForm">
 				<div>
@@ -64,7 +64,7 @@
 				<p>本平台仅限于广工在校学生使用，请输入 <span>学生工作信息管理系统的学号和密码</span> 进行验证。</p>
 				<a href="#" id="have">已有账号登录</a>
 			</div>
-		</li>		
+		</li> -->		
 	</ul></div>
 
 	<div class="bottom_shadow"></div>
