@@ -200,7 +200,7 @@
 		$result = $query->result_array();
 		$isbn_arr = array();
 		foreach ($result as $key => $value) {
-			$string = read_file('./images/'.$value['ISBN'].'.jpg');
+			$string = file_exists('./images/'.$value['ISBN'].'.jpg');
 			if($string==false)
 			{
 				if($value['ISBN']!='')
