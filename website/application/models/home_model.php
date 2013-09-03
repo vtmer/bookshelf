@@ -9,7 +9,7 @@ class Home_Model extends CI_Model
   public function trans_grade($grade)
   {
     $data = getdate();
-      $term = 2;
+      $term = 1;
       $year =$data['year'];
       $month = $data['mon'];
       $school_year = $year.'-'.(int)($year+1);//9月到12月
@@ -17,7 +17,7 @@ class Home_Model extends CI_Model
       {
           $school_year = (int)($year).'-'.(int)($year+1);
           $year-=1;
-          $term = 1;
+          $term = 2;
       }
       else
       if($month>=1&&$month<=2)
@@ -26,13 +26,13 @@ class Home_Model extends CI_Model
       }
       switch ($grade) {
         case $year:
-          $grade = '大二';
+          $grade = '大一';
           break;
         case $year - 1:
-          $grade = '大三';
+          $grade = '大二';
           break;
         case $year - 2:    
-          $grade = '大四';
+          $grade = '大三';
           break;
         case $year - 3:
           $grade = '大四';

@@ -13,6 +13,7 @@ class Login extends CI_Controller
 		{
 			if(isset($_COOKIE['uid']))
 			{
+				ob_start();
 				echo '正在跳转......';
 				$uid = substr($_COOKIE['uid'], 32);
 				$user_data = $this->home_model->get_userinfo($uid);
@@ -26,7 +27,8 @@ class Login extends CI_Controller
                 	    'is_logged_in' => TRUE,
                 	);
 	            $this->session->set_userdata($data);
-	            header("Location:".site_url('guide'));
+	            redirect('guide');
+	            ob_end_flush();
 			}
 			$this->load->view('login');
 		} 
