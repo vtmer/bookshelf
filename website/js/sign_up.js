@@ -381,5 +381,5 @@ $(function(){
 });
 function reloadCode()
 {
-	$("#checkCodeImg").attr("src","http://"+document.domain+"/index.php/captcha?t="+Math.random());
+	$("#checkCodeImg").attr("src","../captcha?t="+Math.random());
 }
