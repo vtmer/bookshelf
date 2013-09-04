@@ -222,12 +222,12 @@
 	public function download_tmpl()
 	{
 		if($this->input->get('type')=='ab')
-		$str = "id,ISBN,name,author,publish,version,course_name,course_category,term,print\nnull";
+		$str = "id,ISBN,name,author,publish,version,course_name,course_category,term,print,status\nnull,xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,1";
 		else if($this->input->get('type')=='ab_mg')
 		{
 			$faculty = $this->input->get('faculty');
 			$major = $this->input->get('major');
-			$str = "id,grade,major,ISBN\nnull,grade,$major,isbn";
+			$str = "id,grade,major,book_id\nnull,grade,$major,please input isbn";
 		}
 		else show_404();
 		Header("Content-type: application/octet-stream");

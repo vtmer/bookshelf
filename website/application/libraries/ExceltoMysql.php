@@ -42,9 +42,10 @@ class ExceltoMysql
 	protected function get_field()
 	{
 		if($this->table == '') exit("Please set tablename!");
-		$query = $this->CI->db->query("SHOW COLUMNS FROM allbook");
+		$query = $this->CI->db->query("SHOW COLUMNS FROM $this->table");
 		$this->fieldNum = $query->num_rows();
 		$result = $query->result_array();
+		$this->fieldNum = count($result);
 		foreach ($result as $key => $value) 
 		{
 			$this->field[] = $value['Field'];
@@ -54,7 +55,7 @@ class ExceltoMysql
 	{
 		$sql = "SELECT `id` from `allbook` where `ISBN` = trim(both from '$ISBN')";
 		$query = $this->CI->db->query($sql);
-		return mysql_fetch_assoc($query);
+		return $query->result_array();
 	}
 	public function InsertToMysql()
 	{
@@ -85,7 +86,7 @@ class ExceltoMysql
     			$result = $this->get_bookid($charArray[3]);
     			if($result)
     			{
-    				$charArray[3] = $result['id'];
+    				$charArray[3] = $result[0]['id'];
     			}
     			else
     			{
