@@ -46,7 +46,7 @@
 				</div> 
 			</form>
 			<div class="sign_up">
-				<p>本平台仅限于广工在校学生使用，请输入 <span>学生工作信息管理系统的学号和密码</span> 进行登录。</p>
+				<p>本平台仅限于广工在校学生使用，请输入 <span>学生工作信息管理系统的学号和密码</span> 进行登录。<span>提示：</span>初始密码为身份证号</p>
 				<!-- <a href="" id="addus">加入我们</a> -->
 			</div>
 			<div class="poins"></div>

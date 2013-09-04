@@ -8,7 +8,7 @@
     <p>2、把填好的模板文件提交回网站。</p>
     <h4>二、分专业添加书籍</h4><p>1、选择要添加书籍的专业，下载模板，填写书籍信息。<span class="label label-warning">注意！</span>每个专业都含有一个ID，在模板中生成，请不要删除。</p>
     <p>2、把填好的模板文件提交回网站。</p>
-    <p><span class="label label-important">注意！</span>请务必按照以上的步骤进行，否则会带来不必要的麻烦！</p>
+    <p><span class="label label-important">注意！</span>请务必按照以上的步骤进行，否则会带来不必要的麻烦！id字段必须为null!</p>
   </div>
   <hr>
   <div id="download">

@@ -13,6 +13,7 @@ class ExceltoMysql
 	protected $file;
 	protected $field;
 	protected $fieldNum;
+	protected $CI;
 	public function __construct()
 	{
 		switch(func_num_args())
@@ -20,6 +21,7 @@ class ExceltoMysql
 			case 2:$this->ExceltoMysql2(func_get_arg(0),func_get_arg(1));break;
 			default:$this->ExceltoMysql();break;
 		}
+		$this->CI =& get_instance();
 	}
 	protected function ExceltoMysql() 
 	{
@@ -40,22 +42,23 @@ class ExceltoMysql
 	protected function get_field()
 	{
 		if($this->table == '') exit("Please set tablename!");
-		$query = mysql_query("SHOW COLUMNS FROM $this->table");
-		$this->fieldNum = mysql_num_rows($query);
-		while($fieldArray = mysql_fetch_assoc($query))
+		$query = $this->CI->db->query("SHOW COLUMNS FROM allbook");
+		$this->fieldNum = $query->num_rows();
+		$result = $query->result_array();
+		foreach ($result as $key => $value) 
 		{
-			$this->field[] = $fieldArray['Field'];
+			$this->field[] = $value['Field'];
 		}
 	}
-	protected function get_bookid($bookname)
+	protected function get_bookid($ISBN)
 	{
-		$sql = "SELECT `id` from `allbook` where `name` = trim(both from '$bookname')";
-		$query = mysql_query($sql);
+		$sql = "SELECT `id` from `allbook` where `ISBN` = trim(both from '$ISBN')";
+		$query = $this->CI->db->query($sql);
 		return mysql_fetch_assoc($query);
 	}
 	public function InsertToMysql()
 	{
-		mysql_query("SET NAMES gbk");
+		$this->CI->db->query("SET NAMES gbk");
 	    $handle = fopen($this->file,'r') or exit("Unable to open $this->file file!");
 	    //验证字段数目
 	    $firstRow = fgetcsv($handle);
@@ -102,7 +105,7 @@ class ExceltoMysql
 	    		}
 	    	}
 	    	$sql3 = $sql.$sql2;
-	    	mysql_query($sql3) or exit("已成功导入".(int)($n-2)."行错误发生在".$n."行<br/>错误信息：".mysql_error());
+	    	$this->CI->db->query($sql3) or exit("已成功导入".(int)($n-2)."行错误发生在".$n."行<br/>错误信息：".mysql_error());
 	    	$n++;
 	    }
 	    return $n-2;   	

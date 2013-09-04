@@ -7,7 +7,8 @@
 	}
 	public function index()
 	{
-		$this->load->view("management/login.html");
+		if($this->session->userdata('authority')=='admin') redirect("management/home");
+		$this->load->view("management/login.html",array("flag"=>true));
 	}
 	public function check()
 	{
