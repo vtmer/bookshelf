@@ -31,7 +31,6 @@
   </ul>
   <script type="text/javascript">
   $("#faculty").change(function(){
-    console.log($(this).val());
     $parent_id = $(this).val();
     if($parent_id > 0){
       $.get("./home/div5_major",{id:5,parent_id:$parent_id},function(data){

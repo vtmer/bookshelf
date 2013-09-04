@@ -20,6 +20,7 @@
 			case '3' :$this->_div3();break;//注册用户
 			case '5' :$this->_div5();break;//增、删、改（书籍）
 			case '6' :$this->_div6();break;//图书自检
+			case '7' :$this->_div7();break;//批量增加书籍
 			case '9' :$this->_div9();break;//学院&专业管理
 			case '11': $this->_div11();break;//管理员账户
 		}
@@ -211,11 +212,40 @@
 		echo json_encode($data);
 		return;
 	}
-	public function div6_book()
+	private function _div7()
 	{
-		if($this->input->get('isbn_arr')) show_404();
-		$isbn_arr = $this->input->get('isbn_arr');
-		print_r($isbn_arr);
+		$this->db->select('name,id')->from('major')->where('parent_id','');
+		$query = $this->db->get();
+		$data['faculty'] = $query->result_array();
+		$this->load->view('management/template/div7',$data);
+	}
+	public function download_tmpl()
+	{
+		if($this->input->get('type')=='ab')
+		$str = 'ISBN,namne,author,publish,version,course_name,course_category,term,print';
+		else if($this->input->get('type')=='ab_mg')
+		{
+			$faculty = $this->input->get('faculty');
+			$major = $this->input->get('major');
+			$str = "grade,major,ISBN\ngrade,$major,isbn";
+		}
+		else show_404();
+		Header("Content-type: application/octet-stream");
+		Header("Accept-Ranges: bytes");
+		Header("Accept-Length: ".strlen($str));
+		Header("Content-Disposition: attachment; filename=template.csv");
+		echo $str;
+	}
+	public function div7_upload()
+	{
+		if($this->input->post()) show_404();
+		$file = $this->input->post('ab');
+		$file = $_FILES['ab'];
+		echo strlen($file);
+		while(!feof($file))
+		  {
+		  echo fgets($file). "<br />";
+		  }
 	}
 
 	private function _div9()
