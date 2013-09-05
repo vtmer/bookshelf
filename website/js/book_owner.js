@@ -1,4 +1,4 @@
-$(".ajax_page").bind('click', function(){
+$(".ajax_page").live('click', function(){
 var url = $(this).attr("href");
         $.get(url,{t:Math.random()},function(res){
         	var	jsonData =  eval('(' + res + ')');
@@ -21,13 +21,4 @@ function update(dat)
 	//替换分页
 	var	page = dat['page'];
 	$(".pages").replaceWith(page);
-	//重新绑定事件
-	$(".ajax_page").bind('click', function(){
-	var url = $(this).attr("href");
-	        $.get(url,{t:Math.random()},function(res){
-	        	var	jsonData =  eval('(' + res + ')');
-	        	update(jsonData);
-	        });
-	window.event.returnValue = false;
-	});
 }

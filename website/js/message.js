@@ -1,5 +1,3 @@
-
-
 $(".main .message .message_box .msg_title").bind("click",function(){
 	$(".main .message .message_box .message_content").slideUp();
 	$(".main .message .message_box h5").removeClass("click_h5");
@@ -50,7 +48,6 @@ $(".del_message").click(function(){
 
     $(".ajaxForm").bind('submit', function(){//回调函数
         ajaxSubmit(this, function(data){  
-        //document.write(data);  	
                         if (typeof data !== 'object') {
 	        	    jsonobj = JSON.parse(data);
                         } else {

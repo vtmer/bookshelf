@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$(".ajax_page").bind('click', function(){
+	$(".ajax_page").live('click', function(){
 	var url = $(this).attr("href");
         $.get(url,{},function(data){
         	 if (typeof data !== 'object') {
@@ -25,19 +25,6 @@ function update(dat)
 	//替换分页
 	var	page = dat['page'];
 	$(".pages").replaceWith(page);
-	//重新绑定事件
-	$(".ajax_page").bind('click', function(){
-	var url = $(this).attr("href");
-	        $.get(url,{},function(data){
-	        	 if (typeof data !== 'object') {
-	        	    jsonobj = JSON.parse(data);
-                        } else {
-                            jsonobj = data;
-                        }
-	        	update(jsonobj);
-	        });
-	window.event.returnValue = false;
-	});
 }
     $(".pull_off").click(function(){//回调函数
     	var url = $(this).attr('href');

@@ -1,7 +1,7 @@
 $(".main .search_bar input").bind("click",function(){if(this.value=="请输入要查找的书目")this.value=""}).bind("blur",function(){if(!this.value)this.value="请输入要查找的书目"});
 $(document).ready(function(){
 $('html,body').animate({scrollTop:390},1000);
-$(".ajax_page").bind('click', function(){
+$(".ajax_page").live('click', function(){
 var url = $(this).attr("href").replace(/search/,"search/ajaxPage");
         $.get(url,{},function(data){
         	 if (typeof data !== 'object') {
@@ -31,18 +31,5 @@ function update(dat)
 	//替换分页
 	var	page = dat['page'];
 	$(".pages").replaceWith(page);
-	//重新绑定事件
-	$(".ajax_page").bind('click', function(){
-	var url = $(this).attr("href").replace(/search/,"search/ajaxPage");
-	        $.get(url,{},function(data){
-	        	if (typeof data !== 'object') {
-	        	    jsonobj = JSON.parse(data);
-                        } else {
-                            jsonobj = data;
-                        }
-	        	update(jsonobj);
-	        });
-	window.event.returnValue = false;
-	});
 }
 });
