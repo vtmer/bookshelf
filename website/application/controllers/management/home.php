@@ -217,6 +217,7 @@
 		$this->db->select('name,id')->from('major')->where('parent_id','');
 		$query = $this->db->get();
 		$data['faculty'] = $query->result_array();
+		$this->load->helper('form');
 		$this->load->view('management/template/div7',$data);
 	}
 	public function download_tmpl()
@@ -238,14 +239,25 @@
 	}
 	public function div7_upload()
 	{
-		if($this->input->post()) show_404();
-		$file = $this->input->post('ab');
-		$file = $_FILES['ab'];
-		echo strlen($file);
-		while(!feof($file))
-		  {
-		  echo fgets($file). "<br />";
-		  }
+		if(!isset($_FILES['file'])) show_404();
+		$file = $_FILES['file'];
+ 		if($file['type']!='text/csv')
+		{
+			echo "illagel type!";
+			exit;
+		}
+		if($file['size']>1024*1024)
+		{
+			echo "too large file";
+			exit;
+		}
+		$this->load->library('ExceltoMysql');
+		$table = '';
+		if($this->input->post('type')=='ab') $table = 'allbook';
+		else if($this->input->post('type')=='ab_mg') $table = 'allbook_mg';
+		$this->exceltomysql->set($table,$file['tmp_name']);
+		echo '已添加'.$this->exceltomysql->InsertToMysql().'行数据<br/>';
+
 	}
 
 	private function _div9()

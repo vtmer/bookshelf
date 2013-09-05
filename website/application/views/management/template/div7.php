@@ -57,12 +57,23 @@
   </script>
 </div><!--End select-->
 </div><!--End download-->
-<div>
+<div >
   <h3>上传数据：</h3>
   <div class="span6">
-    <form action="<?php echo site_url('management/home/div7_upload');?>" method="post" enctype="multipart/form-data">
-    <input type="file" name="ab" /><input type="submit" name="上传"/>
-  </form>
-  <div>
+    <span>书架书库模板:</span>
+    <?php echo form_open_multipart('management/home/div7_upload');?>
+    <input type="file" name="file"/>
+    <input type="submit" value="提交" />
+        <input type="hidden" name="type" value="ab"/>
+    </form>
+  </div>
+     <div class="span6">
+      <span>专业模板:</span>
+    <?php echo form_open_multipart('management/home/div7_upload');?>
+    <input type="file" name="file"/>
+    <input type="submit" value="提交" />
+    <input type="hidden" name="type" value="ab_mg"/>
+    </form>
+  </div>
 </div>
 </div>
