@@ -14,7 +14,6 @@ class Login extends CI_Controller
 			if(isset($_COOKIE['uid']))
 			{
 				ob_start();
-				echo '正在跳转......';
 				$uid = substr($_COOKIE['uid'], 32);
 				$user_data = $this->home_model->get_userinfo($uid);
 				//储存用户信息至session
@@ -40,47 +39,78 @@ class Login extends CI_Controller
     
 	//登陆验证
     public function check()
-	{  
+	{
 		$student_id = $this->input->post('username');
 		$pwd = $this->input->post('pwd');
-		$result = $this->catch_msg->is_login($student_id,$pwd);
-		if($result['status'])
+		$login = false;
+		$row = $this->user_model->get($student_id);
+		if($row==null)//如果是第一次登录
 		{
-			$row = $this->user_model->get($student_id);
-			if($row==null)//如果是第一次登录
+			$result = $this->catch_msg->is_login($student_id,$pwd);
+			if(!$result['status'])
 			{
-				$this->session->set_userdata('student_id',$student_id);
-				$this->session->set_userdata('s_id',$result['s_id']);
-				$url = site_url('register');
-	            $msg = array('type'=>'redirect','url'=>$url,'content'=>'正在获取用户数据,请稍后');
-	            echo json_encode($msg);
-	            exit;//跳转到信息填写
+				$msg = array('type'=>'alert','title'=>'提示信息','content'=>$result['msg']);
+	           	echo json_encode($msg);
+	            exit;
 			}
+			$this->session->set_userdata('student_id',$student_id);
+			$this->session->set_userdata('s_id',$result['s_id']);
+			$url = site_url('register');
+            $msg = array('type'=>'redirect','url'=>$url,'content'=>'正在获取用户数据,请稍后');
+            echo json_encode($msg);
+            exit;//跳转到信息填写
+		}
+		else
+		{//检查数据库
+			$query = $this->db->get_where('user', array('student_id' => $student_id,'password'=>md5($pwd)));
+			$flag = $query->num_rows() == 1 ? TRUE : FALSE;
+			if($flag==FALSE)
+			{
+				$result = $this->catch_msg->is_login($student_id,$pwd);
+				if(!$result['status'])
+				{
+					$msg = array('type'=>'alert','title'=>'提示信息','content'=>$result['msg']);
+		           	echo json_encode($msg);
+		            exit;
+				}else
+				{//success
+					//update pwd into database
+					$uid = $row->id;
+					$this->db->update('user',array('password'=>md5($pwd)),array('id'=>$uid));
+					$login = TRUE;
+				}
+			}else
+			{	
+				$login = TRUE;
+			}
+		}
+		if($login==TRUE)
+		{
 			$uid = $row->id;
-        	//储存用户信息至session
-        	$data = array(
+	    	//储存用户信息至session
+	    	$data = array(
 				'points' => $row->points,
 				'truename' => $row->truename,
-        	    'uid' => $uid,
+	    	    'uid' => $uid,
 				'major' => $row->major,
 				'grade' => $row->grade,
-        	    'is_logged_in' => TRUE,
-        	);
-            $this->session->set_userdata($data);
-            //设置cookies
-            if($this->input->post('auto_login'))
-            {
-                $user_id = md5($uid).$uid;//按照md5(uid)+uid加密
-                setcookie('uid',$user_id,time()+3600*24*7);//持续一周
-            }
+	    	    'is_logged_in' => TRUE,
+	    	);
+	        $this->session->set_userdata($data);
+	        //设置cookies
+	        if($this->input->post('auto_login'))
+	        {
+	            $user_id = md5($uid).$uid;//按照md5(uid)+uid加密
+	            setcookie('uid',$user_id,time()+3600*24*7);//持续一周
+	        }
 	        $url = site_url('guide');
-            $msg = array('type'=>'redirect','url'=>$url);
-            echo json_encode($msg);
-            exit;		
+	        $msg = array('type'=>'redirect','url'=>$url);
+	        echo json_encode($msg);
+	        exit;		
 		}
 		else 
 		{
-            $msg = array('type'=>'alert','title'=>'提示信息','content'=>$result['msg']);
+            $msg = array('type'=>'alert','title'=>'提示信息','content'=>'系统错误');
            	echo json_encode($msg);
             exit;
 		}
