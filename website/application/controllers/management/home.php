@@ -210,8 +210,14 @@
 		}
 		$data = $this->manage_model->div6_book($isbn_arr);
 		echo json_encode($data);
+		if($this->input->get('act')=='saveIMG')
+		{
+			$this->load->library('FetchDouBanImg');
+		    echo $this->fetchdoubanimg->get_img($isbn_arr);
+		}
 		return;
 	}
+
 	private function _div7()
 	{
 		$this->db->select('name,id')->from('major')->where('parent_id','');
