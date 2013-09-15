@@ -50,7 +50,7 @@ function lookup(inputString) {
 			(typeof data !== 'object') ? jsonObj = JSON.parse(data) :  jsonObj = data ;
 			var length = jsonObj.length;
 			if (length >0) { 
-				$('#suggest_box').show().html('<ul></ul>');
+				$('#suggest_box').show().html('<ul></ul><div>找不到你想要的书？试试输入ISBN码吧。</div>');
 				for (var i = 0;i<length;i++) {
 					$('#suggest_box ul').append("<li><a href='' title="+jsonObj[i].name+"><img src='/images/"+jsonObj[i].ISBN+".jpg' alt='' onerror=\"this.onerror=null; this.src=\'/img/loading.gif\'\"/></a></li>"); 
 				}
