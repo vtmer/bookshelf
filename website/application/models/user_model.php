@@ -59,7 +59,7 @@ class User_model extends CI_Model
 				}
 			}
 		}
-		$this->session->set_userdata('major',$m_name);
+		$this->session->set_userdata('major',$data['major']);
 		$this->db->insert('user',$data);
 		return mysql_insert_id();
 	}

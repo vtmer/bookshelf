@@ -1,9 +1,8 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 class FetchDouBanImg
 {
-	private function get_data($url)
+	private function get_data($url ,$timeout)
 	{
-		$timeout = 5;
 		$conn = curl_init($url);//创建个curl语柄
 		curl_setopt($conn, CURLOPT_TIMEOUT, $timeout);//设置超时时间
 		curl_setopt($conn,CURLOPT_RETURNTRANSFER,1);// 返回结果，而不是输出它
@@ -30,11 +29,11 @@ class FetchDouBanImg
 	    	array_push($img , json_decode($data)->image);
 	    	usleep(300000);//300ms (sleep microseconds>>1s==1&10^6us)
     	}
-		$img_content = array();
+		
 		foreach ($img as $key => $value) 
 		{
-			$file = './images/'.$ISBN[$key].'.jpg';
-			$img_content[] = $data =  $this->get_data($value , 3);
+			$file = './downloads/'.$ISBN[$key].'.jpg';
+			$data =  $this->get_data($value , 3);
 			usleep(300000);
 			$f = fopen($file, 'w+');
 			fputs($f, $data);

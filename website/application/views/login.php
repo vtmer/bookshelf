@@ -36,35 +36,20 @@
 		 <img src="<?php echo base_url('img/shujia.png'); ?>" class="shujia" alt="工大书架" />
 			<form action="<?php echo site_url('login/check'); ?>" method="POST" class="ajaxForm">
 				<div>
-					<!-- <span>已有帐号登录:</span> -->
 					<label for="user_name">学号：<input type="text" name="username" value='' placeholder="  请输入您的学号"/ ></label>
 					<label for="password">密码：<input type="password" name="pwd" value=''/></label>
 					<!-- <label for="" class="yanzheng">验证码：<input type="text"/> <img src="" /></label> -->
-					<label for="remember" class="check_label"><input type="checkbox" id="remember" name="auto_login"/><span unselectable="on">一周内自动登录</span><a href="http://eswis.gdut.edu.cn/default.aspx?usract=getpass" class="forget" target="_blank">忘记密码？</a></label>
-					
+					<label for="remember" class="check_label"><!--<input type="checkbox" id="remember" name="auto_login"/><span unselectable="on">一周内自动登录</span>-->
+                        <a href="http://eswis.gdut.edu.cn/default.aspx?usract=getpass" class="forget" target="_blank">忘记密码？</a></label>
 					<input type="submit" class="confirm" value="登 录" />			
 				</div> 
 			</form>
 			<div class="sign_up">
-				<p>本平台仅限于广工在校学生使用，请输入 <span>学生工作信息管理系统的学号和密码</span> 进行登录。<span>提示：</span>初始密码为身份证号</p>
+				<p>本平台仅限于广工在校学生使用，请输入 <span>学生工作信息管理系统的学号和密码</span> 进行登录。<span>小提示：</span>初始密码为身份证号</p>
 				<!-- <a href="" id="addus">加入我们</a> -->
 			</div>
 			<div class="poins"></div>
-		</li>
-<!-- 		<li class="verifier">
-		 <img src="<?php echo base_url('img/shujia.png'); ?>" class="shujia" alt="工大书架" />
-			<form action="<?php echo site_url('login/check'); ?>" method="POST" class="ajaxForm">
-				<div>
-					<label for="user_name">学号：<input type="text" name="username" value='' placeholder="  请输入您的学号"/ ></label>
-					<label for="password">密码：<input type="password" name="pwd" value=''/></label>
-					<input type="submit" class="confirm" value="验 证" />			
-				</div> 
-			</form>
-			<div class="sign_up">
-				<p>本平台仅限于广工在校学生使用，请输入 <span>学生工作信息管理系统的学号和密码</span> 进行验证。</p>
-				<a href="#" id="have">已有账号登录</a>
-			</div>
-		</li> -->		
+		</li>	
 	</ul></div>
 
 	<div class="bottom_shadow"></div>

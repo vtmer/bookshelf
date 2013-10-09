@@ -202,6 +202,7 @@
 		$isbn_arr = array();
 		foreach ($result as $key => $value) {
 			$string = file_exists('./images/'.$value['ISBN'].'.jpg');
+			// $string = read_file('./images/'.$value['ISBN'].'.jpg');
 			if($string==false)
 			{
 				if($value['ISBN']!='')
@@ -247,9 +248,10 @@
 	{
 		if(!isset($_FILES['file'])) show_404();
 		$file = $_FILES['file'];
- 		if($file['type']!='text/csv')
+ 		if($file['type']!='text/csv'&&$file['type']!='application/vnd.ms-excel')
 		{
 			echo "illagel type!";
+			var_dump($file['type']);
 			exit;
 		}
 		if($file['size']>1024*1024)
