@@ -152,19 +152,21 @@ class Home_Model extends CI_Model
 
   public function user_borrow($book_id , $offset , $length)//查找拥有某本书的人
   {
-   /* $this->db->select('SQL_CALC_FOUND_ROWS user.id , user.truename , user.major , user.dormitory ')
+   /* $this->db->select('SQL_CALC_FOUND_ROWS user.id , user.truename , user.major AS major, user.dormitory ')
              ->from('allbook AS ab')
              ->join('circulating_book AS cb' , 'ab.id = cb.book_id' , 'left')
              ->join('user' , 'user.id = cb.from_id','left')
+             ->join('major' , 'user.major = major.id', 'left')
              ->where('cb.book_status',0)
              ->where('cb.book_id',$book_id)
              ->limit($length,$offset);
     $query = $this->db->get();*/
     $uid = $this->session->userdata('uid');
-    $sql = "SELECT SQL_CALC_FOUND_ROWS `user`.`id`, `user`.`truename`, `user`.`major`, `user`.`dormitory` 
+    $sql = "SELECT SQL_CALC_FOUND_ROWS `user`.`id`, `user`.`truename`, `major`.`name` AS major, `user`.`dormitory` 
             FROM (`allbook` AS ab) 
             LEFT JOIN `circulating_book` AS cb ON `ab`.`id` = `cb`.`book_id` 
             LEFT JOIN `user` ON `user`.`id` = `cb`.`from_id` 
+            LEFT JOIN `major` ON `user`.`major` = `major`.`id`
             WHERE `cb`.`book_status` = 0 AND `cb`.`book_id` = ? AND `user`.`id`!=?
             LIMIT ?,?";
     $query = $this->db->query($sql , array($book_id,$uid,$offset,$length));
