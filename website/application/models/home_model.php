@@ -345,7 +345,7 @@ class Home_Model extends CI_Model
               'create_time' => date("Y/m/d")
           );
         $this->db->insert('message',$arr);
-      }
+      
       // $this->db->trans_complete(); 
       // if ($this->db->trans_status() == FALSE)
       // {
@@ -384,6 +384,7 @@ class Home_Model extends CI_Model
     }
     return true;
   	} 	 
+    }
 
   	public function pull_off($id)
   	{
