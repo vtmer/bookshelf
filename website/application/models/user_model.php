@@ -142,15 +142,16 @@ class User_model extends CI_Model
 	public function confirm($bookArray)
 	{
 		$message_id = $bookArray['message_id'];
-		$b_id_arr = array();
+		$cb_id_arr = array();//在cb中的id
+		$b_id_arr = array();//书本id
 		foreach ($bookArray as $key => $value) 
 		{
 			if(is_numeric($key))
 			{
 				array_push($b_id_arr, $key);
+				array_push($cb_id_arr, $value);
 			}
 		}
-		array_shift($bookArray);
 
 		//$this->db->trans_start();
 		//更新信息为已确认
@@ -195,7 +196,7 @@ class User_model extends CI_Model
 				}
 			}
 		}
-		$book_num = count($bookArray);
+		$book_num = count($cb_id_arr);
 		//获取信息扣分者的积分
 		$query_user_from = $this->db->get_where('user',array('id' => $min_id));
 		if($query_user_from->num_rows() == 1)
@@ -219,16 +220,17 @@ class User_model extends CI_Model
 		$this->db->where('id',$add_id);
 		$this->db->update('user',array('points' => $to_point,'lend_book' => $lend_book));
 		//更新所有书本状态
-		foreach ($bookArray as $key => $value) 
+
+		foreach ($cb_id_arr as $key => $value) 
 		{
 			$sql = "UPDATE `circulating_book` 
-					SET `book_status` = '2',
-						`book_right`='1',
+					SET `book_status` = 2,
+						`book_right`= 1 ,
 						`circulate_number` =`circulate_number`+1,
 						`from_id`= $add_id,
 						`to_id`= $min_id,
-						`change_time`= NOW() 
-					WHERE `id`=$value";
+						`change_time`= NOW()
+					WHERE `id`= $value";
 			mysql_query($sql);
 		}
 		foreach ($b_id_arr as $key => $value) 
@@ -250,7 +252,15 @@ class User_model extends CI_Model
 		//   	return mysql_error();
 		// }
 		// $this->db->trans_off();
-		return TRUE;
+		if(!mysql_error())
+		{
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
+		}
+			
 	}
 
 	public function show_message_num($uid)
