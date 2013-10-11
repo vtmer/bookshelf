@@ -77,6 +77,7 @@ class ExceltoMysql
 	    	exit('Please check field:'.$error."in the file $this->file!");
 		}
 		//END
+		// mysql_query("BEGIN");//开启事务处理，如果可以的话
 		$sql = "INSERT INTO $this->table VALUES (";	
 		$n = 2;
 	    while($charArray = fgetcsv($handle))//这里是第二行读取了    
@@ -90,12 +91,14 @@ class ExceltoMysql
     			}
     			else
     			{
-    				exit("已成功导入".(int)($n-2)."行错误发生在".$n."行<br/>错误信息：《".$charArray[3]."》课本不存在！");
+    				// mysql_query("ROLLBACK");//数据回滚
+    				echo ("错误发生在第".$n."行,《".$charArray[3]."》课本不存在！系统默认跳过该记录,请检查后重新导入！<br/>");
+    				continue;//跳该记录
     			} 				
     		}
 	    	$sql2 = "";
-	    	foreach ($charArray as $key => $value) 
-	    	{	
+	    	foreach ($charArray as $key => $value)
+	    	{
 	    		if($key!=$this->fieldNum-1)
 	    		{
 	    			$sql2 .= "trim(both from '".$value."'),";
@@ -106,9 +109,15 @@ class ExceltoMysql
 	    		}
 	    	}
 	    	$sql3 = $sql.$sql2;
-	    	$this->CI->db->query($sql3) or exit("已成功导入".(int)($n-2)."行错误发生在".$n."行<br/>错误信息：".mysql_error());
+	    	mysql_query($sql3);
+	    	if(mysql_error())
+	    	{
+	    		// mysql_query("ROLLBACK");//数据回滚
+				exit("已成功导入".(int)($n-2)."行,错误发生在".$n."行，该行之后的数据不会被导入。<br/>错误信息：".mysql_error());
+			}
 	    	$n++;
 	    }
+	    // mysql_query("COMMIT");//提交确认
 	    return $n-2;   	
 	}
 }

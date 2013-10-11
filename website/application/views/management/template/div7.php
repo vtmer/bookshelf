@@ -31,7 +31,32 @@
     </li>
     <div style="float:left;"><a class="btn btn-primary" id="ab_mg" disabled>下载</a></div> 
   </ul>
-  <script type="text/javascript">
+</div><!--End select-->
+</div><!--End download-->
+<div class="row-fluid">
+  <h3>上传数据：</h3>
+  <div class="span5">
+    <span>书架书库模板:</span>
+    <?php $attributes = array('class' => 'ajaxForm'); echo form_open_multipart('management/home/div7_upload' ,$attributes);?>
+    <input type="file" name="file"/>
+    <input type="submit" value="提交" />
+        <input type="hidden" name="type" value="ab"/>
+    </form>
+  </div>
+     <div class="span5">
+      <span>专业模板:</span>
+    <?php echo form_open_multipart('management/home/div7_upload',$attributes);?>
+    <input type="file" name="file"/>
+    <input type="submit" value="提交" />
+    <input type="hidden" name="type" value="ab_mg"/>
+    </form>
+  </div>
+  <div id="result" class="span10" style="display:none">
+    <textarea style="width:800px;height:100px;"></textarea >
+  </div>
+</div>
+</div>
+ <script type="text/javascript">
   $("#div7_faculty").change(function(){
     $parent_id = $(this).val();
     if($parent_id > 0){
@@ -39,8 +64,7 @@
          (typeof data !== 'object') ? jsonobj = JSON.parse(data) : jsonobj = data;
           var length = jsonobj.length;
           $("#div7_major").html('');
-          for(var i=0;i<length;i++)
-          {
+          for(var i=0;i<length;i++){
             $("#div7_major").append("<option value="+jsonobj[i].id+">"+jsonobj[i].name+"</option>");
           }
           $("#div7_major").removeAttr("disabled");
@@ -54,26 +78,7 @@
        $("#ab_mg").removeAttr("href");
     }
   });
+  $("#div7_major").change(function(){
+    $("#ab_mg").attr("href",'./home/download_tmpl?type=ab_mg&faculty='+$("#div7_faculty").val()+'&major='+$("#div7_major").val());
+  });
   </script>
-</div><!--End select-->
-</div><!--End download-->
-<div >
-  <h3>上传数据：</h3>
-  <div class="span6">
-    <span>书架书库模板:</span>
-    <?php echo form_open_multipart('management/home/div7_upload');?>
-    <input type="file" name="file"/>
-    <input type="submit" value="提交" />
-        <input type="hidden" name="type" value="ab"/>
-    </form>
-  </div>
-     <div class="span6">
-      <span>专业模板:</span>
-    <?php echo form_open_multipart('management/home/div7_upload');?>
-    <input type="file" name="file"/>
-    <input type="submit" value="提交" />
-    <input type="hidden" name="type" value="ab_mg"/>
-    </form>
-  </div>
-</div>
-</div>
