@@ -41,7 +41,7 @@ class ExceltoMysql
 	}
 	protected function get_field()
 	{
-		if($this->table == '') exit("Please set tablename!");
+		if($this->table == '') exit("请设置表名!");
 		$query = $this->CI->db->query("SHOW COLUMNS FROM $this->table");
 		$this->fieldNum = $query->num_rows();
 		$result = $query->result_array();
@@ -60,12 +60,12 @@ class ExceltoMysql
 	public function InsertToMysql()
 	{
 		$this->CI->db->query("SET NAMES gbk");
-	    $handle = fopen($this->file,'r') or exit("Unable to open $this->file file!");
+	    $handle = fopen($this->file,'r') or exit("不能打开文件 $this->file !");
 	    //验证字段数目
 	    $firstRow = fgetcsv($handle);
 	    if(count($firstRow)!=$this->fieldNum)
 	    {
-	    	exit("Unmatch fields' number!");
+	    	exit("数据表字段不匹配，请检查数据文件的首行!");
 		}
 		if(count($diff = array_diff($firstRow,$this->field))) 
 		{
@@ -74,7 +74,7 @@ class ExceltoMysql
 	    	{
 	    		$error .= " '$value' ";
 	    	}
-	    	exit('Please check field:'.$error."in the file $this->file!");
+	    	exit('请检查文件首行字段:'.$error." 文件： $this->file!");
 		}
 		//END
 		// mysql_query("BEGIN");//开启事务处理，如果可以的话

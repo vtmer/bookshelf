@@ -38,24 +38,26 @@
   <div class="span5">
     <span>书架书库模板:</span>
     <?php $attributes = array('class' => 'ajaxForm'); echo form_open_multipart('management/home/div7_upload' ,$attributes);?>
-    <input type="file" name="file"/>
+    <input id="file_ab" type="file" name="file"/>
     <input type="submit" value="提交" />
-        <input type="hidden" name="type" value="ab"/>
+    <input type="hidden" name="type" value="ab"/>
+    <iframe id="upload_target" name="upload_target" src="" style="display:none"></iframe>
     </form>
   </div>
      <div class="span5">
       <span>专业模板:</span>
     <?php echo form_open_multipart('management/home/div7_upload',$attributes);?>
-    <input type="file" name="file"/>
+    <input id="file_ab_mg" type="file" name="file"/>
     <input type="submit" value="提交" />
     <input type="hidden" name="type" value="ab_mg"/>
+    <iframe id="upload_target" name="upload_target" src="" style="display:none"></iframe>
     </form>
   </div>
   <div id="result" class="span10" style="display:none">
-    <textarea style="width:800px;height:100px;"></textarea >
   </div>
 </div>
 </div>
+<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
  <script type="text/javascript">
   $("#div7_faculty").change(function(){
     $parent_id = $(this).val();
@@ -81,4 +83,19 @@
   $("#div7_major").change(function(){
     $("#ab_mg").attr("href",'./home/download_tmpl?type=ab_mg&faculty='+$("#div7_faculty").val()+'&major='+$("#div7_major").val());
   });
+  $(document).ready(function(){
+  function init() {
+    $(".ajaxForm").submit(function() {
+      this.target = "upload_target";
+      document.getElementById("upload_target").onload = uploadDone;
+    });
+  }
+  function uploadDone() { //Function will be called when iframe is loaded
+    var ret = frames['upload_target'].document.getElementsByTagName("body")[0].innerHTML;
+    var div = '<div class="alert fade in"><button type="button" class="close" data-dismiss="alert">×</button>'+ret+'</div>';
+    $("#result").append(div);
+    $("#result").show();
+  }
+  init();
+ });
   </script>

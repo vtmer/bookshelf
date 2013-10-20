@@ -250,13 +250,13 @@
 		$file = $_FILES['file'];
  		if($file['type']!='text/csv'&&$file['type']!='application/vnd.ms-excel')
 		{
-			echo "illagel type!";
+			echo "文件类型错误！请重新选择*.csv的类型文件。";
 			var_dump($file['type']);
 			exit;
 		}
 		if($file['size']>1024*1024)
 		{
-			echo "too large file";
+			echo "文件太大了，不要超过1M。";
 			exit;
 		}
 		$this->load->library('ExceltoMysql');
@@ -264,7 +264,7 @@
 		if($this->input->post('type')=='ab') $table = 'allbook';
 		else if($this->input->post('type')=='ab_mg') $table = 'allbook_mg';
 		$this->exceltomysql->set($table,$file['tmp_name']);
-		echo '已添加'.$this->exceltomysql->InsertToMysql().'行数据<br/>';
+		echo '导入数据文件<strong>'.$file['name'].'</strong>，已添加'.$this->exceltomysql->InsertToMysql().'行数据<br/>';
 
 	}
 
