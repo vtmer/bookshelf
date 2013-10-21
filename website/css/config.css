@@ -18,7 +18,7 @@ div.personal_config div.left { float:left; width:65%; border-right:1px solid #ff
 div.personal_config div.left>div { border-right:1px solid #d6d4ca; padding-top: 10px;}
 div.personal_config div.left label { overflow:hidden; clear: both; display:block; width:350px; margin-bottom: 22px; text-align:right; font-size:14px;}
 div.personal_config div.left label span.user_name { float:right; width:200px; margin-left:15px; text-align:left;}
-div.personal_config div.left label input { width:200px; height:25px; padding-left: 3px;e margin-left:15px; background-color: rgb(226, 226, 226); border:solid 1px #7e7e7d; border-radius: 2px;}
+div.personal_config div.left label input { width:200px; height:25px; padding-left: 3px; margin-left:10px; background-color: rgb(226, 226, 226); border:solid 1px #7e7e7d; border-radius: 2px;}
 div.personal_config div.left label div.select_button { float:right; width:200px; height:40px; margin:3px 0 0 15px;}
 div.personal_config div.left label input.qu { float:left; width:auto; margin: -2px 5px 0px 0px; border: none;}
 
