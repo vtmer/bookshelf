@@ -57,7 +57,6 @@
   </div>
 </div>
 </div>
-<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
  <script type="text/javascript">
   $("#div7_faculty").change(function(){
     $parent_id = $(this).val();

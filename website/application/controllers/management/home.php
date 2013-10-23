@@ -23,6 +23,7 @@
 			case '7' :$this->_div7();break;//批量增加书籍
 			case '9' :$this->_div9();break;//学院&专业管理
 			case '11': $this->_div11();break;//管理员账户
+			case '12': $this->_div12();break;//重新
 		}
 	}
 	private function _page_config()
@@ -271,7 +272,8 @@
 	private function _div9()
 	{
 		$data['major'] = $this->manage_model->major_info();
-		echo $this->load->view('management/template/div9',$data,true);
+		$this->load->library('Compress');
+		echo $this->compress->compress_html($this->load->view('management/template/div9',$data,true));
 		return;
 	}
 	public function div9_update()
@@ -311,4 +313,23 @@
 		echo 'pwd_error';
 		return ;
 	}
+	private function _div12()
+	{
+		$data['data'] = $this->manage_model->div12();
+		echo $this->load->view('management/template/div12',$data,true);
+	}
+	public function div12_reset()
+	{
+		if(!$this->input->get('op')&&!$this->input->get('id')) show_404();
+		$flag = $this->manage_model->reset_book();
+		if($flag)
+		{
+			echo '重置成功！';
+			return ;
+		}else
+		{
+			echo '重置失败！';
+			return;
+		}
+	} 
 }

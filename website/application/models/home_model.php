@@ -325,7 +325,9 @@ class Home_Model extends CI_Model
         $data['book'] = $books;
          //发给捐书人
         $data['type'] = '1';
+        $this->load->library('Compress');//加载压缩类
         $content_lend = $this->load->view('template/msg_content',$data,TRUE);
+        $content_lend = $this->compress->compress_html($content_lend);//压缩html
         $arr = array(
               'from' => $from,
               'to' =>$to,
@@ -338,6 +340,7 @@ class Home_Model extends CI_Model
         //发给借书人
         $data['type'] = '2';
         $content_borr = $this->load->view('template/msg_content',$data,TRUE);
+        $content_borr = $this->compress->compress_html($content_borr);//压缩html
         $arr = array(
               'from' => $to,
               'to' =>$from,
@@ -363,6 +366,7 @@ class Home_Model extends CI_Model
             <p>此信是由工大书架系统发出，系统不接受回信，请勿直接回复。<p>
             <p>如有任何疑问，请联系我们:<a href="http://weibo.com/vtmer">我们的微博</a><p>
             <p>工大书架--@维生数工作室<p>';
+    $msg = $this->compress->compress_html($msg);//压缩html
     $this->load->library('email');
     $this->config->load('email');
     $this->email->from('gdutbookshelf@163.com','工大书架');

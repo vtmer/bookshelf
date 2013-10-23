@@ -189,6 +189,36 @@ class Manage_model extends CI_Model
         $result = $query->result_array();
         return $result;
     }
+    public function div12()
+    {
+        $this->db->select('truename AS username, name AS bookname, cb.change_time AS borrow_time, TIMESTAMPDIFF(day,cb.change_time,now()) AS day, cb.id AS cb_id, cb.to_id')
+                  ->from('user')
+                  ->join('circulating_book cb','cb.to_id = user.id')
+                  ->join('allbook','allbook.id = cb.book_id')
+                  ->where('cb.book_status','2');
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;          
+    }
+    public function reset_book()
+    {
+        $data = $this->div12();
+        foreach ($data as $key => $value) 
+        {
+            $arr = array(
+               'from_id' => $value['to_id'],
+               'to_id' => NULL,
+               'book_status' => 0
+            );
+            $this->db->where('id', $value['cb_id']);
+            $this->db->update('circulating_book', $arr);
+            if(mysql_error()) 
+            {
+                return false;
+            }
+        }
+        if(!mysql_error()) return true;
+    }
 }
 /*---END OF manage_model 
 location: models/manage_model--*/
