@@ -173,9 +173,10 @@ class Manage_model extends CI_Model
         $this->db->select('a.name AS faculty, b.name AS major,count(*) AS num')
                 ->from('major AS a')
                 ->join('major AS b', 'b.parent_id = a.id')
-                ->join('allbook_mg AS abmg', 'abmg.major = b.id')
+                ->join('allbook_mg AS abmg', 'abmg.major = b.id','left')
                 ->group_by('b.name')
-                ->having('num <',15);
+                ->having('num <',15)
+                ->order_by('num');
         $query = $this->db->get();
         $result = $query->result_array();
         return $result;
