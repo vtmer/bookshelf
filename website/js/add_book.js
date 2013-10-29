@@ -55,6 +55,22 @@ function lookup(inputString) {
 					$('#suggest_box ul').append("<li><a href='' title="+jsonObj[i].name+"><img src='/images/"+jsonObj[i].ISBN+".jpg' alt='' onerror=\"this.onerror=null; this.src=\'/img/loading.gif\'\"/></a></li>"); 
 				}
 
+				$(function () {
+					var imgs = $('#suggest_box ul li img');
+					for (var i = 0;i<length;i++) {
+						var	thisimg = $(imgs[i]),
+							imgsrc = thisimg.attr('src'),
+							defaultsrc1 = "",
+							defaultsrc2 = "/images/.jpg",
+							defaultsrc = /^(.*(\/images\/\.jpg))|(.*(\/img\/loading\.gif))$/;
+						if (defaultsrc.test(imgsrc)) {
+							console.log(imgsrc);
+							$(thisimg).parents('li').css("display","none");
+						};						
+					}
+				});//隐藏图片不存在的项目
+
+					var imgs = $('#suggest_box ul li img');
 				$('#suggest_box ul a').click(function() {
 					var $index = $(this).parent('li').index();
 					var $string = "<li><div><img src='/images/"+jsonObj[$index].ISBN+".jpg' alt='' onerror=\"this.onerror=null; this.src=\'/img/loading.gif\'\"/></div>"+
