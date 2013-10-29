@@ -53,7 +53,7 @@ function lookup(inputString) {
 				$('#suggest_box').show().html('<ul></ul><div>找不到你想要的书？试试输入ISBN码吧。</div>');
 				for (var i = 0;i<length;i++) {
 					$('#suggest_box ul').append("<li><a href='' title="+jsonObj[i].name+"><img src='/images/"+jsonObj[i].ISBN+".jpg' alt='' onerror=\"this.onerror=null; this.src=\'/img/loading.gif\'\"/></a></li>"); 
-				}
+				};
 
 				$(function () {
 					var imgs = $('#suggest_box ul li img');
@@ -70,7 +70,6 @@ function lookup(inputString) {
 					}
 				});//隐藏图片不存在的项目
 
-					var imgs = $('#suggest_box ul li img');
 				$('#suggest_box ul a').click(function() {
 					var $index = $(this).parent('li').index();
 					var $string = "<li><div><img src='/images/"+jsonObj[$index].ISBN+".jpg' alt='' onerror=\"this.onerror=null; this.src=\'/img/loading.gif\'\"/></div>"+
