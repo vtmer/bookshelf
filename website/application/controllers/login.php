@@ -5,7 +5,7 @@ class Login extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library('catch_msg');
+        $this->load->library('eswis');
 	}
     public function index()
     {
@@ -46,19 +46,23 @@ class Login extends CI_Controller
 		$row = $this->user_model->get($student_id);
 		if($row==null)//如果是第一次登录
 		{
-			$result = $this->catch_msg->is_login($student_id,$pwd);
-			if(!$result['status'])
+            $result = $this->eswis->login($student_id, $pwd);
+			if(!$result['session_id'])
 			{
-				$msg = array('type'=>'alert','title'=>'提示信息','content'=>$result['msg']);
+				$msg = array('type'=>'alert','title'=>'提示信息','content'=>$result);
 	           	echo json_encode($msg);
 	            exit;
 			}
-			$this->session->set_userdata('student_id',$student_id);
-			$this->session->set_userdata('s_id',$result['s_id']);
-			$url = site_url('register');
-            $msg = array('type'=>'redirect','url'=>$url,'content'=>'正在获取用户数据,请稍后');
-            echo json_encode($msg);
-            exit;//跳转到信息填写
+            else
+            {
+        		$this->session->set_userdata('student_id',$student_id);
+        		$this->session->set_userdata('s_id',$result['session_id']);
+                $this->session->set_userdata('eswis_key',$result['key']);
+        		$url = site_url('register');
+                $msg = array('type'=>'redirect','url'=>$url,'content'=>'正在获取用户数据,请稍后');
+                echo json_encode($msg);
+                exit;//跳转到信息填写
+            }
 		}
 		else
 		{//检查数据库
@@ -66,10 +70,10 @@ class Login extends CI_Controller
 			$flag = $query->num_rows() == 1 ? TRUE : FALSE;
 			if($flag==FALSE)
 			{
-				$result = $this->catch_msg->is_login($student_id,$pwd);
-				if(!$result['status'])
+                $result = $this->eswis->login($student_id, $pwd);
+				if(!$result['session_id'])
 				{
-					$msg = array('type'=>'alert','title'=>'提示信息','content'=>$result['msg']);
+					$msg = array('type'=>'alert','title'=>'提示信息','content'=>$result);
 		           	echo json_encode($msg);
 		            exit;
 				}else

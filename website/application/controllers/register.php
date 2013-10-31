@@ -1,12 +1,12 @@
 <?php
-ob_start();
+
 class Register extends CI_Controller
 {
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->library('email');
-		$this->load->library('catch_msg');
+		$this->load->library('eswis');
 	}	
 
 	public function index()
@@ -14,20 +14,21 @@ class Register extends CI_Controller
 		if(!$this->session->userdata('s_id'))
             redirect('login');
         $s_id = $this->session->userdata('s_id');
+        $key = $this->session->userdata('eswis_key');
         $user_info = '';
         if(!$this->session->userdata('campus'))
         {
-        	$user_info = $this->catch_msg->get_info($s_id);
-            if(count($user_info)==2) redirect('login');
-           
-            //var_dump($user_info);exit;
+        	$user_info = $this->eswis->get_info($s_id, $key);
+            if($user_info['stu_id'] != $this->session->userdata('student_id')) redirect('login');
+           // var_dump($this->session->all_userdata());
+           //  var_dump($user_info);exit;
 	        //将信息存储到session
 			$array = array(
-					'campus'=>substr($user_info[0], 0, stripos($user_info[0],'校区',0)),
-					'faculty'=>$user_info[1],
-					'major'=>substr($user_info[2], 0, stripos($user_info[2],'专业',0)),
-					'grade'=>substr($user_info[3],0,4),
-					'truename'=>$user_info[5]
+					'campus'=>substr($user_info['campus'], 0, stripos($user_info['campus'],'校区',0)),
+					'faculty'=>$user_info['faculty'],
+					'major'=>substr($user_info['major'], 0, stripos($user_info['major'],'专业',0)),
+					'grade'=>substr($user_info['grade'],0,4),
+					'truename'=>$user_info['name']
 				);
 			$this->session->set_userdata($array);
 		}
@@ -175,7 +176,7 @@ class Register extends CI_Controller
 			}
 	
 		/*邮箱验证模块*/
-		$link['link'] = site_url()."verify/index/".$uid."/".$activationKey;//验证链接
+		$link['link'] = site_url('verify')."/activate/".$uid."/".$activationKey;//验证链接
 		$message = $this->load->view('template/email_content', $link, true);//装载邮件模板
 
 		$this->load->library('email');
