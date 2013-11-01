@@ -2,6 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="工大书架,书架,工大,广东工业大学,广工">
+<meta name="description" content="工大书架，旨在营造一个简单、纯净、快速的校内借书平台。工大书架，工大学子的共同书架，在这里，我们传承的不仅仅是书籍......">
+<meta name="baidu-site-verification" content="BBhj82XEnY" />
 <title>登录页</title>
 <link href="<?php echo base_url('css/reset.css'); ?>" type="text/css" rel="stylesheet" />
 <link href="<?php echo base_url('css/login.css'); ?>" type="text/css" rel="stylesheet" />
@@ -132,7 +135,7 @@ $(document).ready(function(){
 					$('#screen').show();
 					$('.popbox').center();
 					$('.popbox').fadeIn();
-					if(jsonobj.content=='用户名不存在')
+					if(jsonobj.content!='')
 					{
 						//关闭按钮
 					    $('.close-btn,.ok-btn ').click(function(){
@@ -144,17 +147,17 @@ $(document).ready(function(){
 							return false;
 						});
 					}
-					else if(jsonobj.content=='密码不正确')
-					{
-						//关闭按钮
-					    $('.close-btn,.ok-btn ').click(function(){
-							$('.popbox').fadeOut(function(){ $('#screen').hide();
-							$('input[type=password]').val('');
-							$('input[type=password]').focus();
-							});
-							return false;
-						});
-					}
+					// else if(jsonobj.content=='密码不正确')
+					// {
+					// 	//关闭按钮
+					//     $('.close-btn,.ok-btn ').click(function(){
+					// 		$('.popbox').fadeOut(function(){ $('#screen').hide();
+					// 		$('input[type=password]').val('');
+					// 		$('input[type=password]').focus();
+					// 		});
+					// 		return false;
+					// 	});
+					// }
 				}
 				else if(jsonobj.type=='redirect')
 				{
@@ -171,6 +174,12 @@ $(document).ready(function(){
 					window.location.href=jsonobj.url;
 				}
              });
+        //关闭按钮
+        $('.close-btn,.ok-btn ').click(function(){
+            $('.popbox').fadeOut(function(){ $('#screen').hide(); 
+            window.top.location.reload();
+            });
+        });
         return false;
     });
 	

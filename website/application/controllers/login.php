@@ -47,7 +47,7 @@ class Login extends CI_Controller
 		if($row==null)//如果是第一次登录
 		{
             $result = $this->eswis->login($student_id, $pwd);
-			if(!$result['session_id'])
+			if(!is_array($result))
 			{
 				$msg = array('type'=>'alert','title'=>'提示信息','content'=>$result);
 	           	echo json_encode($msg);
@@ -71,7 +71,7 @@ class Login extends CI_Controller
 			if($flag==FALSE)
 			{
                 $result = $this->eswis->login($student_id, $pwd);
-				if(!$result['session_id'])
+				if(!is_array($result))
 				{
 					$msg = array('type'=>'alert','title'=>'提示信息','content'=>$result);
 		           	echo json_encode($msg);

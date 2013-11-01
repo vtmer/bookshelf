@@ -5,7 +5,6 @@ require_once('login_helper.php');
 class eswis extends LoginInterface {
     private $login_url = 'http://eswis.gdut.edu.cn/default.aspx';
     private $key = null;
-    private $NOTICE = '请登录以使用本系统';
 
 
     private function get_session_form() {
@@ -56,22 +55,22 @@ class eswis extends LoginInterface {
 
         $ret = $this->request($this->login_url, $session_form);
         $err = $this->check_login($ret['body']);
-        if ($err!=$this->NOTICE) {
+        //if ($err=='密码不正确'||$err=='用户名不存在') {
             // throw new LoginException($err);
-           return $err;
-        }
+            //return $err;
+        //}
 
         $session_id = $this->get_session_id($ret['body']);
         if (!$session_id) {
             // throw new LoginException('Session ID not found');
-            return 'Session ID not found';
+            return '用户名或密码错误！';
         }
         $this->session_id = $session_id;
 
         $key = $this->get_key($ret['body']);
         if (!$key) {
             // throw new LoginException('Key not found');
-            return 'Key not found';
+            return '用户名或密码错误！';
         }
         $this->key = $key;
 
